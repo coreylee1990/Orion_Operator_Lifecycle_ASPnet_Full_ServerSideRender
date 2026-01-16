@@ -1,0 +1,38 @@
+@* Enhanced modal for Add/Edit Requirement *@
+<div class="modal fade" id="requirementModal" tabindex="-1" aria-labelledby="requirementModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="requirementModalLabel">Edit Requirement</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="requirementEditForm">
+          <input type="hidden" id="modalPizzaStatusId" name="PizzaStatusId" />
+          <input type="hidden" id="modalDivision" name="Division" />
+          <div class="row">
+            <div class="col-md-6">
+              <label for="certSearch" class="form-label">Search Certifications</label>
+              <input type="text" id="certSearch" class="form-control mb-2" placeholder="Type to search..." autocomplete="off" />
+              <div id="certPool" class="border rounded p-2" style="min-height:200px; max-height:300px; overflow-y:auto;">
+                <!-- Certifications will be listed here for drag/click -->
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Required Certifications</label>
+              <div id="requiredCertsList" class="border rounded p-2" style="min-height:200px; max-height:300px; overflow-y:auto;">
+                <!-- Dropped/selected certifications will appear here -->
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <span id="modalSaveStatus" class="me-auto text-success" style="display:none;"></span>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="saveRequirementBtn">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+

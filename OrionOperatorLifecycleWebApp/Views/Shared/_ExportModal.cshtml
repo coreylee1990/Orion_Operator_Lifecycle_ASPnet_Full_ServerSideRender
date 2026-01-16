@@ -1,0 +1,25 @@
+<!-- Export Modal Partial -->
+<div class="export-modal" id="exportModal">
+    <div class="export-content">
+        <h3>Export Options</h3>
+        <div class="export-options">
+            <div class="export-option" onclick="exportAsCSV()">
+                <h4>📄 CSV Export</h4>
+                <p>Export all requirements as CSV for Excel/Sheets</p>
+            </div>
+            <div class="export-option" onclick="exportComplianceReport()">
+                <h4>📊 Compliance Report</h4>
+                <p>Detailed compliance report with operator status</p>
+            </div>
+            <div class="export-option" onclick="exportBottleneckAnalysis()">
+                <h4>🚦 Bottleneck Analysis</h4>
+                <p>Identify problematic statuses and certs</p>
+            </div>
+            <div class="export-option" onclick="exportJSON()">
+                <h4>💾 JSON Backup</h4>
+                <p>Full configuration backup in JSON format</p>
+            </div>
+        </div>
+        <button class="btn" onclick="closeExportModal()">Cancel</button>
+    </div>
+</div>

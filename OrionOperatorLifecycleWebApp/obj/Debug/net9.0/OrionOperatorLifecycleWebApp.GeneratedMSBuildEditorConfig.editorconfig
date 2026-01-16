@@ -1,0 +1,49 @@
+is_global = true
+build_property.TargetFramework = net9.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = OrionOperatorLifecycleWebApp
+build_property.RootNamespace = OrionOperatorLifecycleWebApp
+build_property.ProjectDir = C:\Users\PC\Desktop\Orion_Operator_Lifecycle_ASPnet-main\OrionOperatorLifecycleWebApp\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 9.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\PC\Desktop\Orion_Operator_Lifecycle_ASPnet-main\OrionOperatorLifecycleWebApp
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 9.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Users/PC/Desktop/Orion_Operator_Lifecycle_ASPnet-main/OrionOperatorLifecycleWebApp/Views/Requirements/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVxdWlyZW1lbnRzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC/Desktop/Orion_Operator_Lifecycle_ASPnet-main/OrionOperatorLifecycleWebApp/Views/Shared/RequirementsPartials/_RequirementModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFJlcXVpcmVtZW50c1BhcnRpYWxzXF9SZXF1aXJlbWVudE1vZGFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC/Desktop/Orion_Operator_Lifecycle_ASPnet-main/OrionOperatorLifecycleWebApp/Views/Shared/_CertDuplicateModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9DZXJ0RHVwbGljYXRlTW9kYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC/Desktop/Orion_Operator_Lifecycle_ASPnet-main/OrionOperatorLifecycleWebApp/Views/Shared/_CertificationDetailsPanel.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9DZXJ0aWZpY2F0aW9uRGV0YWlsc1BhbmVsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC/Desktop/Orion_Operator_Lifecycle_ASPnet-main/OrionOperatorLifecycleWebApp/Views/Shared/_ExportModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9FeHBvcnRNb2RhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC/Desktop/Orion_Operator_Lifecycle_ASPnet-main/OrionOperatorLifecycleWebApp/Views/Shared/_OperatorProfileModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9PcGVyYXRvclByb2ZpbGVNb2RhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC/Desktop/Orion_Operator_Lifecycle_ASPnet-main/OrionOperatorLifecycleWebApp/Views/Shared/_RequirementModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9SZXF1aXJlbWVudE1vZGFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 

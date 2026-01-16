@@ -1,0 +1,87 @@
+{
+  "info": {
+    "_postman_id": "b1e1e1e1-1234-5678-9abc-def012345678",
+    "name": "Orion Operator Lifecycle API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get Operators",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/data/operators",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "data", "operators"]
+        }
+      }
+    },
+    {
+      "name": "Get Cert Types",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/data/certtypes",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "data", "certtypes"]
+        }
+      }
+    },
+    {
+      "name": "Get Pizza Status Requirements",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/data/pizzastatusrequirements",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "data", "pizzastatusrequirements"]
+        }
+      }
+    },
+    {
+      "name": "Get Status Types",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/data/statustypes",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "data", "statustypes"]
+        }
+      }
+    },
+    {
+      "name": "Get Certification Aliases",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/data/certificationaliases",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "data", "certificationaliases"]
+        }
+      }
+    },
+    {
+      "name": "Get Pizza Statuses",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/data/pizzastatuses",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "data", "pizzastatuses"]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000"
+    }
+  ]
+}

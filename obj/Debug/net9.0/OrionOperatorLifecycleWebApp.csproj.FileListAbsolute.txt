@@ -1,0 +1,8 @@
+C:\Users\PC\Desktop\Projects\Orion_Operator_Lifecycle\Orion_Operator_Lifecycle-ASP.net\obj\Debug\net9.0\rpswa.dswa.cache.json
+C:\Users\PC\Desktop\Projects\Orion_Operator_Lifecycle\Orion_Operator_Lifecycle-ASP.net\obj\Debug\net9.0\OrionOperatorLifecycleWebApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\PC\Desktop\Projects\Orion_Operator_Lifecycle\Orion_Operator_Lifecycle-ASP.net\obj\Debug\net9.0\OrionOperatorLifecycleWebApp.AssemblyInfoInputs.cache
+C:\Users\PC\Desktop\Projects\Orion_Operator_Lifecycle\Orion_Operator_Lifecycle-ASP.net\obj\Debug\net9.0\OrionOperatorLifecycleWebApp.AssemblyInfo.cs
+C:\Users\PC\Desktop\Projects\Orion_Operator_Lifecycle\Orion_Operator_Lifecycle-ASP.net\obj\Debug\net9.0\OrionOperatorLifecycleWebApp.csproj.CoreCompileInputs.cache
+C:\Users\PC\Desktop\Projects\Orion_Operator_Lifecycle\Orion_Operator_Lifecycle-ASP.net\obj\Debug\net9.0\OrionOperatorLifecycleWebApp.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\PC\Desktop\Projects\Orion_Operator_Lifecycle\Orion_Operator_Lifecycle-ASP.net\obj\Debug\net9.0\OrionOperatorLifecycleWebApp.RazorAssemblyInfo.cache
+C:\Users\PC\Desktop\Projects\Orion_Operator_Lifecycle\Orion_Operator_Lifecycle-ASP.net\obj\Debug\net9.0\OrionOperatorLifecycleWebApp.RazorAssemblyInfo.cs
