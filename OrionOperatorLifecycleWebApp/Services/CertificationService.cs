@@ -14,7 +14,7 @@ namespace OrionOperatorLifecycleWebApp.Services
         }
 
         public List<Certification> GetAllCertifications() => _certificationRepository.GetAll();
-        public Certification GetCertificationById(int id) => _certificationRepository.GetById(id);
+        public Certification GetCertificationById(string id) => _certificationRepository.GetById(id);
         public List<Certification> GetCertificationsByDivision(string division) => _certificationRepository.GetByDivision(division);
     }
 }

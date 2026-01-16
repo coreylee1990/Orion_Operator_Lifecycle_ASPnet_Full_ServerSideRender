@@ -21,6 +21,7 @@ builder.Services.AddScoped<ICertificationService, CertificationService>();
 builder.Services.AddScoped<IPizzaStatusService, PizzaStatusService>();
 builder.Services.AddScoped<IStatusTypeService, StatusTypeService>();
 builder.Services.AddScoped<IRequirementService, RequirementService>();
+builder.Services.AddScoped<IAutoAdvanceService, AutoAdvanceService>();
 
 var app = builder.Build();
 

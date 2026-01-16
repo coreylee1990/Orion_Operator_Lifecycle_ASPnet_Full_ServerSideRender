@@ -16,12 +16,14 @@ namespace OrionOperatorLifecycleWebApp.Repositories
             using var doc = JsonDocument.Parse(json);
             if (doc.RootElement.TryGetProperty("certifications", out var certsElement) && certsElement.ValueKind == JsonValueKind.Array)
             {
-                return JsonSerializer.Deserialize<List<Certification>>(certsElement.GetRawText()) ?? new List<Certification>();
+                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                return JsonSerializer.Deserialize<List<Certification>>(certsElement.GetRawText(), options) ?? new List<Certification>();
             }
             return new List<Certification>();
         }
 
-        public Certification GetById(int id) => GetAll().FirstOrDefault(c => c.Id == id);
+        public Certification GetById(string id) => GetAll().FirstOrDefault(c => c.CertificationId == id);
+
 
         public List<Certification> GetByDivision(string division) => GetAll().Where(c => c.Division == division).ToList();
     }

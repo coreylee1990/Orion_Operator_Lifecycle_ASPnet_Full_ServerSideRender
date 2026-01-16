@@ -6,7 +6,7 @@ namespace OrionOperatorLifecycleWebApp.Services
     public interface ICertificationService
     {
         List<Certification> GetAllCertifications();
-        Certification GetCertificationById(int id);
+        Certification GetCertificationById(string id);
         List<Certification> GetCertificationsByDivision(string division);
     }
 }

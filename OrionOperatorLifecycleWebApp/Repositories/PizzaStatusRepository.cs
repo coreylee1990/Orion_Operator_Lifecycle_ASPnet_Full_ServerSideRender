@@ -13,9 +13,13 @@ namespace OrionOperatorLifecycleWebApp.Repositories
         {
             if (!File.Exists(_filePath)) return new List<PizzaStatus>();
             var json = File.ReadAllText(_filePath);
-            return JsonSerializer.Deserialize<List<PizzaStatus>>(json) ?? new List<PizzaStatus>();
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            return JsonSerializer.Deserialize<List<PizzaStatus>>(json, options) ?? new List<PizzaStatus>();
         }
 
-        public PizzaStatus GetById(int id) => GetAll().FirstOrDefault(p => p.Id == id);
+        public PizzaStatus GetById(string id) => GetAll().FirstOrDefault(p => p.Id == id);
+
+        public PizzaStatus GetByStatus(string status) => 
+            GetAll().FirstOrDefault(p => p.Status != null && p.Status.Equals(status, System.StringComparison.OrdinalIgnoreCase));
     }
 }

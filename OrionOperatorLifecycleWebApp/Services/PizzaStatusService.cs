@@ -14,6 +14,6 @@ namespace OrionOperatorLifecycleWebApp.Services
         }
 
         public List<PizzaStatus> GetAllPizzaStatuses() => _pizzaStatusRepository.GetAll();
-        public PizzaStatus GetPizzaStatusById(int id) => _pizzaStatusRepository.GetById(id);
+        public PizzaStatus GetPizzaStatusById(string id) => _pizzaStatusRepository.GetById(id);
     }
 }
