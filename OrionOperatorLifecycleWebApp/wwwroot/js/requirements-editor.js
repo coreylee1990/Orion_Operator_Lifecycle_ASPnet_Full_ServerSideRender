@@ -66,6 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let operators = [];
         let statusTypes = [];
         let certTypes = [];  // Raw cert types from database
+        let certifications = [];  // All certifications from pay_Certifications.json
         let certRequirements = {};
         // Removed pizzaStatusRequirements variable and all related logic
         let currentWorkflow = [];
@@ -78,6 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let editMode = false;
         let selectedDivision = 'ALL';  // Default to All Divisions (for edit mode)
         let mainDivisionFilter = 'ALL';  // Division filter for main operator view
+        let statusTracker = [];  // Track how long operators have been in each status
         let editedRequirements = {};
 
         // Divisions to include (whitelist)
@@ -137,6 +139,34 @@ document.addEventListener('DOMContentLoaded', function() {
                 const certType = typeof c === 'string' ? c : (c?.CertType || '');
                 return normalizeCertName(certType) === normalized;
             });
+        }
+
+        // Calculate how many days an operator has been in their current status
+        function getOperatorDaysInStatus(operatorId) {
+            if (!statusTracker || statusTracker.length === 0) return null;
+            
+            // Find all status tracker records for this operator
+            const operatorRecords = statusTracker.filter(st => st.OperatorID === operatorId);
+            
+            if (operatorRecords.length === 0) return null;
+            
+            // Find the most recent record (latest date)
+            let mostRecent = operatorRecords[0];
+            for (const record of operatorRecords) {
+                const recordDate = new Date(record.Date);
+                const mostRecentDate = new Date(mostRecent.Date);
+                if (recordDate > mostRecentDate) {
+                    mostRecent = record;
+                }
+            }
+            
+            // Calculate days since that date
+            const statusDate = new Date(mostRecent.Date);
+            const today = new Date();
+            const diffTime = Math.abs(today - statusDate);
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            
+            return diffDays;
         }
 
         // Build requirements structure from master definition
@@ -330,6 +360,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 operators = await operatorsResponse.json();
                 console.log('✅ Operators loaded successfully');
                 
+                // Load certifications
+                console.log('📥 Fetching certifications...');
+                const certificationsResponse = await fetch('/api/data/certifications' + cacheBuster);
+                if (!certificationsResponse.ok) {
+                    throw new Error('Failed to load certifications: ' + certificationsResponse.status);
+                }
+                const certificationsData = await certificationsResponse.json();
+                certifications = certificationsData.certifications || [];
+                console.log('✅ Certifications loaded:', certifications.length, 'records');
+                
+                // Join certifications to operators
+                console.log('🔗 Joining certifications to operators...');
+                operators.forEach(op => {
+                    op.certifications = certifications.filter(cert => cert.OperatorID === op.ID);
+                });
+                console.log('✅ Certifications joined to operators');
+                
                 console.log('🔵 Loaded operators:', operators.length);
                 const willie = operators.find(op => op.LastName === 'Quainton');
                 if (willie) {
@@ -363,6 +410,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.statusTypes = statusTypes;
                 console.log('✅ Status types loaded:', statusTypes.length, 'status type mappings');
                 
+                // Load status tracker for operator duration tracking
+                console.log('📥 Fetching status tracker...');
+                const statusTrackerResponse = await fetch('/api/data/statustracker' + cacheBuster);
+                if (!statusTrackerResponse.ok) {
+                    throw new Error('Failed to load status tracker: ' + statusTrackerResponse.status);
+                }
+                const statusTrackerData = await statusTrackerResponse.json();
+                statusTracker = statusTrackerData.statusTracker || [];
+                console.log('✅ Status tracker loaded:', statusTracker.length, 'records');
                 
                 // Removed buildRequirementsFromPizzaStatus and related logic
                 
@@ -518,6 +574,16 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Re-render without calling initializeDynamicWorkflow (which would re-sort)
             renderWorkflowWithoutReinit();
+            updateStats();
+        }
+
+        // Helper function to create a drop zone element
+        function createDropZone(dropIndex) {
+            const dropZone = document.createElement('div');
+            dropZone.className = 'status-drop-zone';
+            dropZone.dataset.dropIndex = dropIndex;
+            dropZone.innerHTML = '<div class="drop-zone-indicator">Drop here to move status</div>';
+            return dropZone;
         }
 
         // Render workflow without re-initializing (preserves current order)
@@ -546,6 +612,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             let renderedCount = 0;
+            let actualIndex = 0;
+
+            // Add initial drop zone (before first card)
+            if (mainDivisionFilter !== 'ALL') {
+                container.appendChild(createDropZone(0));
+            }
 
             currentWorkflow.forEach((flowStep, index) => {
                 const statusName = flowStep.status;
@@ -574,6 +646,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 renderedCount++;
                 const stepCard = createStepCard(flowStep, index);
                 container.appendChild(stepCard);
+                
+                // Add drop zone after each card (only if filtering by division)
+                if (mainDivisionFilter !== 'ALL') {
+                    container.appendChild(createDropZone(index + 1));
+                }
             });
 
             console.log(`🎨 Rendered ${renderedCount} of ${currentWorkflow.length} steps`);
@@ -624,6 +701,11 @@ document.addEventListener('DOMContentLoaded', function() {
             
             let renderedCount = 0;
 
+            // Add initial drop zone (before first card) - only for specific division
+            if (mainDivisionFilter !== 'ALL') {
+                container.appendChild(createDropZone(0));
+            }
+
             currentWorkflow.forEach((flowStep, index) => {
                 // Apply filters
                 const statusName = flowStep.status;
@@ -671,6 +753,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 renderedCount++;
                 const stepCard = createStepCard(flowStep, index);
                 container.appendChild(stepCard);
+                
+                // Add drop zone after each card (only for specific division)
+                if (mainDivisionFilter !== 'ALL') {
+                    container.appendChild(createDropZone(index + 1));
+                }
             });
 
 
@@ -807,40 +894,56 @@ document.addEventListener('DOMContentLoaded', function() {
                                 // Get certs needed for THIS operator's division and current status (PizzaStatusId logic)
                                 const opDivision = op.DivisionID || '';
                                 const opStatus = op.StatusName || '';
-                                let allCertsNeeded = [];
-                                // Find the operator's PizzaStatusId
+                                
+                                // Find the operator's PizzaStatusId from statusTypes
                                 let pizzaStatusId = null;
                                 if (statusTypes && Array.isArray(statusTypes)) {
                                     const st = statusTypes.find(s => s.Status === opStatus && s.DivisionID === opDivision);
                                     if (st && st.PizzaStatusID) pizzaStatusId = st.PizzaStatusID;
                                 }
-                                // Removed pizzaStatusRequirements usage for allCertsNeeded
+                                
+                                // Get all cert types for this PizzaStatusId and Division (not deleted)
+                                let requiredCertTypes = [];
+                                if (pizzaStatusId && certTypes && Array.isArray(certTypes)) {
+                                    requiredCertTypes = certTypes.filter(ct => 
+                                        ct.PizzaStatusID === pizzaStatusId && 
+                                        ct.DivisionID === opDivision && 
+                                        ct.isDeleted !== true && 
+                                        ct.isDeleted !== 'true' && 
+                                        String(ct.isDeleted) !== 'true'
+                                    );
+                                }
 
                                 // Get operator's certifications
                                 const operatorCerts = op.certifications || [];
                                 
-                                // Calculate cert status
+                                // Calculate cert status by matching CertTypeID
                                 let validCount = 0;
                                 let expiredCount = 0;
                                 let missingCount = 0;
-                                let notApprovedCount = 0;
 
-                                allCertsNeeded.forEach(certName => {
-                                    const cert = findMatchingCert(certName, operatorCerts);
+                                requiredCertTypes.forEach(certType => {
+                                    const certTypeId = certType.ID; // The CertType ID we need to match
+                                    
+                                    // Find matching cert in operator's certifications by CertTypeID
+                                    const cert = operatorCerts.find(c => {
+                                        // Match by CertTypeID
+                                        if (c.CertTypeID !== certTypeId) return false;
+                                        // Must not be deleted
+                                        if (c.IsDeleted === '1' || c.IsDeleted === 1 || c.IsDeleted === true) return false;
+                                        // Must be approved (isApproved === '1')
+                                        if (c.isApproved !== '1' && c.isApproved !== 1 && c.isApproved !== true) return false;
+                                        return true;
+                                    });
+                                    
                                     if (cert) {
-                                        // Check if approved (Status != '0' AND has dates)
-                                        const isApproved = cert.Status !== '0' && (cert.IssueDate || cert.ExpireDate);
-                                        if (!isApproved) {
-                                            notApprovedCount++;
-                                            missingCount++;
+                                        // Check if expired
+                                        const expireDate = cert.Date ? new Date(cert.Date) : null;
+                                        const isExpired = expireDate && expireDate < new Date();
+                                        if (isExpired) {
+                                            expiredCount++;
                                         } else {
-                                            const expireDate = cert.ExpireDate ? new Date(cert.ExpireDate) : null;
-                                            const isExpired = expireDate && expireDate < new Date();
-                                            if (isExpired) {
-                                                expiredCount++;
-                                            } else {
-                                                validCount++;
-                                            }
+                                            validCount++;
                                         }
                                     } else {
                                         missingCount++;
@@ -848,7 +951,11 @@ document.addEventListener('DOMContentLoaded', function() {
                                 });
                                 
                                 if (op.LastName === 'Quainton') {
-                                    console.log('  COUNTS - valid:', validCount, 'expired:', expiredCount, 'missing:', missingCount);
+                                    console.log('  OPERATOR:', op.FirstName, op.LastName);
+                                    console.log('  - PizzaStatusId:', pizzaStatusId);
+                                    console.log('  - Required CertTypes:', requiredCertTypes.length);
+                                    console.log('  - Operator Certs:', operatorCerts.length);
+                                    console.log('  - COUNTS - valid:', validCount, 'expired:', expiredCount, 'missing:', missingCount);
                                 }
 
                                 const total = validCount + expiredCount + missingCount;
@@ -856,13 +963,33 @@ document.addEventListener('DOMContentLoaded', function() {
                                 const expiredPercent = total > 0 ? (expiredCount / total * 100) : 0;
                                 const missingPercent = total > 0 ? (missingCount / total * 100) : 0;
 
+                                // Calculate days in current status
+                                const daysInStatus = getOperatorDaysInStatus(op.ID);
+                                const isOverdue = daysInStatus !== null && daysInStatus >= 30;
+                                const daysDisplay = daysInStatus !== null ? 
+                                    `<span class="operator-days-in-status ${isOverdue ? 'overdue' : ''}" title="Days in current status">
+                                        ${isOverdue ? '⚠️ ' : ''}${daysInStatus}d
+                                    </span>` : '';
+                                
+                                // Cert count display (valid/total)
+                                const certCountDisplay = total > 0 ? 
+                                    `<span class="operator-cert-count" title="${validCount} valid, ${expiredCount} expired, ${missingCount} missing">${validCount}/${total}</span>` : '';
+
                                 return `
-                                    <div class="operator-item" onclick="showOperatorProfile('${op.ID}')" style="cursor: pointer;" title="${validCount} Valid, ${expiredCount} Expired, ${missingCount} Missing">
-                                        <span class="operator-name">${op.FirstName} ${op.LastName}</span>
+                                    <div class="operator-item ${isOverdue ? 'operator-overdue' : ''}" onclick="showOperatorProfile('${op.ID}')" style="cursor: pointer;" title="${validCount} Valid, ${expiredCount} Expired, ${missingCount} Missing${daysInStatus !== null ? ' | ' + daysInStatus + ' days in status' : ''}">
+                                        <div class="operator-name-row">
+                                            <span class="operator-name">${op.FirstName} ${op.LastName}</span>
+                                            <div class="operator-badges">
+                                                ${certCountDisplay}
+                                                ${daysDisplay}
+                                            </div>
+                                        </div>
                                         <div class="operator-progress">
-                                            ${validPercent > 0 ? `<div class="operator-progress-segment valid" style="width: ${validPercent}%"></div>` : ''}
-                                            ${expiredPercent > 0 ? `<div class="operator-progress-segment expired" style="width: ${expiredPercent}%"></div>` : ''}
-                                            ${missingPercent > 0 ? `<div class="operator-progress-segment missing" style="width: ${missingPercent}%"></div>` : ''}
+                                            ${total > 0 ? `
+                                                ${validPercent > 0 ? `<div class="operator-progress-segment valid" style="width: ${validPercent}%"></div>` : ''}
+                                                ${expiredPercent > 0 ? `<div class="operator-progress-segment expired" style="width: ${expiredPercent}%"></div>` : ''}
+                                                ${missingPercent > 0 ? `<div class="operator-progress-segment missing" style="width: ${missingPercent}%"></div>` : ''}
+                                            ` : '<div class="operator-progress-segment no-data" style="width: 100%"></div>'}
                                         </div>
                                     </div>
                                 `;
@@ -1231,10 +1358,15 @@ document.addEventListener('DOMContentLoaded', function() {
             stepCards.forEach(card => {
                 card.addEventListener('dragstart', handleDragStart);
                 card.addEventListener('dragend', handleDragEnd);
-                card.addEventListener('dragover', handleDragOver);
-                card.addEventListener('drop', handleDrop);
-                card.addEventListener('dragenter', handleDragEnter);
-                card.addEventListener('dragleave', handleDragLeave);
+            });
+            
+            // Add listeners to drop zones between cards
+            const dropZones = document.querySelectorAll('.status-drop-zone');
+            dropZones.forEach(zone => {
+                zone.addEventListener('dragover', handleDropZoneDragOver);
+                zone.addEventListener('dragenter', handleDropZoneDragEnter);
+                zone.addEventListener('dragleave', handleDropZoneDragLeave);
+                zone.addEventListener('drop', handleDropZoneDrop);
             });
         }
 
@@ -1243,17 +1375,103 @@ document.addEventListener('DOMContentLoaded', function() {
             draggedIndex = parseInt(this.dataset.index);
             this.classList.add('dragging');
             e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', draggedIndex);
+            
+            // Show all drop zones
+            setTimeout(() => {
+                document.querySelectorAll('.status-drop-zone').forEach(zone => {
+                    zone.classList.add('visible');
+                });
+            }, 0);
         }
 
         function handleDragEnd(e) {
             this.classList.remove('dragging');
             
-            // Remove drag-over class from all cards
+            // Hide all drop zones and remove highlights
+            document.querySelectorAll('.status-drop-zone').forEach(zone => {
+                zone.classList.remove('visible', 'drag-over');
+            });
+            
+            // Remove drag-over class from all cards (legacy cleanup)
             document.querySelectorAll('.step-card').forEach(card => {
                 card.classList.remove('drag-over');
             });
         }
 
+        function handleDropZoneDragOver(e) {
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+            e.dataTransfer.dropEffect = 'move';
+            return false;
+        }
+
+        function handleDropZoneDragEnter(e) {
+            e.preventDefault();
+            this.classList.add('drag-over');
+        }
+
+        function handleDropZoneDragLeave(e) {
+            this.classList.remove('drag-over');
+        }
+
+        function handleDropZoneDrop(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+            e.preventDefault();
+            
+            this.classList.remove('drag-over');
+
+            const dropIndex = parseInt(this.dataset.dropIndex);
+            
+            if (draggedIndex === null || draggedIndex === undefined) return false;
+            
+            // Calculate the actual target index
+            // If dropping after the dragged item, we need to adjust
+            let targetIndex = dropIndex;
+            if (draggedIndex < dropIndex) {
+                targetIndex = dropIndex - 1;
+            }
+
+            if (draggedIndex !== targetIndex) {
+                console.log(`🔄 Drag-drop: moving index ${draggedIndex} to position ${targetIndex}`);
+                
+                // Remove the item from its current position
+                const [removed] = currentWorkflow.splice(draggedIndex, 1);
+                // Insert at new position
+                currentWorkflow.splice(targetIndex, 0, removed);
+
+                // Update OrderIDs for all items (same logic as reorderStep)
+                currentWorkflow.forEach((item, idx) => {
+                    const newOrder = String(idx + 1);
+                    item.step = idx + 1;
+                    
+                    if (item.originalObj) {
+                        item.originalObj.OrderID = newOrder;
+                    }
+                    
+                    const globalStatusType = statusTypes.find(st => 
+                        st.Status === item.status && st.DivisionID === mainDivisionFilter
+                    );
+                    if (globalStatusType) {
+                        globalStatusType.OrderID = newOrder;
+                    }
+                });
+                
+                hasUnsavedChanges = true;
+                markUnsaved();
+
+                // Re-render without reinitializing
+                renderWorkflowWithoutReinit();
+                updateStats();
+            }
+
+            return false;
+        }
+        
+        // Legacy handlers (kept for backwards compatibility, but not used for status reordering)
         function handleDragOver(e) {
             if (e.preventDefault) {
                 e.preventDefault();
@@ -1273,22 +1491,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         function handleDrop(e) {
-            if (e.stopPropagation) {
-                e.stopPropagation();
-            }
-
-            const dropIndex = parseInt(this.dataset.index);
-
-            if (draggedIndex !== dropIndex) {
-                // Reorder the workflow
-                const [removed] = currentWorkflow.splice(draggedIndex, 1);
-                currentWorkflow.splice(dropIndex, 0, removed);
-
-                // Re-render
-                renderWorkflow();
-                updateStats();
-            }
-
+            // Legacy - not used for status reordering anymore
             return false;
         }
 
@@ -2223,18 +2426,13 @@ function removeCertFromStatus(statusName, certName) {
             }
 
             // Get operator's certifications, filtered by:
-            // - not isArchived
-            // - IsApproved (Status == '1' or true)
-            // - CertType's DivisionID matches operator's DivisionID
+            // - not deleted (IsDeleted !== '1')
+            // - IsApproved (isApproved === '1')
             const operatorCerts = (operator.certifications || []).filter(cert => {
-                if (cert.isArchived === true || String(cert.isArchived).toLowerCase() === 'true' || String(cert.isArchived) === '1') return false;
-                if (!(cert.Status === '1' || cert.Status === 1 || cert.Status === true)) return false;
-                // Find the certType for this cert
-                const certType = certTypes.find(ct => {
-                    // Match by name and division
-                    return ct.Certification === cert.CertType && ct.DivisionID === operator.DivisionID;
-                });
-                if (!certType) return false;
+                // Must not be deleted
+                if (cert.IsDeleted === '1' || cert.IsDeleted === 1 || cert.IsDeleted === true) return false;
+                // Must be approved
+                if (cert.isApproved !== '1' && cert.isApproved !== 1 && cert.isApproved !== true) return false;
                 return true;
             });
 
@@ -2242,21 +2440,24 @@ function removeCertFromStatus(statusName, certName) {
             const pizzaStatusCertStatusMap = {};
             pizzaStatusCertTypes.forEach(certType => {
                 const certName = certType.Certification;
-                const certTypeId = certType.CertTypeID || certType.ID || '';
-                // Find approved cert for this operator and cert type
+                const certTypeId = certType.ID || ''; // Use ID, not CertTypeID
+                // Find approved cert for this operator by matching CertTypeID
                 const cert = (operator.certifications || []).find(c => {
-                    if (c.CertType !== certName) return false;
-                    if (c.isArchived === true || String(c.isArchived).toLowerCase() === 'true' || String(c.isArchived) === '1') return false;
-                    if (!(c.Status === '1' || c.Status === 1 || c.Status === true)) return false;
+                    // Match by CertTypeID
+                    if (c.CertTypeID !== certTypeId) return false;
+                    // Must not be deleted
+                    if (c.IsDeleted === '1' || c.IsDeleted === 1 || c.IsDeleted === true) return false;
+                    // Must be approved (isApproved === '1')
+                    if (c.isApproved !== '1' && c.isApproved !== 1 && c.isApproved !== true) return false;
                     return true;
                 });
                 if (cert) {
                     pizzaStatusCertStatusMap[certName] = {
                         status: 'has-cert',
                         label: 'Valid',
-                        issueDate: cert.IssueDate,
-                        expireDate: cert.ExpireDate,
-                        certificateId: cert.CertificateID || cert.ID || '',
+                        issueDate: cert.RecordAt,
+                        expireDate: cert.Date,
+                        certificateId: cert.CertificationID || '',
                         certTypeId: certTypeId
                     };
                 } else {
@@ -2295,12 +2496,22 @@ function removeCertFromStatus(statusName, certName) {
             Object.entries(pizzaStatusCertStatusMap).forEach(([certName, certInfo]) => {
                 html += `
                     <div class="cert-card ${certInfo.status}">
-                        <div class="cert-card-name">${certName}</div>
-                        <div class="cert-card-status">${certInfo.label}</div>
-                        ${certInfo.certificateId ? `<div class='cert-card-id cert-card-id-small'>Certificate ID: <span>${certInfo.certificateId}</span></div>` : ''}
-                        ${certInfo.certTypeId ? `<div class='cert-card-type-id cert-card-id-small'>CertType ID: <span>${certInfo.certTypeId}</span></div>` : ''}
-                        ${certInfo.issueDate ? `<div class='cert-card-date'>Issued: ${certInfo.issueDate}</div>` : ''}
-                        ${certInfo.expireDate ? `<div class='cert-card-date'>Expires: ${certInfo.expireDate}</div>` : ''}
+                        <div class="cert-card-header">
+                            <div class="cert-card-name">${certName}</div>
+                            <div class="cert-card-status">${certInfo.label}</div>
+                        </div>
+                        ${(certInfo.certificateId || certInfo.certTypeId || certInfo.issueDate || certInfo.expireDate) ? `
+                        <div class="cert-card-details">
+                            <div class="cert-card-ids">
+                                ${certInfo.certificateId ? `<div class='cert-card-id'>Cert ID: <span>${certInfo.certificateId}</span></div>` : ''}
+                                ${certInfo.certTypeId ? `<div class='cert-card-type-id'>CertType ID: <span>${certInfo.certTypeId}</span></div>` : ''}
+                            </div>
+                            <div class="cert-card-dates">
+                                ${certInfo.issueDate ? `<div class='cert-card-date'>Issued: ${certInfo.issueDate}</div>` : ''}
+                                ${certInfo.expireDate ? `<div class='cert-card-date'>Expires: ${certInfo.expireDate}</div>` : ''}
+                            </div>
+                        </div>
+                        ` : ''}
                     </div>
                 `;
             });
