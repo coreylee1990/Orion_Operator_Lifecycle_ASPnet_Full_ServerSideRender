@@ -2035,31 +2035,72 @@ function removeCertFromStatus(statusName, certName) {
             title.textContent = certName;
             subtitle.textContent = `Viewing details for this certification`;
             
-            // Find all statuses using this cert
+            // Find the certType record for this cert name in the current division
+            const certType = certTypes.find(ct => 
+                ct.Certification === certName && 
+                ct.DivisionID === mainDivisionFilter &&
+                ct.isDeleted !== true && 
+                ct.isDeleted !== 'true'
+            );
+            const certTypeId = certType?.ID || null;
+            const pizzaStatusId = certType?.PizzaStatusID || null;
+            
+            // Find all statuses using this cert (by PizzaStatusID from certTypes)
             const statusesUsing = [];
-            Object.entries(certRequirements).forEach(([status, statusData]) => {
-                const divisions = statusData.divisions || {};
-                let found = false;
-                Object.values(divisions).forEach(divData => {
-                    ['required', 'common', 'optional'].forEach(level => {
-                        if (divData[level]?.some(c => c.cert === certName)) {
-                            found = true;
-                        }
-                    });
+            if (pizzaStatusId && statusTypes && Array.isArray(statusTypes)) {
+                statusTypes.forEach(st => {
+                    if (st.PizzaStatusID === pizzaStatusId && 
+                        st.DivisionID === mainDivisionFilter &&
+                        st.isDeleted !== true && 
+                        String(st.isDeleted) !== 'true') {
+                        statusesUsing.push(st.Status);
+                    }
                 });
-                if (found) statusesUsing.push(status);
-            });
+            }
             
-            // Find operators with this cert (using normalized matching)
-            const operatorsWithCert = operators.filter(op => 
-                op.certifications?.some(cert => certNamesMatch(cert.CertType, certName))
-            );
+            // Find operators IN THIS STATUS AND DIVISION with this cert (matching by CertTypeID, approved and not deleted)
+            const operatorsInStatusWithCert = [];
+            const operatorsInStatusMissingCert = [];
             
-            const operatorsWithoutCert = operators.filter(op => 
-                !op.certifications?.some(cert => certNamesMatch(cert.CertType, certName))
-            );
+            if (pizzaStatusId) {
+                operators.forEach(op => {
+                    // Must be in the selected division
+                    if (op.DivisionID !== mainDivisionFilter) return;
+                    
+                    // Check if operator's current status uses this PizzaStatusID
+                    const opStatusType = statusTypes.find(st => 
+                        st.Status === op.StatusName && 
+                        st.DivisionID === op.DivisionID
+                    );
+                    if (!opStatusType || opStatusType.PizzaStatusID !== pizzaStatusId) return;
+                    
+                    // Check if operator has the cert
+                    const hasCert = op.certifications?.some(cert => {
+                        const matchesCertType = certTypeId ? cert.CertTypeID === certTypeId : cert.Cert === certName;
+                        if (!matchesCertType) return false;
+                        if (cert.isApproved !== '1' && cert.isApproved !== 1 && cert.isApproved !== true) return false;
+                        if (cert.IsDeleted === '1' || cert.IsDeleted === 1 || cert.IsDeleted === true) return false;
+                        return true;
+                    });
+                    
+                    if (hasCert) {
+                        operatorsInStatusWithCert.push(op);
+                    } else {
+                        operatorsInStatusMissingCert.push(op);
+                    }
+                });
+            }
             
             content.innerHTML = `
+                <div class="details-section">
+                    <h4>📋 Cert Type Details</h4>
+                    <div style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 10px;">
+                        ${certTypeId ? `<div><strong>CertType ID:</strong> <span style="font-family: monospace; font-size: 0.8rem;">${certTypeId}</span></div>` : ''}
+                        ${pizzaStatusId ? `<div><strong>PizzaStatus ID:</strong> <span style="font-family: monospace; font-size: 0.8rem;">${pizzaStatusId}</span></div>` : ''}
+                        <div><strong>Division:</strong> ${mainDivisionFilter}</div>
+                    </div>
+                </div>
+                
                 <div class="details-section">
                     <h4>📍 Used In ${statusesUsing.length} Status${statusesUsing.length !== 1 ? 'es' : ''}</h4>
                     <div style="color: #94a3b8; font-size: 0.9rem;">
@@ -2068,36 +2109,48 @@ function removeCertFromStatus(statusName, certName) {
                 </div>
                 
                 <div class="details-section">
-                    <h4>✅ Operators With Cert (${operatorsWithCert.length})</h4>
+                    <h4>✅ Operators In Status With Cert (${operatorsInStatusWithCert.length})</h4>
                     <div class="operator-list">
-                        ${operatorsWithCert.slice(0, 20).map(op => {
-                            const cert = findMatchingCert(certName, op.certifications);
-                            const expireDate = cert?.ExpireDate;
+                        ${operatorsInStatusWithCert.slice(0, 20).map(op => {
+                            const cert = op.certifications?.find(c => {
+                                const matchesCertType = certTypeId ? c.CertTypeID === certTypeId : c.Cert === certName;
+                                return matchesCertType && 
+                                    (c.isApproved === '1' || c.isApproved === 1 || c.isApproved === true) &&
+                                    c.IsDeleted !== '1' && c.IsDeleted !== 1 && c.IsDeleted !== true;
+                            });
+                            const expireDate = cert?.Date;
                             const isExpired = expireDate && new Date(expireDate) < new Date();
                             return `
-                                <div class="operator-item">
-                                    <span class="operator-name">${op.FullName || 'Unknown'}</span>
-                                    <span class="operator-status-badge ${isExpired ? 'expired' : 'has-cert'}">
-                                        ${isExpired ? '⚠️ Expired' : '✓ Valid'}
-                                    </span>
+                                <div class="operator-item" onclick="showOperatorProfile('${op.ID}')" style="cursor: pointer;">
+                                    <div class="operator-name-row">
+                                        <span class="operator-name">${op.FirstName || ''} ${op.LastName || 'Unknown'}</span>
+                                        <span class="operator-status-badge ${isExpired ? 'expired' : 'has-cert'}">
+                                            ${isExpired ? '⚠️ Expired' : '✓ Valid'}
+                                        </span>
+                                    </div>
+                                    <div style="font-size: 0.75rem; color: #64748b;">${op.StatusName || ''} • ${op.DivisionID || ''}</div>
                                 </div>
                             `;
                         }).join('')}
-                        ${operatorsWithCert.length > 20 ? `<div style="color: #64748b; padding: 10px; text-align: center;">... and ${operatorsWithCert.length - 20} more</div>` : ''}
-                        ${operatorsWithCert.length === 0 ? '<div style="color: #64748b; padding: 10px;">No operators have this certification</div>' : ''}
+                        ${operatorsInStatusWithCert.length > 20 ? `<div style="color: #64748b; padding: 10px; text-align: center;">... and ${operatorsInStatusWithCert.length - 20} more</div>` : ''}
+                        ${operatorsInStatusWithCert.length === 0 ? '<div style="color: #64748b; padding: 10px;">No operators in this status have this certification</div>' : ''}
                     </div>
                 </div>
                 
                 <div class="details-section">
-                    <h4>❌ Operators Missing Cert (${operatorsWithoutCert.length})</h4>
+                    <h4>❌ Operators In Status Missing Cert (${operatorsInStatusMissingCert.length})</h4>
                     <div class="operator-list">
-                        ${operatorsWithoutCert.slice(0, 20).map(op => `
-                            <div class="operator-item">
-                                <span class="operator-name">${op.FullName || 'Unknown'}</span>
-                                <span class="operator-status-badge missing-cert">✗ Missing</span>
+                        ${operatorsInStatusMissingCert.slice(0, 20).map(op => `
+                            <div class="operator-item" onclick="showOperatorProfile('${op.ID}')" style="cursor: pointer;">
+                                <div class="operator-name-row">
+                                    <span class="operator-name">${op.FirstName || ''} ${op.LastName || 'Unknown'}</span>
+                                    <span class="operator-status-badge missing-cert">✗ Missing</span>
+                                </div>
+                                <div style="font-size: 0.75rem; color: #64748b;">${op.StatusName || ''} • ${op.DivisionID || ''}</div>
                             </div>
                         `).join('')}
-                        ${operatorsWithoutCert.length > 20 ? `<div style="color: #64748b; padding: 10px; text-align: center;">... and ${operatorsWithoutCert.length - 20} more</div>` : ''}
+                        ${operatorsInStatusMissingCert.length > 20 ? `<div style="color: #64748b; padding: 10px; text-align: center;">... and ${operatorsInStatusMissingCert.length - 20} more</div>` : ''}
+                        ${operatorsInStatusMissingCert.length === 0 ? '<div style="color: #64748b; padding: 10px;">All operators in this status have this certification</div>' : ''}
                     </div>
                 </div>
             `;
