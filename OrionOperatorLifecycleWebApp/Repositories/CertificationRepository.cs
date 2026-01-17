@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace OrionOperatorLifecycleWebApp.Repositories
 {
-    public class CertificationRepository
+    public class CertificationRepository : ICertificationRepository
     {
         private readonly string _filePath = "App_Data/pay_Certifications.json";
 

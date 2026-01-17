@@ -59,6 +59,117 @@ document.addEventListener('DOMContentLoaded', function() {
             confirmAddStatus();
         });
     }
+
+    // Status Delete Warning Modal Confirm Button
+    const statusDeleteConfirmBtn = document.getElementById('statusDeleteWarningConfirmBtn');
+    if (statusDeleteConfirmBtn) {
+        statusDeleteConfirmBtn.addEventListener('click', function() {
+            const ctx = window._statusDeleteContext;
+            if (!ctx) return;
+            
+            // Execute the deletion WITHOUT reassigning
+            executeStatusDeletion(ctx.statusName, ctx.divisionId);
+            
+            // Hide modal
+            const modalEl = document.getElementById('statusDeleteWarningModal');
+            if (modalEl && window.bootstrap && window.bootstrap.Modal) {
+                const modal = window.bootstrap.Modal.getOrCreateInstance(modalEl);
+                modal.hide();
+            } else if (modalEl && typeof $ !== 'undefined' && $(modalEl).modal) {
+                $(modalEl).modal('hide');
+            } else if (modalEl) {
+                modalEl.style.display = 'none';
+            }
+            
+            window._statusDeleteContext = null;
+        });
+    }
+
+    // Status Delete With Reassign Button
+    const statusDeleteWithReassignBtn = document.getElementById('statusDeleteWithReassignBtn');
+    if (statusDeleteWithReassignBtn) {
+        statusDeleteWithReassignBtn.addEventListener('click', async function() {
+            const ctx = window._statusDeleteContext;
+            if (!ctx) return;
+            
+            const targetSelect = document.getElementById('targetStatusSelect');
+            if (!targetSelect || !targetSelect.value) {
+                alert('Please select a target status to reassign operators to.');
+                return;
+            }
+
+            const targetStatusName = targetSelect.value;
+            const targetOption = targetSelect.options[targetSelect.selectedIndex];
+            const targetStatusId = targetOption.getAttribute('data-statusid');
+            const targetOrderId = targetOption.getAttribute('data-orderid');
+
+            // Confirm action
+            if (!confirm(`This will:\n\n1. Move ${ctx.operators.length} operator(s) from "${ctx.statusName}" to "${targetStatusName}"\n2. Delete "${ctx.statusName}" from the division\n\nProceed?`)) {
+                return;
+            }
+
+            // Reassign operators
+            try {
+                const operatorIds = ctx.operators.map(op => op.ID);
+                const response = await fetch('/api/data/operators/bulkupdatestatus', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        OperatorIds: operatorIds,
+                        NewStatusName: targetStatusName,
+                        NewStatusId: targetStatusId,
+                        NewOrderId: targetOrderId
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to reassign operators: ' + response.status);
+                }
+
+                const result = await response.json();
+                console.log(`✅ Reassigned ${result.count} operators to "${targetStatusName}"`);
+
+                // Now execute deletion
+                executeStatusDeletion(ctx.statusName, ctx.divisionId);
+
+                // Hide modal
+                const modalEl = document.getElementById('statusDeleteWarningModal');
+                if (modalEl && window.bootstrap && window.bootstrap.Modal) {
+                    const modal = window.bootstrap.Modal.getOrCreateInstance(modalEl);
+                    modal.hide();
+                } else if (modalEl && typeof $ !== 'undefined' && $(modalEl).modal) {
+                    $(modalEl).modal('hide');
+                } else if (modalEl) {
+                    modalEl.style.display = 'none';
+                }
+
+                window._statusDeleteContext = null;
+
+                alert(`✅ Success!\n\n• ${result.count} operators moved to "${targetStatusName}"\n• Status "${ctx.statusName}" marked for deletion\n\nClick "Save Changes" to persist these changes.`);
+            } catch (error) {
+                console.error('❌ Error reassigning operators:', error);
+                alert('Error reassigning operators: ' + error.message);
+            }
+        });
+    }
+
+    // Event delegation for delete status buttons
+    document.addEventListener('click', function(e) {
+        console.log('🖱️ Click detected on:', e.target);
+        const deleteBtn = e.target.closest('.delete-cert-type-btn');
+        console.log('🔍 Delete button found:', deleteBtn);
+        if (deleteBtn) {
+            const statusName = deleteBtn.dataset.statusName;
+            const division = deleteBtn.dataset.division;
+            console.log('📋 Status:', statusName, 'Division:', division);
+            if (statusName && division) {
+                console.log('🚀 Calling deleteStatus...');
+                deleteStatus(statusName, division);
+            } else {
+                console.warn('⚠️ Missing statusName or division data attributes');
+            }
+        }
+    });
 });
 
         console.log('🚀 Script loading started');
@@ -68,6 +179,11 @@ document.addEventListener('DOMContentLoaded', function() {
         let certTypes = [];  // Raw cert types from database
         let certifications = [];  // All certifications from pay_Certifications.json
         let certRequirements = {};
+        // Chart instances
+        let workflowChartInstance = null;
+        let complianceChartInstance = null;
+        let currentCompliancePercent = 0; // Store current compliance for chart plugin
+        
         // Removed pizzaStatusRequirements variable and all related logic
         let currentWorkflow = [];
         let hasUnsavedChanges = false;
@@ -358,6 +474,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     throw new Error('Failed to load operators data: ' + operatorsResponse.status);
                 }
                 operators = await operatorsResponse.json();
+                
+                // Normalize data properties to match legacy behavior
+                operators.forEach(op => {
+                    // C# model returns "DivisionId", JS expects "DivisionID"
+                    if (!op.DivisionID && op.DivisionId) {
+                        op.DivisionID = op.DivisionId;
+                    }
+                    if (!op.ID && op.Id) {
+                        op.ID = op.Id;
+                    }
+                });
+
                 console.log('✅ Operators loaded successfully');
                 
                 // Load certifications
@@ -367,7 +495,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     throw new Error('Failed to load certifications: ' + certificationsResponse.status);
                 }
                 const certificationsData = await certificationsResponse.json();
-                certifications = certificationsData.certifications || [];
+                certifications = Array.isArray(certificationsData) ? certificationsData : (certificationsData.certifications || []);
                 console.log('✅ Certifications loaded:', certifications.length, 'records');
                 
                 // Join certifications to operators
@@ -396,6 +524,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 certTypes = await certTypesResponse.json();
                 console.log('✅ Cert types loaded:', certTypes.length, 'certification types');
+                if (certTypes.length > 0) {
+                    console.log('   Sample CertType:', certTypes[0]);
+                } else {
+                    console.warn('   ⚠️ No CertTypes returned from API');
+                }
+                
+                // Populate CertType name on each certification by joining with certTypes
+                console.log('🔗 Populating CertType names on certifications...');
+                certifications.forEach(cert => {
+                    const certType = certTypes.find(ct => ct.ID === cert.CertTypeID);
+                    if (certType) {
+                        cert.CertType = certType.Certification;
+                    }
+                });
+                console.log('✅ CertType names populated on certifications');
                 
                 // Removed pizza status requirements fetch and related logic
                 
@@ -406,6 +549,22 @@ document.addEventListener('DOMContentLoaded', function() {
                     throw new Error('Failed to load status types: ' + statusTypesResponse.status);
                 }
                 statusTypes = await statusTypesResponse.json();
+                
+                 // Normalize data properties to match legacy behavior
+                statusTypes.forEach(st => {
+                    // C# model returns "DivisionId", JS expects "DivisionID"
+                    if (!st.DivisionID && st.DivisionId) {
+                        st.DivisionID = st.DivisionId;
+                    }
+                    if (!st.OrderID && st.OrderId) {
+                        st.OrderID = st.OrderId;
+                    }
+                    // Fix PizzaStatusID casing mismatch
+                    if (!st.PizzaStatusID && st.PizzaStatusId) {
+                        st.PizzaStatusID = st.PizzaStatusId;
+                    }
+                });
+
                 // Sync with window.statusTypes so initializeDynamicWorkflow uses the same array
                 window.statusTypes = statusTypes;
                 console.log('✅ Status types loaded:', statusTypes.length, 'status type mappings');
@@ -829,8 +988,14 @@ document.addEventListener('DOMContentLoaded', function() {
             // Check if all operators have required certs (cumulative - includes previous steps)
             const validation = validateOperatorsInStep(operatorsInStep, allRequiredCerts, index);
 
+            // Check if any operator has been in this status for more than 30 days
+            const hasOverdueOperators = operatorsInStep.some(op => {
+                const daysInStatus = getOperatorDaysInStatus(op.ID);
+                return daysInStatus !== null && daysInStatus >= 30;
+            });
+
             const card = document.createElement('div');
-            card.className = `step-card ${validation.isValid ? 'valid' : 'invalid'}`;
+            card.className = `step-card ${hasOverdueOperators ? 'invalid' : 'valid'}`;
             card.draggable = true;
             card.dataset.index = index;
             card.dataset.status = statusName;
@@ -845,11 +1010,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 divisionsText = mainDivisionFilter;
             }
 
+            // Find StatusID and PizzaStatusID if specific division is selected
+            let statusDebugInfo = '';
+            if (mainDivisionFilter !== 'ALL') {
+                const debugSt = statusTypes.find(st => st.Status === statusName && st.DivisionID === mainDivisionFilter);
+                if (debugSt) {
+                    statusDebugInfo = `<div style="font-size: 10px; color: #666; margin-top: 2px;">
+                        IDs: <span style="font-family: monospace;">${debugSt.Id || 'N/A'}</span> (St) | 
+                             <span style="font-family: monospace;">${debugSt.PizzaStatusID || 'N/A'}</span> (Pz)
+                    </div>`;
+                }
+            }
+
             card.innerHTML = `
                 <div class="step-header">
                     <div class="step-number">${index + 1}</div>
                     <div class="step-info">
-                        <div class="step-title">${statusName}</div>
+                        <div class="step-title">
+                            ${statusName}
+                            ${statusDebugInfo}
+                        </div>
                         <div class="step-meta">
                             ${!isNaN(flowStep.step) ? `<span>Original Step: ${flowStep.step}</span><span>|</span>` : ''}
                             <span>Division${mainDivisionFilter === 'ALL' ? 's' : ''}: ${divisionsText}</span>
@@ -875,7 +1055,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             ▼
                         </button>
                     </div>
-                    <button class="delete-cert-type-btn" onclick="deleteStatus('${statusName}', '${mainDivisionFilter}')" title="Delete status '${statusName}' from Division ${mainDivisionFilter}">
+                    <button class="delete-cert-type-btn" data-status-name="${statusName}" data-division="${mainDivisionFilter}" title="Delete status '${statusName}' from Division ${mainDivisionFilter}">
                         🗑️ Remove Status
                     </button>
                 </div>` : ''}
@@ -1037,23 +1217,34 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Get required certifications for a status (using CertTypes table directly)
-        function getRequiredCertsForStatus(statusName) {
-            // Find the PizzaStatusID for this status and division
-            let pizzaStatusId = null;
-            if (statusTypes && Array.isArray(statusTypes)) {
-                const st = statusTypes.find(s => s.Status === statusName && s.DivisionID === mainDivisionFilter);
-                if (st && st.PizzaStatusID) pizzaStatusId = st.PizzaStatusID;
-            }
-            const certs = [];
-            if (pizzaStatusId) {
-                certTypes.forEach(cert => {
-                    if (cert.PizzaStatusID === pizzaStatusId && cert.DivisionID === mainDivisionFilter) {
-                        certs.push(cert.Certification);
-                    }
-                });
-            }
-            return certs;
-        }
+          // Get required certs for a status
+          function getRequiredCertsForStatus(statusName) {
+              const certs = [];
+              
+              // We need to find ALL rows in StatusType that map this Status Name to the current Division
+              // because there isn't always a 1:1 mapping of StatusName -> PizzaStatusID
+              
+              const relevantStatusTypes = statusTypes.filter(s => 
+                   s.Status === statusName && 
+                   (s.DivisionID === mainDivisionFilter || mainDivisionFilter === 'ALL')
+              );
+
+              relevantStatusTypes.forEach(st => {
+                   if(st.PizzaStatusID) {
+                       // Find certTypes linked to this PizzaStatusID (and DivisionID if needed)
+                       certTypes.forEach(cert => {
+                            if (cert.PizzaStatusID === st.PizzaStatusID && 
+                                (cert.DivisionID === st.DivisionID || mainDivisionFilter === 'ALL')) {
+                                if(!certs.includes(cert.Certification)) {
+                                    certs.push(cert.Certification);
+                                }
+                            }
+                       });
+                   }
+              });
+              
+              return certs;
+          }
 
         // Get required certs for an operator based on their division and cumulative statuses
         function getRequiredCertsForOperator(operatorDivision, statusName) {
@@ -1499,13 +1690,31 @@ document.addEventListener('DOMContentLoaded', function() {
         function updateStats() {
             let validSteps = 0;
             let invalidSteps = 0;
+            
+            // Data for charts
+            const workflowLabels = [];
+            const workflowData = [];
+            
+            // Compliance tracking: total certs vs required certs
+            let totalCertsHeld = 0;
+            let totalCertsRequired = 0;
+
+            // Filter operators by division first
+            let filteredOperators = operators;
+            if (mainDivisionFilter !== 'ALL') {
+                filteredOperators = operators.filter(op => op.DivisionID === mainDivisionFilter);
+            }
 
             currentWorkflow.forEach((flowStep, index) => {
                 const statusName = flowStep.status;
-                const operatorsInStep = operators.filter(op => 
+                const operatorsInStep = filteredOperators.filter(op => 
                     op.StatusName === statusName || 
                     (op.StatusName && op.StatusName.toUpperCase() === statusName.toUpperCase())
                 );
+                
+                // For Workflow Chart
+                workflowLabels.push(statusName);
+                workflowData.push(operatorsInStep.length);
 
                 const requiredCerts = getRequiredCertsForStatus(statusName);
                 const validation = validateOperatorsInStep(operatorsInStep, requiredCerts, index);
@@ -1515,15 +1724,137 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else {
                     invalidSteps++;
                 }
+
+                // Calculate compliance: total certs held vs total certs required
+                operatorsInStep.forEach(op => {
+                    // Get all required certs for this operator (cumulative up to their status)
+                    let allRequiredCerts = new Set(requiredCerts);
+                    
+                    // Add certs from all previous steps
+                    for (let i = 0; i < index; i++) {
+                        const prevStatus = currentWorkflow[i].status;
+                        const prevRequiredCerts = getRequiredCertsForStatus(prevStatus);
+                        prevRequiredCerts.forEach(cert => allRequiredCerts.add(cert));
+                    }
+                    
+                    // Count required certs for this operator
+                    totalCertsRequired += allRequiredCerts.size;
+                    
+                    // Count how many of the required certs this operator actually has
+                    const operatorCerts = new Set(
+                        (op.certifications || []).map(cert => cert.CertType).filter(ct => ct)
+                    );
+                    
+                    allRequiredCerts.forEach(requiredCert => {
+                        if (operatorCerts.has(requiredCert)) {
+                            totalCertsHeld++;
+                        }
+                    });
+                });
             });
 
-            const complianceRate = currentWorkflow.length > 0 ? 
-                Math.round((validSteps / currentWorkflow.length) * 100) : 0;
+            // Update DOM numbers (hidden or visible)
+            if(document.getElementById('validSteps')) document.getElementById('validSteps').textContent = validSteps;
+            if(document.getElementById('invalidSteps')) document.getElementById('invalidSteps').textContent = invalidSteps;
+            
+            // Total Operators should reflect the active division filter
+            const totalOpsCount = filteredOperators.length;
+            if(document.getElementById('totalOperators')) document.getElementById('totalOperators').textContent = totalOpsCount;
 
-            document.getElementById('totalOperators').textContent = operators.length;
-            document.getElementById('validSteps').textContent = validSteps;
-            document.getElementById('invalidSteps').textContent = invalidSteps;
-            document.getElementById('complianceRate').textContent = `${complianceRate}%`;
+            // Calculate compliance: (certs held / certs required) * 100
+            currentCompliancePercent = totalCertsRequired > 0 ? Math.round((totalCertsHeld / totalCertsRequired) * 100) : 0;
+
+            // --- CHART UPDATES ---
+            
+            // 1. Compliance Gauge (Doughnut)
+            const ctxCompliance = document.getElementById('complianceChart');
+            if (ctxCompliance) {
+                if (!complianceChartInstance) {
+                    complianceChartInstance = new Chart(ctxCompliance, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['Certs Held', 'Certs Missing'],
+                            datasets: [{
+                                data: [totalCertsHeld, Math.max(0, totalCertsRequired - totalCertsHeld)],
+                                backgroundColor: ['#10b981', '#ef4444'], // Green, Red
+                                borderWidth: 0,
+                                cutout: '70%'
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: true,
+                            plugins: {
+                                legend: { display: false },
+                                tooltip: { enabled: false },
+                                centerText: { display: true }
+                            }
+                        },
+                        plugins: [{
+                            id: 'centerText',
+                            afterDatasetsDraw(chart) {
+                                const { ctx, chartArea: { left, top, width, height } } = chart;
+                                ctx.save();
+                                
+                                const centerX = left + width / 2;
+                                const centerY = top + height / 2;
+                                
+                                ctx.font = 'bold 20px Arial';
+                                ctx.fillStyle = '#fff';
+                                ctx.textAlign = 'center';
+                                ctx.textBaseline = 'middle';
+                                ctx.fillText(currentCompliancePercent + '%', centerX, centerY);
+                                
+                                ctx.restore();
+                            }
+                        }]
+                    });
+                } else {
+                    complianceChartInstance.data.datasets[0].data = [totalCertsHeld, Math.max(0, totalCertsRequired - totalCertsHeld)];
+                    complianceChartInstance.update();
+                }
+            }
+
+            // 2. Workflow Pipeline (Bar)
+            const ctxWorkflow = document.getElementById('workflowChart');
+            if (ctxWorkflow) {
+                if (!workflowChartInstance) {
+                    workflowChartInstance = new Chart(ctxWorkflow, {
+                        type: 'bar',
+                        data: {
+                            labels: workflowLabels,
+                            datasets: [{
+                                label: 'Operators',
+                                data: workflowData,
+                                backgroundColor: '#6366f1',
+                                borderRadius: 4
+                            }]
+                        },
+                        options: {
+                            indexAxis: 'y', // Horizontal bar chart
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                x: { 
+                                    display: false,
+                                    grid: { display: false }
+                                },
+                                y: {
+                                    ticks: { color: '#94a3b8', font: { size: 10 } },
+                                    grid: { display: false }
+                                }
+                            },
+                            plugins: {
+                                legend: { display: false }
+                            }
+                        }
+                    });
+                } else {
+                    workflowChartInstance.data.labels = workflowLabels;
+                    workflowChartInstance.data.datasets[0].data = workflowData;
+                    workflowChartInstance.update();
+                }
+            }
         }
 
         // Reset to ideal flow
@@ -1740,12 +2071,162 @@ function removeCertFromStatus(statusName, certName) {
 }
 
         // Delete entire status from a division
-        function deleteStatus(statusName, divisionId) {
-            if (!confirm(`⚠️ Are you sure you want to remove "${statusName}" from Division ${divisionId}?\n\nThis will:\n1. Mark this status as deleted for this division\n2. Shift all subsequent statuses UP one step`)) {
+        async function deleteStatus(statusName, divisionId) {
+            console.log('🎯 deleteStatus CALLED with:', { statusName, divisionId });
+            console.log(`🔍 Checking impact of deleting status ${statusName} for division ${divisionId}`);
+
+            // 1. Check for operators in this status using the already-loaded operators array
+            const affectedOperators = operators.filter(op => 
+                (op.StatusName === statusName || (op.StatusName && op.StatusName.toUpperCase() === statusName.toUpperCase())) &&
+                op.DivisionID === divisionId
+            );
+            const operatorCount = affectedOperators.length;
+
+            console.log(`   📊 Found ${operatorCount} operators in this status`);
+
+            // 2. Show warning modal with operator details
+            if (operatorCount > 0) {
+                showStatusDeleteWarning(statusName, divisionId, affectedOperators, operatorCount);
+            } else {
+                // No operators affected, proceed with simple confirmation
+                if (confirm(`Remove "${statusName}" from Division ${divisionId}?\n\nNo operators are currently in this status.\n\nThis will:\n1. Mark this status as deleted\n2. Shift subsequent statuses up one step`)) {
+                    executeStatusDeletion(statusName, divisionId);
+                }
+            }
+        }
+
+        // Show warning modal for status deletion with operator list
+        function showStatusDeleteWarning(statusName, divisionId, operators, count) {
+            const modalBody = document.getElementById('statusDeleteWarningModalBody');
+            if (!modalBody) {
+                console.error('❌ Status delete warning modal not found');
                 return;
             }
 
-            console.log(`🗑️ Deleting status ${statusName} for division ${divisionId}`);
+            // Build operator list HTML
+            let operatorListHtml = `
+                <div class="table-responsive" style="max-height: 350px; overflow-y: auto; border: 1px solid #dee2e6; border-radius: 4px;">
+                    <table class="table table-hover table-sm mb-0" style="font-size: 0.9rem;">
+                        <thead style="position: sticky; top: 0; background-color: #f8f9fa; z-index: 10;">
+                            <tr>
+                                <th style="padding: 10px;">Operator ID</th>
+                                <th style="padding: 10px;">First Name</th>
+                                <th style="padding: 10px;">Last Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+            
+            operators.forEach(op => {
+                const operatorId = op.ID || 'N/A';
+                const firstName = op.FirstName || 'N/A';
+                const lastName = op.LastName || 'N/A';
+                operatorListHtml += `
+                    <tr>
+                        <td style="padding: 8px; font-family: monospace; font-size: 0.8rem;">${operatorId}</td>
+                        <td style="padding: 8px;">${firstName}</td>
+                        <td style="padding: 8px;">${lastName}</td>
+                    </tr>
+                `;
+            });
+            
+            operatorListHtml += '</tbody></table></div>';
+
+            // Get suggested target status based on order
+            const currentStatus = statusTypes.find(st => st.Status === statusName && st.DivisionID === divisionId);
+            const currentOrderId = currentStatus ? parseInt(currentStatus.OrderID) : 0;
+            
+            // Get all statuses in this division (excluding the one being deleted)
+            const divisionStatuses = statusTypes
+                .filter(st => st.DivisionID === divisionId && st.Status !== statusName && !st.isDeleted && st.isDeleted !== true)
+                .sort((a, b) => parseInt(a.OrderID) - parseInt(b.OrderID));
+
+            // Find previous status (one step before in workflow)
+            const previousStatus = divisionStatuses.reverse().find(st => parseInt(st.OrderID) < currentOrderId);
+            const suggestedStatus = previousStatus || divisionStatuses[0]; // Default to first status if no previous
+
+            // Build status dropdown options
+            let statusOptions = '';
+            divisionStatuses.reverse().forEach(st => {
+                const selected = suggestedStatus && st.Status === suggestedStatus.Status ? 'selected' : '';
+                const orderLabel = st.OrderID ? ` (Step ${st.OrderID})` : '';
+                statusOptions += `<option value="${st.Status}" data-statusid="${st.Id}" data-orderid="${st.OrderID}" ${selected}>${st.Status}${orderLabel}</option>`;
+            });
+
+            const suggestionText = suggestedStatus 
+                ? `We recommend moving operators to <strong>"${suggestedStatus.Status}"</strong> (the previous step in your workflow).` 
+                : 'No alternate status available in this division.';
+
+            modalBody.innerHTML = `
+                <div style="background: white; padding: 1rem 1.5rem; border-radius: 4px; margin-bottom: 1rem; border-left: 3px solid #dc3545;">
+                    <h6 style="color: #dc3545; font-weight: 600; margin-bottom: 0.25rem; font-size: 1.05rem;">
+                        <i class="fas fa-exclamation-circle me-2"></i>${count} Operator${count !== 1 ? 's' : ''} in "${statusName}" (${divisionId})
+                    </h6>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div>
+                        ${operatorListHtml}
+                    </div>
+                    
+                    <div>
+                        <div style="background: white; padding: 1.25rem; border-radius: 4px; border: 1px solid #dee2e6; margin-bottom: 1rem;">
+                            <h6 style="color: #0d6efd; font-weight: 600; margin-bottom: 0.75rem; font-size: 1rem;">
+                                <i class="fas fa-people-arrows me-2"></i>Reassign Operators
+                            </h6>
+                            <p style="margin-bottom: 1rem; color: #6c757d; font-size: 0.9rem;">${suggestionText}</p>
+                            <label for="targetStatusSelect" class="form-label" style="font-weight: 500; color: #212529; font-size: 0.9rem; margin-bottom: 0.5rem;">
+                                Target status:
+                            </label>
+                            <select class="form-select" id="targetStatusSelect" style="padding: 0.5rem; border: 1px solid #ced4da; font-size: 0.95rem;">
+                                ${statusOptions || '<option value="">No statuses available</option>'}
+                            </select>
+                        </div>
+                        
+                        <div style="background: #e7f3ff; padding: 1rem; border-radius: 4px; border: 1px solid #b8daff; margin-bottom: 1rem;">
+                            <p style="margin-bottom: 0.5rem; color: #004085; font-weight: 500; font-size: 0.875rem;">
+                                <i class="fas fa-info-circle me-1"></i> Reassign & Delete will:
+                            </p>
+                            <ul style="margin-bottom: 0; padding-left: 1.25rem; color: #004085; font-size: 0.825rem; line-height: 1.6;">
+                                <li>Move ${count} operator${count !== 1 ? 's' : ''} to selected status</li>
+                                <li>Mark "${statusName}" as deleted</li>
+                                <li>Adjust workflow order</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="background: #fff3cd; padding: 1rem; border-radius: 4px; border: 1px solid #ffc107;">
+                            <p style="margin-bottom: 0.5rem; color: #856404; font-weight: 500; font-size: 0.875rem;">
+                                <i class="fas fa-exclamation-triangle me-1"></i> Delete Without Reassigning:
+                            </p>
+                            <ul style="margin-bottom: 0; padding-left: 1.25rem; color: #856404; font-size: 0.825rem; line-height: 1.6;">
+                                <li>Operators remain linked to deleted status</li>
+                                <li>May cause data inconsistencies</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Store context for confirm button
+            window._statusDeleteContext = { statusName, divisionId, operators };
+
+            // Show modal
+            const modalEl = document.getElementById('statusDeleteWarningModal');
+            if (modalEl) {
+                if (window.bootstrap && window.bootstrap.Modal) {
+                    const modal = window.bootstrap.Modal.getOrCreateInstance(modalEl);
+                    modal.show();
+                } else if (typeof $ !== 'undefined' && $(modalEl).modal) {
+                    $(modalEl).modal('show');
+                } else {
+                    modalEl.style.display = 'block';
+                }
+            }
+        }
+
+        // Execute the actual status deletion after confirmation
+        function executeStatusDeletion(statusName, divisionId) {
+            console.log(`🗑️ Executing deletion of status ${statusName} for division ${divisionId}`);
 
             // 1. Find the StatusType record
             const statusRecord = statusTypes.find(st => 
@@ -1760,11 +2241,11 @@ function removeCertFromStatus(statusName, certName) {
 
             // 2. Mark as deleted
             statusRecord.isDeleted = true;
-            statusRecord.IsDelete = true; // Handle potential schema inconsistencies
+            statusRecord.IsDelete = true;
             const deletedOrderId = parseInt(statusRecord.OrderID);
             console.log(`   - Marked ID ${statusRecord.Id} as deleted (Order: ${deletedOrderId})`);
 
-            // 3. Find other statuses in this division and shift OrderID
+            // 3. Shift OrderID of subsequent statuses
             let shiftedCount = 0;
             statusTypes.forEach(st => {
                 if (st.DivisionID === divisionId && st.Status !== statusName) {
@@ -1779,14 +2260,9 @@ function removeCertFromStatus(statusName, certName) {
 
             // 4. Force UI refresh
             markUnsaved();
+            renderWorkflow();
             
-            // Re-infer workflow from new status data? 
-            // Currently idealFlow is static, so we might need a page reload to see effect fully, 
-            // or we manually remove it from current view.
-            alert('Status marked for removal. Please click "Save Changes" to apply.');
-            
-            // Reload page suggestion?
-            // For now, let's just save.
+            alert('Status marked for deletion. Click "Save Changes" to apply.');
         }
 
         // Mark as having unsaved changes
@@ -2441,7 +2917,15 @@ function removeCertFromStatus(statusName, certName) {
             const bodyEl = document.getElementById('operatorModalBody');
 
             nameEl.textContent = `${operator.FirstName} ${operator.LastName}`;
-            subtitleEl.textContent = `${operator.StatusName || 'Unknown Status'} • Division ${operator.DivisionID || 'N/A'}`;
+            
+            // Calculate days in status
+            const daysInStatus = getOperatorDaysInStatus(operatorId);
+            const daysText = daysInStatus !== null ? ` • ${daysInStatus} days in status` : '';
+            const overdueWarning = daysInStatus !== null && daysInStatus >= 30 ? ' ⚠️ OVERDUE' : '';
+            
+            subtitleEl.textContent = `${operator.StatusName || 'Unknown Status'} • Division ${operator.DivisionID || 'N/A'}${daysText}${overdueWarning}`;
+            subtitleEl.style.color = (daysInStatus !== null && daysInStatus >= 30) ? '#dc3545' : '';
+            subtitleEl.style.fontWeight = (daysInStatus !== null && daysInStatus >= 30) ? '600' : '';
 
             // Get certs for the operator's current status's PizzaStatusId
             const opDivision = operator.DivisionID || '';

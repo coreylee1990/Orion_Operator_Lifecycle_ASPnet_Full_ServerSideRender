@@ -1,4 +1,5 @@
 using OrionOperatorLifecycleWebApp.Models;
+using OrionOperatorLifecycleWebApp.Repositories;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,9 +7,9 @@ namespace OrionOperatorLifecycleWebApp.Services
 {
     public class RequirementService : IRequirementService
     {
-        private readonly Repositories.RequirementRepository _requirementRepository;
+        private readonly IRequirementRepository _requirementRepository;
 
-        public RequirementService(Repositories.RequirementRepository requirementRepository)
+        public RequirementService(IRequirementRepository requirementRepository)
         {
             _requirementRepository = requirementRepository;
         }

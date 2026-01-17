@@ -1,4 +1,5 @@
 using OrionOperatorLifecycleWebApp.Models;
+using OrionOperatorLifecycleWebApp.Repositories;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,9 +7,9 @@ namespace OrionOperatorLifecycleWebApp.Services
 {
     public class CertificationService : ICertificationService
     {
-        private readonly Repositories.CertificationRepository _certificationRepository;
+        private readonly ICertificationRepository _certificationRepository;
 
-        public CertificationService(Repositories.CertificationRepository certificationRepository)
+        public CertificationService(ICertificationRepository certificationRepository)
         {
             _certificationRepository = certificationRepository;
         }

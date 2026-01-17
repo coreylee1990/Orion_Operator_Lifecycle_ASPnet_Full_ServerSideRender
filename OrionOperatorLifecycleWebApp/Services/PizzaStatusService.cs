@@ -1,4 +1,5 @@
 using OrionOperatorLifecycleWebApp.Models;
+using OrionOperatorLifecycleWebApp.Repositories;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,9 +7,9 @@ namespace OrionOperatorLifecycleWebApp.Services
 {
     public class PizzaStatusService : IPizzaStatusService
     {
-        private readonly Repositories.PizzaStatusRepository _pizzaStatusRepository;
+        private readonly IPizzaStatusRepository _pizzaStatusRepository;
 
-        public PizzaStatusService(Repositories.PizzaStatusRepository pizzaStatusRepository)
+        public PizzaStatusService(IPizzaStatusRepository pizzaStatusRepository)
         {
             _pizzaStatusRepository = pizzaStatusRepository;
         }

@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace OrionOperatorLifecycleWebApp.Repositories
 {
-    public class PizzaStatusRepository
+    public class PizzaStatusRepository : IPizzaStatusRepository
     {
         private readonly string _filePath = "App_Data/pay_PizzaStatuses.json";
 

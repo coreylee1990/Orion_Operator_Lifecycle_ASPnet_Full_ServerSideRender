@@ -9,18 +9,18 @@ namespace OrionOperatorLifecycleWebApp.Services
 {
     public class AutoAdvanceService : IAutoAdvanceService
     {
-        private readonly OperatorRepository _operatorRepo;
-        private readonly StatusTypeRepository _statusTypeRepo;
-        private readonly PizzaStatusRepository _pizzaStatusRepo;
-        private readonly RequirementRepository _requirementRepo;
-        private readonly CertificationRepository _certRepo;
+        private readonly IOperatorRepository _operatorRepo;
+        private readonly IStatusTypeRepository _statusTypeRepo;
+        private readonly IPizzaStatusRepository _pizzaStatusRepo;
+        private readonly IRequirementRepository _requirementRepo;
+        private readonly ICertificationRepository _certRepo;
 
         public AutoAdvanceService(
-            OperatorRepository operatorRepo,
-            StatusTypeRepository statusTypeRepo,
-            PizzaStatusRepository pizzaStatusRepo,
-            RequirementRepository requirementRepo,
-            CertificationRepository certRepo)
+            IOperatorRepository operatorRepo,
+            IStatusTypeRepository statusTypeRepo,
+            IPizzaStatusRepository pizzaStatusRepo,
+            IRequirementRepository requirementRepo,
+            ICertificationRepository certRepo)
         {
             _operatorRepo = operatorRepo;
             _statusTypeRepo = statusTypeRepo;
