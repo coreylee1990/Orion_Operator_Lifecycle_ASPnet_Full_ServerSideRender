@@ -26,7 +26,7 @@ header {
 
 h1 {
     font-size: 2.5rem;
-    background: linear-gradient(135deg, #60a5fa, #a78bfa);
+    background: linear-gradient(135deg, #1382CA, #39afd1);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -77,7 +77,7 @@ h1 {
 
         h1 {
             font-size: 2.5rem;
-            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            background: linear-gradient(135deg, #1382CA, #39afd1);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -108,57 +108,57 @@ h1 {
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            background: linear-gradient(135deg, #1382CA, #1070a8);
             color: white;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 6px 16px rgba(19, 130, 202, 0.4);
         }
 
         .btn-success {
-            background: linear-gradient(135deg, #10b981, #059669);
+            background: linear-gradient(135deg, #0acf97, #09bf8c);
             color: white;
         }
 
         .btn-success:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+            box-shadow: 0 6px 16px rgba(10, 207, 151, 0.4);
         }
 
         .btn-danger {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
+            background: linear-gradient(135deg, #fa5c7c, #e75573);
             color: white;
         }
 
         .btn-danger:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
+            box-shadow: 0 6px 16px rgba(250, 92, 124, 0.4);
         }
 
         .btn-secondary {
-            background: linear-gradient(135deg, #6b7280, #4b5563);
+            background: linear-gradient(135deg, #6c757d, #646c74);
             color: white;
         }
 
         .btn-secondary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(107, 114, 128, 0.4);
+            box-shadow: 0 6px 16px rgba(108, 117, 125, 0.4);
         }
 
         .btn-toggle {
-            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            background: linear-gradient(135deg, #39afd1, #35a2c1);
             color: white;
         }
 
         .btn-toggle:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 6px 16px rgba(57, 175, 209, 0.4);
         }
 
         .btn-toggle.active {
-            background: linear-gradient(135deg, #10b981, #059669);
+            background: linear-gradient(135deg, #0acf97, #09bf8c);
         }
 
         select.division-select {
@@ -179,8 +179,8 @@ h1 {
 
         select.division-select:focus {
             outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            border-color: #1382CA;
+            box-shadow: 0 0 0 3px rgba(19, 130, 202, 0.1);
         }
 
         .editor-container {
@@ -200,7 +200,7 @@ h1 {
         }
 
         .cert-pool h3 {
-            color: #60a5fa;
+            color: #1382CA;
             margin-bottom: 15px;
             font-size: 1.1rem;
         }
@@ -217,7 +217,7 @@ h1 {
         }
 
         .cert-badge:hover {
-            border-color: #60a5fa;
+            border-color: #1382CA;
             transform: translateX(5px);
             box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
         }
@@ -241,7 +241,7 @@ h1 {
         }
 
         .delete-cert-type-btn:hover {
-            background: #ef4444;
+            background: #fa5c7c;
             color: white;
         }
 
@@ -272,13 +272,13 @@ h1 {
         }
 
         .status-requirement-card.drag-over-status {
-            border-color: #a78bfa;
+            border-color: #39afd1;
             background: rgba(167, 139, 250, 0.1);
             transform: translateY(-4px);
         }
 
         .status-requirement-card h3 {
-            color: #60a5fa;
+            color: #1382CA;
             margin-bottom: 15px;
             font-size: 1.1rem;
             display: flex;
@@ -291,7 +291,7 @@ h1 {
             padding: 4px 10px;
             border-radius: 12px;
             font-size: 0.8rem;
-            color: #a78bfa;
+            color: #39afd1;
             margin-right: 8px;
             font-weight: bold;
         }
@@ -313,7 +313,7 @@ h1 {
             padding: 4px 12px;
             border-radius: 12px;
             font-size: 0.85rem;
-            color: #60a5fa;
+            color: #1382CA;
         }
 
         .drop-zone {
@@ -325,7 +325,7 @@ h1 {
         }
 
         .drop-zone.drag-over {
-            border-color: #10b981;
+            border-color: #0acf97;
             background: rgba(16, 185, 129, 0.1);
             transform: scale(1.02);
         }
@@ -353,7 +353,7 @@ h1 {
         }
 
         .remove-cert-btn:hover {
-            background: #ef4444;
+            background: #fa5c7c;
             color: white;
         }
 
@@ -393,7 +393,7 @@ h1 {
         }
 
         .change-summary strong {
-            color: #60a5fa;
+            color: #1382CA;
         }
 
         .workflow-canvas {
@@ -437,16 +437,16 @@ h1 {
         }
 
         .step-card.drag-over {
-            border-color: #60a5fa;
+            border-color: #1382CA;
             background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.2));
         }
 
         .step-card.valid {
-            border-left: 4px solid #10b981;
+            border-left: 4px solid #0acf97;
         }
 
         .step-card.invalid {
-            border-left: 4px solid #ef4444;
+            border-left: 4px solid #fa5c7c;
         }
 
         .step-header {
@@ -457,7 +457,7 @@ h1 {
         }
 
         .step-number {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            background: linear-gradient(135deg, #1382CA, #2563eb);
             color: white;
             width: 40px;
             height: 40px;
@@ -501,12 +501,12 @@ h1 {
 
         .status-indicator.valid {
             background: rgba(16, 185, 129, 0.2);
-            color: #10b981;
+            color: #0acf97;
         }
 
         .status-indicator.invalid {
             background: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
+            color: #fa5c7c;
         }
 
         .status-dot {
@@ -517,11 +517,11 @@ h1 {
         }
 
         .status-indicator.valid .status-dot {
-            background: #10b981;
+            background: #0acf97;
         }
 
         .status-indicator.invalid .status-dot {
-            background: #ef4444;
+            background: #fa5c7c;
         }
 
         @keyframes pulse {
@@ -551,7 +551,7 @@ h1 {
         }
 
         .dropdown-trigger .count {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            background: linear-gradient(135deg, #1382CA, #2563eb);
             color: white;
             padding: 4px 12px;
             border-radius: 12px;
@@ -622,7 +622,7 @@ h1 {
 
         .operator-days-in-status.overdue {
             background: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
+            color: #fa5c7c;
             animation: pulse-warning 2s infinite;
         }
 
@@ -647,7 +647,7 @@ h1 {
             padding: 2px 8px;
             border-radius: 4px;
             background: rgba(96, 165, 250, 0.2);
-            color: #60a5fa;
+            color: #1382CA;
         }
 
         .operator-progress {
@@ -665,15 +665,15 @@ h1 {
         }
 
         .operator-progress-segment.valid {
-            background: linear-gradient(90deg, #10b981, #34d399);
+            background: linear-gradient(90deg, #0acf97, #34d399);
         }
 
         .operator-progress-segment.expired {
-            background: linear-gradient(90deg, #f59e0b, #fbbf24);
+            background: linear-gradient(90deg, #ffc35a, #fbbf24);
         }
 
         .operator-progress-segment.missing {
-            background: linear-gradient(90deg, #ef4444, #f87171);
+            background: linear-gradient(90deg, #fa5c7c, #f87171);
         }
 
         .operator-progress-segment.no-data {
@@ -689,12 +689,12 @@ h1 {
 
         .cert-status.complete {
             background: rgba(16, 185, 129, 0.2);
-            color: #10b981;
+            color: #0acf97;
         }
 
         .cert-status.incomplete {
             background: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
+            color: #fa5c7c;
         }
 
         .cert-details {
@@ -723,7 +723,7 @@ h1 {
             font-size: 0.85rem;
             font-weight: 600;
             background: rgba(59, 130, 246, 0.2);
-            color: #60a5fa;
+            color: #1382CA;
             border: 1px solid rgba(59, 130, 246, 0.3);
             cursor: move;
             position: relative;
@@ -746,7 +746,7 @@ h1 {
             top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
-            color: #ef4444;
+            color: #fa5c7c;
             font-weight: 700;
             padding: 0 4px;
             opacity: 0.7;
@@ -796,7 +796,7 @@ h1 {
 
         .add-cert-input input:focus {
             outline: none;
-            border-color: #60a5fa;
+            border-color: #1382CA;
         }
 
         .autocomplete-dropdown {
@@ -874,12 +874,12 @@ h1 {
         .form-group select:focus,
         .form-group input:focus {
             outline: none;
-            border-color: #3b82f6;
+            border-color: #1382CA;
             box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
         }
 
         .status-option-deleted {
-            color: #ef4444;
+            color: #fa5c7c;
             font-style: italic;
         }
         
@@ -919,7 +919,7 @@ h1 {
 
         .search-input:focus {
             outline: none;
-            border-color: #3b82f6;
+            border-color: #1382CA;
             background: #0f172a;
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
@@ -975,8 +975,8 @@ h1 {
         }
 
         .filter-btn.active {
-            background: #3b82f6;
-            border-color: #3b82f6;
+            background: #1382CA;
+            border-color: #1382CA;
             color: white;
         }
 
@@ -988,7 +988,7 @@ h1 {
 
         .bulk-btn {
             padding: 10px 18px;
-            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            background: linear-gradient(135deg, #1382CA 0%, #4f46e5 100%);
             border: none;
             border-radius: 8px;
             color: white;
@@ -1007,7 +1007,7 @@ h1 {
         }
 
         .bulk-btn.danger {
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            background: linear-gradient(135deg, #fa5c7c 0%, #e75573 100%);
         }
 
         .bulk-btn.danger:hover {
@@ -1015,7 +1015,7 @@ h1 {
         }
 
         .bulk-btn.success {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background: linear-gradient(135deg, #0acf97 0%, #09bf8c 100%);
         }
 
         .bulk-btn.success:hover {
@@ -1126,12 +1126,12 @@ h1 {
 
         .operator-status-badge.has-cert {
             background: rgba(16, 185, 129, 0.2);
-            color: #10b981;
+            color: #0acf97;
         }
 
         .operator-status-badge.missing-cert {
             background: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
+            color: #fa5c7c;
         }
 
         .operator-status-badge.expired {
@@ -1194,7 +1194,7 @@ h1 {
 
         .export-option:hover {
             background: #1e293b;
-            border-color: #3b82f6;
+            border-color: #1382CA;
         }
 
         .export-option h4 {
@@ -1277,8 +1277,8 @@ h1 {
 
         .close-operator-modal:hover {
             background: rgba(239, 68, 68, 0.3);
-            border-color: #ef4444;
-            color: #ef4444;
+            border-color: #fa5c7c;
+            color: #fa5c7c;
         }
 
         .operator-modal-body {
@@ -1428,7 +1428,7 @@ h1 {
 
         .cert-card.has-cert .cert-card-status {
             background: rgba(16, 185, 129, 0.2);
-            color: #10b981;
+            color: #0acf97;
         }
 
         .cert-card.expired .cert-card-status {
@@ -1438,7 +1438,7 @@ h1 {
 
         .cert-card.missing .cert-card-status {
             background: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
+            color: #fa5c7c;
         }
 
         .cert-stats {
@@ -1461,9 +1461,9 @@ h1 {
             margin-bottom: 5px;
         }
 
-        .cert-stat-value.valid { color: #10b981; }
+        .cert-stat-value.valid { color: #0acf97; }
         .cert-stat-value.expired { color: #fbbf24; }
-        .cert-stat-value.missing { color: #ef4444; }
+        .cert-stat-value.missing { color: #fa5c7c; }
 
         .cert-stat-label {
             color: #94a3b8;
@@ -1491,7 +1491,7 @@ h1 {
         }
 
         .operator-progress-segment.valid {
-            background: #10b981;
+            background: #0acf97;
         }
 
         .operator-progress-segment.expired {
@@ -1499,7 +1499,7 @@ h1 {
         }
 
         .operator-progress-segment.missing {
-            background: #ef4444;
+            background: #fa5c7c;
         }
 
         .operator-item {
@@ -1540,15 +1540,15 @@ h1 {
         }
 
         .operator-progress-segment.valid {
-            background: linear-gradient(90deg, #10b981, #059669);
+            background: linear-gradient(90deg, #0acf97, #09bf8c);
         }
 
         .operator-progress-segment.expired {
-            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            background: linear-gradient(90deg, #fbbf24, #ffc35a);
         }
 
         .operator-progress-segment.missing {
-            background: linear-gradient(90deg, #ef4444, #dc2626);
+            background: linear-gradient(90deg, #fa5c7c, #e75573);
         }
 
         .operator-cert-stats {
@@ -1571,9 +1571,9 @@ h1 {
             border-radius: 50%;
         }
 
-        .operator-cert-stat-dot.valid { background: #10b981; }
+        .operator-cert-stat-dot.valid { background: #0acf97; }
         .operator-cert-stat-dot.expired { background: #fbbf24; }
-        .operator-cert-stat-dot.missing { background: #ef4444; }
+        .operator-cert-stat-dot.missing { background: #fa5c7c; }
 
         .operator-item {
             display: flex;
@@ -1620,7 +1620,7 @@ h1 {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: linear-gradient(135deg, #f59e0b, #d97706);
+            background: linear-gradient(135deg, #ffc35a, #ecb453);
             color: white;
             padding: 12px 20px;
             border-radius: 8px;
@@ -1663,7 +1663,7 @@ h1 {
         .stat-value {
             font-size: 2.5rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            background: linear-gradient(135deg, #1382CA, #39afd1);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -1700,11 +1700,11 @@ h1 {
         }
 
         .legend-color.valid {
-            background: #10b981;
+            background: #0acf97;
         }
 
         .legend-color.invalid {
-            background: #ef4444;
+            background: #fa5c7c;
         }
 
         /* Scrollbar styling */
@@ -1746,7 +1746,7 @@ h1 {
 
         /* Warning Banner for ALL mode */
         .all-divisions-warning {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
+            background: linear-gradient(135deg, #ffc35a, #ecb453);
             color: white;
             padding: 15px 20px;
             border-radius: 8px;
@@ -1810,7 +1810,7 @@ h1 {
 
         .modal-header {
             font-size: 1.5rem;
-            color: #f59e0b;
+            color: #ffc35a;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
@@ -1877,7 +1877,7 @@ h1 {
 
 .status-drop-zone.drag-over {
     background: rgba(99, 102, 241, 0.3);
-    border-color: #6366f1;
+    border-color: #1382CA;
     height: 60px;
 }
 
@@ -1886,7 +1886,7 @@ h1 {
     height: 100%;
     align-items: center;
     justify-content: center;
-    color: #6366f1;
+    color: #1382CA;
     font-size: 0.85rem;
     font-weight: 500;
 }
