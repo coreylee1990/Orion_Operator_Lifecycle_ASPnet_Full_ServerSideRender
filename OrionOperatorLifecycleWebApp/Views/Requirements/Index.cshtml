@@ -9,7 +9,7 @@
 <link href="/css/requirements-editor.css" rel="stylesheet">
 
 <div class="container" style="display: flex; flex-direction: row;">
-        <div class="vertical-panel" style="width: 360px; min-width: 300px; max-width: 420px; background: linear-gradient(135deg, #232b3b 0%, #1e293b 100%); border-radius: 18px; margin: 30px 20px 30px 30px; padding: 28px 18px; display: flex; flex-direction: column; gap: 28px; height: fit-content; box-shadow: 0 8px 32px rgba(0,0,0,0.25);">
+        <div class="vertical-panel" style="width: 360px; min-width: 300px; max-width: 420px; background: #fafbfe; border-radius: 18px; margin: 30px 20px 30px 30px; padding: 28px 18px; display: flex; flex-direction: column; gap: 28px; height: fit-content; box-shadow: 0 8px 32px rgba(0,0,0,0.25);">
             <h2 id="divisionTitle" style="margin-bottom: 0; color: #60a5fa; font-weight: bold; font-size: 1.35rem; text-align: center; letter-spacing: 0.5px;">All Divisions</h2>
                         <!-- Add Status to Division Accordion (moved and restyled) -->
                         <div class="accordion" id="addStatusAccordion" style="background: #232b3b; border-radius: 12px; box-shadow: 0 2px 8px rgba(60,60,80,0.10); margin-bottom: 10px;">
@@ -53,7 +53,6 @@
                                 </div>
                             </div>
                         </div>
-            <h3>🎛️ Control Center</h3>
             <div class="stats-panel" id="statsPanel" style="display: flex; flex-direction: column; gap: 15px;">
                 <!-- Summary Row -->
                 <div style="display: flex; gap: 10px; justify-content: space-between;">
@@ -85,26 +84,16 @@
             <div class="legend">
                 <div class="legend-item">
                     <div class="legend-color valid"></div>
-                    <span>All operators have required certifications</span>
+                    <span>No operators stuck 30+ days</span>
                 </div>
                 <div class="legend-item">
                     <div class="legend-color invalid"></div>
-                    <span>Some operators missing required certifications</span>
+                    <span>Operators stuck 30+ days in status</span>
                 </div>
             </div>
-            <div class="search-bar">
-                <span class="search-icon">🔍</span>
-                <input type="text" id="globalSearch" class="search-input" placeholder="Search certifications, operators, or statuses..." oninput="handleGlobalSearch()">
-                <button class="clear-search" onclick="clearGlobalSearch()" style="display: none;">×</button>
-            </div>
-            <div class="filter-options">
-                <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">All Statuses</button>
-                <button class="filter-btn" data-filter="valid" onclick="setFilter('valid')">✓ Valid Only</button>
-                <button class="filter-btn" data-filter="invalid" onclick="setFilter('invalid')">⚠ Invalid Only</button>
-            </div>
             <div class="division-filter-section" style="margin: 15px 0;">
-                <label style="display: block; margin-bottom: 8px; color: #94a3b8; font-size: 0.9rem;">📍 Filter by Division:</label>
-                <select id="mainDivisionFilter" onchange="handleMainDivisionFilter()" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid rgba(148, 163, 184, 0.2); background: rgba(30, 41, 59, 0.6); color: #e2e8f0; font-size: 0.95rem;">
+                <label style="display: block; margin-bottom: 8px; color: #313a46; font-size: 0.9rem;">📍 Filter by Division:</label>
+                <select id="mainDivisionFilter" onchange="handleMainDivisionFilter()" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #dee2e6; background: #ffffff; color: #313a46; font-size: 0.95rem;">
                     <option value="ALL">🌐 All Divisions</option>
                 </select>
             </div>

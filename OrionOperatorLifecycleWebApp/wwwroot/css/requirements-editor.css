@@ -163,18 +163,18 @@ h1 {
 
         select.division-select {
             padding: 12px 16px;
-            border: 2px solid rgba(148, 163, 184, 0.2);
+            border: 1px solid #dee2e6;
             border-radius: 8px;
             font-size: 1rem;
-            background: rgba(30, 41, 59, 0.6);
-            color: #e2e8f0;
+            background: #ffffff;
+            color: #313a46;
             cursor: pointer;
             transition: all 0.3s ease;
             min-width: 200px;
         }
 
         select.division-select:hover {
-            border-color: rgba(96, 165, 250, 0.5);
+            border-color: #1382CA;
         }
 
         select.division-select:focus {
@@ -413,7 +413,7 @@ h1 {
         }
 
         .step-card {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(51, 65, 85, 0.9));
+            background: white;
             border-radius: 12px;
             padding: 20px;
             border: 2px solid rgba(148, 163, 184, 0.2);
@@ -478,7 +478,7 @@ h1 {
         .step-title {
             font-size: 1.3rem;
             font-weight: 700;
-            color: #e2e8f0;
+            color: #313a46;
             margin-bottom: 5px;
         }
 
@@ -576,16 +576,17 @@ h1 {
             display: flex;
             flex-direction: column;
             padding: 10px 16px;
-            background: rgba(15, 23, 42, 0.4);
-            border: 1px solid rgba(148, 163, 184, 0.1);
+            background: #ffffff;
+            border: 1px solid #dee2e6;
             border-radius: 6px;
             margin-bottom: 8px;
             transition: all 0.2s ease;
         }
 
         .operator-item:hover {
-            background: rgba(15, 23, 42, 0.6);
-            border-color: rgba(96, 165, 250, 0.3);
+            background: #f8f9fa;
+            border-color: #1382CA;
+            box-shadow: 0 2px 8px rgba(19, 130, 202, 0.15);
         }
 
         .operator-item.operator-overdue {
@@ -608,7 +609,7 @@ h1 {
 
         .operator-name {
             font-weight: 600;
-            color: #e2e8f0;
+            color: #313a46;
         }
 
         .operator-days-in-status {
@@ -616,8 +617,8 @@ h1 {
             font-weight: 600;
             padding: 2px 8px;
             border-radius: 4px;
-            background: rgba(148, 163, 184, 0.2);
-            color: #94a3b8;
+            background: #e9ecef;
+            color: #6c757d;
         }
 
         .operator-days-in-status.overdue {
@@ -652,16 +653,18 @@ h1 {
 
         .operator-progress {
             width: 100%;
-            height: 6px;
-            background: rgba(30, 41, 59, 0.8);
-            border-radius: 3px;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
             overflow: hidden;
             display: flex;
+            border: 1px solid #dee2e6;
         }
 
         .operator-progress-segment {
             height: 100%;
             transition: width 0.3s ease;
+            min-width: 3px;
         }
 
         .operator-progress-segment.valid {
@@ -677,7 +680,7 @@ h1 {
         }
 
         .operator-progress-segment.no-data {
-            background: rgba(148, 163, 184, 0.2);
+            background: #dee2e6;
         }
 
         .cert-status {
@@ -700,14 +703,14 @@ h1 {
         .cert-details {
             margin-top: 15px;
             padding: 15px;
-            background: rgba(15, 23, 42, 0.4);
+            background: rgb(175 178 186 / 40%);
             border-radius: 8px;
             border: 1px solid rgba(148, 163, 184, 0.1);
         }
 
         .cert-title {
             font-weight: 700;
-            color: #e2e8f0;
+            color: #313a46;
             margin-bottom: 10px;
         }
 
@@ -787,10 +790,10 @@ h1 {
         .add-cert-input input {
             width: 100%;
             padding: 10px 15px;
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(148, 163, 184, 0.3);
+            background: #ffffff;
+            border: 1px solid #dee2e6;
             border-radius: 6px;
-            color: #e2e8f0;
+            color: #313a46;
             font-size: 0.9rem;
         }
 
@@ -803,14 +806,13 @@ h1 {
             position: relative;
             max-height: 300px;
             overflow-y: auto;
-            background: rgba(15, 23, 42, 0.98);
-            border: 1px solid rgba(96, 165, 250, 0.5);
+            background: #ffffff;
+            border: 1px solid #dee2e6;
             border-radius: 6px;
             margin-top: 5px;
             z-index: 9999;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(96, 165, 250, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             display: none;
-            backdrop-filter: blur(10px);
         }
 
         .autocomplete-dropdown.active {
@@ -820,9 +822,9 @@ h1 {
         .autocomplete-item {
             padding: 10px 15px;
             cursor: pointer;
-            color: #e2e8f0;
+            color: #313a46;
             transition: all 0.2s ease;
-            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+            border-bottom: 1px solid #f3f4f6;
         }
 
         .autocomplete-item:last-child {
@@ -830,11 +832,11 @@ h1 {
         }
 
         .autocomplete-item:hover {
-            background: rgba(59, 130, 246, 0.2);
+            background: #f3f4f6;
         }
 
         .autocomplete-item.highlighted {
-            background: rgba(59, 130, 246, 0.3);
+            background: #e0f2fe;
         }
 
         .autocomplete-no-results {
@@ -1028,9 +1030,9 @@ h1 {
             top: 0;
             width: 400px;
             height: 100vh;
-            background: #0f172a;
-            border-left: 1px solid #334155;
-            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
+            background: #ffffff;
+            border-left: 1px solid #dee2e6;
+            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
             transition: right 0.3s ease;
             z-index: 1000;
             overflow-y: auto;
@@ -1042,8 +1044,8 @@ h1 {
 
         .details-header {
             padding: 20px;
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            border-bottom: 1px solid #334155;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
             position: sticky;
             top: 0;
             z-index: 10;
@@ -1051,12 +1053,12 @@ h1 {
 
         .details-header h3 {
             margin: 0 0 5px 0;
-            color: #e2e8f0;
+            color: #313a46;
             font-size: 1.2rem;
         }
 
         .details-subtitle {
-            color: #94a3b8;
+            color: #6c757d;
             font-size: 0.9rem;
         }
 
@@ -1066,7 +1068,7 @@ h1 {
             right: 20px;
             background: none;
             border: none;
-            color: #94a3b8;
+            color: #6c757d;
             cursor: pointer;
             font-size: 24px;
             padding: 0;
@@ -1079,7 +1081,7 @@ h1 {
         }
 
         .close-panel:hover {
-            color: #e2e8f0;
+            color: #fa5c7c;
         }
 
         .details-content {
@@ -1091,11 +1093,11 @@ h1 {
         }
 
         .details-section h4 {
-            color: #e2e8f0;
+            color: #313a46;
             font-size: 1rem;
             margin: 0 0 12px 0;
             padding-bottom: 8px;
-            border-bottom: 1px solid #334155;
+            border-bottom: 1px solid #dee2e6;
         }
 
         .operator-list {
@@ -1217,7 +1219,7 @@ h1 {
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.5);
             z-index: 10000;
             align-items: center;
             justify-content: center;
@@ -1228,8 +1230,8 @@ h1 {
         }
 
         .operator-modal-content {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            border: 1px solid #334155;
+            background: #ffffff;
+            border: 1px solid #dee2e6;
             border-radius: 16px;
             padding: 0;
             max-width: 700px;
@@ -1238,24 +1240,24 @@ h1 {
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
         }
 
         .operator-modal-header {
             padding: 25px 30px;
-            background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
-            border-bottom: 1px solid #475569;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
             position: relative;
         }
 
         .operator-modal-header h2 {
             margin: 0 0 8px 0;
-            color: #e2e8f0;
+            color: #313a46;
             font-size: 1.5rem;
         }
 
         .operator-modal-subtitle {
-            color: #94a3b8;
+            color: #6c757d;
             font-size: 0.9rem;
             margin: 0;
         }
@@ -1264,9 +1266,9 @@ h1 {
             position: absolute;
             top: 20px;
             right: 20px;
-            background: rgba(51, 65, 85, 0.5);
-            border: 1px solid #475569;
-            color: #e2e8f0;
+            background: #ffffff;
+            border: 1px solid #dee2e6;
+            color: #6c757d;
             cursor: pointer;
             font-size: 24px;
             padding: 8px 12px;
@@ -1276,9 +1278,9 @@ h1 {
         }
 
         .close-operator-modal:hover {
-            background: rgba(239, 68, 68, 0.3);
+            background: #fa5c7c;
             border-color: #fa5c7c;
-            color: #fa5c7c;
+            color: #ffffff;
         }
 
         .operator-modal-body {
@@ -1292,9 +1294,9 @@ h1 {
             gap: 15px;
             margin-bottom: 25px;
             padding: 20px;
-            background: rgba(15, 23, 42, 0.5);
+            background: #f8f9fa;
             border-radius: 12px;
-            border: 1px solid #334155;
+            border: 1px solid #dee2e6;
         }
 
         .operator-info-item {
@@ -1304,7 +1306,7 @@ h1 {
         }
 
         .operator-info-label {
-            color: #94a3b8;
+            color: #6c757d;
             font-size: 0.85rem;
             font-weight: 600;
             text-transform: uppercase;
@@ -1312,18 +1314,18 @@ h1 {
         }
 
         .operator-info-value {
-            color: #e2e8f0;
+            color: #313a46;
             font-size: 1rem;
             font-weight: 500;
         }
 
         .certs-section-title {
-            color: #e2e8f0;
+            color: #313a46;
             font-size: 1.2rem;
             font-weight: 600;
             margin: 0 0 15px 0;
             padding-bottom: 10px;
-            border-bottom: 2px solid #334155;
+            border-bottom: 2px solid #dee2e6;
         }
 
         .cert-grid {
@@ -1370,7 +1372,7 @@ h1 {
         }
 
         .cert-card-name {
-            color: #e2e8f0;
+            color: #313a46;
             font-size: 1rem;
             font-weight: 600;
             flex: 1;
@@ -1391,7 +1393,7 @@ h1 {
             align-items: flex-start;
             gap: 20px;
             padding-top: 8px;
-            border-top: 1px solid rgba(148, 163, 184, 0.15);
+            border-top: 1px solid #dee2e6;
         }
 
         .cert-card-ids {
@@ -1403,14 +1405,14 @@ h1 {
         .cert-card-id,
         .cert-card-type-id {
             font-size: 0.8rem;
-            color: #94a3b8;
+            color: #6c757d;
         }
 
         .cert-card-id span,
         .cert-card-type-id span {
             font-family: monospace;
             font-size: 0.75rem;
-            color: #cbd5e1;
+            color: #313a46;
             word-break: break-all;
         }
 
@@ -1423,7 +1425,7 @@ h1 {
 
         .cert-card-date {
             font-size: 0.8rem;
-            color: #94a3b8;
+            color: #6c757d;
         }
 
         .cert-card.has-cert .cert-card-status {
@@ -1445,7 +1447,7 @@ h1 {
             display: flex;
             gap: 20px;
             padding: 15px;
-            background: rgba(15, 23, 42, 0.5);
+            background: #f8f9fa;
             border-radius: 8px;
             margin-bottom: 20px;
         }
@@ -1475,12 +1477,12 @@ h1 {
         /* Operator Progress Bar */
         .operator-progress {
             display: flex;
-            height: 8px;
-            background: rgba(239, 68, 68, 0.3);
-            border-radius: 4px;
+            height: 24px;
+            background: #e9ecef;
+            border-radius: 12px;
             overflow: hidden;
             margin-top: 6px;
-            border: 1px solid rgba(51, 65, 85, 0.3);
+            border: 1px solid #dee2e6;
             flex: 1;
             max-width: 120px;
         }
@@ -1526,12 +1528,12 @@ h1 {
         /* Operator Progress Bar */
         .operator-progress {
             display: flex;
-            height: 6px;
-            background: rgba(15, 23, 42, 0.5);
-            border-radius: 3px;
+            height: 24px;
+            background: #e9ecef;
+            border-radius: 12px;
             overflow: hidden;
             margin-top: 6px;
-            border: 1px solid rgba(51, 65, 85, 0.5);
+            border: 1px solid #dee2e6;
         }
 
         .operator-progress-segment {
@@ -1653,7 +1655,7 @@ h1 {
         }
 
         .stat-card {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(51, 65, 85, 0.9));
+            background: #cacaca4a;
             padding: 20px;
             border-radius: 12px;
             border: 1px solid rgba(148, 163, 184, 0.2);
@@ -1800,12 +1802,12 @@ h1 {
         }
 
         .modal-content {
-            background: linear-gradient(135deg, #1e293b, #334155);
+            background: #ffffff;
             border-radius: 16px;
             padding: 30px;
             max-width: none;
-            border: 1px solid rgba(148, 163, 184, 0.2);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 1px solid #dee2e6;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
         }
 
         .modal-header {
@@ -1818,7 +1820,7 @@ h1 {
         }
 
         .modal-body {
-            color: #cbd5e1;
+            color: #313a46;
             line-height: 1.6;
             margin-bottom: 20px;
         }

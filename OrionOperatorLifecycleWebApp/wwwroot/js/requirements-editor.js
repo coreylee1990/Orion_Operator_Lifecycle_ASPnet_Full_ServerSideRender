@@ -1038,15 +1038,11 @@ document.addEventListener('DOMContentLoaded', function() {
                             ${previousCerts.size > 0 ? `<span>|</span><span style="color: #94a3b8;">${previousCerts.size} from previous steps</span>` : ''}
                         </div>
                     </div>
-                    <div class="status-indicator ${validation.isValid ? 'valid' : 'invalid'}">
-                        <div class="status-dot"></div>
-                        ${validation.isValid ? '✓ Valid' : '⚠ Issues'}
-                    </div>
                 </div>
                 
                 <!-- Status Actions -->
                 ${mainDivisionFilter !== 'ALL' ? `
-                <div style="position: absolute; top: 10px; right: 140px; display: flex; gap: 5px;">
+                <div style="position: absolute; top: 10px; right: 20px; display: flex; gap: 5px;">
                      <div class="step-reorder-buttons" style="display: flex; flex-direction: column; gap: 2px; margin-right: 10px;">
                         <button class="reorder-btn up" onclick="reorderStep(${index}, -1)" title="Move Up" ${index === 0 ? 'disabled style="opacity:0.3; cursor:not-allowed;"' : 'style="cursor:pointer;"'}>
                             ▲
@@ -1055,8 +1051,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             ▼
                         </button>
                     </div>
-                    <button class="delete-cert-type-btn" data-status-name="${statusName}" data-division="${mainDivisionFilter}" title="Delete status '${statusName}' from Division ${mainDivisionFilter}">
-                        🗑️ Remove Status
+                    <button class="delete-cert-type-btn" data-status-name="${statusName}" data-division="${mainDivisionFilter}" title="Delete status '${statusName}' from Division ${mainDivisionFilter}" style="color: #fa5c7c;">
+                        ✕
                     </button>
                 </div>` : ''}
 
@@ -1138,10 +1134,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                     console.log('  - COUNTS - valid:', validCount, 'expired:', expiredCount, 'missing:', missingCount);
                                 }
 
-                                const total = validCount + expiredCount + missingCount;
+                                const total = validCount + missingCount; // Only count valid and missing, exclude expired
                                 const validPercent = total > 0 ? (validCount / total * 100) : 0;
-                                const expiredPercent = total > 0 ? (expiredCount / total * 100) : 0;
-                                const missingPercent = total > 0 ? (missingCount / total * 100) : 0;
 
                                 // Calculate days in current status
                                 const daysInStatus = getOperatorDaysInStatus(op.ID);
@@ -1153,10 +1147,10 @@ document.addEventListener('DOMContentLoaded', function() {
                                 
                                 // Cert count display (valid/total)
                                 const certCountDisplay = total > 0 ? 
-                                    `<span class="operator-cert-count" title="${validCount} valid, ${expiredCount} expired, ${missingCount} missing">${validCount}/${total}</span>` : '';
+                                    `<span class="operator-cert-count" title="${validCount} valid, ${missingCount} missing">${validCount}/${total}</span>` : '';
 
                                 return `
-                                    <div class="operator-item ${isOverdue ? 'operator-overdue' : ''}" onclick="showOperatorProfile('${op.ID}')" style="cursor: pointer;" title="${validCount} Valid, ${expiredCount} Expired, ${missingCount} Missing${daysInStatus !== null ? ' | ' + daysInStatus + ' days in status' : ''}">
+                                    <div class="operator-item ${isOverdue ? 'operator-overdue' : ''}" onclick="showOperatorProfile('${op.ID}')" style="cursor: pointer;" title="${validCount} Valid, ${missingCount} Missing${daysInStatus !== null ? ' | ' + daysInStatus + ' days in status' : ''}">
                                         <div class="operator-name-row">
                                             <span class="operator-name">${op.FirstName} ${op.LastName}</span>
                                             <div class="operator-badges">
@@ -1164,12 +1158,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                                 ${daysDisplay}
                                             </div>
                                         </div>
-                                        <div class="operator-progress">
-                                            ${total > 0 ? `
-                                                ${validPercent > 0 ? `<div class="operator-progress-segment valid" style="width: ${validPercent}%"></div>` : ''}
-                                                ${expiredPercent > 0 ? `<div class="operator-progress-segment expired" style="width: ${expiredPercent}%"></div>` : ''}
-                                                ${missingPercent > 0 ? `<div class="operator-progress-segment missing" style="width: ${missingPercent}%"></div>` : ''}
-                                            ` : '<div class="operator-progress-segment no-data" style="width: 100%"></div>'}
+                                        <div class="progress" role="progressbar" aria-label="Certification progress" aria-valuenow="${validPercent.toFixed(0)}" aria-valuemin="0" aria-valuemax="100" style="width: 100%; margin-top: 8px;">
+                                            <div class="progress-bar" style="width: ${validPercent}%">${validPercent.toFixed(0)}%</div>
                                         </div>
                                     </div>
                                 `;
@@ -1180,7 +1170,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
 
                 <div class="cert-details">
-                    <div class="cert-title">New Required Certifications (${certsToDisplay.length}):</div>
+                    <div class="cert-title">Required Certifications (${certsToDisplay.length}):</div>
                     <div class="cert-list cert-list-editable drop-zone" data-status="${statusName}" ondrop="handleCertDrop(event, this)" ondragover="handleCertDragOver(event)">
                         ${certsToDisplay.length > 0 ? 
                             certsToDisplay.slice(0, 50).map(cert => {
@@ -1391,8 +1381,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         displayDivisions = displayDivisions.filter(d => isDivisionMatch(d, currentFilter));
                     }
                     
-                    // Filter excluded divisions from display
-                    displayDivisions = displayDivisions.filter(d => !EXCLUDED_DIVISIONS.some(ex => d.toUpperCase().includes(ex.toUpperCase())));
+                    // Filter to only show allowed divisions (whitelist)
+                    displayDivisions = displayDivisions.filter(d => ALLOWED_DIVISIONS.includes(d));
                     
                     const divisionsText = displayDivisions.length > 0 
                         ? displayDivisions.slice(0, 3).join(', ') + (displayDivisions.length > 3 ? '...' : '')
@@ -1411,6 +1401,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 currentAutocompleteIndex = 0;
             }
         }
+        
+        // Expose to window for inline event handlers
+        window.handleCertInput = handleCertInput;
 
         // Handle keyboard navigation in autocomplete
         function handleCertKeydown(event, stepIndex) {
@@ -1448,6 +1441,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 dropdown.classList.remove('active');
             }
         }
+        
+        // Expose to window
+        window.handleCertKeydown = handleCertKeydown;
 
         // Handle focus on input
         function handleCertFocus(event, stepIndex) {
@@ -1456,6 +1452,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 handleCertInput(event, stepIndex);
             }
         }
+        
+        // Expose to window
+        window.handleCertFocus = handleCertFocus;
 
         // Handle blur on input
         function handleCertBlur(event, stepIndex) {
@@ -1466,6 +1465,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 currentAutocompleteIndex = -1;
             }, 200);
         }
+        
+        // Expose to window
+        window.handleCertBlur = handleCertBlur;
 
         // Select certification from autocomplete
         function selectCert(event, certName, stepIndex) {
@@ -1799,8 +1801,13 @@ document.addEventListener('DOMContentLoaded', function() {
                                 const centerX = left + width / 2;
                                 const centerY = top + height / 2;
                                 
+                                // Create gradient to match stat-value style
+                                const gradient = ctx.createLinearGradient(centerX - 30, centerY - 10, centerX + 30, centerY + 10);
+                                gradient.addColorStop(0, '#1382CA');
+                                gradient.addColorStop(1, '#39afd1');
+                                
                                 ctx.font = 'bold 20px Arial';
-                                ctx.fillStyle = '#fff';
+                                ctx.fillStyle = gradient;
                                 ctx.textAlign = 'center';
                                 ctx.textBaseline = 'middle';
                                 ctx.fillText(currentCompliancePercent + '%', centerX, centerY);
@@ -2418,15 +2425,6 @@ function removeCertFromStatus(statusName, certName) {
             renderWorkflow();
         }
 
-        // Filter controls
-        function setFilter(filterType) {
-            currentFilter = filterType;
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.filter === filterType);
-            });
-            renderWorkflow();
-        }
-
         // Populate main division filter dropdown
         function populateMainDivisionFilter() {
             const filterSelect = document.getElementById('mainDivisionFilter');
@@ -2552,7 +2550,24 @@ function removeCertFromStatus(statusName, certName) {
                     
                     // Check if operator has the cert
                     const hasCert = op.certifications?.some(cert => {
-                        const matchesCertType = certTypeId ? cert.CertTypeID === certTypeId : cert.Cert === certName;
+                        // Try multiple matching strategies for JSON vs SQL data
+                        let matchesCertType = false;
+                        
+                        // Strategy 1: Match by CertTypeID (preferred for SQL)
+                        if (certTypeId && cert.CertTypeID) {
+                            matchesCertType = cert.CertTypeID === certTypeId;
+                        }
+                        
+                        // Strategy 2: Match by cert name directly (for JSON mode)
+                        if (!matchesCertType && cert.Cert) {
+                            matchesCertType = cert.Cert === certName;
+                        }
+                        
+                        // Strategy 3: Match by CertType property (populated during load)
+                        if (!matchesCertType && cert.CertType) {
+                            matchesCertType = cert.CertType === certName;
+                        }
+                        
                         if (!matchesCertType) return false;
                         if (cert.isApproved !== '1' && cert.isApproved !== 1 && cert.isApproved !== true) return false;
                         if (cert.IsDeleted === '1' || cert.IsDeleted === 1 || cert.IsDeleted === true) return false;
@@ -2589,7 +2604,24 @@ function removeCertFromStatus(statusName, certName) {
                     <div class="operator-list">
                         ${operatorsInStatusWithCert.slice(0, 20).map(op => {
                             const cert = op.certifications?.find(c => {
-                                const matchesCertType = certTypeId ? c.CertTypeID === certTypeId : c.Cert === certName;
+                                // Try multiple matching strategies for JSON vs SQL data
+                                let matchesCertType = false;
+                                
+                                // Strategy 1: Match by CertTypeID (preferred for SQL)
+                                if (certTypeId && c.CertTypeID) {
+                                    matchesCertType = c.CertTypeID === certTypeId;
+                                }
+                                
+                                // Strategy 2: Match by cert name directly (for JSON mode)
+                                if (!matchesCertType && c.Cert) {
+                                    matchesCertType = c.Cert === certName;
+                                }
+                                
+                                // Strategy 3: Match by CertType property
+                                if (!matchesCertType && c.CertType) {
+                                    matchesCertType = c.CertType === certName;
+                                }
+                                
                                 return matchesCertType && 
                                     (c.isApproved === '1' || c.isApproved === 1 || c.isApproved === true) &&
                                     c.IsDeleted !== '1' && c.IsDeleted !== 1 && c.IsDeleted !== true;
