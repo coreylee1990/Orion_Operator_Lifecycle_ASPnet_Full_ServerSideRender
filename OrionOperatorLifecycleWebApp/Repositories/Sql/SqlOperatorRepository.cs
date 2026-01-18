@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using OrionOperatorLifecycleWebApp.Models;
 using OrionOperatorLifecycleWebApp.Repositories;
 
@@ -16,8 +17,8 @@ namespace OrionOperatorLifecycleWebApp.Repositories.Sql
 
         public List<Operator> GetAll()
         {
-            var query = from o in _context.Operators.Where(op => op.IsDeleted != true)
-                        join s in _context.StatusTypes on o.StatusId equals s.Id into joinS
+            var query = from o in _context.Operators.AsNoTracking().Where(op => op.IsDeleted != true)
+                        join s in _context.StatusTypes.AsNoTracking() on o.StatusId equals s.Id into joinS
                         from s in joinS.DefaultIfEmpty()
                         select new { o, s };
 
@@ -30,7 +31,7 @@ namespace OrionOperatorLifecycleWebApp.Repositories.Sql
             
             // Load certifications for all operators
             var operatorIds = operators.Select(o => o.Id).ToList();
-            var certifications = _context.Certifications
+            var certifications = _context.Certifications.AsNoTracking()
                 .Where(c => operatorIds.Contains(c.OperatorId))
                 .ToList();
             
@@ -61,7 +62,7 @@ namespace OrionOperatorLifecycleWebApp.Repositories.Sql
             result.o.OrderId = result.s?.OrderId;
             
             // Load certifications for this operator
-            result.o.Certifications = _context.Certifications
+            result.o.Certifications = _context.Certifications.AsNoTracking()
                 .Where(c => c.OperatorId == id)
                 .ToList();
             
@@ -70,17 +71,34 @@ namespace OrionOperatorLifecycleWebApp.Repositories.Sql
 
         public List<Operator> GetByDivision(string divisionId)
         {
-            var query = from o in _context.Operators.Where(op => op.DivisionId == divisionId)
-                        join s in _context.StatusTypes on o.StatusId equals s.Id into joinS
+            var query = from o in _context.Operators.AsNoTracking().Where(op => op.DivisionId == divisionId && op.IsDeleted != true)
+                        join s in _context.StatusTypes.AsNoTracking() on o.StatusId equals s.Id into joinS
                         from s in joinS.DefaultIfEmpty()
                         select new { o, s };
 
-            return query.ToList().Select(x =>
+            var operators = query.ToList().Select(x =>
             {
                 x.o.StatusName = x.s?.Status;
                 x.o.OrderId = x.s?.OrderId;
                 return x.o;
             }).ToList();
+            
+            // Load certifications for these operators only
+            var operatorIds = operators.Select(o => o.Id).ToList();
+            var certifications = _context.Certifications.AsNoTracking()
+                .Where(c => operatorIds.Contains(c.OperatorId))
+                .ToList();
+            
+            var certsByOperator = certifications.GroupBy(c => c.OperatorId).ToDictionary(g => g.Key, g => g.ToList());
+            
+            foreach (var op in operators)
+            {
+                op.Certifications = certsByOperator.ContainsKey(op.Id) 
+                    ? certsByOperator[op.Id] 
+                    : new List<Certification>();
+            }
+            
+            return operators;
         }
 
         public void Save(Operator op)

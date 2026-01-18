@@ -62,26 +62,21 @@ namespace OrionOperatorLifecycleWebApp.Controllers
         public IActionResult GetOperatorsByDivisionWithCerts(string divisionId)
         {
             List<Operator> operators;
-            List<Certification> certifications;
 
             if (string.IsNullOrEmpty(divisionId) || divisionId == "ALL")
             {
-                // Load ALL operators and certs (fallback for "All Divisions")
+                // Load ALL operators (already includes certs from repository)
                 operators = _operatorService.GetAllOperators();
-                certifications = _certificationService.GetAllCertifications();
             }
             else
             {
-                // Load only operators and certs for this division
-                operators = _operatorService.GetAllOperators()
-                    .Where(op => op.DivisionId == divisionId)
-                    .ToList();
-                
-                var operatorIds = operators.Select(op => op.Id).ToHashSet();
-                certifications = _certificationService.GetAllCertifications()
-                    .Where(c => operatorIds.Contains(c.OperatorId))
-                    .ToList();
+                // Load only operators for this division (optimized query with certs included)
+                operators = _operatorService.GetOperatorsByDivision(divisionId);
             }
+
+            // Certifications are already loaded with operators from the repository
+            // No need to load separately - this eliminates an extra DB query
+            var certifications = operators.SelectMany(op => op.Certifications ?? new List<Certification>()).ToList();
 
             return Json(new { operators, certifications });
         }
@@ -380,12 +375,19 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                 }
             }
 
+            // Build subtitle (days in status calculated client-side from StatusTracker)
+            var subtitle = $"{op.StatusName ?? "Unknown Status"} • Division {op.DivisionId ?? "N/A"}";
+
             var viewModel = new OperatorProfileViewModel
             {
                 Operator = op,
                 CertStatusMap = certStatusMap,
                 ValidCount = certStatusMap.Values.Count(c => c.Status == "has-cert"),
-                MissingCount = certStatusMap.Values.Count(c => c.Status == "missing")
+                MissingCount = certStatusMap.Values.Count(c => c.Status == "missing"),
+                OperatorName = $"{op.FirstName} {op.LastName}",
+                Subtitle = subtitle,
+                IsOverdue = false, // Will be updated client-side
+                DaysInStatus = null // Will be calculated client-side
             };
 
             return PartialView("_OperatorProfileModalContent", viewModel);
@@ -448,6 +450,20 @@ namespace OrionOperatorLifecycleWebApp.Controllers
             return PartialView("_StatusDeleteWarningModalContent", viewModel);
         }
 
+        // GET: /Requirements/RenderCertDuplicateWarning?certName=CPR&oldStatus=APPROVED&newStatus=ACTIVE&divisionId=5 - CA
+        public IActionResult RenderCertDuplicateWarning(string certName, string oldStatus, string newStatus, string divisionId)
+        {
+            var viewModel = new CertDuplicateWarningViewModel
+            {
+                CertName = certName,
+                OldStatus = oldStatus,
+                NewStatus = newStatus,
+                DivisionId = divisionId
+            };
+
+            return PartialView("_CertDuplicateModalContent", viewModel);
+        }
+
         // GET: /Requirements/GetClients - Returns distinct clients from PizzaStatus
         [HttpGet]
         public IActionResult GetClients()
@@ -494,6 +510,10 @@ namespace OrionOperatorLifecycleWebApp.Controllers
         public Dictionary<string, CertStatus> CertStatusMap { get; set; }
         public int ValidCount { get; set; }
         public int MissingCount { get; set; }
+        public string OperatorName { get; set; }
+        public string Subtitle { get; set; }
+        public bool IsOverdue { get; set; }
+        public int? DaysInStatus { get; set; }
     }
 
     public class CertStatus
@@ -523,5 +543,13 @@ namespace OrionOperatorLifecycleWebApp.Controllers
         public string StatusId { get; set; }
         public string OrderId { get; set; }
         public bool IsSelected { get; set; }
+    }
+
+    public class CertDuplicateWarningViewModel
+    {
+        public string CertName { get; set; }
+        public string OldStatus { get; set; }
+        public string NewStatus { get; set; }
+        public string DivisionId { get; set; }
     }
 }

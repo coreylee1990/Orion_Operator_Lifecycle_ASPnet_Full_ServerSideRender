@@ -10,6 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Add Memory Cache for static data (StatusTypes, PizzaStatuses, CertTypes, Clients)
+builder.Services.AddMemoryCache();
+
 bool useSqlDatabase = builder.Configuration.GetValue<bool>("UseSqlDatabase");
 Console.WriteLine($"\n\n---------------------------------------------------------");
 Console.WriteLine($"[CONFIG] UseSqlDatabase: {useSqlDatabase}");

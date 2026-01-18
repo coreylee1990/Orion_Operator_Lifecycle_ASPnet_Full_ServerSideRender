@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using OrionOperatorLifecycleWebApp.Models;
 using OrionOperatorLifecycleWebApp.Repositories;
 
@@ -14,12 +15,12 @@ namespace OrionOperatorLifecycleWebApp.Repositories.Sql
             _context = context;
         }
 
-        public List<StatusType> GetAll() => _context.StatusTypes.ToList();
+        public List<StatusType> GetAll() => _context.StatusTypes.AsNoTracking().ToList();
 
         public StatusType GetById(string id) => _context.StatusTypes.Find(id);
 
         public List<StatusType> GetByDivision(string divisionId) => 
-            _context.StatusTypes.Where(s => s.DivisionId == divisionId).ToList();
+            _context.StatusTypes.AsNoTracking().Where(s => s.DivisionId == divisionId).ToList();
 
         public void SaveAll(List<StatusType> statusTypes)
         {

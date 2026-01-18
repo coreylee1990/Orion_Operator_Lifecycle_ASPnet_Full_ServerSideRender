@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using OrionOperatorLifecycleWebApp.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +16,12 @@ namespace OrionOperatorLifecycleWebApp.Repositories.Sql
 
         public List<Client> GetAll()
         {
-            return _context.Clients.ToList();
+            return _context.Clients.AsNoTracking().ToList();
         }
 
         public Client? GetById(string id)
         {
-            return _context.Clients.FirstOrDefault(c => c.Id == id);
+            return _context.Clients.AsNoTracking().FirstOrDefault(c => c.Id == id);
         }
     }
 }

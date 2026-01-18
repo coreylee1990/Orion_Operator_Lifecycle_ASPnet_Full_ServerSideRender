@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using OrionOperatorLifecycleWebApp.Models;
 using OrionOperatorLifecycleWebApp.Repositories;
 
@@ -16,7 +17,7 @@ namespace OrionOperatorLifecycleWebApp.Repositories.Sql
 
         public List<CertType> GetAll()
         {
-            return _context.CertTypes.ToList();
+            return _context.CertTypes.AsNoTracking().ToList();
         }
 
         public void SaveAll(List<CertType> certTypes)

@@ -8,6 +8,13 @@
     var missingCount = Model.MissingCount;
 }
 
+<!-- Hidden data for JS to read -->
+<div class="modal-header-data" 
+     data-operator-name="@Model.OperatorName"
+     data-subtitle="@Model.Subtitle"
+     data-is-overdue="@Model.IsOverdue.ToString().ToLower()"
+     style="display: none;"></div>
+
 <div class="operator-info-grid">
     <div class="operator-info-item">
         <div class="operator-info-label">Operator ID</div>
@@ -71,5 +78,22 @@
     <div class="summary-stat">
         <div class="summary-label">Missing Certifications</div>
         <div class="summary-value missing">@missingCount</div>
+    </div>
+    <div class="summary-stat">
+        <div class="summary-label">Days in Status</div>
+        <div class="summary-value days">
+            @if (Model.DaysInStatus.HasValue)
+            {
+                <span>@Model.DaysInStatus.Value days</span>
+                @if (Model.DaysInStatus.Value >= 30)
+                {
+                    <span style="color: #ef4444; font-weight: bold; margin-left: 8px;">⚠️ OVERDUE</span>
+                }
+            }
+            else
+            {
+                <span>Unknown</span>
+            }
+        </div>
     </div>
 </div>

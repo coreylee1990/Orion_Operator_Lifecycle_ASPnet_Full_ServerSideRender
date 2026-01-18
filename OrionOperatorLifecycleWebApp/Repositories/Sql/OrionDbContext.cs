@@ -86,8 +86,8 @@ namespace OrionOperatorLifecycleWebApp.Repositories.Sql
                     v => v == null ? null : v.ToString().ToUpper()
                  );
                  entity.Ignore(e => e.IsAuto); // Not present in legacy DB
-                 entity.Ignore(e => e.IsOperator); // Likely not present or named differently
-                 entity.Ignore(e => e.IsProvider); // Likely not present or named differently
+                 entity.Property(e => e.IsOperator).HasColumnName("IsOperator").IsRequired(false);
+                 entity.Property(e => e.IsProvider).HasColumnName("IsProvider").IsRequired(false);
             });
 
             modelBuilder.Entity<StatusType>(entity =>
@@ -106,6 +106,8 @@ namespace OrionOperatorLifecycleWebApp.Repositories.Sql
                     v => v == null ? null : v.ToString().ToUpper()
                  );
                  entity.Property(e => e.IsDeleted).HasColumnName("isDeleted").IsRequired(false);
+                 entity.Property(e => e.Fleet).HasColumnName("Fleet").IsRequired(false);
+                 entity.Property(e => e.Providers).HasColumnName("Providers").IsRequired(false);
             });
 
             modelBuilder.Entity<CertType>(entity =>

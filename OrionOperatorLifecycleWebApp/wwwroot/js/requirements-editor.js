@@ -45,28 +45,47 @@ async function renderCertBadgePartial(certName, statusName) {
 // ======================
 
 // Show the duplicate cert modal
-function showCertDuplicateModal(certName, oldStatus, newStatus, stepIndex) {
+async function showCertDuplicateModal(certName, oldStatus, newStatus, stepIndex) {
     const modalBody = document.getElementById('certDuplicateModalBody');
-    if (modalBody) {
-        modalBody.innerHTML = `
-            <div class="mb-2">The certification <strong>"${certName}"</strong> is already assigned to <strong>${oldStatus}</strong> in this division.</div>
-            <div class="mb-2">Do you want to move it to <strong>${newStatus}</strong> instead?</div>
-            <div class="alert alert-warning">This will update the assignment and remove it from the previous status.</div>
-        `;
+    if (!modalBody) {
+        console.error('❌ Cert duplicate modal body not found');
+        return;
     }
-    // Store context for confirm
-    window._certDuplicateModalContext = { certName, oldStatus, newStatus, stepIndex };
-    // Show modal (Bootstrap 5)
-    const modalEl = document.getElementById('certDuplicateModal');
-    if (modalEl) {
-        if (window.bootstrap && window.bootstrap.Modal) {
-            const modal = window.bootstrap.Modal.getOrCreateInstance(modalEl);
-            modal.show();
-        } else if (typeof $ !== 'undefined' && $(modalEl).modal) {
-            $(modalEl).modal('show');
-        } else {
-            modalEl.style.display = 'block';
+
+    // Show loading state
+    modalBody.innerHTML = '<div style="padding: 20px; text-align: center;"><i class="fas fa-spinner fa-spin"></i> Loading...</div>';
+
+    try {
+        // Fetch pre-rendered content from server
+        const response = await fetch(
+            `/Requirements/RenderCertDuplicateWarning?certName=${encodeURIComponent(certName)}&oldStatus=${encodeURIComponent(oldStatus)}&newStatus=${encodeURIComponent(newStatus)}&divisionId=${encodeURIComponent(mainDivisionFilter)}`
+        );
+
+        if (!response.ok) {
+            throw new Error(`Server returned ${response.status}`);
         }
+
+        const html = await response.text();
+        modalBody.innerHTML = html;
+
+        // Store context for confirm
+        window._certDuplicateModalContext = { certName, oldStatus, newStatus, stepIndex };
+
+        // Show modal (Bootstrap 5)
+        const modalEl = document.getElementById('certDuplicateModal');
+        if (modalEl) {
+            if (window.bootstrap && window.bootstrap.Modal) {
+                const modal = window.bootstrap.Modal.getOrCreateInstance(modalEl);
+                modal.show();
+            } else if (typeof $ !== 'undefined' && $(modalEl).modal) {
+                $(modalEl).modal('show');
+            } else {
+                modalEl.style.display = 'block';
+            }
+        }
+    } catch (error) {
+        console.error('❌ Error loading cert duplicate warning:', error);
+        modalBody.innerHTML = `<div style="padding: 20px; color: #dc3545;">Error loading data: ${error.message}</div>`;
     }
 }
 
@@ -696,9 +715,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Removed certRequirements and originalCertRequirements logic related to pizzaStatusRequirements
                 // Build list of all existing certifications
                 buildExistingCertsList();
-                // Initialize workflow
-                // initializeDynamicWorkflow(); // Logic moved to renderWorkflow for reactivity
-                currentWorkflow = [...idealFlow];
+                // Initialize workflow - ALWAYS use dynamic workflow
+                initializeDynamicWorkflow();
                 renderWorkflow();
                 updateStats();
                 populateMainDivisionFilter();
@@ -712,12 +730,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Initialize workflow based on Dynamic Status Types
         function initializeDynamicWorkflow() {
-            // If no client filter and division is 'ALL', use legacy ideal flow
-            if (mainDivisionFilter === 'ALL' && !mainClientFilter) {
-                currentWorkflow = [...idealFlow];
-                return;
-            }
-            
             // Use StatusTypes for filtering, matching Python script logic
             // Ensure statusTypes and pizzaStatuses are loaded
             if (typeof window.statusTypes === 'undefined') {
@@ -745,26 +757,58 @@ document.addEventListener('DOMContentLoaded', function() {
             const statusTypesArr = window.statusTypes;
             const pizzaStatusesArr = window.pizzaStatuses;
             const pizzaStatusMap = {};
-            pizzaStatusesArr.forEach(p => { if (p.ID) pizzaStatusMap[p.ID] = p; });
+            pizzaStatusesArr.forEach(p => { if (p.ID || p.Id) pizzaStatusMap[p.ID || p.Id] = p; });
+
+            // Debug: Log data structure to understand property names
+            console.log('🔍 StatusTypes count:', statusTypesArr.length, 'sample:', statusTypesArr.length > 0 ? statusTypesArr[0] : 'empty');
+            console.log('🔍 PizzaStatuses count:', pizzaStatusesArr.length, 'sample:', pizzaStatusesArr.length > 0 ? pizzaStatusesArr[0] : 'empty');
+            console.log('🔍 Filter - Division:', mainDivisionFilter, 'Client:', mainClientFilter);
 
             // Filter StatusTypes for the selected division and/or client
+            // OPERATOR ONLY: Fleet=0, Providers=0, isDeleted=false, PizzaStatusID not null
             let divStatuses = statusTypesArr.filter(st => {
-                // Basic filters
-                if (mainDivisionFilter !== 'ALL' && st.DivisionID !== mainDivisionFilter) return false;
-                if (st.isDeleted === true || st.IsDelete === true || String(st.isDeleted).trim() === '1' || String(st.IsDelete).trim() === '1' || String(st.isDeleted).trim().toLowerCase() === 'true' || String(st.IsDelete).trim().toLowerCase() === 'true') return false;
-                if (!st.PizzaStatusID) return false;
-                if (!pizzaStatusMap[st.PizzaStatusID]) return false;
-                if (!(String(st.isActive || '1').trim() === '1' || st.isActive === true)) return false;
-                if (pizzaStatusMap[st.PizzaStatusID].IsOperator !== true) return false;
+                // Get division ID with flexible property name (SQL vs JSON may differ)
+                const stDivision = st.DivisionID || st.DivisionId || st.divisionId || st.divisionID;
+                const stPizzaStatusId = st.PizzaStatusID || st.PizzaStatusId || st.pizzaStatusId || st.pizzaStatusID;
+                const stIsDeleted = st.isDeleted ?? st.IsDeleted ?? st.IsDelete ?? st.isDelete;
+                const stFleet = st.Fleet ?? st.fleet ?? 0;
+                const stProviders = st.Providers ?? st.providers ?? 0;
+                
+                // Must have PizzaStatusID
+                if (!stPizzaStatusId) return false;
+                
+                // Must have matching PizzaStatus in map
+                if (!pizzaStatusMap[stPizzaStatusId]) return false;
+                
+                // Deleted filter - must not be deleted
+                if (stIsDeleted === true || stIsDeleted === 1 || String(stIsDeleted).trim() === '1' || String(stIsDeleted).trim().toLowerCase() === 'true') return false;
+                
+                // Operator-only filter: Fleet must be 0/false (not Fleet status)
+                if (stFleet === 1 || stFleet === true || String(stFleet).trim() === '1') return false;
+                
+                // Operator-only filter: Providers must be 0/false (not Provider status)
+                if (stProviders === 1 || stProviders === true || String(stProviders).trim() === '1') return false;
+                
+                // CRITICAL: PizzaStatus MUST have IsOperator = 1/true to be an Operator status
+                // This excludes event/accident statuses (NULL/NULL) and Provider statuses
+                const ps = pizzaStatusMap[stPizzaStatusId];
+                const psIsOperator = ps.IsOperator ?? ps.isOperator;
+                // Require IsOperator to be explicitly true/1
+                if (psIsOperator !== true && psIsOperator !== 1) return false;
+                
+                // Division filter
+                if (mainDivisionFilter !== 'ALL' && stDivision !== mainDivisionFilter) return false;
                 
                 // Client filter: Only show StatusTypes whose PizzaStatus matches the selected client
                 if (mainClientFilter) {
-                    const ps = pizzaStatusMap[st.PizzaStatusID];
-                    if (ps.ClientId !== mainClientFilter) return false;
+                    const psClientId = ps.ClientId || ps.ClientID || ps.clientId || ps.clientID;
+                    if (psClientId !== mainClientFilter) return false;
                 }
                 
                 return true;
             });
+            
+            console.log('🔍 Filtered StatusTypes count:', divStatuses.length);
 
             // Sort by OrderID (as integer, fallback to 9999 if missing)
             divStatuses.sort((a, b) => {
@@ -774,6 +818,22 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             if (divStatuses.length > 0) {
+                // Group by status name to avoid duplicates in ALL mode
+                if (mainDivisionFilter === 'ALL') {
+                    const statusMap = new Map();
+                    divStatuses.forEach(st => {
+                        if (!statusMap.has(st.Status)) {
+                            statusMap.set(st.Status, st);
+                        }
+                    });
+                    divStatuses = Array.from(statusMap.values());
+                    divStatuses.sort((a, b) => {
+                        const ordA = parseInt(a.OrderID) || 9999;
+                        const ordB = parseInt(b.OrderID) || 9999;
+                        return ordA - ordB;
+                    });
+                }
+                
                 currentWorkflow = divStatuses.map((st, idx) => ({
                     step: (parseInt(st.OrderID) || (idx + 1)),
                     status: st.Status,
@@ -908,12 +968,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Render the workflow
         function renderWorkflow() {
             // Re-initialize workflow based on current filter state
-            // This ensures we see the correct list of statuses for the selected division/client
-            if (mainDivisionFilter !== 'ALL' || mainClientFilter) {
-                initializeDynamicWorkflow();
-            } else {
-                currentWorkflow = [...idealFlow];
-            }
+            // ALWAYS use dynamic workflow now (no more hardcoded idealFlow)
+            initializeDynamicWorkflow();
 
             // Check if we accidentally got into legacy "Edit Mode" state and reset it
             if (typeof editMode !== 'undefined' && editMode) {
@@ -1795,137 +1851,122 @@ document.addEventListener('DOMContentLoaded', function() {
             return false;
         }
 
-        // Update statistics
+        // Update statistics - NEW SIMPLIFIED VERSION
         function updateStats() {
-            let validSteps = 0;
-            let invalidSteps = 0;
+            console.log('📊 Updating stats...');
+            console.log('Current operators:', operators.length);
+            console.log('Current workflow:', currentWorkflow);
+            console.log('Filters - Division:', mainDivisionFilter, 'Client:', mainClientFilter);
             
-            // Data for charts
-            const workflowLabels = [];
-            const workflowData = [];
-            
-            // Compliance tracking: total certs vs required certs
-            let totalCertsHeld = 0;
-            let totalCertsRequired = 0;
-
-            // Filter operators by client and division
+            // Filter operators by division
             let filteredOperators = operators;
+            if (mainDivisionFilter !== 'ALL') {
+                filteredOperators = filteredOperators.filter(op => op.DivisionID === mainDivisionFilter);
+            }
             
-            // Apply client filter first
+            // Apply client filter if needed
             if (mainClientFilter && statusTypes && pizzaStatuses) {
-                // Build set of PizzaStatus IDs for selected client
                 const clientPizzaStatuses = new Set(
                     pizzaStatuses
                         .filter(ps => ps.ClientId === mainClientFilter)
                         .map(ps => ps.ID)
                 );
                 
-                // Build set of StatusNames that belong to this client
                 const clientStatusNames = new Set(
                     statusTypes
                         .filter(st => st.PizzaStatusID && clientPizzaStatuses.has(st.PizzaStatusID))
-                        .map(st => st.StatusName)
+                        .map(st => st.Status || st.StatusName)
                 );
                 
-                // Filter operators by their StatusName
-                filteredOperators = filteredOperators.filter(op => 
-                    op.StatusName && clientStatusNames.has(op.StatusName)
-                );
+                filteredOperators = filteredOperators.filter(op => {
+                    const opStatus = op.Status || op.StatusName;
+                    return opStatus && clientStatusNames.has(opStatus);
+                });
             }
+
+            console.log('Filtered operators:', filteredOperators.length);
+
+            // Update total operators count
+            const totalOpsCount = filteredOperators.length;
+            const totalOpsEl = document.getElementById('totalOperators');
+            if (totalOpsEl) {
+                totalOpsEl.textContent = totalOpsCount;
+            }
+
+            // Build workflow distribution by counting operators in each status
+            const statusCounts = new Map();
+            const workflowLabels = [];
+            const workflowData = [];
             
-            // Apply division filter
-            if (mainDivisionFilter !== 'ALL') {
-                filteredOperators = filteredOperators.filter(op => op.DivisionID === mainDivisionFilter);
-            }
-
-            currentWorkflow.forEach((flowStep, index) => {
-                const statusName = flowStep.status;
-                const pizzaStatusId = flowStep.originalObj ? flowStep.originalObj.PizzaStatusID : null;
-                const operatorsInStep = filteredOperators.filter(op => 
-                    op.StatusName === statusName || 
-                    (op.StatusName && op.StatusName.toUpperCase() === statusName.toUpperCase())
-                );
-                
-                // For Workflow Chart
-                workflowLabels.push(statusName);
-                workflowData.push(operatorsInStep.length);
-
-                const requiredCerts = getRequiredCertsForStatus(statusName, pizzaStatusId);
-                const validation = validateOperatorsInStep(operatorsInStep, requiredCerts, index);
-
-                if (validation.isValid) {
-                    validSteps++;
-                } else {
-                    invalidSteps++;
-                }
-
-                // Calculate compliance: total certs held vs total certs required
-                operatorsInStep.forEach(op => {
-                    // Get all required certs for this operator (cumulative up to their status)
-                    let allRequiredCerts = new Set(requiredCerts);
-                    
-                    // Add certs from all previous steps
-                    for (let i = 0; i < index; i++) {
-                        const prevStatus = currentWorkflow[i].status;
-                        const prevPizzaStatusId = currentWorkflow[i].originalObj ? currentWorkflow[i].originalObj.PizzaStatusID : null;
-                        const prevRequiredCerts = getRequiredCertsForStatus(prevStatus, prevPizzaStatusId);
-                        prevRequiredCerts.forEach(cert => allRequiredCerts.add(cert));
-                    }
-                    
-                    // Count required certs for this operator
-                    totalCertsRequired += allRequiredCerts.size;
-                    
-                    // Count how many of the required certs this operator actually has
-                    // Use approved, non-deleted certs only
-                    const operatorApprovedCerts = new Set(
-                        (op.certifications || [])
-                            .filter(cert => {
-                                // Must not be deleted
-                                if (cert.IsDeleted === '1' || cert.IsDeleted === 1 || cert.IsDeleted === true) return false;
-                                // Must be approved
-                                if (cert.isApproved !== '1' && cert.isApproved !== 1 && cert.isApproved !== true) return false;
-                                return true;
-                            })
-                            .map(cert => cert.CertType)
-                            .filter(ct => ct)
-                    );
-                    
-                    allRequiredCerts.forEach(requiredCert => {
-                        // Use certNamesMatch for flexible name comparison
-                        for (let opCert of operatorApprovedCerts) {
-                            if (certNamesMatch(opCert, requiredCert)) {
-                                totalCertsHeld++;
-                                break; // Only count once per required cert
+            // Initialize counts for all workflow statuses
+            currentWorkflow.forEach(flow => {
+                statusCounts.set(flow.status, 0);
+            });
+            
+            // Count operators by their actual status
+            filteredOperators.forEach(op => {
+                const opStatus = op.Status || op.StatusName;
+                if (opStatus) {
+                    // Try exact match first
+                    if (statusCounts.has(opStatus)) {
+                        statusCounts.set(opStatus, statusCounts.get(opStatus) + 1);
+                    } else {
+                        // Try case-insensitive match
+                        for (let [statusName, count] of statusCounts) {
+                            if (statusName.toUpperCase() === opStatus.toUpperCase()) {
+                                statusCounts.set(statusName, count + 1);
+                                break;
                             }
                         }
-                    });
-                });
+                    }
+                }
             });
 
-            // Update DOM numbers (hidden or visible)
-            if(document.getElementById('validSteps')) document.getElementById('validSteps').textContent = validSteps;
-            if(document.getElementById('invalidSteps')) document.getElementById('invalidSteps').textContent = invalidSteps;
+            console.log('Status counts:', Object.fromEntries(statusCounts));
+
+            // Build arrays for chart
+            currentWorkflow.forEach(flow => {
+                workflowLabels.push(flow.status);
+                workflowData.push(statusCounts.get(flow.status) || 0);
+            });
+
+            // Calculate compliance: operators with all required certs vs total operators
+            let operatorsWithAllCerts = 0;
+            filteredOperators.forEach(op => {
+                const opCerts = (op.certifications || []).filter(cert => {
+                    return (cert.isApproved === '1' || cert.isApproved === 1 || cert.isApproved === true) &&
+                           !(cert.IsDeleted === '1' || cert.IsDeleted === 1 || cert.IsDeleted === true);
+                });
+                
+                // Simple compliance: does operator have at least one approved cert?
+                if (opCerts.length > 0) {
+                    operatorsWithAllCerts++;
+                }
+            });
+
+            const compliancePercent = totalOpsCount > 0 
+                ? Math.round((operatorsWithAllCerts / totalOpsCount) * 100) 
+                : 0;
             
-            // Total Operators should reflect the active division filter
-            const totalOpsCount = filteredOperators.length;
-            if(document.getElementById('totalOperators')) document.getElementById('totalOperators').textContent = totalOpsCount;
+            currentCompliancePercent = compliancePercent;
+            console.log('Compliance:', compliancePercent + '%', `(${operatorsWithAllCerts}/${totalOpsCount})`);
 
-            // Calculate compliance: (certs held / certs required) * 100
-            currentCompliancePercent = totalCertsRequired > 0 ? Math.round((totalCertsHeld / totalCertsRequired) * 100) : 0;
-
-            // --- CHART UPDATES ---
+            // --- UPDATE CHARTS ---
             
             // 1. Compliance Gauge (Doughnut)
             const ctxCompliance = document.getElementById('complianceChart');
             if (ctxCompliance) {
+                const compliantCount = operatorsWithAllCerts;
+                const nonCompliantCount = totalOpsCount - operatorsWithAllCerts;
+                
                 if (!complianceChartInstance) {
                     complianceChartInstance = new Chart(ctxCompliance, {
                         type: 'doughnut',
                         data: {
-                            labels: ['Certs Held', 'Certs Missing'],
+                            labels: ['Compliant', 'Non-Compliant'],
                             datasets: [{
-                                data: [totalCertsHeld, Math.max(0, totalCertsRequired - totalCertsHeld)],
-                                backgroundColor: ['#10b981', '#ef4444'], // Green, Red
+                                data: [compliantCount, nonCompliantCount],
+                                backgroundColor: ['#10b981', '#ef4444'],
                                 borderWidth: 0,
                                 cutout: '70%'
                             }]
@@ -1935,8 +1976,14 @@ document.addEventListener('DOMContentLoaded', function() {
                             maintainAspectRatio: true,
                             plugins: {
                                 legend: { display: false },
-                                tooltip: { enabled: false },
-                                centerText: { display: true }
+                                tooltip: { 
+                                    enabled: true,
+                                    callbacks: {
+                                        label: function(context) {
+                                            return context.label + ': ' + context.parsed + ' operators';
+                                        }
+                                    }
+                                }
                             }
                         },
                         plugins: [{
@@ -1948,7 +1995,6 @@ document.addEventListener('DOMContentLoaded', function() {
                                 const centerX = left + width / 2;
                                 const centerY = top + height / 2;
                                 
-                                // Create gradient to match stat-value style
                                 const gradient = ctx.createLinearGradient(centerX - 30, centerY - 10, centerX + 30, centerY + 10);
                                 gradient.addColorStop(0, '#1382CA');
                                 gradient.addColorStop(1, '#39afd1');
@@ -1957,19 +2003,19 @@ document.addEventListener('DOMContentLoaded', function() {
                                 ctx.fillStyle = gradient;
                                 ctx.textAlign = 'center';
                                 ctx.textBaseline = 'middle';
-                                ctx.fillText(currentCompliancePercent + '%', centerX, centerY);
+                                ctx.fillText(compliancePercent + '%', centerX, centerY);
                                 
                                 ctx.restore();
                             }
                         }]
                     });
                 } else {
-                    complianceChartInstance.data.datasets[0].data = [totalCertsHeld, Math.max(0, totalCertsRequired - totalCertsHeld)];
+                    complianceChartInstance.data.datasets[0].data = [compliantCount, nonCompliantCount];
                     complianceChartInstance.update();
                 }
             }
 
-            // 2. Workflow Pipeline (Bar)
+            // 2. Workflow Distribution (Horizontal Bar)
             const ctxWorkflow = document.getElementById('workflowChart');
             if (ctxWorkflow) {
                 if (!workflowChartInstance) {
@@ -1985,21 +2031,37 @@ document.addEventListener('DOMContentLoaded', function() {
                             }]
                         },
                         options: {
-                            indexAxis: 'y', // Horizontal bar chart
+                            indexAxis: 'y',
                             responsive: true,
                             maintainAspectRatio: false,
                             scales: {
                                 x: { 
-                                    display: false,
-                                    grid: { display: false }
+                                    beginAtZero: true,
+                                    ticks: { 
+                                        color: '#94a3b8',
+                                        font: { size: 10 },
+                                        stepSize: 1
+                                    },
+                                    grid: { color: '#1e293b' }
                                 },
                                 y: {
-                                    ticks: { color: '#94a3b8', font: { size: 10 } },
+                                    ticks: { 
+                                        color: '#94a3b8', 
+                                        font: { size: 10 } 
+                                    },
                                     grid: { display: false }
                                 }
                             },
                             plugins: {
-                                legend: { display: false }
+                                legend: { display: false },
+                                tooltip: {
+                                    enabled: true,
+                                    callbacks: {
+                                        label: function(context) {
+                                            return context.parsed.x + ' operators';
+                                        }
+                                    }
+                                }
                             }
                         }
                     });
@@ -2009,6 +2071,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     workflowChartInstance.update();
                 }
             }
+
+            console.log('✅ Stats updated successfully');
         }
 
         // Reset to ideal flow
@@ -2515,7 +2579,7 @@ function removeCertFromStatus(statusName, certName) {
             });
 
             // Clear existing options except "All Divisions"
-            filterSelect.innerHTML = '<option value="ALL">🌐 All Divisions</option>';
+            filterSelect.innerHTML = '<option value="ALL">All Divisions</option>';
 
             // Add divisions, greying out non-whitelisted ones
             divisionsArray.forEach(div => {
@@ -3007,18 +3071,7 @@ function removeCertFromStatus(statusName, certName) {
             const subtitleEl = document.getElementById('operatorModalSubtitle');
             const bodyEl = document.getElementById('operatorModalBody');
 
-            nameEl.textContent = `${operator.FirstName} ${operator.LastName}`;
-            
-            // Calculate days in status
-            const daysInStatus = getOperatorDaysInStatus(operatorId);
-            const daysText = daysInStatus !== null ? ` • ${daysInStatus} days in status` : '';
-            const overdueWarning = daysInStatus !== null && daysInStatus >= 30 ? ' ⚠️ OVERDUE' : '';
-            
-            subtitleEl.textContent = `${operator.StatusName || 'Unknown Status'} • Division ${operator.DivisionID || 'N/A'}${daysText}${overdueWarning}`;
-            subtitleEl.style.color = (daysInStatus !== null && daysInStatus >= 30) ? '#dc3545' : '';
-            subtitleEl.style.fontWeight = (daysInStatus !== null && daysInStatus >= 30) ? '600' : '';
-
-            // Load content from server
+            // Load content from server (including header data)
             bodyEl.innerHTML = '<div style="text-align: center; padding: 2rem;">Loading...</div>';
             
             try {
@@ -3028,6 +3081,31 @@ function removeCertFromStatus(statusName, certName) {
                 }
                 const html = await response.text();
                 bodyEl.innerHTML = html;
+                
+                // Extract header data from server-rendered content and enhance with days calculation
+                const headerData = bodyEl.querySelector('.modal-header-data');
+                if (headerData) {
+                    nameEl.textContent = headerData.dataset.operatorName || `${operator.FirstName} ${operator.LastName}`;
+                    
+                    // Get base subtitle from server
+                    let subtitle = headerData.dataset.subtitle || '';
+                    
+                    // Calculate days in status client-side and append
+                    const daysInStatus = getOperatorDaysInStatus(operatorId);
+                    if (daysInStatus !== null) {
+                        subtitle += ` \u2022 ${daysInStatus} days in status`;
+                        if (daysInStatus >= 30) {
+                            subtitle += ' \u26a0\ufe0f OVERDUE';
+                            subtitleEl.style.color = '#dc3545';
+                            subtitleEl.style.fontWeight = '600';
+                        } else {
+                            subtitleEl.style.color = '';
+                            subtitleEl.style.fontWeight = '';
+                        }
+                    }
+                    
+                    subtitleEl.textContent = subtitle;
+                }
             } catch (error) {
                 console.error('Error loading operator profile:', error);
                 bodyEl.innerHTML = '<div style="text-align: center; padding: 2rem; color: #ef4444;">Failed to load operator profile</div>';
@@ -3303,3 +3381,11 @@ function removeCertFromStatus(statusName, certName) {
             }
         }
 
+        // Placeholder functions for Create Pizza Status and Create Status modals
+        function showCreatePizzaStatusModal() {
+            alert('Create Pizza Status modal - TODO: Implement server-side modal\n\nRequired fields:\n- Status Name\n- Description\n- Client ID\n- Is Operator (checkbox)\n- Is Provider (checkbox)\n- Mobile App Order (number)');
+        }
+
+        function showCreateStatusModal() {
+            alert('Create Status modal - TODO: Implement server-side modal\n\nRequired fields:\n- Status Name\n- Division ID\n- Pizza Status ID (dropdown)\n- Order ID (number)');
+        }

@@ -7,6 +7,7 @@
         using System.Linq;
         using System.Collections.Generic;
         using System;
+        using Microsoft.Extensions.Caching.Memory;
 
 namespace OrionOperatorLifecycleWebApp.Controllers
 {
@@ -21,6 +22,14 @@ namespace OrionOperatorLifecycleWebApp.Controllers
         private readonly IStatusTypeService _statusTypeService;
         private readonly ICertTypeService _certTypeService;
         private readonly IClientService _clientService;
+        private readonly IMemoryCache _cache;
+        
+        // Cache keys
+        private const string CACHE_KEY_STATUSTYPES = "StaticData_StatusTypes";
+        private const string CACHE_KEY_PIZZASTATUSES = "StaticData_PizzaStatuses";
+        private const string CACHE_KEY_CERTTYPES = "StaticData_CertTypes";
+        private const string CACHE_KEY_CLIENTS = "StaticData_Clients";
+        private static readonly TimeSpan CACHE_DURATION = TimeSpan.FromMinutes(10);
 
         public DataController(
             IWebHostEnvironment env,
@@ -29,7 +38,8 @@ namespace OrionOperatorLifecycleWebApp.Controllers
             IPizzaStatusService pizzaStatusService,
             IStatusTypeService statusTypeService,
             ICertTypeService certTypeService,
-            IClientService clientService)
+            IClientService clientService,
+            IMemoryCache cache)
         {
             _appDataPath = Path.Combine(env.ContentRootPath, "App_Data");
             _operatorService = operatorService;
@@ -38,6 +48,7 @@ namespace OrionOperatorLifecycleWebApp.Controllers
             _statusTypeService = statusTypeService;
             _certTypeService = certTypeService;
             _clientService = clientService;
+            _cache = cache;
         }
 
         [HttpPost("statustypes")]
@@ -83,8 +94,13 @@ namespace OrionOperatorLifecycleWebApp.Controllers
         [HttpGet("clients")]
         public IActionResult GetClients()
         {
-            var data = _clientService.GetAllClients();
-            var json = JsonSerializer.Serialize(data, new JsonSerializerOptions { PropertyNamingPolicy = null });
+            // Use cache for static data
+            var json = _cache.GetOrCreate(CACHE_KEY_CLIENTS, entry =>
+            {
+                entry.AbsoluteExpirationRelativeToNow = CACHE_DURATION;
+                var data = _clientService.GetAllClients();
+                return JsonSerializer.Serialize(data, new JsonSerializerOptions { PropertyNamingPolicy = null });
+            });
             return Content(json, "application/json");
         }
 
@@ -121,40 +137,37 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                 [HttpGet("certtypes")]
                 public IActionResult GetCertTypes()
                 {
-                    var data = _certTypeService.GetAllCertTypes();
-                    // Custom serialization to match legacy JSON property names if needed, 
-                    // or just return as is (and ensure frontend expects "id" not "ID" or handles both).
-                    // The legacy JSON has PascalCase properties like "ID", "Certification", "DivisionID".
-                    // The Model has "Id", "Certification", "DivisionId".
-                    // System.Text.Json defaults to camelCase usually unless configured.
-                    // But legacy code might rely on exact casing. 
-                    
-                    var jsonOptions = new JsonSerializerOptions { PropertyNamingPolicy = null }; // Use PascalCase from C# properties
-                    
-                    // But we might need to map manual properties to match legacy exactly:
-                    // ID vs Id, DivisionID vs DivisionId.
-                    // The simplest way to preserve legacy contract is to map to anonymous object or use JsonPropertyName attributes.
-                    // Let's create a dynamic mapping to ensure compatibility.
-                    
-                    var mappedData = data.Select(c => new {
-                        ID = c.Id,
-                        Certification = c.Certification,
-                        Description = c.Description,
-                        DivisionID = c.DivisionId,
-                        PizzaStatusID = c.PizzaStatusId,
-                        isDeleted = c.IsDeleted,
-                        // Add other fields if necessary or critical
-                    });
+                    // Use cache for static data
+                    var json = _cache.GetOrCreate(CACHE_KEY_CERTTYPES, entry =>
+                    {
+                        entry.AbsoluteExpirationRelativeToNow = CACHE_DURATION;
+                        var data = _certTypeService.GetAllCertTypes();
+                        var jsonOptions = new JsonSerializerOptions { PropertyNamingPolicy = null };
+                        
+                        var mappedData = data.Select(c => new {
+                            ID = c.Id,
+                            Certification = c.Certification,
+                            Description = c.Description,
+                            DivisionID = c.DivisionId,
+                            PizzaStatusID = c.PizzaStatusId,
+                            isDeleted = c.IsDeleted,
+                        });
 
-                    var json = JsonSerializer.Serialize(mappedData, jsonOptions);
+                        return JsonSerializer.Serialize(mappedData, jsonOptions);
+                    });
                     return Content(json, "application/json");
                 }
 
                 [HttpGet("pizzastatuses")]
                 public IActionResult GetPizzaStatuses()
                 {
-                    var data = _pizzaStatusService.GetAllPizzaStatuses();
-                    var json = JsonSerializer.Serialize(data, new JsonSerializerOptions { PropertyNamingPolicy = null });
+                    // Use cache for static data
+                    var json = _cache.GetOrCreate(CACHE_KEY_PIZZASTATUSES, entry =>
+                    {
+                        entry.AbsoluteExpirationRelativeToNow = CACHE_DURATION;
+                        var data = _pizzaStatusService.GetAllPizzaStatuses();
+                        return JsonSerializer.Serialize(data, new JsonSerializerOptions { PropertyNamingPolicy = null });
+                    });
                     return Content(json, "application/json");
                 }
 
@@ -162,8 +175,13 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                 [HttpGet("statustypes")]
                 public IActionResult GetStatusTypes()
                 {
-                    var data = _statusTypeService.GetAllStatusTypes();
-                    var json = JsonSerializer.Serialize(data, new JsonSerializerOptions { PropertyNamingPolicy = null });
+                    // Use cache for static data
+                    var json = _cache.GetOrCreate(CACHE_KEY_STATUSTYPES, entry =>
+                    {
+                        entry.AbsoluteExpirationRelativeToNow = CACHE_DURATION;
+                        var data = _statusTypeService.GetAllStatusTypes();
+                        return JsonSerializer.Serialize(data, new JsonSerializerOptions { PropertyNamingPolicy = null });
+                    });
                     return Content(json, "application/json");
                 }
 

@@ -1,0 +1,12 @@
+@using OrionOperatorLifecycleWebApp.Controllers
+@model CertDuplicateWarningViewModel
+
+<div class="mb-3">
+    The certification <strong>"@Model.CertName"</strong> is already assigned to <strong>@Model.OldStatus</strong> in this division.
+</div>
+<div class="mb-3">
+    Do you want to move it to <strong>@Model.NewStatus</strong> instead?
+</div>
+<div class="alert alert-warning" style="margin-bottom: 0;">
+    <i class="fas fa-exclamation-triangle me-2"></i>This will update the assignment and remove it from the previous status.
+</div>

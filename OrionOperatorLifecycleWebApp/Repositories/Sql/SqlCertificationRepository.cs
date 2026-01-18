@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using OrionOperatorLifecycleWebApp.Models;
 using OrionOperatorLifecycleWebApp.Repositories;
 
@@ -14,11 +15,16 @@ namespace OrionOperatorLifecycleWebApp.Repositories.Sql
             _context = context;
         }
 
-        public List<Certification> GetAll() => _context.Certifications.ToList();
+        public List<Certification> GetAll() => _context.Certifications.AsNoTracking().ToList();
 
         public Certification GetById(string id) => _context.Certifications.Find(id);
 
         public List<Certification> GetByDivision(string division) => 
-            _context.Certifications.Where(c => c.Division == division).ToList();
+            _context.Certifications.AsNoTracking().Where(c => c.Division == division).ToList();
+
+        public List<Certification> GetByOperatorIds(List<string> operatorIds) =>
+            _context.Certifications.AsNoTracking()
+                .Where(c => operatorIds.Contains(c.OperatorId))
+                .ToList();
     }
 }
