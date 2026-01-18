@@ -201,5 +201,6 @@ C:\Users\PC\Desktop\Orion_Operator_Lifecycle_ASPnet-main\OrionOperatorLifecycleW
 C:\Users\PC\Desktop\Orion_Operator_Lifecycle_ASPnet-main\OrionOperatorLifecycleWebApp\obj\Debug\net9.0\OrionOperatorLifecycleWebApp.pdb
 C:\Users\PC\Desktop\Orion_Operator_Lifecycle_ASPnet-main\OrionOperatorLifecycleWebApp\obj\Debug\net9.0\OrionOperatorLifecycleWebApp.genruntimeconfig.cache
 C:\Users\PC\Desktop\Orion_Operator_Lifecycle_ASPnet-main\OrionOperatorLifecycleWebApp\obj\Debug\net9.0\ref\OrionOperatorLifecycleWebApp.dll
-C:\Users\PC\Desktop\Orion_Operator_Lifecycle_ASPnet-main\OrionOperatorLifecycleWebApp\obj\Debug\net9.0\compressed\tfuthwk0kp-izzyc6ybco.gz
-C:\Users\PC\Desktop\Orion_Operator_Lifecycle_ASPnet-main\OrionOperatorLifecycleWebApp\obj\Debug\net9.0\compressed\uls5qjfpth-1iemrzi82f.gz
+C:\Users\PC\Desktop\Orion_Operator_Lifecycle_ASPnet-main\OrionOperatorLifecycleWebApp\obj\Debug\net9.0\compressed\tfuthwk0kp-i7lhnxh6qs.gz
+C:\Users\PC\Desktop\Orion_Operator_Lifecycle_ASPnet-main\OrionOperatorLifecycleWebApp\bin\Debug\net9.0\App_Data\pay_Clients.json
+C:\Users\PC\Desktop\Orion_Operator_Lifecycle_ASPnet-main\OrionOperatorLifecycleWebApp\obj\Debug\net9.0\compressed\uls5qjfpth-n1n9tnuf5r.gz

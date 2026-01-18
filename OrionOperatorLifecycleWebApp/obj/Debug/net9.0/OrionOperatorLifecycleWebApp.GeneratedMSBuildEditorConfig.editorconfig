@@ -40,6 +40,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9DZXJ0RHVwbGljYXRlTW9kYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/PC/Desktop/Orion_Operator_Lifecycle_ASPnet-main/OrionOperatorLifecycleWebApp/Views/Shared/_CertificationBadge.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9DZXJ0aWZpY2F0aW9uQmFkZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/PC/Desktop/Orion_Operator_Lifecycle_ASPnet-main/OrionOperatorLifecycleWebApp/Views/Shared/_CertificationDetailsPanel.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9DZXJ0aWZpY2F0aW9uRGV0YWlsc1BhbmVsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -48,8 +52,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9FeHBvcnRNb2RhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/PC/Desktop/Orion_Operator_Lifecycle_ASPnet-main/OrionOperatorLifecycleWebApp/Views/Shared/_OperatorCard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9PcGVyYXRvckNhcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/PC/Desktop/Orion_Operator_Lifecycle_ASPnet-main/OrionOperatorLifecycleWebApp/Views/Shared/_OperatorProfileModal.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9PcGVyYXRvclByb2ZpbGVNb2RhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC/Desktop/Orion_Operator_Lifecycle_ASPnet-main/OrionOperatorLifecycleWebApp/Views/Shared/_OperatorProfileModalContent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9PcGVyYXRvclByb2ZpbGVNb2RhbENvbnRlbnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/PC/Desktop/Orion_Operator_Lifecycle_ASPnet-main/OrionOperatorLifecycleWebApp/Views/Shared/_RequirementModal.cshtml]
@@ -58,4 +70,8 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/PC/Desktop/Orion_Operator_Lifecycle_ASPnet-main/OrionOperatorLifecycleWebApp/Views/Shared/_StatusDeleteWarningModal.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9TdGF0dXNEZWxldGVXYXJuaW5nTW9kYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC/Desktop/Orion_Operator_Lifecycle_ASPnet-main/OrionOperatorLifecycleWebApp/Views/Shared/_StatusDeleteWarningModalContent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9TdGF0dXNEZWxldGVXYXJuaW5nTW9kYWxDb250ZW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

@@ -16,9 +16,9 @@ namespace OrionOperatorLifecycleWebApp.Repositories.Sql
 
         public List<PizzaStatus> GetAll() => _context.PizzaStatuses.ToList();
 
-        public PizzaStatus GetById(string id) => _context.PizzaStatuses.Find(id);
+        public PizzaStatus? GetById(string id) => _context.PizzaStatuses.Find(id);
 
-        public PizzaStatus GetByStatus(string status) => 
+        public PizzaStatus? GetByStatus(string status) => 
             _context.PizzaStatuses.FirstOrDefault(p => p.Status == status);
     }
 }

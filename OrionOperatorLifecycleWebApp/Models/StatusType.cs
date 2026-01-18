@@ -17,10 +17,10 @@ namespace OrionOperatorLifecycleWebApp.Models
         public string OrderId { get; set; }
         
         [JsonPropertyName("isDeleted")]
-        public bool IsDeleted { get; set; }
+        public bool? IsDeleted { get; set; }
         
         // This links the StatusType to an actual PizzaStatus (the workflow definition)
         [JsonPropertyName("PizzaStatusID")]
-        public string PizzaStatusId { get; set; } 
+        public string PizzaStatusId { get; set; }
     }
 }

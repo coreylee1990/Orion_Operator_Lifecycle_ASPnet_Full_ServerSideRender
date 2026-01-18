@@ -1,10 +1,79 @@
-<!-- Certification Details Panel Partial -->
-<div class="details-panel" id="detailsPanel">
-    <div class="details-header">
-        <h3 id="detailsTitle">Certification Details</h3>
-        <div class="details-subtitle" id="detailsSubtitle"></div>
-        <button class="close-panel" onclick="closeDetailsPanel()">×</button>
+@model OrionOperatorLifecycleWebApp.Models.ViewModels.CertificationDetailsViewModel
+
+<div class="details-section">
+    <h4>📋 Cert Type Details</h4>
+    <div style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 10px;">
+        @if (!string.IsNullOrEmpty(Model.CertTypeId))
+        {
+            <div><strong>CertType ID:</strong> <span style="font-family: monospace; font-size: 0.8rem;">@Model.CertTypeId</span></div>
+        }
+        @if (!string.IsNullOrEmpty(Model.PizzaStatusId))
+        {
+            <div><strong>PizzaStatus ID:</strong> <span style="font-family: monospace; font-size: 0.8rem;">@Model.PizzaStatusId</span></div>
+        }
+        <div><strong>Division:</strong> @Model.Division</div>
     </div>
-    <div class="details-content" id="detailsContent">
+</div>
+
+<div class="details-section">
+    <h4>📍 Used In @Model.StatusesUsing.Count Status@(Model.StatusesUsing.Count != 1 ? "es" : "")</h4>
+    <div style="color: #94a3b8; font-size: 0.9rem;">
+        @(Model.StatusesUsing.Any() ? string.Join(", ", Model.StatusesUsing) : "None")
+    </div>
+</div>
+
+<div class="details-section">
+    <h4>✅ Operators In Status With Cert (@Model.OperatorsWithCert.Count)</h4>
+    <div class="operator-list">
+        @if (Model.OperatorsWithCert.Any())
+        {
+            @foreach (var op in Model.OperatorsWithCert.Take(20))
+            {
+                <div class="operator-item" onclick="showOperatorProfile('@op.Id')" style="cursor: pointer;">
+                    <div class="operator-name-row">
+                        <span class="operator-name">@op.FirstName @op.LastName</span>
+                        <span class="operator-status-badge @(op.IsExpired ? "expired" : "has-cert")">
+                            @(op.IsExpired ? "⚠️ Expired" : "✓ Valid")
+                        </span>
+                    </div>
+                    <div style="font-size: 0.75rem; color: #64748b;">@op.StatusName • @op.DivisionId</div>
+                </div>
+            }
+            @if (Model.OperatorsWithCert.Count > 20)
+            {
+                <div style="color: #64748b; padding: 10px; text-align: center;">... and @(Model.OperatorsWithCert.Count - 20) more</div>
+            }
+        }
+        else
+        {
+            <div style="color: #64748b; padding: 10px;">No operators in this status have this certification</div>
+        }
+    </div>
+</div>
+
+<div class="details-section">
+    <h4>❌ Operators In Status Missing Cert (@Model.OperatorsMissingCert.Count)</h4>
+    <div class="operator-list">
+        @if (Model.OperatorsMissingCert.Any())
+        {
+            @foreach (var op in Model.OperatorsMissingCert.Take(20))
+            {
+                <div class="operator-item" onclick="showOperatorProfile('@op.Id')" style="cursor: pointer;">
+                    <div class="operator-name-row">
+                        <span class="operator-name">@op.FirstName @op.LastName</span>
+                        <span class="operator-status-badge missing-cert">✗ Missing</span>
+                    </div>
+                    <div style="font-size: 0.75rem; color: #64748b;">@op.StatusName • @op.DivisionId</div>
+                </div>
+            }
+            @if (Model.OperatorsMissingCert.Count > 20)
+            {
+                <div style="color: #64748b; padding: 10px; text-align: center;">... and @(Model.OperatorsMissingCert.Count - 20) more</div>
+            }
+        }
+        else
+        {
+            <div style="color: #64748b; padding: 10px;">All operators in this status have this certification</div>
+        }
     </div>
 </div>

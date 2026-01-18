@@ -1,0 +1,75 @@
+@using OrionOperatorLifecycleWebApp.Controllers
+@model OperatorProfileViewModel
+
+@{
+    var op = Model.Operator;
+    var certStatusMap = Model.CertStatusMap;
+    var validCount = Model.ValidCount;
+    var missingCount = Model.MissingCount;
+}
+
+<div class="operator-info-grid">
+    <div class="operator-info-item">
+        <div class="operator-info-label">Operator ID</div>
+        <div class="operator-info-value">@op.Id</div>
+    </div>
+    <div class="operator-info-item">
+        <div class="operator-info-label">Status</div>
+        <div class="operator-info-value">@(op.StatusName ?? "Unknown")</div>
+    </div>
+    <div class="operator-info-item">
+        <div class="operator-info-label">Division</div>
+        <div class="operator-info-value">@(op.DivisionId ?? "N/A")</div>
+    </div>
+</div>
+
+<h3 class="certs-section-title">Required for This Status (@certStatusMap.Count)</h3>
+<div class="cert-grid">
+    @foreach (var kvp in certStatusMap)
+    {
+        var certName = kvp.Key;
+        var certInfo = kvp.Value;
+        
+        if (certInfo == null) continue;
+        
+        var statusClass = certInfo.Status ?? "unknown";
+        var labelText = certInfo.Label ?? "Unknown";
+        
+        <div class="cert-card @statusClass">
+            <div class="cert-card-header">
+                <div class="cert-card-name">@certName</div>
+                <div class="cert-card-status @statusClass">@labelText</div>
+            </div>
+            @if (certInfo.Status == "has-cert")
+            {
+                <div class="cert-card-body">
+                    @if (certInfo.IssueDate.HasValue)
+                    {
+                        <div class="cert-card-meta">
+                            <span class="cert-card-meta-label">Issued:</span>
+                            <span>@certInfo.IssueDate.Value.ToString("MM/dd/yyyy")</span>
+                        </div>
+                    }
+                    @if (certInfo.ExpireDate.HasValue)
+                    {
+                        <div class="cert-card-meta">
+                            <span class="cert-card-meta-label">Expires:</span>
+                            <span>@certInfo.ExpireDate.Value.ToString("MM/dd/yyyy")</span>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<div class="operator-modal-summary">
+    <div class="summary-stat">
+        <div class="summary-label">Valid Certifications</div>
+        <div class="summary-value valid">@validCount</div>
+    </div>
+    <div class="summary-stat">
+        <div class="summary-label">Missing Certifications</div>
+        <div class="summary-value missing">@missingCount</div>
+    </div>
+</div>

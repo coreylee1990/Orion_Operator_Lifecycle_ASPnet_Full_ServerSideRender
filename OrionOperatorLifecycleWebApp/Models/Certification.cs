@@ -29,5 +29,9 @@ namespace OrionOperatorLifecycleWebApp.Models
         [JsonPropertyName("Date")]
         [JsonConverter(typeof(FlexibleDateTimeConverter))]
         public DateTime? Date { get; set; }
+        
+        [JsonPropertyName("RecordAt")]
+        [JsonConverter(typeof(FlexibleDateTimeConverter))]
+        public DateTime? RecordAt { get; set; }
     }
 }

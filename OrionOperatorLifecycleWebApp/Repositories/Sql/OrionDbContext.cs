@@ -15,6 +15,7 @@ namespace OrionOperatorLifecycleWebApp.Repositories.Sql
         public DbSet<Certification> Certifications { get; set; }
         public DbSet<StatusType> StatusTypes { get; set; }
         public DbSet<CertType> CertTypes { get; set; }
+        public DbSet<Client> Clients { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -80,6 +81,10 @@ namespace OrionOperatorLifecycleWebApp.Repositories.Sql
                     v => Guid.Parse(v),
                     v => v.ToString().ToUpper()
                  );
+                 entity.Property(e => e.ClientId).HasColumnName("ClientID").IsRequired(false).HasConversion(
+                    v => v == null ? (Guid?)null : Guid.Parse(v),
+                    v => v == null ? null : v.ToString().ToUpper()
+                 );
                  entity.Ignore(e => e.IsAuto); // Not present in legacy DB
                  entity.Ignore(e => e.IsOperator); // Likely not present or named differently
                  entity.Ignore(e => e.IsProvider); // Likely not present or named differently
@@ -100,6 +105,7 @@ namespace OrionOperatorLifecycleWebApp.Repositories.Sql
                     v => v == null ? (Guid?)null : Guid.Parse(v),
                     v => v == null ? null : v.ToString().ToUpper()
                  );
+                 entity.Property(e => e.IsDeleted).HasColumnName("isDeleted").IsRequired(false);
             });
 
             modelBuilder.Entity<CertType>(entity =>
@@ -118,6 +124,22 @@ namespace OrionOperatorLifecycleWebApp.Repositories.Sql
                     v => v == null ? null : v.ToString().ToUpper()
                 );
                  entity.Property(e => e.IsDeleted).HasColumnName("isDeleted").IsRequired(false);
+            });
+
+            modelBuilder.Entity<Client>(entity =>
+            {
+                entity.ToTable("pay_Clients");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).HasColumnName("ID").HasConversion(
+                    v => Guid.Parse(v),
+                    v => v.ToString().ToUpper()
+                );
+                entity.Property(e => e.Description).HasColumnName("Description");
+                entity.Property(e => e.Contact).HasColumnName("Contact");
+                entity.Property(e => e.PhoneNumber).HasColumnName("PhoneNumber");
+                entity.Property(e => e.City).HasColumnName("City");
+                entity.Property(e => e.State).HasColumnName("State");
+                entity.Property(e => e.ZipCode).HasColumnName("ZipCode");
             });
         }
     }

@@ -20,6 +20,7 @@ namespace OrionOperatorLifecycleWebApp.Controllers
         private readonly IPizzaStatusService _pizzaStatusService;
         private readonly IStatusTypeService _statusTypeService;
         private readonly ICertTypeService _certTypeService;
+        private readonly IClientService _clientService;
 
         public DataController(
             IWebHostEnvironment env,
@@ -27,7 +28,8 @@ namespace OrionOperatorLifecycleWebApp.Controllers
             ICertificationService certificationService,
             IPizzaStatusService pizzaStatusService,
             IStatusTypeService statusTypeService,
-            ICertTypeService certTypeService)
+            ICertTypeService certTypeService,
+            IClientService clientService)
         {
             _appDataPath = Path.Combine(env.ContentRootPath, "App_Data");
             _operatorService = operatorService;
@@ -35,6 +37,7 @@ namespace OrionOperatorLifecycleWebApp.Controllers
             _pizzaStatusService = pizzaStatusService;
             _statusTypeService = statusTypeService;
             _certTypeService = certTypeService;
+            _clientService = clientService;
         }
 
         [HttpPost("statustypes")]
@@ -75,6 +78,14 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                 Console.WriteLine($"Error saving cert types: {ex.Message}");
                 return StatusCode(500, new { success = false, message = ex.Message });
             }
+        }
+
+        [HttpGet("clients")]
+        public IActionResult GetClients()
+        {
+            var data = _clientService.GetAllClients();
+            var json = JsonSerializer.Serialize(data, new JsonSerializerOptions { PropertyNamingPolicy = null });
+            return Content(json, "application/json");
         }
 
                 [HttpGet("operators")]

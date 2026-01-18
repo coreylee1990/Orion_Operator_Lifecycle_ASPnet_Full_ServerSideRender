@@ -28,6 +28,7 @@ if (useSqlDatabase)
     builder.Services.AddScoped<IStatusTypeRepository, SqlStatusTypeRepository>();
     builder.Services.AddScoped<IRequirementRepository, SqlRequirementRepository>();
     builder.Services.AddScoped<ICertTypeRepository, SqlCertTypeRepository>();
+    builder.Services.AddScoped<IClientRepository, SqlClientRepository>();
 }
 else
 {
@@ -39,6 +40,7 @@ else
     builder.Services.AddSingleton<IRequirementRepository, RequirementRepository>();
     builder.Services.AddSingleton<ICertTypeRepository>(provider => 
         new CertTypeRepository(builder.Environment.ContentRootPath));
+    builder.Services.AddSingleton<IClientRepository, ClientRepository>();
 }
 
 // Register services
@@ -48,6 +50,7 @@ builder.Services.AddScoped<IPizzaStatusService, PizzaStatusService>();
 builder.Services.AddScoped<IStatusTypeService, StatusTypeService>();
 builder.Services.AddScoped<IRequirementService, RequirementService>();
 builder.Services.AddScoped<ICertTypeService, CertTypeService>();
+builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IAutoAdvanceService, AutoAdvanceService>();
 
 var app = builder.Build();

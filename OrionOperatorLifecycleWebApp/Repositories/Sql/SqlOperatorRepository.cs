@@ -21,12 +21,30 @@ namespace OrionOperatorLifecycleWebApp.Repositories.Sql
                         from s in joinS.DefaultIfEmpty()
                         select new { o, s };
 
-            return query.ToList().Select(x =>
+            var operators = query.ToList().Select(x =>
             {
                 x.o.StatusName = x.s?.Status;
                 x.o.OrderId = x.s?.OrderId;
                 return x.o;
             }).ToList();
+            
+            // Load certifications for all operators
+            var operatorIds = operators.Select(o => o.Id).ToList();
+            var certifications = _context.Certifications
+                .Where(c => operatorIds.Contains(c.OperatorId))
+                .ToList();
+            
+            // Group certifications by operator
+            var certsByOperator = certifications.GroupBy(c => c.OperatorId).ToDictionary(g => g.Key, g => g.ToList());
+            
+            foreach (var op in operators)
+            {
+                op.Certifications = certsByOperator.ContainsKey(op.Id) 
+                    ? certsByOperator[op.Id] 
+                    : new List<Certification>();
+            }
+            
+            return operators;
         }
 
         public Operator GetById(string id)
@@ -41,6 +59,12 @@ namespace OrionOperatorLifecycleWebApp.Repositories.Sql
             
             result.o.StatusName = result.s?.Status;
             result.o.OrderId = result.s?.OrderId;
+            
+            // Load certifications for this operator
+            result.o.Certifications = _context.Certifications
+                .Where(c => c.OperatorId == id)
+                .ToList();
+            
             return result.o;
         }
 

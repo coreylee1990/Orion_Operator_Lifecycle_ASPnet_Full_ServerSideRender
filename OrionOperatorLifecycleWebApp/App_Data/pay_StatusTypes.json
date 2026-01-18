@@ -403,7 +403,7 @@
     "Id": "EAEFDCBF-B5AB-487A-8D02-0CF19D3AFCF8",
     "Status": "APPROVED FOR CHO (CLIENT HOSTED)",
     "DivisionID": "10 - OR",
-    "OrderID": "8",
+    "OrderID": "7",
     "isDeleted": false,
     "PizzaStatusID": "9814CCF3-6F40-4480-BB3B-76DA6E727947"
   },
@@ -539,7 +539,7 @@
     "Id": "C862D294-E4BB-423A-86EF-112343D786A8",
     "Status": "CREDENTIALING",
     "DivisionID": "10 - OR",
-    "OrderID": "4",
+    "OrderID": "3",
     "isDeleted": false,
     "PizzaStatusID": "0AFED8D9-D0FC-4CB6-A062-4240A13D5CBB"
   },
@@ -875,7 +875,7 @@
     "Id": "7F09E49B-0968-4220-8951-1BB4CE82EDC9",
     "Status": "DOT SCREENING",
     "DivisionID": "10 - OR",
-    "OrderID": "6",
+    "OrderID": "4",
     "isDeleted": true,
     "PizzaStatusID": "80E13E31-FC68-4AA2-BCE7-48A4A1FFBB2B"
   },
@@ -963,7 +963,7 @@
     "Id": "4BFA6ADF-597B-4435-AC5F-1E310E236A41",
     "Status": "SBPC APPROVED FOR SERVICE",
     "DivisionID": "11 - GA",
-    "OrderID": "8",
+    "OrderID": "7",
     "isDeleted": false,
     "PizzaStatusID": "569C3481-69A6-4CDC-87E8-D500E66770CD"
   },
@@ -971,7 +971,7 @@
     "Id": "929C6FDD-4CAB-4688-907E-1E4583C78BC7",
     "Status": "ORIENTATION-BIG STAR SAFETY \u0026 SERVICE",
     "DivisionID": "10 - OR",
-    "OrderID": "6",
+    "OrderID": "5",
     "isDeleted": false,
     "PizzaStatusID": "9814CCF3-6F40-4480-BB3B-76DA6E727947"
   },
@@ -987,7 +987,7 @@
     "Id": "DD9F87F1-A5A5-4FCD-86C1-1F72F51391E5",
     "Status": "IN-SERVICE",
     "DivisionID": "11 - GA",
-    "OrderID": null,
+    "OrderID": "11",
     "isDeleted": false,
     "PizzaStatusID": "441BA34C-B1A5-4A13-912D-1615CEC94CB0"
   },
@@ -995,7 +995,7 @@
     "Id": "EEA9D7AE-94B3-47DF-9229-1FB0F85F397D",
     "Status": "COMPLIANCE REVIEW",
     "DivisionID": "11 - GA",
-    "OrderID": null,
+    "OrderID": "6",
     "isDeleted": true,
     "PizzaStatusID": "569C3481-69A6-4CDC-87E8-D500E66770CD"
   },
@@ -1211,7 +1211,7 @@
     "Id": "05020B93-6BE0-488B-A477-2511686E7EA0",
     "Status": "COMPLIANCE REVIEW",
     "DivisionID": "10 - OR",
-    "OrderID": "4",
+    "OrderID": "9",
     "isDeleted": false,
     "PizzaStatusID": "D0F9AB8C-9489-47B8-AC78-E363561A2574"
   },
@@ -1483,7 +1483,7 @@
     "Id": "6573D73D-100D-497C-B896-2D54F4EE89C0",
     "Status": "ONBOARDING",
     "DivisionID": "11 - GA",
-    "OrderID": "1",
+    "OrderID": "2",
     "isDeleted": false,
     "PizzaStatusID": "D884F3D1-8AA3-48A3-B172-DF754283F4C2"
   },
@@ -1515,7 +1515,7 @@
     "Id": "ED2338E0-2D7E-4FE9-9EE2-2DD2767376D7",
     "Status": "APPROVED-ORIENTATION BTW",
     "DivisionID": "11 - GA",
-    "OrderID": "6",
+    "OrderID": "5",
     "isDeleted": false,
     "PizzaStatusID": "9814CCF3-6F40-4480-BB3B-76DA6E727947"
   },
@@ -1675,7 +1675,7 @@
     "Id": "FA738869-CA25-418E-A0A1-326ACB7A6765",
     "Status": "APPROVED FOR LEASING",
     "DivisionID": "10 - OR",
-    "OrderID": "5",
+    "OrderID": "13",
     "isDeleted": false,
     "PizzaStatusID": "DCBFB7C6-04EC-40A6-AB42-AA4E52D58E37"
   },
@@ -1819,7 +1819,7 @@
     "Id": "81070265-EDD5-469F-83C6-38C280287F65",
     "Status": "IN-SERVICE",
     "DivisionID": "10 - OR",
-    "OrderID": "4",
+    "OrderID": "14",
     "isDeleted": false,
     "PizzaStatusID": null
   },
@@ -2075,7 +2075,7 @@
     "Id": "B62B46CD-19EC-4475-9CA1-429F55C0CB8D",
     "Status": "ORIENTATION - CLIENT HOSTED",
     "DivisionID": "11 - GA",
-    "OrderID": "4",
+    "OrderID": "1",
     "isDeleted": false,
     "PizzaStatusID": "9814CCF3-6F40-4480-BB3B-76DA6E727947"
   },
@@ -2523,7 +2523,7 @@
     "Id": "5E8B000D-5D91-4C4F-ADFC-51EC10DB408C",
     "Status": "APPROVED FOR CONTRACTING",
     "DivisionID": "11 - GA",
-    "OrderID": null,
+    "OrderID": "9",
     "isDeleted": true,
     "PizzaStatusID": "0F3DDDE2-1920-4E71-A40A-7610F5C58FAC"
   },
@@ -2547,7 +2547,7 @@
     "Id": "84B76237-8C85-4B6D-93EC-52783CB9048B",
     "Status": "ONBOARDING",
     "DivisionID": "10 - OR",
-    "OrderID": "4",
+    "OrderID": "2",
     "isDeleted": false,
     "PizzaStatusID": "D884F3D1-8AA3-48A3-B172-DF754283F4C2"
   },
@@ -2811,7 +2811,7 @@
     "Id": "E236AD13-B8EC-4269-9F8F-5AED946799B1",
     "Status": "APPROVED FOR SERVICE",
     "DivisionID": "10 - OR",
-    "OrderID": "12",
+    "OrderID": "11",
     "isDeleted": false,
     "PizzaStatusID": "0F3DDDE2-1920-4E71-A40A-7610F5C58FAC"
   },
@@ -2891,7 +2891,7 @@
     "Id": "8CF15612-DF81-4E0D-9375-5F050752C3A3",
     "Status": "IN-SERVICE",
     "DivisionID": "11 - GA",
-    "OrderID": "12",
+    "OrderID": "11",
     "isDeleted": false,
     "PizzaStatusID": "FA64C4A7-322A-40F0-A161-EEDD422F49C2"
   },
@@ -3699,7 +3699,7 @@
     "Id": "47619FFD-8640-4778-92DB-73E3750A124B",
     "Status": "APPROVED FOR LEASING",
     "DivisionID": "11 - GA",
-    "OrderID": null,
+    "OrderID": "10",
     "isDeleted": true,
     "PizzaStatusID": "F8A05A66-09D9-4C19-A808-643BF3E3A798"
   },
@@ -4259,7 +4259,7 @@
     "Id": "DA460AB2-705A-4F1D-80EF-85DD94E2EB84",
     "Status": "APPROVED FOR LEASING",
     "DivisionID": "10 - OR",
-    "OrderID": "14",
+    "OrderID": "13",
     "isDeleted": false,
     "PizzaStatusID": "F8A05A66-09D9-4C19-A808-643BF3E3A798"
   },
@@ -4355,7 +4355,7 @@
     "Id": "7CB4AD5D-E729-4515-AD0C-8AC896752E28",
     "Status": "APPROVED FOR CHO (CLIENT HOSTED)",
     "DivisionID": "11 - GA",
-    "OrderID": "5",
+    "OrderID": "4",
     "isDeleted": false,
     "PizzaStatusID": "9814CCF3-6F40-4480-BB3B-76DA6E727947"
   },
@@ -4787,7 +4787,7 @@
     "Id": "D9CF9DFC-8B20-49A9-95E2-9947AB228376",
     "Status": "APPROVED FOR SERVICE",
     "DivisionID": "11 - GA",
-    "OrderID": null,
+    "OrderID": "8",
     "isDeleted": false,
     "PizzaStatusID": null
   },
@@ -4939,7 +4939,7 @@
     "Id": "F63AB621-F393-4926-90E0-9E035811F052",
     "Status": "DOT SCREENING",
     "DivisionID": "10 - OR",
-    "OrderID": "5",
+    "OrderID": "4",
     "isDeleted": false,
     "PizzaStatusID": "80E13E31-FC68-4AA2-BCE7-48A4A1FFBB2B"
   },
@@ -5747,7 +5747,7 @@
     "Id": "86B8CD33-E1FD-465B-98A8-BA4400C0CE23",
     "Status": "IN-SERVICE",
     "DivisionID": "10 - OR",
-    "OrderID": "15",
+    "OrderID": "14",
     "isDeleted": false,
     "PizzaStatusID": "FA64C4A7-322A-40F0-A161-EEDD422F49C2"
   },
@@ -5763,7 +5763,7 @@
     "Id": "3E16E718-E2F3-4D41-8AAD-BA9888387B75",
     "Status": "SBPC APPROVED FOR SERVICE",
     "DivisionID": "10 - OR",
-    "OrderID": "11",
+    "OrderID": "10",
     "isDeleted": false,
     "PizzaStatusID": "569C3481-69A6-4CDC-87E8-D500E66770CD"
   },
@@ -6099,7 +6099,7 @@
     "Id": "273CCF83-5625-4ACB-88C7-C708B1E187DA",
     "Status": "APPROVED-ORIENTATION BTW",
     "DivisionID": "10 - OR",
-    "OrderID": "9",
+    "OrderID": "8",
     "isDeleted": false,
     "PizzaStatusID": "9814CCF3-6F40-4480-BB3B-76DA6E727947"
   },
@@ -6611,7 +6611,7 @@
     "Id": "F1A1583A-B1E2-4EC1-883E-D8C4EAA8DF19",
     "Status": "APPROVED FOR LEASING",
     "DivisionID": "11 - GA",
-    "OrderID": "11",
+    "OrderID": "10",
     "isDeleted": false,
     "PizzaStatusID": "F8A05A66-09D9-4C19-A808-643BF3E3A798"
   },
@@ -6731,7 +6731,7 @@
     "Id": "9CAD697E-F4D6-4725-A086-DDDDEA6BBFBB",
     "Status": "ORIENTATION - CLIENT HOSTED",
     "DivisionID": "10 - OR",
-    "OrderID": "7",
+    "OrderID": "6",
     "isDeleted": false,
     "PizzaStatusID": "9814CCF3-6F40-4480-BB3B-76DA6E727947"
   },
@@ -6803,7 +6803,7 @@
     "Id": "CA53EC96-7616-4A45-8209-E04C85513AFE",
     "Status": "APPROVED FOR SERVICE",
     "DivisionID": "11 - GA",
-    "OrderID": "9",
+    "OrderID": "8",
     "isDeleted": false,
     "PizzaStatusID": "0F3DDDE2-1920-4E71-A40A-7610F5C58FAC"
   },
@@ -6851,7 +6851,7 @@
     "Id": "FF95D7BE-164B-44F2-AB2F-E16F9B5C041D",
     "Status": "COMPLIANCE REVIEW",
     "DivisionID": "10 - OR",
-    "OrderID": "10",
+    "OrderID": "9",
     "isDeleted": false,
     "PizzaStatusID": "569C3481-69A6-4CDC-87E8-D500E66770CD"
   },
@@ -7283,8 +7283,8 @@
     "Id": "F33DF4AB-DAB5-4864-9EF2-EED8EA71E790",
     "Status": "DOT SCREENING",
     "DivisionID": "11 - GA",
-    "OrderID": "2",
-    "isDeleted": false,
+    "OrderID": "3",
+    "isDeleted": true,
     "PizzaStatusID": "80E13E31-FC68-4AA2-BCE7-48A4A1FFBB2B"
   },
   {
@@ -7339,7 +7339,7 @@
     "Id": "A2B3E951-D4F3-4F34-BB54-F15DBD5C7F8C",
     "Status": "COMPLIANCE REVIEW",
     "DivisionID": "11 - GA",
-    "OrderID": "7",
+    "OrderID": "6",
     "isDeleted": false,
     "PizzaStatusID": "569C3481-69A6-4CDC-87E8-D500E66770CD"
   },
@@ -7403,7 +7403,7 @@
     "Id": "7D7F4649-C0B8-4B98-BAD6-F38A01E80B7B",
     "Status": "APPROVED FOR CONTRACTING",
     "DivisionID": "10 - OR",
-    "OrderID": "13",
+    "OrderID": "12",
     "isDeleted": false,
     "PizzaStatusID": "0F3DDDE2-1920-4E71-A40A-7610F5C58FAC"
   },
@@ -7755,7 +7755,7 @@
     "Id": "D18703B5-0CF1-42E9-9618-FF0C26C7D403",
     "Status": "APPROVED FOR CONTRACTING",
     "DivisionID": "11 - GA",
-    "OrderID": "10",
+    "OrderID": "9",
     "isDeleted": false,
     "PizzaStatusID": "0F3DDDE2-1920-4E71-A40A-7610F5C58FAC"
   },

@@ -1,0 +1,15 @@
+@model string
+
+@{
+    var statusName = ViewBag.StatusName ?? "";
+}
+
+<span class="cert-badge" 
+      draggable="true" 
+      ondragstart="handleCertDragStart(event, this)" 
+      data-cert="@Model" 
+      onclick="showCertDetails('@Model.Replace("'", "\\'")', '@statusName')" 
+      style="cursor: pointer;">
+    @Model
+    <span class="remove-cert" onclick="event.stopPropagation(); removeCert(event, '@statusName', '@Model.Replace("'", "\\'"))')">×</span>
+</span>

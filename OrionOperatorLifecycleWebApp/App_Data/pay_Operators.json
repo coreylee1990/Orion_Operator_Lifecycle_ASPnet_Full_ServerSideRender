@@ -8,7 +8,8 @@
     "DivisionID": "PA - BROOKES",
     "StatusName": "REGISTRATION",
     "StatusID": "72AE04E6-61C0-4008-8B34-D75845422036",
-    "OrderID": "1"
+    "OrderID": "1",
+    "isDeleted": null
   },
   {
     "ID": "0399947F-1ECC-44AB-B106-EDFE663A1DDB",
@@ -19,7 +20,8 @@
     "DivisionID": "PA - BROOKES",
     "StatusName": "REGISTRATION",
     "StatusID": "72AE04E6-61C0-4008-8B34-D75845422036",
-    "OrderID": "1"
+    "OrderID": "1",
+    "isDeleted": null
   },
   {
     "ID": "0D5B99A8-D6A3-4C8E-8053-0AB30DFF0B28",
@@ -30,7 +32,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "REGISTRATION",
     "StatusID": "3A0C9054-B0C0-4B0B-A10A-7A61696BC91E",
-    "OrderID": "1"
+    "OrderID": "1",
+    "isDeleted": null
   },
   {
     "ID": "EBDBE90D-2C0E-4EA9-A11C-10190383C1EE",
@@ -41,7 +44,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "REGISTRATION",
     "StatusID": "3A0C9054-B0C0-4B0B-A10A-7A61696BC91E",
-    "OrderID": "1"
+    "OrderID": "1",
+    "isDeleted": null
   },
   {
     "ID": "DDA18EE1-B267-4643-A727-15E412D3E08D",
@@ -52,7 +56,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "REGISTRATION",
     "StatusID": "3A0C9054-B0C0-4B0B-A10A-7A61696BC91E",
-    "OrderID": "1"
+    "OrderID": "1",
+    "isDeleted": null
   },
   {
     "ID": "C9C00589-2A41-4257-AA0A-1FA6604971BF",
@@ -63,7 +68,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "REGISTRATION",
     "StatusID": "3A0C9054-B0C0-4B0B-A10A-7A61696BC91E",
-    "OrderID": "1"
+    "OrderID": "1",
+    "isDeleted": null
   },
   {
     "ID": "27E2113C-8D3B-4989-940F-27EBA0B588A9",
@@ -74,7 +80,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "REGISTRATION",
     "StatusID": "3A0C9054-B0C0-4B0B-A10A-7A61696BC91E",
-    "OrderID": "1"
+    "OrderID": "1",
+    "isDeleted": null
   },
   {
     "ID": "12BC766D-557D-489D-A0E7-2CF8A48C4203",
@@ -85,7 +92,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "REGISTRATION",
     "StatusID": "3A0C9054-B0C0-4B0B-A10A-7A61696BC91E",
-    "OrderID": "1"
+    "OrderID": "1",
+    "isDeleted": null
   },
   {
     "ID": "176F68F3-A1DE-4594-9B90-32DB903B0360",
@@ -96,7 +104,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "REGISTRATION",
     "StatusID": "3A0C9054-B0C0-4B0B-A10A-7A61696BC91E",
-    "OrderID": "1"
+    "OrderID": "1",
+    "isDeleted": null
   },
   {
     "ID": "E0035E85-D95A-4547-A411-32F2D500CBD5",
@@ -107,7 +116,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "REGISTRATION",
     "StatusID": "3A0C9054-B0C0-4B0B-A10A-7A61696BC91E",
-    "OrderID": "1"
+    "OrderID": "1",
+    "isDeleted": null
   },
   {
     "ID": "278BE6A4-5274-4F59-A8E9-790C64B85A43",
@@ -118,7 +128,8 @@
     "DivisionID": "11 - GA",
     "StatusName": "SBPC APPROVED FOR SERVICE",
     "StatusID": "4BFA6ADF-597B-4435-AC5F-1E310E236A41",
-    "OrderID": "10"
+    "OrderID": "10",
+    "isDeleted": null
   },
   {
     "ID": "D26F5019-AB3F-49F2-9A88-9B1CBDCC1284",
@@ -129,7 +140,8 @@
     "DivisionID": "11 - GA",
     "StatusName": "SBPC APPROVED FOR SERVICE",
     "StatusID": "4BFA6ADF-597B-4435-AC5F-1E310E236A41",
-    "OrderID": "10"
+    "OrderID": "10",
+    "isDeleted": null
   },
   {
     "ID": "79E5C541-F2BC-4370-B3A5-B344D7B8BBB4",
@@ -140,7 +152,8 @@
     "DivisionID": "11 - GA",
     "StatusName": "SBPC APPROVED FOR SERVICE",
     "StatusID": "4BFA6ADF-597B-4435-AC5F-1E310E236A41",
-    "OrderID": "10"
+    "OrderID": "10",
+    "isDeleted": null
   },
   {
     "ID": "9F2AEAFC-E5CA-47A5-AC7D-FEB1BE0A6272",
@@ -151,7 +164,8 @@
     "DivisionID": "11 - GA",
     "StatusName": "SBPC APPROVED FOR SERVICE",
     "StatusID": "4BFA6ADF-597B-4435-AC5F-1E310E236A41",
-    "OrderID": "10"
+    "OrderID": "10",
+    "isDeleted": null
   },
   {
     "ID": "1099F015-60E7-461E-93FF-0B30B33A9DC4",
@@ -162,7 +176,8 @@
     "DivisionID": "6 - FL",
     "StatusName": "APPROVED FOR SERVICE",
     "StatusID": "D17C7E1B-5436-40DE-BC4D-7C400294FA6D",
-    "OrderID": "11"
+    "OrderID": "11",
+    "isDeleted": null
   },
   {
     "ID": "A91D2F7D-ECF5-4892-8FB7-AA303AEDA5D0",
@@ -173,7 +188,8 @@
     "DivisionID": "7 - MI",
     "StatusName": "APPROVED FOR CONTRACTING",
     "StatusID": "57822BB5-0824-456A-B7C7-49D1896C03C2",
-    "OrderID": "11"
+    "OrderID": "11",
+    "isDeleted": null
   },
   {
     "ID": "1E1609CE-A4E6-46B2-96E5-6F7505D7130E",
@@ -184,7 +200,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "APPROVED FOR CONTRACTING",
     "StatusID": "7D7F4649-C0B8-4B98-BAD6-F38A01E80B7B",
-    "OrderID": "12"
+    "OrderID": "12",
+    "isDeleted": null
   },
   {
     "ID": "13C53248-4B24-4186-9A82-91B2109166EA",
@@ -195,7 +212,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "APPROVED FOR CONTRACTING",
     "StatusID": "7D7F4649-C0B8-4B98-BAD6-F38A01E80B7B",
-    "OrderID": "12"
+    "OrderID": "12",
+    "isDeleted": null
   },
   {
     "ID": "C921C7E7-4A5B-4F10-8E7B-CAE29206EFFB",
@@ -206,7 +224,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "APPROVED FOR CONTRACTING",
     "StatusID": "7D7F4649-C0B8-4B98-BAD6-F38A01E80B7B",
-    "OrderID": "12"
+    "OrderID": "12",
+    "isDeleted": null
   },
   {
     "ID": "238EBB0F-FE9B-41DF-89AA-423EA4AFE98D",
@@ -217,7 +236,8 @@
     "DivisionID": "8 - OH",
     "StatusName": "APPROVED FOR CONTRACTING",
     "StatusID": "32D6928D-AF5F-4C61-A53C-B0890ADE2F34",
-    "OrderID": "12"
+    "OrderID": "12",
+    "isDeleted": null
   },
   {
     "ID": "EF208EB2-29DD-493D-AFE5-89A5622000F4",
@@ -228,7 +248,8 @@
     "DivisionID": "11 - GA",
     "StatusName": "APPROVED FOR LEASING",
     "StatusID": "F1A1583A-B1E2-4EC1-883E-D8C4EAA8DF19",
-    "OrderID": "13"
+    "OrderID": "13",
+    "isDeleted": null
   },
   {
     "ID": "828B1C5A-A250-479E-81CD-213EBC35DE72",
@@ -239,7 +260,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "IN-SERVICE",
     "StatusID": "86B8CD33-E1FD-465B-98A8-BA4400C0CE23",
-    "OrderID": "14"
+    "OrderID": "14",
+    "isDeleted": null
   },
   {
     "ID": "E151D171-145B-45A1-8F76-2D280C3A2FE0",
@@ -250,7 +272,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "IN-SERVICE",
     "StatusID": "86B8CD33-E1FD-465B-98A8-BA4400C0CE23",
-    "OrderID": "14"
+    "OrderID": "14",
+    "isDeleted": null
   },
   {
     "ID": "755EE525-7995-4C8D-B4E7-5D30FE0E997C",
@@ -261,7 +284,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "IN-SERVICE",
     "StatusID": "86B8CD33-E1FD-465B-98A8-BA4400C0CE23",
-    "OrderID": "14"
+    "OrderID": "14",
+    "isDeleted": null
   },
   {
     "ID": "1269A6B1-D3F9-4F39-B995-6757804CFC34",
@@ -272,7 +296,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "IN-SERVICE",
     "StatusID": "86B8CD33-E1FD-465B-98A8-BA4400C0CE23",
-    "OrderID": "14"
+    "OrderID": "14",
+    "isDeleted": null
   },
   {
     "ID": "B9AAA17E-7F2C-494B-A141-70116D35E867",
@@ -283,7 +308,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "IN-SERVICE",
     "StatusID": "86B8CD33-E1FD-465B-98A8-BA4400C0CE23",
-    "OrderID": "14"
+    "OrderID": "14",
+    "isDeleted": null
   },
   {
     "ID": "2B9537E8-F79E-4CC8-B82D-79302F835FD3",
@@ -294,7 +320,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "IN-SERVICE",
     "StatusID": "86B8CD33-E1FD-465B-98A8-BA4400C0CE23",
-    "OrderID": "14"
+    "OrderID": "14",
+    "isDeleted": null
   },
   {
     "ID": "18F4B133-6A3E-4BF4-8E05-7A11A124D401",
@@ -305,7 +332,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "IN-SERVICE",
     "StatusID": "86B8CD33-E1FD-465B-98A8-BA4400C0CE23",
-    "OrderID": "14"
+    "OrderID": "14",
+    "isDeleted": null
   },
   {
     "ID": "4BB22BD2-6723-4EE5-B5F4-7FC979C667F3",
@@ -316,7 +344,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "IN-SERVICE",
     "StatusID": "86B8CD33-E1FD-465B-98A8-BA4400C0CE23",
-    "OrderID": "14"
+    "OrderID": "14",
+    "isDeleted": null
   },
   {
     "ID": "BBE700EE-53DE-4BDD-AD1A-84FFC1FC4A5F",
@@ -327,7 +356,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "IN-SERVICE",
     "StatusID": "86B8CD33-E1FD-465B-98A8-BA4400C0CE23",
-    "OrderID": "14"
+    "OrderID": "14",
+    "isDeleted": null
   },
   {
     "ID": "47DFE00B-B97F-48C1-B4E2-85E8898D5F11",
@@ -338,7 +368,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "IN-SERVICE",
     "StatusID": "86B8CD33-E1FD-465B-98A8-BA4400C0CE23",
-    "OrderID": "14"
+    "OrderID": "14",
+    "isDeleted": null
   },
   {
     "ID": "C1C59E3D-BD85-4659-9DCB-05B38635E7CC",
@@ -349,7 +380,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "ONBOARDING",
     "StatusID": "84B76237-8C85-4B6D-93EC-52783CB9048B",
-    "OrderID": "2"
+    "OrderID": "2",
+    "isDeleted": null
   },
   {
     "ID": "674E1014-6066-492D-8827-0ABD6D51C441",
@@ -360,7 +392,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "ONBOARDING",
     "StatusID": "84B76237-8C85-4B6D-93EC-52783CB9048B",
-    "OrderID": "2"
+    "OrderID": "2",
+    "isDeleted": null
   },
   {
     "ID": "371C0740-4C35-4D9F-97AF-15D40A57EE68",
@@ -371,7 +404,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "ONBOARDING",
     "StatusID": "84B76237-8C85-4B6D-93EC-52783CB9048B",
-    "OrderID": "2"
+    "OrderID": "2",
+    "isDeleted": null
   },
   {
     "ID": "E83A41EE-0E90-4826-9909-1C8DB501DAD0",
@@ -382,7 +416,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "ONBOARDING",
     "StatusID": "84B76237-8C85-4B6D-93EC-52783CB9048B",
-    "OrderID": "2"
+    "OrderID": "2",
+    "isDeleted": null
   },
   {
     "ID": "2D868860-CB3C-4323-A81B-3CF388BCD69A",
@@ -393,7 +428,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "ONBOARDING",
     "StatusID": "84B76237-8C85-4B6D-93EC-52783CB9048B",
-    "OrderID": "2"
+    "OrderID": "2",
+    "isDeleted": null
   },
   {
     "ID": "A965F5F6-B017-4B3C-ABBC-3DBF5F4AC861",
@@ -404,7 +440,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "ONBOARDING",
     "StatusID": "84B76237-8C85-4B6D-93EC-52783CB9048B",
-    "OrderID": "2"
+    "OrderID": "2",
+    "isDeleted": null
   },
   {
     "ID": "0F2DD8C7-2AC5-4CB8-8D2A-47DF9743A2DC",
@@ -415,7 +452,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "ONBOARDING",
     "StatusID": "84B76237-8C85-4B6D-93EC-52783CB9048B",
-    "OrderID": "2"
+    "OrderID": "2",
+    "isDeleted": null
   },
   {
     "ID": "C57427F6-2FF5-4DCD-A5BA-4C96B8ACF73B",
@@ -426,7 +464,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "ONBOARDING",
     "StatusID": "84B76237-8C85-4B6D-93EC-52783CB9048B",
-    "OrderID": "2"
+    "OrderID": "2",
+    "isDeleted": null
   },
   {
     "ID": "35EB6A4C-5290-4A47-A8E5-4EBFF52122DF",
@@ -437,7 +476,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "ONBOARDING",
     "StatusID": "84B76237-8C85-4B6D-93EC-52783CB9048B",
-    "OrderID": "2"
+    "OrderID": "2",
+    "isDeleted": null
   },
   {
     "ID": "19F293E6-B154-4426-AC58-680FF5646E76",
@@ -448,7 +488,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "ONBOARDING",
     "StatusID": "84B76237-8C85-4B6D-93EC-52783CB9048B",
-    "OrderID": "2"
+    "OrderID": "2",
+    "isDeleted": null
   },
   {
     "ID": "85ADCA0E-2440-43B2-B685-BB88364E88DB",
@@ -459,7 +500,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "CREDENTIALING",
     "StatusID": "C862D294-E4BB-423A-86EF-112343D786A8",
-    "OrderID": "3"
+    "OrderID": "3",
+    "isDeleted": null
   },
   {
     "ID": "918E0EA0-A75C-4F9B-8A7D-812DEA83439C",
@@ -468,9 +510,10 @@
     "Email": "hakimfmholdings@gmail.com",
     "Mobile": "(470) 716-7011",
     "DivisionID": "11 - GA",
-    "StatusName": "ONBOARDING",
-    "StatusID": "6573D73D-100D-497C-B896-2D54F4EE89C0",
-    "OrderID": "1"
+    "StatusName": "ORIENTATION - CLIENT HOSTED",
+    "StatusID": "B62B46CD-19EC-4475-9CA1-429F55C0CB8D",
+    "OrderID": "1",
+    "isDeleted": null
   },
   {
     "ID": "7B0759C1-C532-4308-9441-DE7F6B994865",
@@ -481,7 +524,8 @@
     "DivisionID": "12 - PA",
     "StatusName": "CREDENTIALING",
     "StatusID": "C4EF163C-1090-4E76-AA5E-0357DC53AE76",
-    "OrderID": "3"
+    "OrderID": "3",
+    "isDeleted": null
   },
   {
     "ID": "44B70C2A-0209-4881-9494-1DCFE1753BC4",
@@ -492,7 +536,8 @@
     "DivisionID": "3 - TX",
     "StatusName": "CREDENTIALING",
     "StatusID": "1F0E7EFD-D5F0-4A7F-8FFE-5FEC757E1041",
-    "OrderID": "3"
+    "OrderID": "3",
+    "isDeleted": null
   },
   {
     "ID": "01182DEF-9741-4D84-8585-41A101FBDC5F",
@@ -503,7 +548,8 @@
     "DivisionID": "3 - TX",
     "StatusName": "CREDENTIALING",
     "StatusID": "1F0E7EFD-D5F0-4A7F-8FFE-5FEC757E1041",
-    "OrderID": "3"
+    "OrderID": "3",
+    "isDeleted": null
   },
   {
     "ID": "09C7D0D8-AA74-439A-86C0-152C13C97861",
@@ -514,7 +560,8 @@
     "DivisionID": "7 - MI",
     "StatusName": "CREDENTIALING",
     "StatusID": "79A5B3FB-ACEE-4665-AF34-26B6E97A0DA3",
-    "OrderID": "3"
+    "OrderID": "3",
+    "isDeleted": null
   },
   {
     "ID": "E511C100-EBCF-4CD0-8984-C62A1B63EFFF",
@@ -525,7 +572,8 @@
     "DivisionID": "7 - MI",
     "StatusName": "CREDENTIALING",
     "StatusID": "79A5B3FB-ACEE-4665-AF34-26B6E97A0DA3",
-    "OrderID": "3"
+    "OrderID": "3",
+    "isDeleted": null
   },
   {
     "ID": "390C18CC-FD6B-4935-835F-5B4FA53AFD30",
@@ -536,7 +584,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "DOT SCREENING",
     "StatusID": "F63AB621-F393-4926-90E0-9E035811F052",
-    "OrderID": "4"
+    "OrderID": "4",
+    "isDeleted": null
   },
   {
     "ID": "7B1A2DBD-F31D-46C8-8C71-638EB2F6C200",
@@ -547,7 +596,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "DOT SCREENING",
     "StatusID": "F63AB621-F393-4926-90E0-9E035811F052",
-    "OrderID": "4"
+    "OrderID": "4",
+    "isDeleted": null
   },
   {
     "ID": "5CB56314-5D4D-436D-8D39-8743F94EF93D",
@@ -558,7 +608,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "DOT SCREENING",
     "StatusID": "F63AB621-F393-4926-90E0-9E035811F052",
-    "OrderID": "4"
+    "OrderID": "4",
+    "isDeleted": null
   },
   {
     "ID": "79DE0E84-360D-4B1F-9060-045D3C7B9221",
@@ -567,9 +618,10 @@
     "Email": "bradfordglobal@gmail.com",
     "Mobile": "(678) 200-0071",
     "DivisionID": "11 - GA",
-    "StatusName": "DOT SCREENING",
-    "StatusID": "F33DF4AB-DAB5-4864-9EF2-EED8EA71E790",
-    "OrderID": "4"
+    "StatusName": "PENDING NEED",
+    "StatusID": "A39F54E5-DACC-4FE2-B6E0-52E88FB54A19",
+    "OrderID": "null",
+    "isDeleted": null
   },
   {
     "ID": "882B3EE6-9591-437A-AF19-14C7B513D659",
@@ -578,9 +630,10 @@
     "Email": "corinthia.griffith@gmail.com",
     "Mobile": "(213) 569-8426",
     "DivisionID": "11 - GA",
-    "StatusName": "DOT SCREENING",
-    "StatusID": "F33DF4AB-DAB5-4864-9EF2-EED8EA71E790",
-    "OrderID": "4"
+    "StatusName": "PENDING NEED",
+    "StatusID": "A39F54E5-DACC-4FE2-B6E0-52E88FB54A19",
+    "OrderID": "null",
+    "isDeleted": null
   },
   {
     "ID": "A6B7ECD7-1C10-4020-9EE5-7BC55A6F66E2",
@@ -589,9 +642,10 @@
     "Email": "g.i.graham90@gmail.com",
     "Mobile": "(240) 498-3504",
     "DivisionID": "11 - GA",
-    "StatusName": "DOT SCREENING",
-    "StatusID": "F33DF4AB-DAB5-4864-9EF2-EED8EA71E790",
-    "OrderID": "4"
+    "StatusName": "PENDING NEED",
+    "StatusID": "A39F54E5-DACC-4FE2-B6E0-52E88FB54A19",
+    "OrderID": "null",
+    "isDeleted": null
   },
   {
     "ID": "33CC5B3F-3246-4E41-930D-BFE5428645D1",
@@ -600,9 +654,10 @@
     "Email": "romellomcclain747@gmail.com",
     "Mobile": "(404) 330-4360",
     "DivisionID": "11 - GA",
-    "StatusName": "DOT SCREENING",
-    "StatusID": "F33DF4AB-DAB5-4864-9EF2-EED8EA71E790",
-    "OrderID": "4"
+    "StatusName": "PENDING NEED",
+    "StatusID": "A39F54E5-DACC-4FE2-B6E0-52E88FB54A19",
+    "OrderID": "null",
+    "isDeleted": null
   },
   {
     "ID": "0D00CE9B-4B3B-49AF-B0C9-EEFFA1D7D382",
@@ -611,9 +666,10 @@
     "Email": "thomyjah1@yahoo.com",
     "Mobile": "(504) 357-2706",
     "DivisionID": "11 - GA",
-    "StatusName": "DOT SCREENING",
-    "StatusID": "F33DF4AB-DAB5-4864-9EF2-EED8EA71E790",
-    "OrderID": "4"
+    "StatusName": "PENDING NEED",
+    "StatusID": "A39F54E5-DACC-4FE2-B6E0-52E88FB54A19",
+    "OrderID": "null",
+    "isDeleted": null
   },
   {
     "ID": "9454150F-F242-44B9-B4EC-1A59023D247D",
@@ -624,7 +680,8 @@
     "DivisionID": "12 - PA",
     "StatusName": "DOT SCREENING",
     "StatusID": "B8698A50-FEFF-43BC-90FF-6ED1CAE6C41B",
-    "OrderID": "4"
+    "OrderID": "4",
+    "isDeleted": null
   },
   {
     "ID": "D5E266AC-666D-4BB9-94C1-7DF5ED1E7438",
@@ -635,7 +692,8 @@
     "DivisionID": "12 - PA",
     "StatusName": "DOT SCREENING",
     "StatusID": "B8698A50-FEFF-43BC-90FF-6ED1CAE6C41B",
-    "OrderID": "4"
+    "OrderID": "4",
+    "isDeleted": null
   },
   {
     "ID": "ADD22A46-FB7A-4109-9BE0-1066963A75B4",
@@ -646,7 +704,8 @@
     "DivisionID": "3 - TX",
     "StatusName": "ORIENTATION-BIG STAR SAFETY \u0026 SERVICE",
     "StatusID": "1A544845-CA14-43DB-884F-E5F0DAC6D877",
-    "OrderID": "5"
+    "OrderID": "5",
+    "isDeleted": null
   },
   {
     "ID": "F829C4A3-E262-4200-81D0-5F82C71BB236",
@@ -657,7 +716,8 @@
     "DivisionID": "3 - TX",
     "StatusName": "ORIENTATION-BIG STAR SAFETY \u0026 SERVICE",
     "StatusID": "1A544845-CA14-43DB-884F-E5F0DAC6D877",
-    "OrderID": "5"
+    "OrderID": "5",
+    "isDeleted": null
   },
   {
     "ID": "810AC1CF-0A2D-4E79-A846-750B43517D90",
@@ -668,7 +728,8 @@
     "DivisionID": "3 - TX",
     "StatusName": "ORIENTATION-BIG STAR SAFETY \u0026 SERVICE",
     "StatusID": "1A544845-CA14-43DB-884F-E5F0DAC6D877",
-    "OrderID": "5"
+    "OrderID": "5",
+    "isDeleted": null
   },
   {
     "ID": "58E5FF3B-A058-4628-8C45-A557747D53B1",
@@ -679,7 +740,8 @@
     "DivisionID": "3 - TX",
     "StatusName": "ORIENTATION-BIG STAR SAFETY \u0026 SERVICE",
     "StatusID": "1A544845-CA14-43DB-884F-E5F0DAC6D877",
-    "OrderID": "5"
+    "OrderID": "5",
+    "isDeleted": null
   },
   {
     "ID": "69074639-C5F6-4088-A91F-7A7981449D8D",
@@ -690,7 +752,8 @@
     "DivisionID": "6 - FL",
     "StatusName": "ORIENTATION-BIG STAR SAFETY \u0026 SERVICE",
     "StatusID": "85F8103E-F6A4-4EC1-9BD5-842FB4BED561",
-    "OrderID": "5"
+    "OrderID": "5",
+    "isDeleted": null
   },
   {
     "ID": "E98ECB6B-C801-4FD2-BB42-F2EB942C7FF3",
@@ -701,7 +764,8 @@
     "DivisionID": "7 - MI",
     "StatusName": "ORIENTATION-BIG STAR SAFETY \u0026 SERVICE",
     "StatusID": "2CF6D154-065E-4043-B6FC-71A7E7147B4B",
-    "OrderID": "5"
+    "OrderID": "5",
+    "isDeleted": null
   },
   {
     "ID": "4B0C4FF3-FF94-4889-9B77-2317F173333E",
@@ -712,7 +776,8 @@
     "DivisionID": "8 - OH",
     "StatusName": "ORIENTATION-BIG STAR SAFETY \u0026 SERVICE",
     "StatusID": "990C4E17-6C75-4DDC-BF31-2C8F2E918B4F",
-    "OrderID": "5"
+    "OrderID": "5",
+    "isDeleted": null
   },
   {
     "ID": "B344C307-6EF5-4CB2-87B5-E87F7FBD6DF7",
@@ -723,7 +788,8 @@
     "DivisionID": "7 - MI",
     "StatusName": "APPROVED-ORIENTATION BTW",
     "StatusID": "4185B583-698B-42AB-9EA8-5F7D2161E658",
-    "OrderID": "7"
+    "OrderID": "7",
+    "isDeleted": null
   },
   {
     "ID": "1DE58DF3-6CD6-4752-ADDA-ED933631D15D",
@@ -734,7 +800,8 @@
     "DivisionID": "7 - MI",
     "StatusName": "APPROVED-ORIENTATION BTW",
     "StatusID": "4185B583-698B-42AB-9EA8-5F7D2161E658",
-    "OrderID": "7"
+    "OrderID": "7",
+    "isDeleted": null
   },
   {
     "ID": "DB3EDFAA-AF4C-454A-8080-29CD5869DBBC",
@@ -745,7 +812,8 @@
     "DivisionID": "12 - PA",
     "StatusName": "APPROVED-ORIENTATION BTW",
     "StatusID": "548AB58E-A17E-4898-A7C1-153E82156E33",
-    "OrderID": "8"
+    "OrderID": "8",
+    "isDeleted": null
   },
   {
     "ID": "50CAECAD-35A7-454A-8F3B-556F07DD19AB",
@@ -756,7 +824,8 @@
     "DivisionID": "12 - PA",
     "StatusName": "APPROVED-ORIENTATION BTW",
     "StatusID": "548AB58E-A17E-4898-A7C1-153E82156E33",
-    "OrderID": "8"
+    "OrderID": "8",
+    "isDeleted": null
   },
   {
     "ID": "EA9942C7-540F-4443-9743-D1B2B58DD050",
@@ -767,7 +836,8 @@
     "DivisionID": "12 - PA",
     "StatusName": "APPROVED-ORIENTATION BTW",
     "StatusID": "548AB58E-A17E-4898-A7C1-153E82156E33",
-    "OrderID": "8"
+    "OrderID": "8",
+    "isDeleted": null
   },
   {
     "ID": "6663CE80-C594-428C-B031-9B5F7A9E3368",
@@ -778,7 +848,8 @@
     "DivisionID": "10 - OR",
     "StatusName": "COMPLIANCE REVIEW",
     "StatusID": "FF95D7BE-164B-44F2-AB2F-E16F9B5C041D",
-    "OrderID": "9"
+    "OrderID": "9",
+    "isDeleted": null
   },
   {
     "ID": "DA74927D-840C-4B8E-B0E6-577C42CBCD50",
@@ -789,7 +860,8 @@
     "DivisionID": "11 - GA",
     "StatusName": "COMPLIANCE REVIEW",
     "StatusID": "A2B3E951-D4F3-4F34-BB54-F15DBD5C7F8C",
-    "OrderID": "9"
+    "OrderID": "9",
+    "isDeleted": null
   },
   {
     "ID": "92DEE45B-9AC2-44B3-A964-B1E6609EC637",
@@ -800,7 +872,8 @@
     "DivisionID": "11 - GA",
     "StatusName": "COMPLIANCE REVIEW",
     "StatusID": "A2B3E951-D4F3-4F34-BB54-F15DBD5C7F8C",
-    "OrderID": "9"
+    "OrderID": "9",
+    "isDeleted": null
   },
   {
     "ID": "87E4B7EB-C319-4D54-9A0D-011FB8654F46",
@@ -811,7 +884,8 @@
     "DivisionID": "12 - PA",
     "StatusName": "COMPLIANCE REVIEW",
     "StatusID": "8B6C849B-AE1B-4BF0-BF46-1D1A71157D7E",
-    "OrderID": "9"
+    "OrderID": "9",
+    "isDeleted": null
   },
   {
     "ID": "7576A481-1C78-46D0-B492-0D65D94175F0",
@@ -822,7 +896,8 @@
     "DivisionID": "12 - PA",
     "StatusName": "COMPLIANCE REVIEW",
     "StatusID": "8B6C849B-AE1B-4BF0-BF46-1D1A71157D7E",
-    "OrderID": "9"
+    "OrderID": "9",
+    "isDeleted": null
   },
   {
     "ID": "6384A471-6779-4A42-AB6A-39A3F962C16E",
@@ -833,7 +908,8 @@
     "DivisionID": "12 - PA",
     "StatusName": "COMPLIANCE REVIEW",
     "StatusID": "8B6C849B-AE1B-4BF0-BF46-1D1A71157D7E",
-    "OrderID": "9"
+    "OrderID": "9",
+    "isDeleted": null
   },
   {
     "ID": "E8EEB2E4-E7F0-4896-9768-3E36BE8428E1",
@@ -844,7 +920,8 @@
     "DivisionID": "12 - PA",
     "StatusName": "COMPLIANCE REVIEW",
     "StatusID": "8B6C849B-AE1B-4BF0-BF46-1D1A71157D7E",
-    "OrderID": "9"
+    "OrderID": "9",
+    "isDeleted": null
   },
   {
     "ID": "A0A0A2D7-89B0-4C6E-9967-4678695A5618",
@@ -855,7 +932,8 @@
     "DivisionID": "12 - PA",
     "StatusName": "COMPLIANCE REVIEW",
     "StatusID": "8B6C849B-AE1B-4BF0-BF46-1D1A71157D7E",
-    "OrderID": "9"
+    "OrderID": "9",
+    "isDeleted": null
   },
   {
     "ID": "4E2679DB-9F63-4657-91C6-49A07CE00839",
@@ -866,7 +944,8 @@
     "DivisionID": "12 - PA",
     "StatusName": "COMPLIANCE REVIEW",
     "StatusID": "8B6C849B-AE1B-4BF0-BF46-1D1A71157D7E",
-    "OrderID": "9"
+    "OrderID": "9",
+    "isDeleted": null
   },
   {
     "ID": "B0291C8A-8B9F-4330-B1F1-8AFDBFE5FF5D",
@@ -877,7 +956,8 @@
     "DivisionID": "12 - PA",
     "StatusName": "COMPLIANCE REVIEW",
     "StatusID": "8B6C849B-AE1B-4BF0-BF46-1D1A71157D7E",
-    "OrderID": "9"
+    "OrderID": "9",
+    "isDeleted": null
   },
   {
     "ID": "6E89BDD9-BD7E-4D5F-B2B4-E081BE0C6383",
@@ -888,6 +968,7 @@
     "DivisionID": "7 - MI",
     "StatusName": "SBPC APPROVED FOR SERVICE",
     "StatusID": "A5C169C3-FA6E-46F4-B64F-03CA600E49DE",
-    "OrderID": "9"
+    "OrderID": "9",
+    "isDeleted": null
   }
 ]

@@ -13,6 +13,9 @@ namespace OrionOperatorLifecycleWebApp.Models
         [JsonPropertyName("Description")]
         public string Description { get; set; }
         
+        [JsonPropertyName("ClientID")]
+        public string ClientId { get; set; }
+        
         [JsonPropertyName("IsOperator")]
         public bool? IsOperator { get; set; }
         
