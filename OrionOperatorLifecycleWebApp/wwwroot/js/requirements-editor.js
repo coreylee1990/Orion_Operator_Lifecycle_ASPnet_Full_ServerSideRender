@@ -931,6 +931,29 @@ document.addEventListener('DOMContentLoaded', function() {
             // Re-render without calling initializeDynamicWorkflow (which would re-sort)
             renderWorkflowWithoutReinit();
             updateStats();
+            
+            // Add animations to affected cards
+            setTimeout(() => {
+                const cards = document.querySelectorAll('.step-card');
+                
+                // Determine the range of affected cards
+                const minAffected = Math.min(index, newIndex);
+                const maxAffected = Math.max(index, newIndex);
+                
+                cards.forEach((card, idx) => {
+                    if (idx >= minAffected && idx <= maxAffected) {
+                        if (idx === newIndex) {
+                            // The moved card gets green wiggle
+                            card.classList.add('wiggle');
+                            setTimeout(() => card.classList.remove('wiggle'), 600);
+                        } else {
+                            // Other affected cards get yellow glow
+                            card.classList.add('order-changed');
+                            setTimeout(() => card.classList.remove('order-changed'), 800);
+                        }
+                    }
+                });
+            }, 50);
         }
 
         // Helper function to create a drop zone element
@@ -1853,10 +1876,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     zone.classList.add('visible');
                 });
             }, 0);
+            
+            // Add global drag tracking to highlight nearest zone
+            document.addEventListener('drag', updateNearestDropZone);
         }
 
         function handleDragEnd(e) {
             this.classList.remove('dragging');
+            
+            // Remove global drag tracker
+            document.removeEventListener('drag', updateNearestDropZone);
             
             // Hide all drop zones and remove highlights
             document.querySelectorAll('.status-drop-zone').forEach(zone => {
@@ -1876,14 +1905,52 @@ document.addEventListener('DOMContentLoaded', function() {
             e.dataTransfer.dropEffect = 'move';
             return false;
         }
+        
+        // Highlight only the nearest drop zone based on cursor position
+        function updateNearestDropZone(e) {
+            const x = e.clientX;
+            const y = e.clientY;
+            
+            if (x === 0 && y === 0) return; // Ignore invalid coordinates
+            
+            const dropZones = document.querySelectorAll('.status-drop-zone.visible');
+            let nearestZone = null;
+            let minDistance = Infinity;
+            
+            dropZones.forEach(zone => {
+                const rect = zone.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                
+                // Calculate distance from cursor to center of drop zone
+                const distance = Math.sqrt(
+                    Math.pow(x - centerX, 2) + 
+                    Math.pow(y - centerY, 2)
+                );
+                
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    nearestZone = zone;
+                }
+            });
+            
+            // Remove drag-over from all zones, then add to nearest
+            dropZones.forEach(zone => {
+                if (zone === nearestZone) {
+                    zone.classList.add('drag-over');
+                } else {
+                    zone.classList.remove('drag-over');
+                }
+            });
+        }
 
         function handleDropZoneDragEnter(e) {
             e.preventDefault();
-            this.classList.add('drag-over');
+            e.stopPropagation();
         }
 
         function handleDropZoneDragLeave(e) {
-            this.classList.remove('drag-over');
+            // Handled by updateNearestDropZone, no action needed
         }
 
         function handleDropZoneDrop(e) {
@@ -1935,6 +2002,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Re-render without reinitializing
                 renderWorkflowWithoutReinit();
                 updateStats();
+                
+                // Add animations to affected cards
+                setTimeout(() => {
+                    const cards = document.querySelectorAll('.step-card');
+                    
+                    // Determine the range of affected cards
+                    const minAffected = Math.min(draggedIndex, targetIndex);
+                    const maxAffected = Math.max(draggedIndex, targetIndex);
+                    
+                    cards.forEach((card, idx) => {
+                        if (idx >= minAffected && idx <= maxAffected) {
+                            if (idx === targetIndex) {
+                                // The moved card gets green wiggle
+                                card.classList.add('wiggle');
+                                setTimeout(() => card.classList.remove('wiggle'), 600);
+                            } else {
+                                // Other affected cards get yellow glow
+                                card.classList.add('order-changed');
+                                setTimeout(() => card.classList.remove('order-changed'), 800);
+                            }
+                        }
+                    });
+                }, 50);
             }
 
             return false;

@@ -2,11 +2,146 @@
 
 /* ...rest of the CSS from lifecycle-workflow-builder.html will be migrated here in full for UI parity... */
 
+/* Animations */
+@keyframes wiggle {
+    0%, 100% { transform: translateX(0) rotate(0); }
+    15% { transform: translateX(-8px) rotate(-2deg); }
+    30% { transform: translateX(8px) rotate(2deg); }
+    45% { transform: translateX(-6px) rotate(-1.5deg); }
+    60% { transform: translateX(6px) rotate(1.5deg); }
+    75% { transform: translateX(-3px) rotate(-0.5deg); }
+    90% { transform: translateX(3px) rotate(0.5deg); }
+}
+
+@keyframes yellowPulse {
+    0%, 100% { 
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    50% { 
+        box-shadow: 0 0 30px rgba(234, 179, 8, 0.8), 
+                    0 0 60px rgba(234, 179, 8, 0.6), 
+                    0 0 90px rgba(234, 179, 8, 0.4),
+                    0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+}
+
 /* Accordion custom style */
 .accordion-body {
     background: #5b657a !important;
     border-radius: 0 0 12px 12px;
     color: white;
+}
+
+/* Add Status Accordion Styling */
+#addStatusAccordion {
+    background: transparent !important;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+#addStatusAccordion .accordion-item {
+    background: transparent;
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+#addStatusAccordion .accordion-button {
+    background: linear-gradient(90deg, #6366f1 0%, #60a5fa 100%);
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    transition: all 0.3s ease;
+}
+
+#addStatusAccordion .accordion-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+}
+
+#addStatusAccordion .accordion-button:not(.collapsed) {
+    background: linear-gradient(90deg, #6366f1 0%, #60a5fa 100%);
+    color: #fff;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+#addStatusAccordion .accordion-button::after {
+    filter: brightness(0) invert(1);
+}
+
+#addStatusAccordion .accordion-button:focus {
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    border: none;
+}
+
+#addStatusAccordion .accordion-collapse {
+    border: none;
+}
+
+#addStatusAccordion .accordion-body {
+    background: white !important;
+    color: #1e293b;
+    border-radius: 0 0 12px 12px;
+    padding: 24px;
+    border: 2px solid #e2e8f0;
+    border-top: none;
+}
+
+#addStatusAccordion .form-label {
+    color: #475569;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+#addStatusAccordion .form-control,
+#addStatusAccordion .form-select {
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 14px;
+    transition: all 0.2s ease;
+}
+
+#addStatusAccordion .form-control:focus,
+#addStatusAccordion .form-select:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+#addStatusAccordion .form-text {
+    color: #64748b;
+    font-size: 0.875rem;
+}
+
+#addStatusAccordion .btn {
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+#addStatusAccordion .btn-primary {
+    background: linear-gradient(135deg, #6366f1, #60a5fa);
+    border: none;
+}
+
+#addStatusAccordion .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+#addStatusAccordion .btn-secondary {
+    background: #e2e8f0;
+    color: #475569;
+    border: none;
+}
+
+#addStatusAccordion .btn-secondary:hover {
+    background: #cbd5e1;
 }
 
 .container {
@@ -419,10 +554,22 @@ h1 {
             border: 2px solid rgba(148, 163, 184, 0.2);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             cursor: move;
-            transition: all 0.3s ease;
+            transition: all 0.3s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
             z-index: 1;
             overflow: visible;
+        }
+
+        .step-card.wiggle {
+            animation: wiggle 0.6s ease-in-out;
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.6), 
+                        0 0 50px rgba(16, 185, 129, 0.4), 
+                        0 0 75px rgba(16, 185, 129, 0.2),
+                        0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .step-card.order-changed {
+            animation: yellowPulse 0.8s ease-in-out;
         }
 
         .step-card:hover {
@@ -625,7 +772,7 @@ h1 {
         }
 
         .operator-name {
-            color: #282828;
+            color: #101010;
             font-weight: 500;
         }
 
@@ -1433,7 +1580,7 @@ h1 {
         }
 
         .cert-card-name {
-            color: #1a1d21;
+            color: #1a1a1a;
             font-size: 1rem;
             font-weight: 600;
             flex: 1;
@@ -1922,10 +2069,13 @@ h1 {
 }
 /* Status Drop Zones for Drag and Drop Reordering */
 .status-drop-zone {
-    height: 8px;
-    margin: 4px 0;
-    border-radius: 4px;
-    transition: all 0.2s ease;
+    height: 12px;
+    margin: 8px 0;
+    border-radius: 8px;
+    transition: height 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                background 0.3s ease,
+                border-color 0.3s ease,
+                opacity 0.2s ease;
     opacity: 0;
     pointer-events: none;
 }
@@ -1933,15 +2083,19 @@ h1 {
 .status-drop-zone.visible {
     opacity: 1;
     pointer-events: auto;
-    height: 40px;
-    background: rgba(99, 102, 241, 0.1);
-    border: 2px dashed rgba(99, 102, 241, 0.4);
+    height: 120px;
+    background: rgba(99, 102, 241, 0.15);
+    border: 3px dashed rgba(99, 102, 241, 0.5);
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
 }
 
 .status-drop-zone.drag-over {
-    background: rgba(99, 102, 241, 0.3);
+    background: rgba(99, 102, 241, 0.4);
     border-color: #1382CA;
-    height: 60px;
+    border-style: solid;
+    height: 180px;
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.5);
+    transform: scaleY(1.1);
 }
 
 .status-drop-zone .drop-zone-indicator {
@@ -1950,8 +2104,8 @@ h1 {
     align-items: center;
     justify-content: center;
     color: #1382CA;
-    font-size: 0.85rem;
-    font-weight: 500;
+    font-size: 1rem;
+    font-weight: 600;
 }
 
 .status-drop-zone.visible .drop-zone-indicator {
@@ -1961,6 +2115,7 @@ h1 {
 .status-drop-zone.drag-over .drop-zone-indicator {
     color: white;
     font-weight: bold;
+    font-size: 1.2rem;
 }
 
 /* Dragging state for step cards */
