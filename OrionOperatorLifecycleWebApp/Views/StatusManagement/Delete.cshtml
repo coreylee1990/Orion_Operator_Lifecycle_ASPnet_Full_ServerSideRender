@@ -1,0 +1,280 @@
+@model OrionOperatorLifecycleWebApp.Models.StatusType
+@{
+    ViewData["Title"] = "Delete Status";
+    var relatedPizzaStatus = ViewBag.RelatedPizzaStatus as OrionOperatorLifecycleWebApp.Models.PizzaStatus;
+}
+
+<div class="delete-status-container">
+    <div class="header-section">
+        <h1>Delete Status</h1>
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Back to List
+        </a>
+    </div>
+
+    <div class="delete-warning">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+        <div>
+            <h3>Are you sure you want to delete this status?</h3>
+            <p>This will perform a <strong>soft delete</strong> - the status will be marked as deleted but can be restored later.</p>
+        </div>
+    </div>
+
+    <div class="details-container">
+        <h3>Status Details</h3>
+        
+        <dl class="row">
+            <dt class="col-sm-3">ID</dt>
+            <dd class="col-sm-9">@Model.Id</dd>
+
+            <dt class="col-sm-3">Status Name</dt>
+            <dd class="col-sm-9"><strong>@Model.Status</strong></dd>
+
+            <dt class="col-sm-3">Division</dt>
+            <dd class="col-sm-9">
+                <span class="badge division-badge division-@Model.DivisionId">
+                    @switch(Model.DivisionId)
+                    {
+                        case "1": @("1 - Operator"); break;
+                        case "2": @("2 - Fleet"); break;
+                        case "3": @("3 - Provider"); break;
+                        case "4": @("4 - Managers"); break;
+                        case "5": @("5 - CA"); break;
+                        default: @Model.DivisionId; break;
+                    }
+                </span>
+            </dd>
+
+            <dt class="col-sm-3">Order ID</dt>
+            <dd class="col-sm-9">@Model.OrderId</dd>
+
+            <dt class="col-sm-3">Pizza Status</dt>
+            <dd class="col-sm-9">
+                @if (relatedPizzaStatus != null)
+                {
+                    <span class="badge bg-info">@relatedPizzaStatus.Status - @relatedPizzaStatus.Description</span>
+                }
+                else
+                {
+                    <span class="text-muted">No linked pizza status</span>
+                }
+            </dd>
+
+            <dt class="col-sm-3">Fleet</dt>
+            <dd class="col-sm-9">
+                @if (Model.Fleet == true)
+                {
+                    <i class="bi bi-check-circle-fill text-success"></i> <span>Yes</span>
+                }
+                else
+                {
+                    <i class="bi bi-x-circle text-muted"></i> <span>No</span>
+                }
+            </dd>
+
+            <dt class="col-sm-3">Providers</dt>
+            <dd class="col-sm-9">
+                @if (Model.Providers == true)
+                {
+                    <i class="bi bi-check-circle-fill text-success"></i> <span>Yes</span>
+                }
+                else
+                {
+                    <i class="bi bi-x-circle text-muted"></i> <span>No</span>
+                }
+            </dd>
+
+            <dt class="col-sm-3">Currently Deleted</dt>
+            <dd class="col-sm-9">
+                @if (Model.IsDeleted == true)
+                {
+                    <span class="badge bg-danger">Yes - Already Deleted</span>
+                }
+                else
+                {
+                    <span class="badge bg-success">No - Active</span>
+                }
+            </dd>
+        </dl>
+    </div>
+
+    <div class="form-actions">
+        <form asp-action="Delete" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Id" />
+            
+            <button type="submit" class="btn btn-danger btn-lg">
+                <i class="bi bi-trash"></i> Confirm Delete (Soft Delete)
+            </button>
+            <a asp-action="Index" class="btn btn-secondary btn-lg">
+                <i class="bi bi-x-circle"></i> Cancel
+            </a>
+        </form>
+    </div>
+
+    <div class="info-section">
+        <i class="bi bi-info-circle"></i>
+        <div>
+            <h4>What is a Soft Delete?</h4>
+            <p>The status will be marked as deleted but remains in the database. You can view deleted statuses by applying the "Deleted" filter on the main list page, and restore them if needed.</p>
+            <p>To permanently remove a status from the database, you must use the <strong>Hard Delete</strong> option from the deleted items list.</p>
+        </div>
+    </div>
+</div>
+
+<style>
+    .delete-status-container {
+        padding: 20px;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .header-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #e0e0e0;
+    }
+
+    .header-section h1 {
+        margin: 0;
+        color: #2c3e50;
+        font-size: 2rem;
+        font-weight: 600;
+    }
+
+    .delete-warning {
+        background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+        color: white;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+    }
+
+    .delete-warning i {
+        font-size: 3rem;
+        flex-shrink: 0;
+    }
+
+    .delete-warning h3 {
+        margin: 0 0 10px 0;
+        font-size: 1.3rem;
+        font-weight: 600;
+    }
+
+    .delete-warning p {
+        margin: 0;
+        font-size: 0.95rem;
+        opacity: 0.95;
+    }
+
+    .details-container {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        margin-bottom: 30px;
+    }
+
+    .details-container h3 {
+        color: #495057;
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+        font-weight: 600;
+        border-bottom: 2px solid #e9ecef;
+        padding-bottom: 10px;
+    }
+
+    .details-container dl {
+        margin: 0;
+    }
+
+    .details-container dt {
+        font-weight: 600;
+        color: #6c757d;
+        padding: 12px 0;
+    }
+
+    .details-container dd {
+        padding: 12px 0;
+        border-bottom: 1px solid #f8f9fa;
+    }
+
+    .details-container .row:last-child dd {
+        border-bottom: none;
+    }
+
+    .division-badge {
+        font-size: 0.9rem;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-weight: 600;
+    }
+
+    .division-1 { background: #4CAF50; color: white; }
+    .division-2 { background: #2196F3; color: white; }
+    .division-3 { background: #FF9800; color: white; }
+    .division-4 { background: #9C27B0; color: white; }
+    .division-5 { background: #00BCD4; color: white; }
+
+    .form-actions {
+        margin-bottom: 30px;
+    }
+
+    .form-actions form {
+        display: flex;
+        gap: 15px;
+    }
+
+    .form-actions .btn {
+        padding: 12px 30px;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+
+    .form-actions .btn-danger:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+    }
+
+    .info-section {
+        background: #e7f3ff;
+        border-left: 4px solid #2196F3;
+        padding: 20px;
+        border-radius: 8px;
+        display: flex;
+        gap: 15px;
+    }
+
+    .info-section i {
+        font-size: 1.5rem;
+        color: #2196F3;
+        flex-shrink: 0;
+        margin-top: 3px;
+    }
+
+    .info-section h4 {
+        margin: 0 0 10px 0;
+        color: #2c3e50;
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .info-section p {
+        margin: 0 0 10px 0;
+        color: #495057;
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .info-section p:last-child {
+        margin-bottom: 0;
+    }
+</style>

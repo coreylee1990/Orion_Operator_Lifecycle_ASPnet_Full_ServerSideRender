@@ -1,0 +1,266 @@
+@model OrionOperatorLifecycleWebApp.Models.StatusType
+@{
+    ViewData["Title"] = "Edit Status";
+    var pizzaStatuses = ViewBag.PizzaStatuses as List<OrionOperatorLifecycleWebApp.Models.PizzaStatus>;
+}
+
+<div class="edit-status-container">
+    <div class="header-section">
+        <h1>Edit Status</h1>
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Back to List
+        </a>
+    </div>
+
+    <div class="form-container">
+        <form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Id" />
+
+            <div class="info-badge">
+                <i class="bi bi-info-circle"></i> Editing Status ID: <strong>@Model.Id</strong>
+            </div>
+
+            <div class="form-section">
+                <h3>Basic Information</h3>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label asp-for="Status" class="form-label">Status Name *</label>
+                            <input asp-for="Status" class="form-control" required />
+                            <span asp-validation-for="Status" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="mb-3">
+                            <label asp-for="DivisionId" class="form-label">Division *</label>
+                            <select asp-for="DivisionId" class="form-select" required>
+                                <option value="">-- Select Division --</option>
+                                <option value="1">1 - Operator</option>
+                                <option value="2">2 - Fleet</option>
+                                <option value="3">3 - Provider</option>
+                                <option value="4">4 - Managers</option>
+                                <option value="5">5 - CA</option>
+                            </select>
+                            <span asp-validation-for="DivisionId" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="mb-3">
+                            <label asp-for="OrderId" class="form-label">Order ID *</label>
+                            <input asp-for="OrderId" class="form-control" type="number" required />
+                            <span asp-validation-for="OrderId" class="text-danger"></span>
+                            <small class="form-text text-muted">Display order in workflow</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="PizzaStatusId" class="form-label">Linked Pizza Status</label>
+                    <select asp-for="PizzaStatusId" class="form-select">
+                        <option value="">-- No Linked Status --</option>
+                        @if (pizzaStatuses != null)
+                        {
+                            @foreach (var ps in pizzaStatuses)
+                            {
+                                <option value="@ps.Id">@ps.Status - @ps.Description</option>
+                            }
+                        }
+                    </select>
+                    <small class="form-text text-muted">Link this status to a workflow definition</small>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Flags</h3>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-check form-switch mb-3">
+                            <input asp-for="Fleet" class="form-check-input" type="checkbox" role="switch" />
+                            <label asp-for="Fleet" class="form-check-label">
+                                Fleet Status
+                            </label>
+                            <small class="form-text text-muted d-block">Applies to fleet personnel</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-check form-switch mb-3">
+                            <input asp-for="Providers" class="form-check-input" type="checkbox" role="switch" />
+                            <label asp-for="Providers" class="form-check-label">
+                                Provider Status
+                            </label>
+                            <small class="form-text text-muted d-block">Applies to providers</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-check form-switch mb-3">
+                            <input asp-for="IsDeleted" class="form-check-input" type="checkbox" role="switch" />
+                            <label asp-for="IsDeleted" class="form-check-label">
+                                Mark as Deleted
+                            </label>
+                            <small class="form-text text-muted d-block">Soft delete (can be restored)</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="bi bi-save"></i> Save Changes
+                </button>
+                <a asp-action="Index" class="btn btn-secondary btn-lg">
+                    <i class="bi bi-x-circle"></i> Cancel
+                </a>
+                <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger btn-lg ms-auto">
+                    <i class="bi bi-trash"></i> Delete
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<style>
+    .edit-status-container {
+        padding: 20px;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .header-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #e0e0e0;
+    }
+
+    .header-section h1 {
+        margin: 0;
+        color: #2c3e50;
+        font-size: 2rem;
+        font-weight: 600;
+    }
+
+    .form-container {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .info-badge {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .info-badge i {
+        font-size: 1.2rem;
+    }
+
+    .form-section {
+        margin-bottom: 30px;
+        padding-bottom: 25px;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    .form-section:last-of-type {
+        border-bottom: none;
+    }
+
+    .form-section h3 {
+        color: #495057;
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #495057;
+        margin-bottom: 8px;
+    }
+
+    .form-control, .form-select {
+        border-radius: 6px;
+        border: 1px solid #ced4da;
+        padding: 10px 15px;
+        transition: all 0.2s ease;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    }
+
+    .form-check-input {
+        width: 3em;
+        height: 1.5em;
+        cursor: pointer;
+    }
+
+    .form-check-input:checked {
+        background-color: #667eea;
+        border-color: #667eea;
+    }
+
+    .form-check-label {
+        font-weight: 600;
+        color: #495057;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        margin-top: 30px;
+        padding-top: 25px;
+        border-top: 2px solid #e9ecef;
+    }
+
+    .form-actions .btn {
+        padding: 12px 30px;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+
+    .form-actions .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+    }
+
+    .form-actions .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    .ms-auto {
+        margin-left: auto !important;
+    }
+
+    .text-danger {
+        font-size: 0.875rem;
+        margin-top: 5px;
+        display: block;
+    }
+</style>
