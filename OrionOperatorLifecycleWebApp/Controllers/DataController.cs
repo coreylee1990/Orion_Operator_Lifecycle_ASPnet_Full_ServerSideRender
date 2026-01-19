@@ -62,6 +62,9 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                 
                 _statusTypeService.SaveAllStatusTypes(statusTypes);
                 
+                // Invalidate the DataController cache so GET returns fresh data
+                _cache.Remove(CACHE_KEY_STATUSTYPES);
+                
                 return Ok(new { success = true, message = "Status types saved successfully" });
             }
             catch (Exception ex)
@@ -81,6 +84,9 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                 var certTypes = JsonSerializer.Deserialize<List<CertType>>(inputJson, options);
                 
                 _certTypeService.SaveAllCertTypes(certTypes);
+                
+                // Invalidate the DataController cache so GET returns fresh data
+                _cache.Remove(CACHE_KEY_CERTTYPES);
                 
                 return Ok(new { success = true, message = "Cert types saved successfully" });
             }
