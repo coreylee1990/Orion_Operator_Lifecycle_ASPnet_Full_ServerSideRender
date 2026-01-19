@@ -194,23 +194,11 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                     }
 
                     var allOperators = _operatorService.GetAllOperators();
-                    Console.WriteLine($"[DEBUG] Total operators loaded: {allOperators.Count}");
-                    Console.WriteLine($"[DEBUG] Looking for status: '{status}', division: '{division}'");
-                    
-                    // Debug: show first few operators for verification
-                    foreach (var op in allOperators.Take(3))
-                    {
-                        Console.WriteLine($"[DEBUG] Operator: {op.FirstName} {op.LastName} - StatusName: '{op.StatusName}', DivisionId: '{op.DivisionId}'");
-                    }
                     
                     var operators = allOperators
                         .Where(op => {
                             var statusMatch = op.StatusName == status;
                             var divisionMatch = op.DivisionId == division;
-                            if (statusMatch && divisionMatch)
-                            {
-                                Console.WriteLine($"[DEBUG] MATCH: {op.FirstName} {op.LastName}");
-                            }
                             return statusMatch && divisionMatch;
                         })
                         .Select(op => new {
@@ -223,8 +211,6 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                             DivisionID = op.DivisionId
                         })
                         .ToList();
-
-                    Console.WriteLine($"[DEBUG] Found {operators.Count} matching operators");
 
                     return Ok(new { 
                         count = operators.Count, 

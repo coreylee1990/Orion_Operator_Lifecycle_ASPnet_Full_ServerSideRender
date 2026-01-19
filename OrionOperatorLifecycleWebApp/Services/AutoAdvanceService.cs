@@ -69,7 +69,7 @@ namespace OrionOperatorLifecycleWebApp.Services
                 if (specificRequirement != null && specificRequirement.RequiredCertifications != null && specificRequirement.RequiredCertifications.Any())
                 {
                     var opCerts = _certRepo.GetAll()
-                        .Where(c => c.OperatorId == op.Id && c.IsDeleted != "1" && c.IsApproved == "1")
+                        .Where(c => c.OperatorId == op.Id && c.IsDeleted != true && c.IsApproved == true)
                         .ToList();
 
 

@@ -1,6 +1,7 @@
 using OrionOperatorLifecycleWebApp.Models;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 
 namespace OrionOperatorLifecycleWebApp.Repositories
@@ -13,12 +14,24 @@ namespace OrionOperatorLifecycleWebApp.Repositories
         {
             if (!File.Exists(_filePath)) return new List<Certification>();
             var json = File.ReadAllText(_filePath);
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            
             using var doc = JsonDocument.Parse(json);
-            if (doc.RootElement.TryGetProperty("certifications", out var certsElement) && certsElement.ValueKind == JsonValueKind.Array)
+            
+            // Check if the JSON is directly an array (exported format)
+            if (doc.RootElement.ValueKind == JsonValueKind.Array)
             {
-                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                return JsonSerializer.Deserialize<List<Certification>>(json, options) ?? new List<Certification>();
+            }
+            
+            // Otherwise, try old format with "certifications" property
+            if (doc.RootElement.ValueKind == JsonValueKind.Object && 
+                doc.RootElement.TryGetProperty("certifications", out var certsElement) && 
+                certsElement.ValueKind == JsonValueKind.Array)
+            {
                 return JsonSerializer.Deserialize<List<Certification>>(certsElement.GetRawText(), options) ?? new List<Certification>();
             }
+            
             return new List<Certification>();
         }
 

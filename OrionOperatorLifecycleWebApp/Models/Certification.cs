@@ -12,10 +12,10 @@ namespace OrionOperatorLifecycleWebApp.Models
         public string Cert { get; set; }
         
         [JsonPropertyName("isApproved")]
-        public string IsApproved { get; set; }
+        public bool? IsApproved { get; set; }
         
         [JsonPropertyName("IsDeleted")]
-        public string IsDeleted { get; set; }
+        public bool? IsDeleted { get; set; }
         
         [JsonPropertyName("DivisionID")]
         public string Division { get; set; }

@@ -480,6 +480,23 @@ h1 {
             font-weight: 700;
             color: #313a46;
             margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .pizza-status-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: #ffffff;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            box-shadow: 0 2px 6px rgba(99, 102, 241, 0.3);
+            text-transform: uppercase;
         }
 
         .step-meta {
@@ -608,8 +625,8 @@ h1 {
         }
 
         .operator-name {
-            font-weight: 600;
-            color: #313a46;
+            color: #282828;
+            font-weight: 500;
         }
 
         .operator-days-in-status {
@@ -1252,12 +1269,12 @@ h1 {
 
         .operator-modal-header h2 {
             margin: 0 0 8px 0;
-            color: #313a46;
+            color: #1a1d21;
             font-size: 1.5rem;
         }
 
         .operator-modal-subtitle {
-            color: #6c757d;
+            color: #495057;
             font-size: 0.9rem;
             margin: 0;
         }
@@ -1306,7 +1323,7 @@ h1 {
         }
 
         .operator-info-label {
-            color: #6c757d;
+            color: #495057;
             font-size: 0.85rem;
             font-weight: 600;
             text-transform: uppercase;
@@ -1314,13 +1331,57 @@ h1 {
         }
 
         .operator-info-value {
-            color: #313a46;
+            color: #212529;
             font-size: 1rem;
             font-weight: 500;
         }
 
+        .operator-modal-summary {
+            display: flex;
+            gap: 20px;
+            justify-content: space-around;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 1px solid #dee2e6;
+            margin-top: 20px;
+        }
+
+        .summary-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .summary-label {
+            color: #6c757d;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .summary-value {
+            color: #212529;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .summary-value.valid {
+            color: #10b981;
+        }
+
+        .summary-value.missing {
+            color: #ef4444;
+        }
+
+        .summary-value.days {
+            color: #3b82f6;
+        }
+
         .certs-section-title {
-            color: #313a46;
+            color: #212529;
             font-size: 1.2rem;
             font-weight: 600;
             margin: 0 0 15px 0;
@@ -1372,7 +1433,7 @@ h1 {
         }
 
         .cert-card-name {
-            color: #313a46;
+            color: #1a1d21;
             font-size: 1rem;
             font-weight: 600;
             flex: 1;
@@ -1405,14 +1466,14 @@ h1 {
         .cert-card-id,
         .cert-card-type-id {
             font-size: 0.8rem;
-            color: #6c757d;
+            color: #495057;
         }
 
         .cert-card-id span,
         .cert-card-type-id span {
             font-family: monospace;
             font-size: 0.75rem;
-            color: #313a46;
+            color: #212529;
             word-break: break-all;
         }
 
@@ -1425,7 +1486,7 @@ h1 {
 
         .cert-card-date {
             font-size: 0.8rem;
-            color: #6c757d;
+            color: #495057;
         }
 
         .cert-card.has-cert .cert-card-status {

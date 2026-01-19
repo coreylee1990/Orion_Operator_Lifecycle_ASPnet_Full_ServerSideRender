@@ -315,16 +315,67 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Calculate how many days an operator has been in their current status
         function getOperatorDaysInStatus(operatorId) {
-            if (!statusTracker || statusTracker.length === 0) return null;
+            if (!statusTracker || statusTracker.length === 0) {
+                return null;
+            }
+            
+            // Find the operator to get their current status
+            const operator = operators.find(op => op.ID === operatorId);
+            if (!operator || !operator.Status) {
+                return null;
+            }
             
             // Find all status tracker records for this operator
             const operatorRecords = statusTracker.filter(st => st.OperatorID === operatorId);
             
             if (operatorRecords.length === 0) return null;
             
-            // Find the most recent record (latest date)
-            let mostRecent = operatorRecords[0];
-            for (const record of operatorRecords) {
+            // Find matching status type for operator's current status and division
+            const matchingStatusType = statusTypes.find(st => 
+                st.Status === operator.Status && 
+                st.DivisionID === operator.DivisionID
+            );
+            
+            if (!matchingStatusType) {
+                // Fallback: use most recent record if no matching status found
+                let mostRecent = operatorRecords[0];
+                for (const record of operatorRecords) {
+                    const recordDate = new Date(record.Date);
+                    const mostRecentDate = new Date(mostRecent.Date);
+                    if (recordDate > mostRecentDate) {
+                        mostRecent = record;
+                    }
+                }
+                const statusDate = new Date(mostRecent.Date);
+                const today = new Date();
+                const diffTime = Math.abs(today - statusDate);
+                return Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            }
+            
+            // Find records matching the operator's current StatusID
+            const currentStatusRecords = operatorRecords.filter(st => 
+                st.StatusID === matchingStatusType.Id
+            );
+            
+            if (currentStatusRecords.length === 0) {
+                // Fallback if no exact match
+                let mostRecent = operatorRecords[0];
+                for (const record of operatorRecords) {
+                    const recordDate = new Date(record.Date);
+                    const mostRecentDate = new Date(mostRecent.Date);
+                    if (recordDate > mostRecentDate) {
+                        mostRecent = record;
+                    }
+                }
+                const statusDate = new Date(mostRecent.Date);
+                const today = new Date();
+                const diffTime = Math.abs(today - statusDate);
+                return Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            }
+            
+            // Find the most recent record for current status
+            let mostRecent = currentStatusRecords[0];
+            for (const record of currentStatusRecords) {
                 const recordDate = new Date(record.Date);
                 const mostRecentDate = new Date(mostRecent.Date);
                 if (recordDate > mostRecentDate) {
@@ -383,7 +434,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Count operators in this division/status
                 const operatorsInStatus = operators.filter(op => 
-                    op.DivisionID === division && op.StatusName === status
+                    op.DivisionID === division && op.Status === status
                 );
                 
                 // Store requirements for this status+division combo
@@ -759,11 +810,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const pizzaStatusMap = {};
             pizzaStatusesArr.forEach(p => { if (p.ID || p.Id) pizzaStatusMap[p.ID || p.Id] = p; });
 
-            // Debug: Log data structure to understand property names
-            console.log('🔍 StatusTypes count:', statusTypesArr.length, 'sample:', statusTypesArr.length > 0 ? statusTypesArr[0] : 'empty');
-            console.log('🔍 PizzaStatuses count:', pizzaStatusesArr.length, 'sample:', pizzaStatusesArr.length > 0 ? pizzaStatusesArr[0] : 'empty');
-            console.log('🔍 Filter - Division:', mainDivisionFilter, 'Client:', mainClientFilter);
-
             // Filter StatusTypes for the selected division and/or client
             // OPERATOR ONLY: Fleet=0, Providers=0, isDeleted=false, PizzaStatusID not null
             let divStatuses = statusTypesArr.filter(st => {
@@ -807,8 +853,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 return true;
             });
-            
-            console.log('🔍 Filtered StatusTypes count:', divStatuses.length);
 
             // Sort by OrderID (as integer, fallback to 9999 if missing)
             divStatuses.sort((a, b) => {
@@ -932,8 +976,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 const statusName = flowStep.status;
                 const pizzaStatusId = flowStep.originalObj ? flowStep.originalObj.PizzaStatusID : null;
                 let operatorsInStep = operators.filter(op => 
-                    op.StatusName === statusName || 
-                    (op.StatusName && op.StatusName.toUpperCase() === statusName.toUpperCase())
+                    op.Status === statusName || 
+                    (op.Status && op.Status.toUpperCase() === statusName.toUpperCase())
                 );
                 
                 if (mainDivisionFilter !== 'ALL') {
@@ -1008,8 +1052,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 const statusName = flowStep.status;
                 const pizzaStatusId = flowStep.originalObj ? flowStep.originalObj.PizzaStatusID : null;
                 let operatorsInStep = operators.filter(op => 
-                    op.StatusName === statusName || 
-                    (op.StatusName && op.StatusName.toUpperCase() === statusName.toUpperCase())
+                    op.Status === statusName || 
+                    (op.Status && op.Status.toUpperCase() === statusName.toUpperCase())
                 );
                 
                 // Apply division filter
@@ -1081,6 +1125,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }));
             }
+            
+            // After loading operator cards, update status containers with days info and red border
+            updateStatusContainersWithDaysInfo();
 
             // Load cert badges
             for (let i = 0; i < certPlaceholders.length; i += batchSize) {
@@ -1096,6 +1143,65 @@ document.addEventListener('DOMContentLoaded', function() {
                 }));
             }
         }
+        
+        /**
+         * Update status containers with days information and apply red border if needed
+         */
+        function updateStatusContainersWithDaysInfo() {
+            // Find all status cards
+            const stepCards = document.querySelectorAll('.step-card');
+            
+            stepCards.forEach(stepCard => {
+                // Find all operator items within this status card
+                const operatorItems = stepCard.querySelectorAll('.operator-item');
+                
+                let maxDays = null;
+                let hasOverdue = false;
+                let operatorCount = 0;
+                
+                operatorItems.forEach(item => {
+                    operatorCount++;
+                    
+                    // Check if operator has days badge
+                    const daysBadge = item.querySelector('.operator-days-in-status');
+                    if (daysBadge) {
+                        // Extract days number from badge text (e.g., "9d" or "⚠️ 35d")
+                        const text = daysBadge.textContent.trim();
+                        const daysMatch = text.match(/(\d+)d/);
+                        if (daysMatch) {
+                            const days = parseInt(daysMatch[1], 10);
+                            if (maxDays === null || days > maxDays) {
+                                maxDays = days;
+                            }
+                            if (days >= 30) {
+                                hasOverdue = true;
+                            }
+                        }
+                    }
+                });
+                
+                // Apply red border if any operator is 30+ days
+                if (hasOverdue) {
+                    stepCard.classList.remove('valid');
+                    stepCard.classList.add('invalid');
+                } else {
+                    stepCard.classList.remove('invalid');
+                    stepCard.classList.add('valid');
+                }
+                
+                // Update the operator count display to include days info
+                const dropdownTrigger = stepCard.querySelector('.operators-dropdown .dropdown-trigger span:first-child');
+                if (dropdownTrigger && maxDays !== null) {
+                    const countSpan = dropdownTrigger.querySelector('.count');
+                    if (countSpan) {
+                        const daysText = hasOverdue ? 
+                            `⚠️ Max: ${maxDays}d` : 
+                            `Max: ${maxDays}d`;
+                        countSpan.innerHTML = `${operatorCount} <span style="margin-left: 8px; color: ${hasOverdue ? '#fa5c7c' : '#10b981'}; font-weight: 600;">${daysText}</span>`;
+                    }
+                }
+            });
+        }
 
         // Create a step card
         function createStepCard(flowStep, index) {
@@ -1103,8 +1209,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const pizzaStatusId = flowStep.originalObj ? flowStep.originalObj.PizzaStatusID : null;
             
             let operatorsInStep = operators.filter(op => 
-                op.StatusName === statusName || 
-                (op.StatusName && op.StatusName.toUpperCase() === statusName.toUpperCase())
+                op.Status === statusName || 
+                (op.Status && op.Status.toUpperCase() === statusName.toUpperCase())
             );
             
             // Apply division filter
@@ -1154,14 +1260,11 @@ document.addEventListener('DOMContentLoaded', function() {
             // Check if all operators have required certs (cumulative - includes previous steps)
             const validation = validateOperatorsInStep(operatorsInStep, allRequiredCerts, index);
 
-            // Check if any operator has been in this status for more than 30 days
-            const hasOverdueOperators = operatorsInStep.some(op => {
-                const daysInStatus = getOperatorDaysInStatus(op.ID);
-                return daysInStatus !== null && daysInStatus >= 30;
-            });
-
+            // Note: Red border for 30+ day operators will be applied after operator cards are loaded
+            // by updateStatusContainersWithDaysInfo() function
+            
             const card = document.createElement('div');
-            card.className = `step-card ${hasOverdueOperators ? 'invalid' : 'valid'}`;
+            card.className = `step-card valid`; // Will be updated after operator cards load
             card.draggable = true;
             card.dataset.index = index;
             card.dataset.status = statusName;
@@ -1178,6 +1281,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Find StatusID and PizzaStatusID if specific division is selected
             let statusDebugInfo = '';
+            let pizzaStatusName = '';
             if (mainDivisionFilter !== 'ALL') {
                 const debugSt = statusTypes.find(st => st.Status === statusName && st.DivisionID === mainDivisionFilter);
                 if (debugSt) {
@@ -1185,6 +1289,14 @@ document.addEventListener('DOMContentLoaded', function() {
                         IDs: <span style="font-family: monospace;">${debugSt.Id || 'N/A'}</span> (St) | 
                              <span style="font-family: monospace;">${debugSt.PizzaStatusID || 'N/A'}</span> (Pz)
                     </div>`;
+                    
+                    // Get PizzaStatus name
+                    if (debugSt.PizzaStatusID && pizzaStatuses && Array.isArray(pizzaStatuses)) {
+                        const pizzaStat = pizzaStatuses.find(ps => ps.ID === debugSt.PizzaStatusID);
+                        if (pizzaStat && pizzaStat.Status) {
+                            pizzaStatusName = pizzaStat.Status;
+                        }
+                    }
                 }
             }
 
@@ -1194,6 +1306,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="step-info">
                         <div class="step-title">
                             ${statusName}
+                            ${pizzaStatusName ? `<span class="pizza-status-tag">${pizzaStatusName}</span>` : ''}
                             ${statusDebugInfo}
                         </div>
                         <div class="step-meta">
@@ -1235,7 +1348,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             operatorsInStep.map(op => {
                                 // Get certs needed for THIS operator's division and current status (PizzaStatusId logic)
                                 const opDivision = op.DivisionID || '';
-                                const opStatus = op.StatusName || '';
+                                const opStatus = op.Status || '';
                                 
                                 // Find the operator's PizzaStatusId from statusTypes
                                 let pizzaStatusId = null;
@@ -1853,11 +1966,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Update statistics - NEW SIMPLIFIED VERSION
         function updateStats() {
-            console.log('📊 Updating stats...');
-            console.log('Current operators:', operators.length);
-            console.log('Current workflow:', currentWorkflow);
-            console.log('Filters - Division:', mainDivisionFilter, 'Client:', mainClientFilter);
-            
             // Filter operators by division
             let filteredOperators = operators;
             if (mainDivisionFilter !== 'ALL') {
@@ -1879,12 +1987,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 );
                 
                 filteredOperators = filteredOperators.filter(op => {
-                    const opStatus = op.Status || op.StatusName;
+                    const opStatus = op.Status;
                     return opStatus && clientStatusNames.has(opStatus);
                 });
             }
-
-            console.log('Filtered operators:', filteredOperators.length);
 
             // Update total operators count
             const totalOpsCount = filteredOperators.length;
@@ -1905,7 +2011,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Count operators by their actual status
             filteredOperators.forEach(op => {
-                const opStatus = op.Status || op.StatusName;
+                const opStatus = op.Status;
                 if (opStatus) {
                     // Try exact match first
                     if (statusCounts.has(opStatus)) {
@@ -1922,8 +2028,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
-            console.log('Status counts:', Object.fromEntries(statusCounts));
-
             // Build arrays for chart
             currentWorkflow.forEach(flow => {
                 workflowLabels.push(flow.status);
@@ -1932,14 +2036,55 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Calculate compliance: operators with all required certs vs total operators
             let operatorsWithAllCerts = 0;
+            
             filteredOperators.forEach(op => {
-                const opCerts = (op.certifications || []).filter(cert => {
-                    return (cert.isApproved === '1' || cert.isApproved === 1 || cert.isApproved === true) &&
-                           !(cert.IsDeleted === '1' || cert.IsDeleted === 1 || cert.IsDeleted === true);
+                const opDivision = op.DivisionID || '';
+                const opStatus = op.Status || '';
+                
+                // Find the operator's PizzaStatusId from statusTypes
+                let pizzaStatusId = null;
+                if (statusTypes && Array.isArray(statusTypes)) {
+                    const st = statusTypes.find(s => 
+                        s.Status === opStatus && 
+                        s.DivisionID === opDivision
+                    );
+                    if (st && st.PizzaStatusID) {
+                        pizzaStatusId = st.PizzaStatusID;
+                    }
+                }
+                
+                // Get all required cert types for this operator's status and division
+                let requiredCertTypes = [];
+                if (pizzaStatusId && certTypes && Array.isArray(certTypes)) {
+                    requiredCertTypes = certTypes.filter(ct => 
+                        ct.PizzaStatusID === pizzaStatusId && 
+                        ct.DivisionID === opDivision && 
+                        ct.isDeleted !== true && 
+                        ct.isDeleted !== 'true' && 
+                        String(ct.isDeleted) !== 'true'
+                    );
+                }
+                
+                // If no required certs for this status, operator is compliant
+                if (requiredCertTypes.length === 0) {
+                    operatorsWithAllCerts++;
+                    return;
+                }
+                
+                // Get operator's approved certifications
+                const opCerts = op.certifications || [];
+                
+                // Check if operator has all required certs
+                const hasAllRequiredCerts = requiredCertTypes.every(certType => {
+                    // Find matching cert by CertTypeID
+                    return opCerts.some(cert => 
+                        cert.CertTypeID === certType.Id &&
+                        (cert.isApproved === '1' || cert.isApproved === 1 || cert.isApproved === true) &&
+                        !(cert.IsDeleted === '1' || cert.IsDeleted === 1 || cert.IsDeleted === true)
+                    );
                 });
                 
-                // Simple compliance: does operator have at least one approved cert?
-                if (opCerts.length > 0) {
+                if (hasAllRequiredCerts) {
                     operatorsWithAllCerts++;
                 }
             });
@@ -1949,7 +2094,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 : 0;
             
             currentCompliancePercent = compliancePercent;
-            console.log('Compliance:', compliancePercent + '%', `(${operatorsWithAllCerts}/${totalOpsCount})`);
 
             // --- UPDATE CHARTS ---
             
@@ -2003,7 +2147,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                 ctx.fillStyle = gradient;
                                 ctx.textAlign = 'center';
                                 ctx.textBaseline = 'middle';
-                                ctx.fillText(compliancePercent + '%', centerX, centerY);
+                                // Use global variable so it updates when chart updates
+                                ctx.fillText(currentCompliancePercent + '%', centerX, centerY);
                                 
                                 ctx.restore();
                             }
@@ -2071,8 +2216,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     workflowChartInstance.update();
                 }
             }
-
-            console.log('✅ Stats updated successfully');
         }
 
         // Reset to ideal flow
@@ -2096,8 +2239,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 const statusName = flowStep.status;
                 const pizzaStatusId = flowStep.originalObj ? flowStep.originalObj.PizzaStatusID : null;
                 const operatorsInStep = operators.filter(op => 
-                    op.StatusName === statusName || 
-                    (op.StatusName && op.StatusName.toUpperCase() === statusName.toUpperCase())
+                    op.Status === statusName || 
+                    (op.Status && op.Status.toUpperCase() === statusName.toUpperCase())
                 );
 
                 const requiredCerts = getRequiredCertsForStatus(statusName, pizzaStatusId);
@@ -2290,7 +2433,7 @@ function removeCertFromStatus(statusName, certName) {
 
             // 1. Check for operators in this status using the already-loaded operators array
             const affectedOperators = operators.filter(op => 
-                (op.StatusName === statusName || (op.StatusName && op.StatusName.toUpperCase() === statusName.toUpperCase())) &&
+                (op.Status === statusName || (op.Status && op.Status.toUpperCase() === statusName.toUpperCase())) &&
                 op.DivisionID === divisionId
             );
             const operatorCount = affectedOperators.length;
@@ -2675,8 +2818,6 @@ function removeCertFromStatus(statusName, certName) {
                         op.certifications = certifications.filter(cert => cert.OperatorID === op.ID);
                     });
                     
-                    console.log(`✅ Loaded ${operators.length} operators and ${certifications.length} certifications for division: ${mainDivisionFilter}`);
-                    
                 } catch (error) {
                     console.error('❌ Error loading division data:', error);
                     alert('Failed to load operators for selected division. Please try again.');
@@ -2851,8 +2992,8 @@ function removeCertFromStatus(statusName, certName) {
             currentWorkflow.forEach(step => {
                 const pizzaStatusId = step.originalObj ? step.originalObj.PizzaStatusID : null;
                 const operatorsInStep = operators.filter(op => 
-                    op.StatusName === step.status || 
-                    (op.StatusName && op.StatusName.toUpperCase() === step.status.toUpperCase())                );
+                    op.Status === step.status || 
+                    (op.Status && op.Status.toUpperCase() === step.status.toUpperCase())                );
                 const allCerts = getRequiredCertsForStatus(step.status, pizzaStatusId);
                 const validCount = operatorsInStep.filter(op => {
                     return allCerts.every(cert => 
@@ -2887,8 +3028,8 @@ function removeCertFromStatus(statusName, certName) {
             const statusCompliance = currentWorkflow.map(step => {
                 const pizzaStatusId = step.originalObj ? step.originalObj.PizzaStatusID : null;
                 const operatorsInStep = operators.filter(op => 
-                    op.StatusName === step.status || 
-                    (op.StatusName && op.StatusName.toUpperCase() === step.status.toUpperCase())
+                    op.Status === step.status || 
+                    (op.Status && op.Status.toUpperCase() === step.status.toUpperCase())
                 );
                 const allCerts = getRequiredCertsForStatus(step.status, pizzaStatusId);
                 const validCount = operatorsInStep.filter(op => {
@@ -2918,8 +3059,8 @@ function removeCertFromStatus(statusName, certName) {
                 const pizzaStatusId = step.originalObj ? step.originalObj.PizzaStatusID : null;
                 const allCerts = getRequiredCertsForStatus(step.status, pizzaStatusId);
                 const operatorsInStep = operators.filter(op => 
-                    op.StatusName === step.status || 
-                    (op.StatusName && op.StatusName.toUpperCase() === step.status.toUpperCase())
+                    op.Status === step.status || 
+                    (op.Status && op.Status.toUpperCase() === step.status.toUpperCase())
                 );
                 allCerts.forEach(cert => {
                     if (!certCompliance[cert]) {
@@ -2980,8 +3121,8 @@ function removeCertFromStatus(statusName, certName) {
                 const pizzaStatusId = step.originalObj ? step.originalObj.PizzaStatusID : null;
                 const allCerts = getRequiredCertsForStatus(step.status, pizzaStatusId);
                 const operatorsInStep = operators.filter(op => 
-                    op.StatusName === step.status || 
-                    (op.StatusName && op.StatusName.toUpperCase() === step.status.toUpperCase())
+                    op.Status === step.status || 
+                    (op.Status && op.Status.toUpperCase() === step.status.toUpperCase())
                 );
                 allCerts.forEach(cert => {
                     if (!certStats[cert]) {
@@ -3092,6 +3233,7 @@ function removeCertFromStatus(statusName, certName) {
                     
                     // Calculate days in status client-side and append
                     const daysInStatus = getOperatorDaysInStatus(operatorId);
+                    
                     if (daysInStatus !== null) {
                         subtitle += ` \u2022 ${daysInStatus} days in status`;
                         if (daysInStatus >= 30) {
@@ -3101,6 +3243,14 @@ function removeCertFromStatus(statusName, certName) {
                         } else {
                             subtitleEl.style.color = '';
                             subtitleEl.style.fontWeight = '';
+                        }
+                        
+                        // Update the "Days in Status" stat in modal body
+                        const daysStatValue = bodyEl.querySelector('.summary-stat .summary-value.days');
+                        if (daysStatValue) {
+                            const overdueWarning = daysInStatus >= 30 ? 
+                                '<span style="color: #ef4444; font-weight: bold; margin-left: 8px;">⚠️ OVERDUE</span>' : '';
+                            daysStatValue.innerHTML = `<span>${daysInStatus} days</span>${overdueWarning}`;
                         }
                     }
                     

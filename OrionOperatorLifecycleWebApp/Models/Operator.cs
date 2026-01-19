@@ -23,6 +23,9 @@ namespace OrionOperatorLifecycleWebApp.Models
         [JsonPropertyName("DivisionID")]
         public string? DivisionId { get; set; }
         
+        [JsonPropertyName("Status")]
+        public string? Status { get; set; }
+        
         [JsonPropertyName("StatusName")]
         public string? StatusName { get; set; }
         

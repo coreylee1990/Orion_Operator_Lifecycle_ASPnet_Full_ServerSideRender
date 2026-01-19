@@ -54,10 +54,7 @@ namespace OrionOperatorLifecycleWebApp.Repositories.Sql
                );
                entity.Ignore(e => e.Division); // Division likely denormalized in JSON but normalized (via Operator) in SQL
                entity.Property(e => e.Cert).HasColumnName("Cert").IsRequired(false);
-               entity.Property(e => e.IsDeleted).HasColumnName("IsDeleted").IsRequired(false).HasConversion(
-                    v => v == "1",
-                    v => v ? "1" : "0"
-               );
+               entity.Property(e => e.IsDeleted).HasColumnName("IsDeleted").IsRequired(false);
                entity.Property(e => e.CertTypeId).HasColumnName("CertTypeID").IsRequired(false).HasConversion(
                     v => v == null ? (Guid?)null : Guid.Parse(v),
                     v => v == null ? null : v.ToString().ToUpper()
@@ -66,10 +63,7 @@ namespace OrionOperatorLifecycleWebApp.Repositories.Sql
                     v => v == null ? (Guid?)null : Guid.Parse(v),
                     v => v == null ? null : v.ToString().ToUpper()
                );
-               entity.Property(e => e.IsApproved).HasColumnName("isApproved").IsRequired(false).HasConversion(
-                    v => v == "1",
-                    v => v ? "1" : "0"
-               );
+               entity.Property(e => e.IsApproved).HasColumnName("isApproved").IsRequired(false);
                entity.Property(e => e.Date).HasColumnName("Date").IsRequired(false);
             });
 

@@ -16,6 +16,7 @@ namespace OrionOperatorLifecycleWebApp.Controllers
         private readonly IStatusTypeService _statusTypeService;
         private readonly IRequirementService _requirementService;
         private readonly ICertTypeService _certTypeService;
+        private readonly IStatusTrackerService _statusTrackerService;
 
         public RequirementsController(
             IOperatorService operatorService,
@@ -23,7 +24,8 @@ namespace OrionOperatorLifecycleWebApp.Controllers
             IPizzaStatusService pizzaStatusService,
             IStatusTypeService statusTypeService,
             IRequirementService requirementService,
-            ICertTypeService certTypeService)
+            ICertTypeService certTypeService,
+            IStatusTrackerService statusTrackerService)
         {
             _operatorService = operatorService;
             _certificationService = certificationService;
@@ -31,6 +33,7 @@ namespace OrionOperatorLifecycleWebApp.Controllers
             _statusTypeService = statusTypeService;
             _requirementService = requirementService;
             _certTypeService = certTypeService;
+            _statusTrackerService = statusTrackerService;
         }
 
         // GET: /Requirements/
@@ -115,7 +118,7 @@ namespace OrionOperatorLifecycleWebApp.Controllers
             // Use the divisionId parameter from the workflow context (not operator's stored division)
             // This ensures we look up certs for the correct division context
             var workflowDivision = divisionId ?? "";
-            var opStatus = op.StatusName ?? "";
+            var opStatus = op.Status ?? "";
 
             // If pizzaStatusId is provided from the workflow step, use it directly
             // Otherwise, find the operator's current status PizzaStatusId
@@ -175,10 +178,10 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                 {
                     // Match by CertTypeID
                     if (c.CertTypeId != certTypeId) return false;
-                    // Must not be deleted
-                    if (c.IsDeleted == "1" || c.IsDeleted == "1" || c.IsDeleted == "true") return false;
-                    // Must be approved (isApproved === '1')
-                    if (c.IsApproved != "1" && c.IsApproved != "1" && c.IsApproved != "true") return false;
+                    // Must not be deleted (null or false)
+                    if (c.IsDeleted == true) return false;
+                    // Must be approved (true, not null or false)
+                    if (c.IsApproved != true) return false;
                     return true;
                 });
 
@@ -195,7 +198,9 @@ namespace OrionOperatorLifecycleWebApp.Controllers
             // Stats for current PizzaStatus only (lines 2973-2974)
             ViewBag.ValidCount = currentValid;
             ViewBag.MissingCount = currentMissing;
-            ViewBag.DaysInStatus = null;
+            
+            // Calculate days in status using operator's current StatusID
+            ViewBag.DaysInStatus = _statusTrackerService.GetDaysInStatus(op.Id, op.StatusId ?? "");
 
             return PartialView("_OperatorCard", op);
         }
@@ -251,7 +256,7 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                 foreach (var op in allOperators)
                 {
                     var opStatusType = allStatusTypes.FirstOrDefault(st =>
-                        st.Status == op.StatusName &&
+                        st.Status == op.Status &&
                         st.DivisionId == op.DivisionId
                     );
 
@@ -264,8 +269,8 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                     // Check if operator has this cert
                     var cert = operatorCerts.FirstOrDefault(c =>
                         c.CertTypeId == certType.Id &&
-                        c.IsDeleted != "1" &&
-                        c.IsApproved == "1"
+                        c.IsDeleted != true &&
+                        c.IsApproved == true
                     );
 
                     if (cert != null)
@@ -277,7 +282,7 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                             Id = op.Id,
                             FirstName = op.FirstName,
                             LastName = op.LastName,
-                            StatusName = op.StatusName,
+                            StatusName = op.Status,
                             DivisionId = op.DivisionId,
                             IsExpired = isExpired
                         });
@@ -290,7 +295,7 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                             Id = op.Id,
                             FirstName = op.FirstName,
                             LastName = op.LastName,
-                            StatusName = op.StatusName,
+                            StatusName = op.Status,
                             DivisionId = op.DivisionId
                         });
                     }
@@ -316,7 +321,7 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                 .ToList();
 
             var opDivision = op.DivisionId ?? "";
-            var opStatus = op.StatusName ?? "";
+            var opStatus = op.Status ?? "";
 
             // Find the operator's PizzaStatusId
             var allStatusTypes = _statusTypeService.GetAllStatusTypes();
@@ -347,8 +352,8 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                 // Find approved cert for this operator by matching CertTypeID
                 var cert = op.Certifications.FirstOrDefault(c =>
                     c.CertTypeId == certTypeId &&
-                    c.IsDeleted != "1" &&
-                    c.IsApproved == "1"
+                    c.IsDeleted != true &&
+                    c.IsApproved == true
                 );
 
                 if (cert != null)
@@ -375,8 +380,9 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                 }
             }
 
-            // Build subtitle (days in status calculated client-side from StatusTracker)
-            var subtitle = $"{op.StatusName ?? "Unknown Status"} • Division {op.DivisionId ?? "N/A"}";
+            // Build subtitle (days in status calculated server-side from StatusTracker)
+            var daysInStatus = _statusTrackerService.GetDaysInStatus(op.Id, op.StatusId ?? "");
+            var subtitle = $"{op.Status ?? "Unknown Status"} • Division {op.DivisionId ?? "N/A"}";
 
             var viewModel = new OperatorProfileViewModel
             {
@@ -386,8 +392,8 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                 MissingCount = certStatusMap.Values.Count(c => c.Status == "missing"),
                 OperatorName = $"{op.FirstName} {op.LastName}",
                 Subtitle = subtitle,
-                IsOverdue = false, // Will be updated client-side
-                DaysInStatus = null // Will be calculated client-side
+                IsOverdue = daysInStatus.HasValue && daysInStatus.Value >= 30,
+                DaysInStatus = daysInStatus
             };
 
             return PartialView("_OperatorProfileModalContent", viewModel);
@@ -399,13 +405,13 @@ namespace OrionOperatorLifecycleWebApp.Controllers
             // Get operators in this status
             var allOperators = _operatorService.GetAllOperators();
             var operatorsInStatus = allOperators
-                .Where(op => op.StatusName == statusName && op.DivisionId == divisionId)
+                .Where(op => op.Status == statusName && op.DivisionId == divisionId)
                 .Select(op => new Models.ViewModels.OperatorBasicInfo
                 {
                     Id = op.Id,
                     FirstName = op.FirstName,
                     LastName = op.LastName,
-                    StatusName = op.StatusName,
+                    StatusName = op.Status,
                     DivisionId = op.DivisionId
                 })
                 .ToList();
