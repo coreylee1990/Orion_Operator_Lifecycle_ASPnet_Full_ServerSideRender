@@ -97,10 +97,24 @@ def export_operators(conn, max_per_division_status=10):
     
     for combo in combinations:
         division, status, count = combo
-        
+
         # Get top N operators from this division/status (most recently updated first)
+        # Export only real Operator columns; no synthetic StatusName/OrderId fields
         cursor.execute(f"""
-            SELECT TOP {max_per_division_status} *
+            SELECT TOP {max_per_division_status}
+                ID,
+                FirstName,
+                LastName,
+                Email,
+                Mobile,
+                DivisionID,
+                Status,
+                StatusID,
+                IsDeleted,
+                RecordAt,
+                RecordBy,
+                UpdateAt,
+                UpdateBy
             FROM pay_Operators
             WHERE DivisionID = ? 
               AND Status = ?

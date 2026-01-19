@@ -8,5 +8,6 @@ namespace OrionOperatorLifecycleWebApp.Services
         List<Certification> GetAllCertifications();
         Certification GetCertificationById(string id);
         List<Certification> GetCertificationsByDivision(string division);
+        List<Certification> GetCertificationsByOperatorIds(List<string> operatorIds);
     }
 }

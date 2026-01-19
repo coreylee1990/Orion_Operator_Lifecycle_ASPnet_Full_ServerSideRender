@@ -32,6 +32,5 @@ These repositories are active when `UseSqlDatabase` is set to `false` in `appset
 - **SaveAll methods**: Support batch updates for status types and cert types
 
 ## Related
-- SQL implementations: See `localhostuseONLY/` folder
 - Service layer: See `Services/` folder
 - Data models: See `Models/` folder

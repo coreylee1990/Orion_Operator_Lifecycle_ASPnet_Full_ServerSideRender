@@ -29,5 +29,11 @@ namespace OrionOperatorLifecycleWebApp.Services
         }
 
         public PizzaStatus GetPizzaStatusById(string id) => _pizzaStatusRepository.GetById(id);
+
+        public void SaveAllPizzaStatuses(List<PizzaStatus> pizzaStatuses)
+        {
+            _pizzaStatusRepository.SaveAll(pizzaStatuses);
+            _cache.Remove(CACHE_KEY_ALL);
+        }
     }
 }

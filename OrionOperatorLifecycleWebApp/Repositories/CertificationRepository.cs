@@ -39,5 +39,16 @@ namespace OrionOperatorLifecycleWebApp.Repositories
 
 
         public List<Certification> GetByDivision(string division) => GetAll().Where(c => c.Division == division).ToList();
+
+        public List<Certification> GetByOperatorIds(List<string> operatorIds)
+        {
+            if (operatorIds == null || operatorIds.Count == 0)
+            {
+                return new List<Certification>();
+            }
+
+            var set = operatorIds.ToHashSet();
+            return GetAll().Where(c => !string.IsNullOrEmpty(c.OperatorId) && set.Contains(c.OperatorId)).ToList();
+        }
     }
 }

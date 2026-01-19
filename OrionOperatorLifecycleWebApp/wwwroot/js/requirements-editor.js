@@ -1030,6 +1030,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
             addDragAndDropListeners();
+
+            // After re-rendering in-place (no re-init), reload operator and
+            // certification partials so that CertTypes and operator cards
+            // repopulate correctly after drag/drop or arrow moves.
+            loadOperatorPartials();
         }
 
         // Render the workflow
@@ -1181,9 +1186,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 let maxDays = null;
                 let hasOverdue = false;
                 let operatorCount = 0;
+                let hasCompleteOperator = false;
                 
                 operatorItems.forEach(item => {
                     operatorCount++;
+                    if (item.classList.contains('operator-complete')) {
+                        hasCompleteOperator = true;
+                    }
                     
                     // Check if operator has days badge
                     const daysBadge = item.querySelector('.operator-days-in-status');
@@ -1210,6 +1219,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else {
                     stepCard.classList.remove('invalid');
                     stepCard.classList.add('valid');
+                }
+
+                // Highlight status card when it contains at least one fully compliant operator
+                if (hasCompleteOperator) {
+                    stepCard.classList.add('has-complete-operator');
+                } else {
+                    stepCard.classList.remove('has-complete-operator');
                 }
                 
                 // Update the operator count display to include days info
@@ -1305,6 +1321,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Find StatusID and PizzaStatusID if specific division is selected
             let statusDebugInfo = '';
             let pizzaStatusName = '';
+            let autoToggleHtml = '';
             if (mainDivisionFilter !== 'ALL') {
                 const debugSt = statusTypes.find(st => st.Status === statusName && st.DivisionID === mainDivisionFilter);
                 if (debugSt) {
@@ -1315,9 +1332,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     // Get PizzaStatus name
                     if (debugSt.PizzaStatusID && pizzaStatuses && Array.isArray(pizzaStatuses)) {
-                        const pizzaStat = pizzaStatuses.find(ps => ps.ID === debugSt.PizzaStatusID);
-                        if (pizzaStat && pizzaStat.Status) {
-                            pizzaStatusName = pizzaStat.Status;
+                        const pizzaStat = pizzaStatuses.find(ps => ps.ID === debugSt.PizzaStatusID || ps.Id === debugSt.PizzaStatusID);
+                        if (pizzaStat) {
+                            if (pizzaStat.Status) {
+                                pizzaStatusName = pizzaStat.Status;
+                            }
+                            const isAuto = pizzaStat.IsAuto === true || pizzaStat.isAuto === true;
+                            autoToggleHtml = `
+                                <span>|</span>
+                                <label class="auto-toggle-label" title="Auto-advance when requirements met">
+                                    <input type="checkbox" class="auto-toggle-checkbox" ${isAuto ? 'checked' : ''}
+                                           onchange="togglePizzaStatusAuto('${debugSt.PizzaStatusID}', this.checked); event.stopPropagation();" />
+                                    Auto
+                                </label>`;
                         }
                     }
                 }
@@ -1338,6 +1365,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <span>|</span>
                             <span>${certsToDisplay.length} New Required Cert${certsToDisplay.length !== 1 ? 's' : ''}</span>
                             ${previousCerts.size > 0 ? `<span>|</span><span style="color: #94a3b8;">${previousCerts.size} from previous steps</span>` : ''}
+                            ${autoToggleHtml}
                         </div>
                     </div>
                 </div>
@@ -1487,60 +1515,84 @@ document.addEventListener('DOMContentLoaded', function() {
             return card;
         }
 
-        // Get required certifications for a status (using CertTypes table directly)
-          // Get required certs for a status
-          function getRequiredCertsForStatus(statusName, pizzaStatusIdHint = null) {
-              const certs = [];
-              
-              // We need to find ALL rows in StatusType that map this Status Name to the current Division
-              // because there isn't always a 1:1 mapping of StatusName -> PizzaStatusID
-              
-              // If we have a PizzaStatusID hint from the workflow, use it to filter more precisely
-              const relevantStatusTypes = statusTypes.filter(s => {
-                   if (s.Status !== statusName) return false;
-                   if (mainDivisionFilter !== 'ALL' && s.DivisionID !== mainDivisionFilter) return false;
-                   
-                   // CRITICAL: Only use StatusTypes where the PizzaStatus is an OPERATOR status (not Provider)
-                   // This prevents mixing Operator and Provider certs when status names match
-                   if (s.PizzaStatusID) {
-                       const pizzaStatus = pizzaStatuses.find(ps => ps.ID === s.PizzaStatusID);
-                       if (!pizzaStatus) return false;
-                       
-                       // Only include if IsOperator is true
-                       if (pizzaStatus.IsOperator !== true) return false;
-                       
-                       // If we have a PizzaStatusID hint, use it to pick the exact match
-                       if (pizzaStatusIdHint && s.PizzaStatusID !== pizzaStatusIdHint) return false;
-                       
-                       // Filter by client through PizzaStatus relationship
-                       if (mainClientFilter && pizzaStatus.ClientId !== mainClientFilter) return false;
-                   }
-                   
-                   return true;
-              });
+        // Get required certs for a status (using CertTypes table directly)
+        function getRequiredCertsForStatus(statusName, pizzaStatusIdHint = null) {
+            const certs = [];
 
-              relevantStatusTypes.forEach(st => {
-                   if(st.PizzaStatusID) {
-                       // Find certTypes linked to this PizzaStatusID (and DivisionID if needed)
-                       certTypes.forEach(cert => {
-                            if (cert.PizzaStatusID === st.PizzaStatusID && 
-                                (cert.DivisionID === st.DivisionID || mainDivisionFilter === 'ALL')) {
-                                // Filter by client through PizzaStatus relationship
-                                if (mainClientFilter) {
-                                    const pizzaStatus = pizzaStatuses.find(ps => ps.ID === cert.PizzaStatusID);
-                                    if (pizzaStatus && pizzaStatus.ClientId !== mainClientFilter) return;
-                                }
-                                
-                                if(!certs.includes(cert.Certification)) {
-                                    certs.push(cert.Certification);
-                                }
-                            }
-                       });
-                   }
-              });
-              
-              return certs;
-          }
+            // Fast path: if we know the exact PizzaStatusID for this workflow step,
+            // use it directly instead of re-deriving via StatusTypes. This avoids
+            // issues when reordering statuses and keeps certs stable.
+            if (pizzaStatusIdHint && pizzaStatuses && Array.isArray(pizzaStatuses) && certTypes && Array.isArray(certTypes)) {
+                const pizzaStatus = pizzaStatuses.find(ps => ps.ID === pizzaStatusIdHint || ps.Id === pizzaStatusIdHint);
+                if (!pizzaStatus) return certs;
+
+                // Only operator statuses are relevant here
+                const psIsOperator = pizzaStatus.IsOperator ?? pizzaStatus.isOperator;
+                if (psIsOperator !== true && psIsOperator !== 1) return certs;
+
+                // Client filter via PizzaStatus
+                if (mainClientFilter) {
+                    const psClientId = pizzaStatus.ClientId || pizzaStatus.ClientID || pizzaStatus.clientId || pizzaStatus.clientID;
+                    if (psClientId !== mainClientFilter) return certs;
+                }
+
+                certTypes.forEach(cert => {
+                    if (!cert.PizzaStatusID) return;
+                    if (cert.PizzaStatusID !== pizzaStatusIdHint) return;
+
+                    // Division filter
+                    if (mainDivisionFilter !== 'ALL' && cert.DivisionID !== mainDivisionFilter) return;
+
+                    if (!cert.Certification) return;
+                    if (!certs.includes(cert.Certification)) {
+                        certs.push(cert.Certification);
+                    }
+                });
+
+                return certs;
+            }
+
+            // Fallback: derive via StatusTypes when we don't have a PizzaStatusID hint
+            if (!statusTypes || !Array.isArray(statusTypes) || !pizzaStatuses || !Array.isArray(pizzaStatuses)) {
+                return certs;
+            }
+
+            const relevantStatusTypes = statusTypes.filter(s => {
+                if (s.Status !== statusName) return false;
+                if (mainDivisionFilter !== 'ALL' && s.DivisionID !== mainDivisionFilter) return false;
+
+                if (s.PizzaStatusID) {
+                    const pizzaStatus = pizzaStatuses.find(ps => ps.ID === s.PizzaStatusID || ps.Id === s.PizzaStatusID);
+                    if (!pizzaStatus) return false;
+
+                    const psIsOperator = pizzaStatus.IsOperator ?? pizzaStatus.isOperator;
+                    if (psIsOperator !== true && psIsOperator !== 1) return false;
+
+                    if (mainClientFilter) {
+                        const psClientId = pizzaStatus.ClientId || pizzaStatus.ClientID || pizzaStatus.clientId || pizzaStatus.clientID;
+                        if (psClientId !== mainClientFilter) return false;
+                    }
+                }
+
+                return true;
+            });
+
+            relevantStatusTypes.forEach(st => {
+                if (!st.PizzaStatusID) return;
+
+                certTypes.forEach(cert => {
+                    if (cert.PizzaStatusID !== st.PizzaStatusID) return;
+                    if (mainDivisionFilter !== 'ALL' && cert.DivisionID !== st.DivisionID) return;
+                    if (!cert.Certification) return;
+
+                    if (!certs.includes(cert.Certification)) {
+                        certs.push(cert.Certification);
+                    }
+                });
+            });
+
+            return certs;
+        }
 
         // Get required certs for an operator based on their division and cumulative statuses
         function getRequiredCertsForOperator(operatorDivision, statusName) {
@@ -2054,7 +2106,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return false;
         }
 
-        // Update statistics - NEW SIMPLIFIED VERSION
+        // Update statistics - compute everything on the client
         function updateStats() {
             // Filter operators by division
             let filteredOperators = operators;
@@ -2073,7 +2125,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const clientStatusNames = new Set(
                     statusTypes
                         .filter(st => st.PizzaStatusID && clientPizzaStatuses.has(st.PizzaStatusID))
-                        .map(st => st.Status || st.StatusName)
+                        .map(st => st.Status)
                 );
                 
                 filteredOperators = filteredOperators.filter(op => {
@@ -2124,97 +2176,146 @@ document.addEventListener('DOMContentLoaded', function() {
                 workflowData.push(statusCounts.get(flow.status) || 0);
             });
 
-            // Calculate compliance: operators with all required certs vs total operators
-            let operatorsWithAllCerts = 0;
-            
-            filteredOperators.forEach(op => {
-                const opDivision = op.DivisionID || '';
-                const opStatus = op.Status || '';
-                
-                // Find the operator's PizzaStatusId from statusTypes
-                let pizzaStatusId = null;
-                if (statusTypes && Array.isArray(statusTypes)) {
-                    const st = statusTypes.find(s => 
-                        s.Status === opStatus && 
-                        s.DivisionID === opDivision
-                    );
-                    if (st && st.PizzaStatusID) {
-                        pizzaStatusId = st.PizzaStatusID;
+            // Calculate compliance on the client: total fulfilled required cert slots vs total required slots
+            let totalRequiredSlots = 0;
+            let fulfilledSlots = 0;
+            let compliancePercent = 0;
+
+            try {
+                if (
+                    mainDivisionFilter &&
+                    mainDivisionFilter !== 'ALL' &&
+                    Array.isArray(filteredOperators) &&
+                    filteredOperators.length > 0 &&
+                    Array.isArray(currentWorkflow) &&
+                    currentWorkflow.length > 0 &&
+                    Array.isArray(certTypes) &&
+                    certTypes.length > 0
+                ) {
+                    // Build a map from status name (uppercased) to workflow step / StatusType
+                    const flowMap = new Map();
+                    currentWorkflow.forEach(flow => {
+                        if (flow && flow.status && flow.originalObj) {
+                            flowMap.set(String(flow.status).toUpperCase(), flow.originalObj);
+                        }
+                    });
+
+                    filteredOperators.forEach(op => {
+                        const opStatus = op.Status;
+                        const opId = op.ID || op.Id;
+                        if (!opStatus || !opId) {
+                            return;
+                        }
+
+                        const statusType = flowMap.get(String(opStatus).toUpperCase());
+                        if (!statusType) {
+                            return;
+                        }
+
+                        const stPizzaStatusId =
+                            statusType.PizzaStatusID ||
+                            statusType.PizzaStatusId ||
+                            statusType.pizzaStatusId ||
+                            statusType.pizzaStatusID;
+                        const stDivisionId =
+                            statusType.DivisionID ||
+                            statusType.DivisionId ||
+                            statusType.divisionId ||
+                            statusType.divisionID;
+
+                        if (!stPizzaStatusId || stDivisionId !== mainDivisionFilter) {
+                            return;
+                        }
+
+                        // Required cert types for this PizzaStatusID + division
+                        const requiredCertTypes = certTypes.filter(ct => {
+                            const ctPizzaStatusId =
+                                ct.PizzaStatusID ||
+                                ct.PizzaStatusId ||
+                                ct.pizzaStatusId ||
+                                ct.pizzaStatusID;
+                            const ctDivisionId =
+                                ct.DivisionID ||
+                                ct.DivisionId ||
+                                ct.divisionId ||
+                                ct.divisionID;
+                            const ctIsDeleted = ct.IsDeleted ?? ct.isDeleted ?? ct.isDelete;
+
+                            if (!ctPizzaStatusId || ctIsDeleted === true) return false;
+                            if (ctPizzaStatusId !== stPizzaStatusId) return false;
+                            if (ctDivisionId !== mainDivisionFilter) return false;
+                            return true;
+                        });
+
+                        if (requiredCertTypes.length === 0) {
+                            return;
+                        }
+
+                        const opCerts = (op.certifications && Array.isArray(op.certifications))
+                            ? op.certifications
+                            : certifications.filter(c => (c.OperatorID || c.OperatorId) === opId);
+
+                        requiredCertTypes.forEach(ct => {
+                            const ctId = ct.ID || ct.Id;
+                            if (!ctId) {
+                                return;
+                            }
+
+                            const hasCert = opCerts.some(c => {
+                                const cCertTypeId = c.CertTypeID || c.CertTypeId;
+                                const isDeleted = c.IsDeleted === true || c.isDeleted === true;
+                                const isApproved = c.IsApproved === true || c.isApproved === true;
+                                if (!cCertTypeId || isDeleted || !isApproved) return false;
+                                return cCertTypeId === ctId;
+                            });
+
+                            totalRequiredSlots++;
+                            if (hasCert) {
+                                fulfilledSlots++;
+                            }
+                        });
+                    });
+
+                    if (totalRequiredSlots > 0) {
+                        compliancePercent = Math.round((fulfilledSlots / totalRequiredSlots) * 100);
                     }
                 }
-                
-                // Get all required cert types for this operator's status and division
-                let requiredCertTypes = [];
-                if (pizzaStatusId && certTypes && Array.isArray(certTypes)) {
-                    requiredCertTypes = certTypes.filter(ct => 
-                        ct.PizzaStatusID === pizzaStatusId && 
-                        ct.DivisionID === opDivision && 
-                        ct.isDeleted !== true && 
-                        ct.isDeleted !== 'true' && 
-                        String(ct.isDeleted) !== 'true'
-                    );
-                }
-                
-                // If no required certs for this status, operator is compliant
-                if (requiredCertTypes.length === 0) {
-                    operatorsWithAllCerts++;
-                    return;
-                }
-                
-                // Get operator's approved certifications
-                const opCerts = op.certifications || [];
-                
-                // Check if operator has all required certs
-                const hasAllRequiredCerts = requiredCertTypes.every(certType => {
-                    // Find matching cert by CertTypeID
-                    return opCerts.some(cert => 
-                        cert.CertTypeID === certType.Id &&
-                        (cert.isApproved === '1' || cert.isApproved === 1 || cert.isApproved === true) &&
-                        !(cert.IsDeleted === '1' || cert.IsDeleted === 1 || cert.IsDeleted === true)
-                    );
-                });
-                
-                if (hasAllRequiredCerts) {
-                    operatorsWithAllCerts++;
-                }
-            });
+            } catch (e) {
+                // Swallow errors for safety; if anything goes wrong, chart stays at zero
+            }
 
-            const compliancePercent = totalOpsCount > 0 
-                ? Math.round((operatorsWithAllCerts / totalOpsCount) * 100) 
-                : 0;
-            
             currentCompliancePercent = compliancePercent;
 
             // --- UPDATE CHARTS ---
-            
-            // 1. Compliance Gauge (Doughnut)
-            const ctxCompliance = document.getElementById('complianceChart');
-            if (ctxCompliance) {
-                const compliantCount = operatorsWithAllCerts;
-                const nonCompliantCount = totalOpsCount - operatorsWithAllCerts;
-                
+
+            // 1. Compliance Doughnut
+            const ctxComplianceInner = document.getElementById('complianceChart');
+            if (ctxComplianceInner) {
+                const compliantCountInner = fulfilledSlots;
+                const nonCompliantCountInner = Math.max(totalRequiredSlots - fulfilledSlots, 0);
+
                 if (!complianceChartInstance) {
-                    complianceChartInstance = new Chart(ctxCompliance, {
+                    complianceChartInstance = new Chart(ctxComplianceInner, {
                         type: 'doughnut',
                         data: {
                             labels: ['Compliant', 'Non-Compliant'],
                             datasets: [{
-                                data: [compliantCount, nonCompliantCount],
-                                backgroundColor: ['#10b981', '#ef4444'],
+                                data: [compliantCountInner, nonCompliantCountInner],
+                                backgroundColor: ['#22c55e', '#d1d5db'],
                                 borderWidth: 0,
-                                cutout: '70%'
+                                cutout: '65%'
                             }]
                         },
                         options: {
                             responsive: true,
-                            maintainAspectRatio: true,
+                            maintainAspectRatio: false,
                             plugins: {
                                 legend: { display: false },
-                                tooltip: { 
+                                tooltip: {
                                     enabled: true,
                                     callbacks: {
-                                        label: function(context) {
-                                            return context.label + ': ' + context.parsed + ' operators';
+                                        label: function (context) {
+                                            return context.label + ': ' + context.parsed + ' slots';
                                         }
                                     }
                                 }
@@ -2225,31 +2326,25 @@ document.addEventListener('DOMContentLoaded', function() {
                             afterDatasetsDraw(chart) {
                                 const { ctx, chartArea: { left, top, width, height } } = chart;
                                 ctx.save();
-                                
                                 const centerX = left + width / 2;
                                 const centerY = top + height / 2;
-                                
                                 const gradient = ctx.createLinearGradient(centerX - 30, centerY - 10, centerX + 30, centerY + 10);
                                 gradient.addColorStop(0, '#1382CA');
                                 gradient.addColorStop(1, '#39afd1');
-                                
-                                ctx.font = 'bold 20px Arial';
+                                ctx.font = 'bold 24px Arial';
                                 ctx.fillStyle = gradient;
                                 ctx.textAlign = 'center';
                                 ctx.textBaseline = 'middle';
-                                // Use global variable so it updates when chart updates
                                 ctx.fillText(currentCompliancePercent + '%', centerX, centerY);
-                                
                                 ctx.restore();
                             }
                         }]
                     });
                 } else {
-                    complianceChartInstance.data.datasets[0].data = [compliantCount, nonCompliantCount];
+                    complianceChartInstance.data.datasets[0].data = [compliantCountInner, nonCompliantCountInner];
                     complianceChartInstance.update();
                 }
             }
-
             // 2. Workflow Distribution (Horizontal Bar)
             const ctxWorkflow = document.getElementById('workflowChart');
             if (ctxWorkflow) {
@@ -2716,6 +2811,26 @@ function removeCertFromStatus(statusName, certName) {
                 saveSuccess = false;
             }
 
+            try {
+                // Save pizza statuses (including IsAuto flag)
+                const cleanPizzaStatuses = pizzaStatuses.map(ps => ({ ...ps }));
+                const responsePizzaStatuses = await fetch('/api/data/pizzastatuses', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(cleanPizzaStatuses)
+                });
+                if (responsePizzaStatuses.ok) {
+                    saveLog += '✓ Pizza statuses saved successfully.\n';
+                } else {
+                    const errorText = await responsePizzaStatuses.text();
+                    saveLog += `✗ Failed to save pizza statuses: ${responsePizzaStatuses.status} ${responsePizzaStatuses.statusText} - ${errorText}\n`;
+                    saveSuccess = false;
+                }
+            } catch (err) {
+                saveLog += `✗ Error during save (pizza statuses): ${err.message || err}\n`;
+                saveSuccess = false;
+            }
+
             // Show log/notice to user
             alert(`Save Attempt:\n${saveLog}`);
 
@@ -2751,6 +2866,84 @@ function removeCertFromStatus(statusName, certName) {
             
             // Update original data
             originalCertRequirements = JSON.parse(JSON.stringify(certRequirements));
+        }
+
+        // Toggle IsAuto flag for a PizzaStatus and mark changes
+        function togglePizzaStatusAuto(pizzaStatusId, isAuto) {
+            if (!pizzaStatusId || !pizzaStatuses || !Array.isArray(pizzaStatuses)) {
+                return;
+            }
+
+            // Update both Id/ID and IsAuto/isAuto variants to keep data consistent
+            pizzaStatuses.forEach(ps => {
+                const idMatch = ps.ID === pizzaStatusId || ps.Id === pizzaStatusId;
+                if (idMatch) {
+                    ps.IsAuto = isAuto;
+                    ps.isAuto = isAuto;
+                }
+            });
+
+            window.pizzaStatuses = pizzaStatuses;
+            markUnsaved();
+        }
+
+        // Auto-move a single operator to their computed next status
+        async function autoMoveOperatorToNextStatus(operatorId, nextStatusId, nextStatusName, nextOrderId, btn) {
+            if (!operatorId || !nextStatusId) {
+                return;
+            }
+
+            const confirmed = confirm(`Move this operator to the next status "${nextStatusName}"?`);
+            if (!confirmed) {
+                return;
+            }
+
+            try {
+                if (btn) {
+                    btn.disabled = true;
+                    btn.textContent = 'Moving...';
+                }
+
+                const payload = {
+                    OperatorIds: [operatorId],
+                    NewStatusName: nextStatusName,
+                    NewStatusId: nextStatusId,
+                    NewOrderId: nextOrderId || ''
+                };
+
+                const response = await fetch('/api/data/operators/bulkupdatestatus', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const text = await response.text();
+                    throw new Error(`Server returned ${response.status}: ${text}`);
+                }
+
+                // Update local operators array so UI stays roughly in sync
+                operators.forEach(op => {
+                    if (op.ID === operatorId || op.Id === operatorId) {
+                        op.Status = nextStatusName;
+                    }
+                });
+
+                markUnsaved();
+
+                if (btn) {
+                    btn.textContent = 'Moved';
+                    btn.classList.remove('btn-success');
+                    btn.classList.add('btn-secondary');
+                }
+            } catch (err) {
+                console.error('Error auto-moving operator:', err);
+                alert('Failed to move operator: ' + (err.message || err));
+                if (btn) {
+                    btn.disabled = false;
+                    btn.textContent = 'Move to next status';
+                }
+            }
         }
 
         // ===== CONTROL CENTER FEATURES =====
@@ -2930,6 +3123,8 @@ function removeCertFromStatus(statusName, certName) {
             renderWorkflow();
             updateStats();
             populateAddStatusFields();
+            // After initializing this division's workflow, check for auto-advance candidates
+            checkAutoAdvanceOnInit();
         }
 
         // Handle main client filter change
@@ -3017,6 +3212,81 @@ function removeCertFromStatus(statusName, certName) {
 
         function closeDetailsPanel() {
             document.getElementById('detailsPanel').classList.remove('open');
+        }
+
+        // Check for auto-advance candidates for the current division and show modal
+        async function checkAutoAdvanceOnInit() {
+            if (!mainDivisionFilter || mainDivisionFilter === 'ALL') {
+                return;
+            }
+
+            try {
+                let url = `/Requirements/GetAutoAdvanceCandidates?divisionId=${encodeURIComponent(mainDivisionFilter)}`;
+                if (mainClientFilter) {
+                    url += `&clientId=${encodeURIComponent(mainClientFilter)}`;
+                }
+
+                const response = await fetch(url);
+                if (!response.ok) {
+                    return;
+                }
+
+                const candidates = await response.json();
+                if (!candidates || !Array.isArray(candidates) || candidates.length === 0) {
+                    return;
+                }
+
+                const body = document.getElementById('autoAdvanceModalBody');
+                if (!body) return;
+
+                let html = '';
+                html += `<p style="margin-bottom: 10px;">The following operators have all required certifications for an auto-advance status in division <strong>${mainDivisionFilter}</strong>.</p>`;
+                html += '<div class="table-responsive">';
+                html += '<table class="table table-sm align-middle mb-0">';
+                html += '<thead><tr>' +
+                    '<th>Operator</th>' +
+                    '<th>Current Status</th>' +
+                    '<th>Next Status</th>' +
+                    '<th style="width: 1%; white-space: nowrap;">Action</th>' +
+                    '</tr></thead><tbody>';
+
+                candidates.forEach((c, idx) => {
+                    const opName = c.OperatorName || c.operatorName || 'Unknown';
+                    const currentStatus = c.CurrentStatusName || c.currentStatusName || '';
+                    const nextStatus = c.NextStatusName || c.nextStatusName || '';
+                    const nextStatusId = c.NextStatusId || c.nextStatusId || '';
+                    const nextOrderId = c.NextOrderId || c.nextOrderId || '';
+                    const opId = c.OperatorId || c.operatorId || '';
+                    html += `<tr>` +
+                        `<td>${opName}</td>` +
+                        `<td>${currentStatus}</td>` +
+                        `<td>${nextStatus}</td>` +
+                        `<td>` +
+                        `<button type="button" class="btn btn-sm btn-success" ` +
+                        `onclick="autoMoveOperatorToNextStatus('${opId}','${nextStatusId}','${nextStatus}','${nextOrderId}', this)">` +
+                        `Move to next status` +
+                        `</button>` +
+                        `</td>` +
+                        `</tr>`;
+                });
+
+                html += '</tbody></table></div>';
+                body.innerHTML = html;
+
+                const modalEl = document.getElementById('autoAdvanceModal');
+                if (modalEl) {
+                    if (window.bootstrap && window.bootstrap.Modal) {
+                        const modal = window.bootstrap.Modal.getOrCreateInstance(modalEl);
+                        modal.show();
+                    } else if (typeof $ !== 'undefined' && $(modalEl).modal) {
+                        $(modalEl).modal('show');
+                    } else {
+                        modalEl.style.display = 'block';
+                    }
+                }
+            } catch (err) {
+                console.error('Error checking auto-advance candidates:', err);
+            }
         }
 
         // Bulk add certification to multiple statuses

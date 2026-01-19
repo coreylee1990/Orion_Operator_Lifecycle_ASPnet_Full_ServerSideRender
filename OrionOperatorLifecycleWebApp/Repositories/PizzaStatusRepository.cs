@@ -2,6 +2,8 @@ using OrionOperatorLifecycleWebApp.Models;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using System;
+using System.Linq;
 
 namespace OrionOperatorLifecycleWebApp.Repositories
 {
@@ -21,5 +23,14 @@ namespace OrionOperatorLifecycleWebApp.Repositories
 
         public PizzaStatus GetByStatus(string status) => 
             GetAll().FirstOrDefault(p => p.Status != null && p.Status.Equals(status, System.StringComparison.OrdinalIgnoreCase));
+
+        public void SaveAll(List<PizzaStatus> pizzaStatuses)
+        {
+            if (pizzaStatuses == null) throw new ArgumentNullException(nameof(pizzaStatuses));
+
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            var json = JsonSerializer.Serialize(pizzaStatuses, options);
+            File.WriteAllText(_filePath, json);
+        }
     }
 }

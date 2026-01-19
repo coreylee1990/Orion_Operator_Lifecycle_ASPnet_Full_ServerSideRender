@@ -22,12 +22,7 @@ namespace OrionOperatorLifecycleWebApp.Repositories.Sql
                         from s in joinS.DefaultIfEmpty()
                         select new { o, s };
 
-            var operators = query.ToList().Select(x =>
-            {
-                x.o.StatusName = x.s?.Status;
-                x.o.OrderId = x.s?.OrderId;
-                return x.o;
-            }).ToList();
+            var operators = query.ToList().Select(x => x.o).ToList();
             
             // Load certifications for all operators
             var operatorIds = operators.Select(o => o.Id).ToList();
@@ -58,9 +53,6 @@ namespace OrionOperatorLifecycleWebApp.Repositories.Sql
             var result = query.FirstOrDefault();
             if (result == null) return null;
             
-            result.o.StatusName = result.s?.Status;
-            result.o.OrderId = result.s?.OrderId;
-            
             // Load certifications for this operator
             result.o.Certifications = _context.Certifications.AsNoTracking()
                 .Where(c => c.OperatorId == id)
@@ -76,12 +68,7 @@ namespace OrionOperatorLifecycleWebApp.Repositories.Sql
                         from s in joinS.DefaultIfEmpty()
                         select new { o, s };
 
-            var operators = query.ToList().Select(x =>
-            {
-                x.o.StatusName = x.s?.Status;
-                x.o.OrderId = x.s?.OrderId;
-                return x.o;
-            }).ToList();
+            var operators = query.ToList().Select(x => x.o).ToList();
             
             // Load certifications for these operators only
             var operatorIds = operators.Select(o => o.Id).ToList();
@@ -121,7 +108,7 @@ namespace OrionOperatorLifecycleWebApp.Repositories.Sql
             if (op != null)
             {
                 op.StatusId = newStatusId;
-                // StatusName and OrderId are computed from join in GetAll, but we update StatusId
+                op.Status = newStatusName;
                 _context.SaveChanges();
             }
         }

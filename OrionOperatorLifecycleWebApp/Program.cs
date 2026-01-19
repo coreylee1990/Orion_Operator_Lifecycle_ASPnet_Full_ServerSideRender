@@ -44,7 +44,6 @@ else
     builder.Services.AddSingleton<ICertTypeRepository>(provider => 
         new CertTypeRepository(builder.Environment.ContentRootPath));
     builder.Services.AddSingleton<IClientRepository, ClientRepository>();
-    builder.Services.AddSingleton<IStatusTrackerRepository, StatusTrackerRepository>();
 }
 
 // Register services
@@ -57,6 +56,7 @@ builder.Services.AddScoped<ICertTypeService, CertTypeService>();
 builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IAutoAdvanceService, AutoAdvanceService>();
 builder.Services.AddScoped<IStatusTrackerService, StatusTrackerService>();
+builder.Services.AddSingleton<IStatusTrackerRepository, StatusTrackerRepository>();
 
 var app = builder.Build();
 

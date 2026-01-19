@@ -18,6 +18,18 @@
 				"$msCompile"
 			],
 			"group": "build"
+		},
+		{
+			"label": "Build OrionOperatorLifecycleWebApp",
+			"type": "shell",
+			"command": "dotnet build OrionOperatorLifecycleWebApp/OrionOperatorLifecycleWebApp.csproj",
+			"group": "build"
+		},
+		{
+			"label": "Build OrionOperatorLifecycleWebApp after RequirementsController fix",
+			"type": "shell",
+			"command": "dotnet build OrionOperatorLifecycleWebApp/OrionOperatorLifecycleWebApp.csproj",
+			"group": "build"
 		}
 	]
 }

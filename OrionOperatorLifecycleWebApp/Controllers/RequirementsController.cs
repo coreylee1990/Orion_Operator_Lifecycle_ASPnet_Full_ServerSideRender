@@ -109,11 +109,9 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                 return NotFound();
             }
 
-            // CRITICAL: Load certifications for this operator (they're stored separately)
-            var allCertifications = _certificationService.GetAllCertifications();
-            op.Certifications = allCertifications
-                .Where(c => c.OperatorId == operatorId)
-                .ToList();
+            // Load certifications only for this operator (avoid full-table scan)
+            var opCertifications = _certificationService.GetCertificationsByOperatorIds(new List<string> { operatorId });
+            op.Certifications = opCertifications ?? new List<Certification>();
 
             // Use the divisionId parameter from the workflow context (not operator's stored division)
             // This ensures we look up certs for the correct division context
@@ -146,6 +144,7 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                     {
                         ViewBag.ValidCount = 0;
                         ViewBag.MissingCount = 0;
+                        ViewBag.HasAllRequiredCerts = false;
                         ViewBag.DaysInStatus = null;
                         return PartialView("_OperatorCard", op);
                     }
@@ -195,9 +194,13 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                 }
             }
 
-            // Stats for current PizzaStatus only (lines 2973-2974)
+            // Stats for current PizzaStatus only
             ViewBag.ValidCount = currentValid;
             ViewBag.MissingCount = currentMissing;
+
+            // Flag when operator has all required certs for this status
+            var hasAllRequiredCerts = currentMissing == 0 && pizzaStatusCertTypes.Count > 0;
+            ViewBag.HasAllRequiredCerts = hasAllRequiredCerts;
             
             // Calculate days in status using operator's current StatusID
             ViewBag.DaysInStatus = _statusTrackerService.GetDaysInStatus(op.Id, op.StatusId ?? "");
@@ -249,8 +252,8 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                     .Where(op => op.DivisionId == division)
                     .ToList();
 
-                // Load all certifications
-                var allCertifications = _certificationService.GetAllCertifications();
+                // Load certifications only for this division
+                var allCertifications = _certificationService.GetCertificationsByDivision(division);
 
                 // Filter operators by status that uses this PizzaStatusId
                 foreach (var op in allOperators)
@@ -314,17 +317,15 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                 return NotFound();
             }
 
-            // Load certifications for this operator
-            var allCertifications = _certificationService.GetAllCertifications();
-            op.Certifications = allCertifications
-                .Where(c => c.OperatorId == operatorId)
-                .ToList();
+            // Load certifications only for this operator (avoid full-table scan)
+            var opCertifications = _certificationService.GetCertificationsByOperatorIds(new List<string> { operatorId });
+            op.Certifications = opCertifications ?? new List<Certification>();
 
             var opDivision = op.DivisionId ?? "";
             var opStatus = op.Status ?? "";
 
-            // Find the operator's PizzaStatusId
-            var allStatusTypes = _statusTypeService.GetAllStatusTypes();
+            // Find the operator's PizzaStatusId using the operator's division
+            var allStatusTypes = _statusTypeService.GetStatusTypesByDivision(opDivision);
             var statusType = allStatusTypes.FirstOrDefault(st =>
                 st.Status == opStatus &&
                 st.DivisionId == opDivision
@@ -470,6 +471,313 @@ namespace OrionOperatorLifecycleWebApp.Controllers
             return PartialView("_CertDuplicateModalContent", viewModel);
         }
 
+        // GET: /Requirements/GetAutoAdvanceCandidates?divisionId=5&clientId={clientId}
+        // Uses the same filtering rules as the Requirements editor (operator-only workflow statuses)
+        [HttpGet]
+        public IActionResult GetAutoAdvanceCandidates(string divisionId, string clientId = null)
+        {
+            if (string.IsNullOrEmpty(divisionId) || divisionId == "ALL")
+            {
+                return Json(new List<AutoAdvanceCandidate>());
+            }
+
+            var operators = _operatorService.GetOperatorsByDivision(divisionId);
+            if (operators == null || operators.Count == 0)
+            {
+                return Json(new List<AutoAdvanceCandidate>());
+            }
+
+            var allCertifications = _certificationService.GetCertificationsByDivision(divisionId);
+            var allStatusTypes = _statusTypeService.GetStatusTypesByDivision(divisionId);
+            var allCertTypes = _certTypeService.GetAllCertTypes();
+            var allPizzaStatuses = _pizzaStatusService.GetAllPizzaStatuses();
+
+            // Build a safe lookup for PizzaStatus by Id (defensive against duplicate IDs)
+            var pizzaStatusLookup = allPizzaStatuses
+                .Where(ps => !string.IsNullOrEmpty(ps.Id))
+                .GroupBy(ps => ps.Id)
+                .ToDictionary(g => g.Key, g => g.First());
+
+            // Apply the same operator-only workflow filters used by the Requirements editor JS:
+            // - Same division
+            // - Not deleted
+            // - Has PizzaStatusId that exists
+            // - StatusType.Fleet != true and Providers != true
+            // - PizzaStatus.IsOperator == true
+            // - If clientId is specified, PizzaStatus.ClientId must match
+            var divisionStatuses = allStatusTypes
+                .Where(st => st.DivisionId == divisionId && st.IsDeleted != true)
+                .Where(st =>
+                {
+                    if (string.IsNullOrEmpty(st.PizzaStatusId)) return false;
+
+                    if (!pizzaStatusLookup.TryGetValue(st.PizzaStatusId, out var ps)) return false;
+
+                    if (st.Fleet == true || st.Providers == true) return false;
+
+                    if (ps.IsOperator != true) return false;
+
+                    if (!string.IsNullOrEmpty(clientId))
+                    {
+                        if (!string.Equals(ps.ClientId, clientId, StringComparison.OrdinalIgnoreCase))
+                        {
+                            return false;
+                        }
+                    }
+
+                    return true;
+                })
+                .ToList();
+
+            var candidates = new List<AutoAdvanceCandidate>();
+
+            foreach (var op in operators)
+            {
+                var opStatus = op.Status ?? string.Empty;
+                if (string.IsNullOrWhiteSpace(opStatus))
+                {
+                    continue;
+                }
+
+                // Find status type for operator's current status in this division
+                var statusType = divisionStatuses.FirstOrDefault(st => st.Status == opStatus)
+                                 ?? divisionStatuses.FirstOrDefault(st => string.Equals(st.Status, opStatus, StringComparison.OrdinalIgnoreCase));
+
+                if (statusType == null || string.IsNullOrEmpty(statusType.PizzaStatusId))
+                {
+                    continue;
+                }
+
+                if (!pizzaStatusLookup.TryGetValue(statusType.PizzaStatusId, out var pizzaStatus))
+                {
+                    continue;
+                }
+                if (pizzaStatus.IsAuto != true)
+                {
+                    // Only consider auto-advance pizza statuses
+                    continue;
+                }
+
+                // Get all cert types for this PizzaStatusId and division
+                var pizzaStatusCertTypes = allCertTypes
+                    .Where(ct =>
+                        ct.PizzaStatusId == statusType.PizzaStatusId &&
+                        ct.DivisionId == divisionId &&
+                        ct.IsDeleted != true)
+                    .ToList();
+
+                if (pizzaStatusCertTypes.Count == 0)
+                {
+                    continue;
+                }
+
+                var opCerts = allCertifications
+                    .Where(c => c.OperatorId == op.Id)
+                    .ToList();
+
+                int currentValid = 0;
+                int currentMissing = 0;
+
+                foreach (var certType in pizzaStatusCertTypes)
+                {
+                    var certTypeId = certType.Id;
+
+                    var cert = opCerts.FirstOrDefault(c =>
+                    {
+                        if (c.CertTypeId != certTypeId) return false;
+                        if (c.IsDeleted == true) return false;
+                        if (c.IsApproved != true) return false;
+                        return true;
+                    });
+
+                    if (cert != null)
+                    {
+                        currentValid++;
+                    }
+                    else
+                    {
+                        currentMissing++;
+                    }
+                }
+
+                // Only consider operators who have ALL required certs for this auto-advance status
+                if (currentMissing != 0)
+                {
+                    continue;
+                }
+
+                // Determine numeric OrderId for current status
+                if (!int.TryParse(statusType.OrderId, out var currentOrder))
+                {
+                    continue;
+                }
+
+                var nextStatus = divisionStatuses
+                    // Only consider statuses that are further in the workflow
+                    .Where(st => int.TryParse(st.OrderId, out var order) && order > currentOrder)
+                    // And that do NOT share the same PizzaStatusId as the current status
+                    .Where(st => !string.Equals(st.PizzaStatusId, statusType.PizzaStatusId, StringComparison.OrdinalIgnoreCase))
+                    .OrderBy(st => int.TryParse(st.OrderId, out var order) ? order : int.MaxValue)
+                    .FirstOrDefault();
+
+                if (nextStatus == null)
+                {
+                    continue;
+                }
+
+                candidates.Add(new AutoAdvanceCandidate
+                {
+                    OperatorId = op.Id,
+                    OperatorName = $"{op.FirstName} {op.LastName}",
+                    DivisionId = divisionId,
+                    CurrentStatusId = statusType.Id,
+                    CurrentStatusName = statusType.Status,
+                    CurrentOrderId = statusType.OrderId,
+                    NextStatusId = nextStatus.Id,
+                    NextStatusName = nextStatus.Status,
+                    NextOrderId = nextStatus.OrderId,
+                    PizzaStatusId = statusType.PizzaStatusId,
+                    IsAuto = true
+                });
+            }
+
+            return Json(candidates);
+        }
+
+        // GET: /Requirements/GetComplianceSummary?divisionId=5&clientId={clientId}
+        // Returns aggregate cert coverage across all visible operator/status combinations:
+        // totalRequiredSlots = total required cert "slots"; fulfilledSlots = how many of those slots have an approved cert.
+        [HttpGet]
+        public IActionResult GetComplianceSummary(string divisionId, string clientId = null)
+        {
+            if (string.IsNullOrEmpty(divisionId) || divisionId == "ALL")
+            {
+                return Json(new { totalRequiredSlots = 0, fulfilledSlots = 0, percent = 0 });
+            }
+
+            var operators = _operatorService.GetOperatorsByDivision(divisionId);
+            if (operators == null || operators.Count == 0)
+            {
+                return Json(new { totalRequiredSlots = 0, fulfilledSlots = 0, percent = 0 });
+            }
+
+            var allCertifications = _certificationService.GetCertificationsByDivision(divisionId);
+            var allStatusTypes = _statusTypeService.GetStatusTypesByDivision(divisionId);
+            var allCertTypes = _certTypeService.GetAllCertTypes();
+            var allPizzaStatuses = _pizzaStatusService.GetAllPizzaStatuses();
+
+            // Build a safe lookup for PizzaStatus by Id (defensive against duplicate IDs)
+            var pizzaStatusLookup = allPizzaStatuses
+                .Where(ps => !string.IsNullOrEmpty(ps.Id))
+                .GroupBy(ps => ps.Id)
+                .ToDictionary(g => g.Key, g => g.First());
+
+            // Mirror Requirements editor filtering for operator workflow statuses
+            var divisionStatuses = allStatusTypes
+                .Where(st => st.DivisionId == divisionId && st.IsDeleted != true)
+                .Where(st =>
+                {
+                    if (string.IsNullOrEmpty(st.PizzaStatusId)) return false;
+
+                    if (!pizzaStatusLookup.TryGetValue(st.PizzaStatusId, out var ps)) return false;
+
+                    if (st.Fleet == true || st.Providers == true) return false;
+
+                    if (ps.IsOperator != true) return false;
+
+                    if (!string.IsNullOrEmpty(clientId))
+                    {
+                        if (!string.Equals(ps.ClientId, clientId, StringComparison.OrdinalIgnoreCase))
+                        {
+                            return false;
+                        }
+                    }
+
+                    return true;
+                })
+                .ToList();
+
+            // Map (division,statusName) -> StatusType
+            var statusMap = divisionStatuses
+                .GroupBy(st => new { st.DivisionId, st.Status })
+                .ToDictionary(g => g.Key, g => g.First());
+
+            // Group certifications by operator for quick lookups, only approved and not deleted
+            var certsByOperator = allCertifications
+                .Where(c => c.IsDeleted != true && c.IsApproved == true &&
+                            !string.IsNullOrEmpty(c.OperatorId) && !string.IsNullOrEmpty(c.CertTypeId))
+                .GroupBy(c => c.OperatorId)
+                .ToDictionary(g => g.Key, g => g.Select(x => x.CertTypeId).ToHashSet());
+
+            int totalRequiredSlots = 0;
+            int fulfilledSlots = 0;
+
+            foreach (var op in operators)
+            {
+                var opDivision = op.DivisionId ?? string.Empty;
+                var opStatus = op.Status ?? string.Empty;
+                var opId = op.Id;
+
+                // Skip operators without required fields (defensive against bad data)
+                if (string.IsNullOrWhiteSpace(opDivision) || string.IsNullOrWhiteSpace(opStatus) || string.IsNullOrEmpty(opId))
+                {
+                    continue;
+                }
+
+                var key = new { DivisionId = opDivision, Status = opStatus };
+                if (!statusMap.TryGetValue(key, out var statusType))
+                {
+                    // Try case-insensitive fallback
+                    statusType = statusMap
+                        .Where(kvp => string.Equals(kvp.Key.DivisionId, opDivision, StringComparison.OrdinalIgnoreCase) &&
+                                      string.Equals(kvp.Key.Status, opStatus, StringComparison.OrdinalIgnoreCase))
+                        .Select(kvp => kvp.Value)
+                        .FirstOrDefault();
+                }
+
+                if (statusType == null || string.IsNullOrEmpty(statusType.PizzaStatusId))
+                {
+                    continue;
+                }
+
+                if (!pizzaStatusLookup.TryGetValue(statusType.PizzaStatusId, out var psForStatus))
+                {
+                    continue;
+                }
+
+                // Get required cert types for this PizzaStatusId + division
+                var requiredCertTypes = allCertTypes
+                    .Where(ct => ct.PizzaStatusId == statusType.PizzaStatusId &&
+                                 ct.DivisionId == opDivision &&
+                                 ct.IsDeleted != true)
+                    .ToList();
+
+                if (requiredCertTypes.Count == 0)
+                {
+                    continue;
+                }
+
+                var heldCertTypeIds = certsByOperator.TryGetValue(opId, out var set)
+                    ? set
+                    : new HashSet<string>();
+
+                foreach (var ct in requiredCertTypes)
+                {
+                    totalRequiredSlots++;
+                    if (!string.IsNullOrEmpty(ct.Id) && heldCertTypeIds.Contains(ct.Id))
+                    {
+                        fulfilledSlots++;
+                    }
+                }
+            }
+
+            int percent = totalRequiredSlots > 0
+                ? (int)Math.Round((double)fulfilledSlots / totalRequiredSlots * 100.0)
+                : 0;
+
+            return Json(new { totalRequiredSlots, fulfilledSlots, percent });
+        }
+
         // GET: /Requirements/GetClients - Returns distinct clients from PizzaStatus
         [HttpGet]
         public IActionResult GetClients()
@@ -557,5 +865,20 @@ namespace OrionOperatorLifecycleWebApp.Controllers
         public string OldStatus { get; set; }
         public string NewStatus { get; set; }
         public string DivisionId { get; set; }
+    }
+
+    public class AutoAdvanceCandidate
+    {
+        public string OperatorId { get; set; }
+        public string OperatorName { get; set; }
+        public string DivisionId { get; set; }
+        public string CurrentStatusId { get; set; }
+        public string CurrentStatusName { get; set; }
+        public string CurrentOrderId { get; set; }
+        public string NextStatusId { get; set; }
+        public string NextStatusName { get; set; }
+        public string NextOrderId { get; set; }
+        public string PizzaStatusId { get; set; }
+        public bool IsAuto { get; set; }
     }
 }

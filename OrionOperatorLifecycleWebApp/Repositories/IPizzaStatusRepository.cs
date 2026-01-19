@@ -8,5 +8,6 @@ namespace OrionOperatorLifecycleWebApp.Repositories
         List<PizzaStatus> GetAll();
         PizzaStatus GetById(string id);
         PizzaStatus GetByStatus(string status);
+        void SaveAll(List<PizzaStatus> pizzaStatuses);
     }
 }

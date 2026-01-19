@@ -97,6 +97,29 @@ namespace OrionOperatorLifecycleWebApp.Controllers
             }
         }
 
+        [HttpPost("pizzastatuses")]
+        public IActionResult SavePizzaStatuses([FromBody] JsonElement pizzaStatusesJson)
+        {
+            try
+            {
+                var inputJson = pizzaStatusesJson.GetRawText();
+                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                var pizzaStatuses = JsonSerializer.Deserialize<List<PizzaStatus>>(inputJson, options);
+
+                _pizzaStatusService.SaveAllPizzaStatuses(pizzaStatuses ?? new List<PizzaStatus>());
+
+                // Invalidate the DataController cache so GET returns fresh data
+                _cache.Remove(CACHE_KEY_PIZZASTATUSES);
+
+                return Ok(new { success = true, message = "Pizza statuses saved successfully" });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error saving pizza statuses: {ex.Message}");
+                return StatusCode(500, new { success = false, message = ex.Message });
+            }
+        }
+
         [HttpGet("clients")]
         public IActionResult GetClients()
         {
@@ -203,7 +226,7 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                     
                     var operators = allOperators
                         .Where(op => {
-                            var statusMatch = op.StatusName == status;
+                            var statusMatch = op.Status == status;
                             var divisionMatch = op.DivisionId == division;
                             return statusMatch && divisionMatch;
                         })
@@ -213,7 +236,8 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                             LastName = op.LastName,
                             Email = op.Email,
                             Mobile = op.Mobile,
-                            StatusName = op.StatusName,
+                            // Keep response field name for compatibility, but source from Status
+                            StatusName = op.Status,
                             DivisionID = op.DivisionId
                         })
                         .ToList();

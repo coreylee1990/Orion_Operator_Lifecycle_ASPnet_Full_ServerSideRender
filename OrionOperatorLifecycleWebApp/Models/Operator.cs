@@ -25,15 +25,9 @@ namespace OrionOperatorLifecycleWebApp.Models
         
         [JsonPropertyName("Status")]
         public string? Status { get; set; }
-        
-        [JsonPropertyName("StatusName")]
-        public string? StatusName { get; set; }
-        
+
         [JsonPropertyName("StatusID")]
         public string? StatusId { get; set; }
-        
-        [JsonPropertyName("OrderID")]
-        public string? OrderId { get; set; }
         
         [JsonPropertyName("isDeleted")]
         public bool? IsDeleted { get; set; }

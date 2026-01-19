@@ -7,9 +7,14 @@
     var validPercent = total > 0 ? (validCount * 100.0 / total) : 0;
     var daysInStatus = ViewBag.DaysInStatus;
     var isOverdue = daysInStatus != null && daysInStatus >= 30;
+    bool hasAllRequiredCerts = false;
+    if (ViewBag.HasAllRequiredCerts != null)
+    {
+        hasAllRequiredCerts = (bool)ViewBag.HasAllRequiredCerts;
+    }
 }
 
-<div class="operator-item @(isOverdue ? "operator-overdue" : "")" 
+<div class="operator-item @(isOverdue ? "operator-overdue" : "") @(hasAllRequiredCerts ? "operator-complete" : "")" 
      onclick="showOperatorProfile('@Model.Id')" 
      style="cursor: pointer;" 
      title="@validCount Valid, @missingCount Missing@(daysInStatus != null ? " | " + daysInStatus + " days in status" : "")">
@@ -19,6 +24,12 @@
             @if (total > 0)
             {
                 <span class="operator-cert-count" title="@validCount valid, @missingCount missing">@validCount/@total</span>
+            }
+            @if (hasAllRequiredCerts && total > 0)
+            {
+                <span class="operator-all-complete" title="All required cert types complete">
+                    <i class="bi bi-patch-check-fill"></i>
+                </span>
             }
             @if (daysInStatus != null)
             {

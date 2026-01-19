@@ -16,16 +16,7 @@ namespace OrionOperatorLifecycleWebApp.Repositories
             var json = File.ReadAllText(_filePath);
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
             var allOperators = JsonSerializer.Deserialize<List<Operator>>(json, options) ?? new List<Operator>();
-            
-            // Map Status to StatusName if StatusName is null (for SQL-exported JSON)
-            foreach (var op in allOperators)
-            {
-                if (string.IsNullOrEmpty(op.StatusName) && !string.IsNullOrEmpty(op.Status))
-                {
-                    op.StatusName = op.Status;
-                }
-            }
-            
+
             return allOperators.Where(o => o.IsDeleted != true).ToList();
         }
 
@@ -51,9 +42,8 @@ namespace OrionOperatorLifecycleWebApp.Repositories
             var op = list.FirstOrDefault(o => o.Id == operatorId);
             if (op != null)
             {
-                op.StatusName = newStatusName;
+                op.Status = newStatusName;
                 op.StatusId = newStatusId;
-                op.OrderId = newOrderId;
                 var json = JsonSerializer.Serialize(list, new JsonSerializerOptions { WriteIndented = true });
                 File.WriteAllText(_filePath, json);
             }

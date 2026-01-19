@@ -43,12 +43,12 @@ namespace OrionOperatorLifecycleWebApp.Services
                     currentStatusType = _statusTypeRepo.GetById(op.StatusId);
                 }
                 
-                // Fallback: match by StatusName and DivisionId
-                if (currentStatusType == null && !string.IsNullOrEmpty(op.StatusName))
+                // Fallback: match by Status text and DivisionId
+                if (currentStatusType == null && !string.IsNullOrEmpty(op.Status))
                 {
                     var divStatusTypes = _statusTypeRepo.GetByDivision(op.DivisionId);
                     currentStatusType = divStatusTypes
-                        .FirstOrDefault(s => s.Status != null && s.Status.Equals(op.StatusName, StringComparison.OrdinalIgnoreCase));
+                        .FirstOrDefault(s => s.Status != null && s.Status.Equals(op.Status, StringComparison.OrdinalIgnoreCase));
                 }
 
                 if (currentStatusType == null) return;
@@ -92,11 +92,8 @@ namespace OrionOperatorLifecycleWebApp.Services
                     
                     if (nextStatusType != null)
                     {
-                        op.StatusId = nextStatusType.Id;
-                        op.StatusName = nextStatusType.Status;
-                        op.OrderId = nextStatusType.OrderId;
-                        
-                        _operatorRepo.Save(op);
+                        // Persist using standard status update path
+                        _operatorRepo.UpdateStatus(op.Id, nextStatusType.Status, nextStatusType.Id, nextStatusType.OrderId);
                     }
                 }
             });

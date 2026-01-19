@@ -1,5 +1,6 @@
 @await Html.PartialAsync("_CertDuplicateModal")
 @await Html.PartialAsync("_StatusDeleteWarningModal")
+@await Html.PartialAsync("_AutoAdvanceModal")
 @{
     ViewData["Title"] = "Operator Lifecycle - Requirements";
 }
@@ -42,8 +43,8 @@
                         <div class="stat-label">Total Operators</div>
                     </div>
                     <div class="stat-card" style="flex: 1; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                         <div style="position: relative; width: 80px; height: 80px; margin: 0 auto;">
-                             <canvas id="complianceChart"></canvas>
+                         <div style="position: relative; width: 120px; height: 120px; margin: 0 auto;">
+                             <canvas id="complianceChart" style="width: 120px; height: 120px;"></canvas>
                          </div>
                          <div class="stat-label" style="margin-top: 5px;">Compliance</div>
                     </div>

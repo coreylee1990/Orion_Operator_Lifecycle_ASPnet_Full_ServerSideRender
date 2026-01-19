@@ -7,6 +7,6 @@ namespace OrionOperatorLifecycleWebApp.Services
     {
         List<PizzaStatus> GetAllPizzaStatuses();
         PizzaStatus GetPizzaStatusById(string id);
-        // Add more methods as needed
+        void SaveAllPizzaStatuses(List<PizzaStatus> pizzaStatuses);
     }
 }
