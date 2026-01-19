@@ -2,80 +2,130 @@
 @{
     ViewData["Title"] = "Status Management";
     var pizzaStatuses = ViewBag.PizzaStatuses as List<OrionOperatorLifecycleWebApp.Models.PizzaStatus>;
+    var clients = ViewBag.Clients as List<OrionOperatorLifecycleWebApp.Models.Client>;
+    var operators = ViewBag.Operators as List<OrionOperatorLifecycleWebApp.Models.Operator>;
+    var divisions = Model
+        .Where(s => !string.IsNullOrWhiteSpace(s.DivisionId))
+        .Select(s => s.DivisionId)
+        .Distinct()
+        .OrderBy(d => d)
+        .ToList();
 }
 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
 <div class="status-management-container">
-    <div class="header-section">
-        <h1>Status Management</h1>
-        <a asp-action="Create" class="btn btn-primary">
+    
+    <div class="page-header">
+        <div class="header-left">
+            <i class="bi bi-diagram-3-fill header-icon"></i>
+            <div>
+                <h1>Status Management</h1>
+                <p class="subtitle">Manage workflow statuses across all clients and divisions</p>
+            </div>
+        </div>
+        <a asp-action="Create" class="btn-create">
             <i class="bi bi-plus-circle"></i> Create New Status
         </a>
     </div>
 
-    <div class="filter-section">
+    <div class="filter-card">
+        <h3><i class="bi bi-funnel"></i> Filters</h3>
         <form method="get" asp-action="Index" class="filter-form">
-            <div class="filter-group">
-                <label for="division">Division:</label>
-                <select name="division" id="division" class="form-select">
-                    <option value="">All Divisions</option>
-                    <option value="1" selected="@(ViewBag.SelectedDivision == "1")">1 - Operator</option>
-                    <option value="2" selected="@(ViewBag.SelectedDivision == "2")">2 - Fleet</option>
-                    <option value="3" selected="@(ViewBag.SelectedDivision == "3")">3 - Provider</option>
-                    <option value="4" selected="@(ViewBag.SelectedDivision == "4")">4 - Managers</option>
-                    <option value="5" selected="@(ViewBag.SelectedDivision == "5")">5 - CA</option>
-                </select>
-            </div>
+            <div class="filter-row">
+                <div class="filter-item">
+                    <label for="division">Client:</label>
+                    <select name="division" id="division" class="form-control">
+                        <option value="">All Clients</option>
+                        @if (clients != null)
+                        {
+                            @foreach (var client in clients.OrderBy(c => c.Description))
+                            {
+                                var isSelected = ViewBag.SelectedDivision == client.Id;
+                                <option value="@client.Id" selected="@isSelected">@client.Description</option>
+                            }
+                        }
+                    </select>
+                </div>
 
-            <div class="filter-group">
-                <label for="fleet">Fleet:</label>
-                <select name="fleet" id="fleet" class="form-select">
-                    <option value="">All</option>
-                    <option value="true" selected="@(ViewBag.SelectedFleet == true)">Yes</option>
-                    <option value="false" selected="@(ViewBag.SelectedFleet == false)">No</option>
-                </select>
-            </div>
+                <div class="filter-item">
+                    <label for="divisionFilter">Division ID:</label>
+                    <select name="divisionFilter" id="divisionFilter" class="form-control">
+                        <option value="">All Divisions</option>
+                        @foreach (var divisionValue in divisions)
+                        {
+                            var isSelectedDivision = ViewBag.SelectedDivisionFilter == divisionValue;
+                            <option value="@divisionValue" selected="@isSelectedDivision">@divisionValue</option>
+                        }
+                    </select>
+                </div>
 
-            <div class="filter-group">
-                <label for="providers">Providers:</label>
-                <select name="providers" id="providers" class="form-select">
-                    <option value="">All</option>
-                    <option value="true" selected="@(ViewBag.SelectedProviders == true)">Yes</option>
-                    <option value="false" selected="@(ViewBag.SelectedProviders == false)">No</option>
-                </select>
-            </div>
+                <div class="filter-item checkbox-item">
+                    <label>
+                        <input type="checkbox" name="operators" value="true" @(ViewBag.SelectedOperators == true ? "checked" : "") />
+                        <i class="bi bi-people"></i> Operators Only
+                    </label>
+                </div>
 
-            <div class="filter-group">
-                <label for="isDeleted">Status:</label>
-                <select name="isDeleted" id="isDeleted" class="form-select">
-                    <option value="">Active (Not Deleted)</option>
-                    <option value="true" selected="@(ViewBag.SelectedIsDeleted == true)">Deleted</option>
-                    <option value="false" selected="@(ViewBag.SelectedIsDeleted == false)">Active</option>
-                </select>
-            </div>
+                <div class="filter-item checkbox-item">
+                    <label>
+                        <input type="checkbox" name="fleet" value="true" @(ViewBag.SelectedFleet == true ? "checked" : "") />
+                        <i class="bi bi-truck"></i> Fleet Only
+                    </label>
+                </div>
 
-            <div class="filter-actions">
-                <button type="submit" class="btn btn-secondary">
-                    <i class="bi bi-funnel"></i> Apply Filters
-                </button>
-                <a asp-action="Index" class="btn btn-outline-secondary">
-                    <i class="bi bi-x-circle"></i> Clear
-                </a>
+                <div class="filter-item checkbox-item">
+                    <label>
+                        <input type="checkbox" name="providers" value="true" @(ViewBag.SelectedProviders == true ? "checked" : "") />
+                        <i class="bi bi-person-badge"></i> Providers Only
+                    </label>
+                </div>
+
+                <div class="filter-item checkbox-item">
+                    <label>
+                        <input type="checkbox" name="hasProvider" value="true" @(ViewBag.SelectedHasProvider == true ? "checked" : "") />
+                        <i class="bi bi-building-check"></i> Has ClientId
+                    </label>
+                </div>
+
+                <div class="filter-item">
+                    <label for="isDeleted">Show:</label>
+                    <select name="isDeleted" id="isDeleted" class="form-control">
+                        <option value="">Active Only</option>
+                        <option value="true" selected="@(ViewBag.SelectedIsDeleted == true)">Deleted Only</option>
+                        <option value="false" selected="@(ViewBag.SelectedIsDeleted == false)">Active Only</option>
+                    </select>
+                </div>
+
+                <div class="filter-actions">
+                    <button type="submit" class="btn-apply">
+                        <i class="bi bi-funnel-fill"></i> Apply
+                    </button>
+                    <a asp-action="Index" class="btn-clear">
+                        <i class="bi bi-x-circle"></i> Clear
+                    </a>
+                </div>
             </div>
         </form>
     </div>
 
-    <div class="table-responsive">
-        <table class="table table-striped table-hover status-table">
+    <div class="table-container">
+        <table class="status-table">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Status Name</th>
-                    <th>Division</th>
+                    <th>Description</th>
+                    <th>Client</th>
+                    <th>Division ID</th>
                     <th>Order</th>
                     <th>Pizza Status</th>
+                    <th>Age Alert (Days)</th>
+                    <th>Operators</th>
                     <th class="text-center">Fleet</th>
-                    <th class="text-center">Providers</th>
-                    <th class="text-center">Deleted</th>
+                    <th class="text-center">Provider</th>
+                    <th class="text-center">Active</th>
                     <th class="text-end">Actions</th>
                 </tr>
             </thead>
@@ -85,29 +135,49 @@
                     @foreach (var status in Model)
                     {
                         var pizzaStatus = pizzaStatuses?.FirstOrDefault(ps => ps.Id == status.PizzaStatusId);
-                        var rowClass = status.IsDeleted == true ? "deleted-row" : "";
+                        var providerName = clients?.FirstOrDefault(c => c.Id == status.DivisionId)?.Description ?? "-";
+                        var isDeleted = status.IsDeleted == true;
+                        var rowClass = isDeleted ? "deleted-row" : "";
                         
+                        // Only count operators if this status is for operators (not Fleet and not Providers)
+                        var isOperatorStatus = status.Fleet != true && status.Providers != true;
+                        var operatorCountForStatus = isOperatorStatus ? (operators?.Count(o => o.DivisionId == status.DivisionId) ?? 0) : 0;
+
                         <tr class="@rowClass">
                             <td>@status.Id</td>
                             <td><strong>@status.Status</strong></td>
-                            <td>
-                                <span class="badge division-badge division-@status.DivisionId">
-                                    @switch(status.DivisionId)
-                                    {
-                                        case "1": @("Operator"); break;
-                                        case "2": @("Fleet"); break;
-                                        case "3": @("Provider"); break;
-                                        case "4": @("Managers"); break;
-                                        case "5": @("CA"); break;
-                                        default: @status.DivisionId; break;
-                                    }
-                                </span>
-                            </td>
+                            <td>@status.Description</td>
+                            <td>@providerName</td>
+                            <td>@status.DivisionId</td>
                             <td>@status.OrderId</td>
                             <td>
                                 @if (pizzaStatus != null)
                                 {
-                                    <span class="badge bg-info">@pizzaStatus.Status</span>
+                                    <span class="badge badge-info">@pizzaStatus.Status</span>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">-</span>
+                                }
+                            </td>
+                            <td>
+                                @if (!string.IsNullOrWhiteSpace(status.AgeDaysAlert))
+                                {
+                                    <span class="operator-count">@status.AgeDaysAlert</span>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">-</span>
+                                }
+                            </td>
+                            <td>
+                                @if (isOperatorStatus && operatorCountForStatus > 0)
+                                {
+                                    <span class="operator-count">@operatorCountForStatus</span>
+                                }
+                                else if (isOperatorStatus)
+                                {
+                                    <span class="text-muted">0</span>
                                 }
                                 else
                                 {
@@ -135,23 +205,23 @@
                                 }
                             </td>
                             <td class="text-center">
-                                @if (status.IsDeleted == true)
+                                @if (!isDeleted)
                                 {
-                                    <span class="badge bg-danger">Deleted</span>
+                                    <span class="badge badge-success">Active</span>
                                 }
                                 else
                                 {
-                                    <span class="badge bg-success">Active</span>
+                                    <span class="badge badge-danger">Deleted</span>
                                 }
                             </td>
                             <td class="text-end">
-                                <div class="btn-group" role="group">
-                                    @if (status.IsDeleted != true)
+                                <div class="action-btns">
+                                    @if (!isDeleted)
                                     {
-                                        <a asp-action="Edit" asp-route-id="@status.Id" class="btn btn-sm btn-outline-primary" title="Edit">
+                                        <a asp-action="Edit" asp-route-id="@status.Id" class="btn-action btn-edit" title="Edit">
                                             <i class="bi bi-pencil"></i>
                                         </a>
-                                        <a asp-action="Delete" asp-route-id="@status.Id" class="btn btn-sm btn-outline-danger" title="Delete">
+                                        <a asp-action="Delete" asp-route-id="@status.Id" class="btn-action btn-delete" title="Delete">
                                             <i class="bi bi-trash"></i>
                                         </a>
                                     }
@@ -159,15 +229,15 @@
                                     {
                                         <form asp-action="Restore" asp-route-id="@status.Id" method="post" style="display:inline;">
                                             @Html.AntiForgeryToken()
-                                            <button type="submit" class="btn btn-sm btn-outline-success" title="Restore">
-                                                <i class="bi bi-arrow-counterclockwise"></i> Restore
+                                            <button type="submit" class="btn-action btn-restore" title="Restore">
+                                                <i class="bi bi-arrow-counterclockwise"></i>
                                             </button>
                                         </form>
                                         <form asp-action="HardDelete" asp-route-id="@status.Id" method="post" style="display:inline;" 
-                                              onsubmit="return confirm('Are you sure you want to permanently delete this status? This cannot be undone.');">
+                                              onsubmit="return confirm('Permanently delete? This cannot be undone.');">
                                             @Html.AntiForgeryToken()
-                                            <button type="submit" class="btn btn-sm btn-outline-danger" title="Permanently Delete">
-                                                <i class="bi bi-trash3"></i> Hard Delete
+                                            <button type="submit" class="btn-action btn-hard-delete" title="Hard Delete">
+                                                <i class="bi bi-trash3"></i>
                                             </button>
                                         </form>
                                     }
@@ -179,8 +249,9 @@
                 else
                 {
                     <tr>
-                        <td colspan="9" class="text-center text-muted py-4">
-                            No statuses found matching the selected filters.
+                        <td colspan="11" class="empty-message">
+                            <i class="bi bi-inbox"></i>
+                            <p>No statuses found matching the selected filters.</p>
                         </td>
                     </tr>
                 }
@@ -188,160 +259,90 @@
         </table>
     </div>
 
-    <div class="summary-section">
-        <p class="text-muted">
-            Showing @Model.Count status@(Model.Count != 1 ? "es" : "")
-        </p>
+    <div class="result-summary">
+        <p>Showing <strong>@Model.Count</strong> status@(Model.Count != 1 ? "es" : "")</p>
     </div>
 </div>
 
 <style>
-    .status-management-container {
-        padding: 20px;
-        max-width: 1400px;
-        margin: 0 auto;
+    * { box-sizing: border-box; }
+    body { background: #f8fafc; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
+
+    .status-management-container { max-width: 1600px; margin: 0 auto; padding: 30px 40px; }
+
+    /* HEADER */
+    .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #e2e8f0; }
+    .header-left { display: flex; align-items: center; gap: 15px; }
+    .header-icon { font-size: 2.5rem; color: #60a5fa; }
+    .page-header h1 { margin: 0; color: #1e293b; font-size: 2rem; font-weight: 700; }
+    .subtitle { margin: 5px 0 0 0; color: #64748b; font-size: 0.95rem; }
+    .btn-create { background: linear-gradient(135deg, #60a5fa 0%, #6366f1 100%); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 2px 8px rgba(96, 165, 250, 0.3); transition: all 0.2s; }
+    .btn-create:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(96, 165, 250, 0.4); color: white; }
+
+    /* FILTER CARD */
+    .filter-card { background: white; border-radius: 12px; padding: 25px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; }
+    .filter-card h3 { margin: 0 0 20px 0; color: #1e293b; font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+    .filter-form { display: block; }
+    .filter-row { display: flex; gap: 15px; align-items: end; flex-wrap: wrap; }
+    .filter-item { flex: 1; min-width: 180px; }
+    .filter-item label { display: block; font-weight: 600; margin-bottom: 6px; color: #475569; font-size: 0.9rem; }
+    .filter-item.checkbox-item { display: flex; align-items: center; min-width: auto; }
+    .filter-item.checkbox-item label { display: flex; align-items: center; gap: 6px; margin: 0; cursor: pointer; font-weight: 500; }
+    .filter-item.checkbox-item input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; }
+    .form-control { width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid #cbd5e1; background: white; color: #1e293b; font-size: 0.95rem; transition: all 0.2s; }
+    .form-control:focus { outline: none; border-color: #60a5fa; box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1); }
+    .filter-actions { display: flex; gap: 10px; }
+    .btn-apply { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s; }
+    .btn-apply:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3); }
+    .btn-clear { background: white; color: #64748b; border: 2px solid #e2e8f0; padding: 8px 20px; border-radius: 8px; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: all 0.2s; }
+    .btn-clear:hover { background: #f8fafc; border-color: #cbd5e1; color: #475569; }
+
+    /* TABLE */
+    .table-container { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; }
+    .status-table { width: 100%; border-collapse: collapse; }
+    .status-table thead { background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); }
+    .status-table th { padding: 16px; text-align: left; font-weight: 600; color: #475569; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid #e2e8f0; }
+    .status-table td { padding: 14px 16px; border-bottom: 1px solid #f1f5f9; vertical-align: middle; }
+    .status-table tbody tr { transition: all 0.15s; }
+    .status-table tbody tr:hover { background: #f8fafc; }
+    .status-table tbody tr.deleted-row { background: #fef2f2; opacity: 0.8; }
+    .status-table tbody tr.deleted-row:hover { background: #fee2e2; }
+    .badge { padding: 5px 10px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; }
+    .badge-info { background: #dbeafe; color: #1e40af; }
+    .badge-success { background: #dcfce7; color: #166534; }
+    .badge-danger { background: #fee2e2; color: #991b1b; }
+    .operator-count { background: #f1f5f9; color: #1e293b; padding: 4px 12px; border-radius: 6px; font-weight: 600; font-size: 0.9rem; display: inline-block; }
+    .text-center { text-align: center; }
+    .text-end { text-align: right; }
+    .text-muted { color: #94a3b8; }
+    .action-btns { display: flex; gap: 8px; justify-content: flex-end; }
+    .btn-action { padding: 8px 12px; border: none; border-radius: 6px; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
+    .btn-edit { background: #dbeafe; color: #1e40af; }
+    .btn-edit:hover { background: #bfdbfe; transform: translateY(-1px); }
+    .btn-delete { background: #fee2e2; color: #991b1b; }
+    .btn-delete:hover { background: #fecaca; transform: translateY(-1px); }
+    .btn-restore { background: #dcfce7; color: #166534; }
+    .btn-restore:hover { background: #bbf7d0; transform: translateY(-1px); }
+    .btn-hard-delete { background: #fef2f2; color: #7f1d1d; border: 2px solid #fee2e2; }
+    .btn-hard-delete:hover { background: #fee2e2; }
+    .empty-message { text-align: center; padding: 60px 20px; color: #94a3b8; }
+    .empty-message i { font-size: 3rem; display: block; margin-bottom: 15px; }
+    .empty-message p { margin: 5px 0 0 0; font-size: 1rem; }
+
+    /* RESULT SUMMARY */
+    .result-summary { margin-top: 20px; padding: 15px 0; color: #64748b; font-size: 0.95rem; }
+    .result-summary strong { color: #1e293b; }
+
+    /* RESPONSIVE */
+    @@media (max-width: 1400px) {
+        .status-table { font-size: 0.9rem; }
+        .status-table th, .status-table td { padding: 12px; }
     }
-
-    .header-section {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 30px;
-        padding-bottom: 15px;
-        border-bottom: 2px solid #e0e0e0;
-    }
-
-    .header-section h1 {
-        margin: 0;
-        color: #2c3e50;
-        font-size: 2rem;
-        font-weight: 600;
-    }
-
-    .filter-section {
-        background: #f8f9fa;
-        padding: 20px;
-        border-radius: 8px;
-        margin-bottom: 25px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
-
-    .filter-form {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 15px;
-        align-items: end;
-    }
-
-    .filter-group {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .filter-group label {
-        font-weight: 600;
-        margin-bottom: 5px;
-        color: #495057;
-        font-size: 0.9rem;
-    }
-
-    .filter-actions {
-        display: flex;
-        gap: 10px;
-        align-items: end;
-    }
-
-    .filter-actions button,
-    .filter-actions a {
-        white-space: nowrap;
-    }
-
-    .status-table {
-        background: white;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-
-    .status-table thead {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-    }
-
-    .status-table thead th {
-        border: none;
-        padding: 15px;
-        font-weight: 600;
-        text-transform: uppercase;
-        font-size: 0.85rem;
-        letter-spacing: 0.5px;
-    }
-
-    .status-table tbody tr {
-        transition: all 0.2s ease;
-    }
-
-    .status-table tbody tr:hover {
-        background-color: #f8f9fa;
-        transform: scale(1.01);
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
-    .status-table tbody td {
-        padding: 12px 15px;
-        vertical-align: middle;
-    }
-
-    .division-badge {
-        font-size: 0.85rem;
-        padding: 5px 12px;
-        border-radius: 20px;
-        font-weight: 600;
-    }
-
-    .division-1 { background: #4CAF50; color: white; }
-    .division-2 { background: #2196F3; color: white; }
-    .division-3 { background: #FF9800; color: white; }
-    .division-4 { background: #9C27B0; color: white; }
-    .division-5 { background: #00BCD4; color: white; }
-
-    .deleted-row {
-        background-color: #ffe6e6 !important;
-        opacity: 0.7;
-    }
-
-    .deleted-row:hover {
-        background-color: #ffd4d4 !important;
-    }
-
-    .btn-group {
-        gap: 5px;
-    }
-
-    .summary-section {
-        margin-top: 20px;
-        padding-top: 15px;
-        border-top: 1px solid #e0e0e0;
-    }
-
-    .table-responsive {
-        border-radius: 8px;
-        overflow: hidden;
-    }
-
-    @media (max-width: 768px) {
-        .filter-form {
-            grid-template-columns: 1fr;
-        }
-
-        .header-section {
-            flex-direction: column;
-            align-items: stretch;
-            gap: 15px;
-        }
-
-        .header-section h1 {
-            font-size: 1.5rem;
-        }
+    @@media (max-width: 768px) {
+        .status-management-container { padding: 20px; }
+        .page-header { flex-direction: column; align-items: flex-start; gap: 15px; }
+        .filter-row { flex-direction: column; align-items: stretch; }
+        .filter-item { width: 100%; }
+        .table-container { overflow-x: auto; }
     }
 </style>

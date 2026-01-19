@@ -1694,6 +1694,20 @@
     "FleetID": null
   },
   {
+    "ID": "F5A3054E-7F05-4792-B28A-540F5BC18C4E",
+    "StatusID": "C5E5F514-11C4-4539-9B5A-B9A8ED62CF76",
+    "OperatorID": "7F87BF3B-1C8C-4EA8-ADA0-1DDB45B9AE2B",
+    "Date": "2026-01-14T22:50:28.407000",
+    "RecordAt": "2026-01-14T22:50:28.407000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "6 - FL",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "26E6B7F6-4041-4DC6-9BEA-3E8D32D36E00",
     "StatusID": "5784C955-A664-4271-9A5C-9EC818D56E18",
     "OperatorID": "48F3C62B-6E3F-494B-B20A-1E8FF0DD4FD2",
@@ -9030,6 +9044,20 @@
     "FleetID": null
   },
   {
+    "ID": "3BD6FDC9-932C-4172-A48D-98DA2C3B2220",
+    "StatusID": "439DBB11-6C9F-4FD7-B90C-239A9BF01EFE",
+    "OperatorID": "023D278A-BD8D-444A-A4CC-6DD6CC5DBA2D",
+    "Date": "2026-01-19T13:20:26.063000",
+    "RecordAt": "2026-01-19T13:20:26.063000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "03BB241E-C94F-4E4A-BFF3-29796B6C6437",
     "StatusID": "F37A9F7C-693C-4F27-B0ED-AD76F464EC76",
     "OperatorID": "110C63B4-432E-420F-864D-6E16FD8B5EF6",
@@ -10556,20 +10584,6 @@
     "FleetID": null
   },
   {
-    "ID": "BA6DC0EB-B999-4214-8CCD-33D3E3AA1491",
-    "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
-    "OperatorID": "939BE1EE-83E5-4F36-973A-7A7E01896739",
-    "Date": "2026-01-14T21:20:29.700000",
-    "RecordAt": "2026-01-14T21:20:29.700000",
-    "RecordBy": null,
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "3 - TX",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
     "ID": "B2A5EDA7-621E-47E9-94C5-F3C4F2555562",
     "StatusID": "2892B645-B6FA-4C37-8F4E-E4A54202AE20",
     "OperatorID": "1F1F1EEE-6643-4C94-A3C7-7DA1EDE36180",
@@ -11503,6 +11517,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "10 - OR",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "030878AE-0C45-4C57-9E96-CD242669B893",
+    "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
+    "OperatorID": "0FA0A873-1E15-4607-A270-87F508E7342C",
+    "Date": "2026-01-19T13:51:39.813000",
+    "RecordAt": "2026-01-19T13:51:39.813000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -15596,6 +15624,20 @@
     "FleetID": null
   },
   {
+    "ID": "90665CC9-A93F-4E62-82AA-1FCD1773DAA3",
+    "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
+    "OperatorID": "06816B42-B753-4D9E-BAFF-B206D663DE51",
+    "Date": "2026-01-19T13:51:40.783000",
+    "RecordAt": "2026-01-19T13:51:40.783000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "CD67226D-37D6-4398-8F04-71E028D1E127",
     "StatusID": "73AEAF4E-937E-47E3-8AD2-5E4115132D2D",
     "OperatorID": "77769C9B-6EE2-4990-B025-B6C4714386E8",
@@ -18928,6 +18970,20 @@
     "FleetID": null
   },
   {
+    "ID": "DD72880D-1C78-4A36-A76B-6566E6CB054B",
+    "StatusID": "5784C955-A664-4271-9A5C-9EC818D56E18",
+    "OperatorID": "D6DE8DD0-5581-492C-B4CC-D465760F5457",
+    "Date": "2026-01-19T14:27:49.097000",
+    "RecordAt": "2026-01-19T14:27:49.097000",
+    "RecordBy": "kelsey@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "6 - FL",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "41AEABB3-A745-4EAE-8243-C1297196C87D",
     "StatusID": "EA630AC9-1B42-4173-8D0E-4108178D24DE",
     "OperatorID": "D6DE8DD0-5581-492C-B4CC-D465760F5457",
@@ -20001,6 +20057,34 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "11 - GA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "4407DA09-EA16-447D-AC4C-4D8566A4ABC8",
+    "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
+    "OperatorID": "290BA1B2-F365-4E11-AF73-DEC9DA5A5AD1",
+    "Date": "2026-01-19T14:20:31.363000",
+    "RecordAt": "2026-01-19T14:20:31.363000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "46227C36-928B-4155-9D54-22BF1D1CE0F8",
+    "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
+    "OperatorID": "290BA1B2-F365-4E11-AF73-DEC9DA5A5AD1",
+    "Date": "2026-01-19T13:51:33.863000",
+    "RecordAt": "2026-01-19T13:51:33.863000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -21555,6 +21639,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "7 - MI",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "ED1E2890-F07D-40C2-B305-34C8F96C9618",
+    "StatusID": "439DBB11-6C9F-4FD7-B90C-239A9BF01EFE",
+    "OperatorID": "B26D20B5-110B-4798-8977-E8CB3FBF1321",
+    "Date": "2026-01-19T12:50:25.690000",
+    "RecordAt": "2026-01-19T12:50:25.690000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null

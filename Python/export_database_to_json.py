@@ -229,8 +229,21 @@ def main():
         export_status_tracker(conn, operator_ids)
         
         # Export reference tables (full export, no sampling)
-        export_table(conn, 'pay_StatusTypes', 'pay_StatusTypes.json', 
-                     where_clause="(isDeleted = 0 OR isDeleted IS NULL)")
+        print("\n📋 Exporting pay_StatusTypes (all fields)...")
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT *
+            FROM pay_StatusTypes
+            WHERE (isDeleted = 0 OR isDeleted IS NULL)
+            ORDER BY DivisionID, 
+                CASE WHEN ISNUMERIC(OrderID) = 1 THEN CAST(OrderID as INT) ELSE 999 END
+        """)
+        status_types = [row_to_dict(cursor, row) for row in cursor.fetchall()]
+        output_file = os.path.join(OUTPUT_DIR, 'pay_StatusTypes.json')
+        with open(output_file, 'w', encoding='utf-8') as f:
+            json.dump(status_types, f, indent=2, ensure_ascii=False)
+        print(f"✅ Exported {len(status_types)} status types")
+        print(f"   Exported to: {output_file}")
         
         export_table(conn, 'pay_PizzaStatus', 'pay_PizzaStatuses.json')
         

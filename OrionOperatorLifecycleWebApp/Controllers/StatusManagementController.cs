@@ -10,35 +10,79 @@ namespace OrionOperatorLifecycleWebApp.Controllers
     {
         private readonly IStatusTypeService _statusTypeService;
         private readonly IPizzaStatusService _pizzaStatusService;
+        private readonly IOperatorService _operatorService;
+        private readonly IClientService _clientService;
 
         public StatusManagementController(
             IStatusTypeService statusTypeService,
-            IPizzaStatusService pizzaStatusService)
+            IPizzaStatusService pizzaStatusService,
+            IOperatorService operatorService,
+            IClientService clientService)
         {
             _statusTypeService = statusTypeService;
             _pizzaStatusService = pizzaStatusService;
+            _operatorService = operatorService;
+            _clientService = clientService;
         }
 
         // GET: /StatusManagement/
-        public IActionResult Index(string division = null, bool? fleet = null, bool? providers = null, bool? isDeleted = null)
+        public IActionResult Index(string division = null, string divisionFilter = null, bool? operators = null, bool? fleet = null, bool? providers = null, bool? hasProvider = null, bool? isDeleted = null)
         {
             var allStatuses = _statusTypeService.GetAllStatusTypes();
             var pizzaStatuses = _pizzaStatusService.GetAllPizzaStatuses();
+            var allOperators = _operatorService.GetAllOperators();
+            var clients = _clientService.GetAllClients();
+
+            // Calculate operator counts per division (only where Fleet=false and Providers=false)
+            var operatorCounts = allOperators
+                .Where(o => o.IsDeleted != true)
+                .GroupBy(o => o.DivisionId)
+                .ToDictionary(
+                    g => g.Key ?? "",
+                    g => g.Count()
+                );
 
             // Apply filters
             if (!string.IsNullOrEmpty(division) && division != "ALL")
             {
+                // Client filter (if wired to a client identifier)
                 allStatuses = allStatuses.Where(s => s.DivisionId == division).ToList();
             }
 
-            if (fleet.HasValue)
+            if (!string.IsNullOrEmpty(divisionFilter))
             {
-                allStatuses = allStatuses.Where(s => s.Fleet == fleet.Value).ToList();
+                // Explicit DivisionID filter
+                allStatuses = allStatuses.Where(s => s.DivisionId == divisionFilter).ToList();
             }
 
-            if (providers.HasValue)
+            if (operators.HasValue && operators.Value)
             {
-                allStatuses = allStatuses.Where(s => s.Providers == providers.Value).ToList();
+                // Operators only: Fleet != true AND Providers != true
+                allStatuses = allStatuses.Where(s => s.Fleet != true && s.Providers != true).ToList();
+            }
+
+            if (fleet.HasValue && fleet.Value)
+            {
+                allStatuses = allStatuses.Where(s => s.Fleet == true).ToList();
+            }
+
+            if (providers.HasValue && providers.Value)
+            {
+                allStatuses = allStatuses.Where(s => s.Providers == true).ToList();
+            }
+
+            if (hasProvider.HasValue)
+            {
+                if (hasProvider.Value)
+                {
+                    // Has Provider: DivisionId is not null or empty
+                    allStatuses = allStatuses.Where(s => !string.IsNullOrEmpty(s.DivisionId)).ToList();
+                }
+                else
+                {
+                    // No Provider: DivisionId is null or empty
+                    allStatuses = allStatuses.Where(s => string.IsNullOrEmpty(s.DivisionId)).ToList();
+                }
             }
 
             if (isDeleted.HasValue)
@@ -58,9 +102,15 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                 .ToList();
 
             ViewBag.PizzaStatuses = pizzaStatuses;
+            ViewBag.Clients = clients;
+            ViewBag.Operators = allOperators;
+            ViewBag.OperatorCounts = operatorCounts;
             ViewBag.SelectedDivision = division;
+            ViewBag.SelectedDivisionFilter = divisionFilter;
+            ViewBag.SelectedOperators = operators;
             ViewBag.SelectedFleet = fleet;
             ViewBag.SelectedProviders = providers;
+            ViewBag.SelectedHasProvider = hasProvider;
             ViewBag.SelectedIsDeleted = isDeleted;
 
             return View(allStatuses);
