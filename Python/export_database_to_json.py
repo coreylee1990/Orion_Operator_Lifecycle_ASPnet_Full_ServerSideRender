@@ -2,18 +2,6 @@
 Export SQL Database to JSON Files
 ==================================
 Exports data from the Orion SQL database to JSON files for the ASP.NET app.
-
-Key Features:
-- Exports operators with sampling: max 10 operators per division/status combination
-- Exports all related tables (StatusTypes, PizzaStatuses, CertTypes, Certifications, etc.)
-- Maintains data relationships and referential integrity
-- Outputs to OrionOperatorLifecycleWebApp/App_Data/ folder
-
-Usage:
-    python export_database_to_json.py
-
-Requirements:
-    pip install pyodbc
 """
 
 import pyodbc
@@ -21,9 +9,8 @@ import json
 import os
 from datetime import datetime
 from decimal import Decimal
-from collections import defaultdict
 
-# Database connection details (from appsettings.Development.json)
+# Database connection details
 SERVER = 'oriontcms.database.windows.net'
 DATABASE = 'Orion'
 USERNAME = 'tcms_admin'
@@ -47,14 +34,13 @@ def connect_to_database():
         raise
 
 def convert_value(value):
-    """Convert SQL value to JSON-compatible format matching existing JSON schema."""
+    """Convert SQL value to JSON-compatible format."""
     if value is None:
         return None
     if isinstance(value, datetime):
         return value.isoformat()
     if isinstance(value, Decimal):
         return float(value)
-
     if isinstance(value, bytes):
         return value.decode('utf-8', errors='ignore')
     return value
@@ -65,23 +51,12 @@ def row_to_dict(cursor, row):
     return {col: convert_value(val) for col, val in zip(columns, row)}
 
 def export_operators(conn, max_per_division_status=10):
-    """
-    Export operators with sampling strategy.
-    
-    Strategy:
-    - For each division + status combination, select max 10 operators
-    - Ensures diverse representation across all divisions and statuses
-    - Prioritizes recently updated operators
-    """
+    """Export operators with sampling strategy."""
     cursor = conn.cursor()
-    
-    # Get all division/status combinations with operator counts
     print("\n📊 Analyzing operator distribution...")
+    
     cursor.execute("""
-        SELECT 
-            DivisionID,
-            Status,
-            COUNT(*) as OperatorCount
+        SELECT DivisionID, Status, COUNT(*) as OperatorCount
         FROM pay_Operators
         WHERE (IsDeleted = 0 OR IsDeleted IS NULL)
         GROUP BY DivisionID, Status
@@ -89,36 +64,17 @@ def export_operators(conn, max_per_division_status=10):
     """)
     
     combinations = cursor.fetchall()
-    print(f"   Found {len(combinations)} division/status combinations")
-    
-    # Sample operators from each combination
     sampled_operators = []
     operator_ids = set()
     
     for combo in combinations:
         division, status, count = combo
-
-        # Get top N operators from this division/status (most recently updated first)
-        # Export only real Operator columns; no synthetic StatusName/OrderId fields
         cursor.execute(f"""
             SELECT TOP {max_per_division_status}
-                ID,
-                FirstName,
-                LastName,
-                Email,
-                Mobile,
-                DivisionID,
-                Status,
-                StatusID,
-                IsDeleted,
-                RecordAt,
-                RecordBy,
-                UpdateAt,
-                UpdateBy
+                ID, FirstName, LastName, Email, Mobile, DivisionID,
+                Status, StatusID, IsDeleted, RecordAt, RecordBy, UpdateAt, UpdateBy
             FROM pay_Operators
-            WHERE DivisionID = ? 
-              AND Status = ?
-              AND (IsDeleted = 0 OR IsDeleted IS NULL)
+            WHERE DivisionID = ? AND Status = ? AND (IsDeleted = 0 OR IsDeleted IS NULL)
             ORDER BY UpdateAt DESC, RecordAt DESC
         """, (division, status))
         
@@ -130,140 +86,100 @@ def export_operators(conn, max_per_division_status=10):
         
         print(f"   {division} - {status}: Selected {len(rows)} of {count} operators")
     
-    print(f"\n✅ Total operators sampled: {len(sampled_operators)}")
-    
-    # Export to JSON
     output_file = os.path.join(OUTPUT_DIR, 'pay_Operators.json')
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(sampled_operators, f, indent=2, ensure_ascii=False)
-    print(f"   Exported to: {output_file}")
     
-    return operator_ids
+    return list(operator_ids)
 
-def export_certifications(conn, operator_ids):
-    """Export certifications for the sampled operators."""
-    cursor = conn.cursor()
-    
-    # Convert operator_ids set to SQL-compatible format
+def export_related_data(conn, table_name, operator_ids, output_filename):
+    """Helper to export records filtered by OperatorID list."""
     if not operator_ids:
-        print("⚠️  No operators to export certifications for")
         return
     
-    operator_ids_list = "', '".join(operator_ids)
-    
-    print("\n📜 Exporting certifications...")
-    cursor.execute(f"""
-        SELECT *
-        FROM pay_Certifications
-        WHERE OperatorID IN ('{operator_ids_list}')
-          AND (IsDeleted = 0 OR IsDeleted IS NULL)
-        ORDER BY OperatorID, Date DESC
-    """)
-    
-    certifications = [row_to_dict(cursor, row) for row in cursor.fetchall()]
-    
-    output_file = os.path.join(OUTPUT_DIR, 'pay_Certifications.json')
-    with open(output_file, 'w', encoding='utf-8') as f:
-        json.dump(certifications, f, indent=2, ensure_ascii=False)
-    
-    print(f"✅ Exported {len(certifications)} certifications")
-    print(f"   Exported to: {output_file}")
-
-def export_status_tracker(conn, operator_ids):
-    """Export status tracker records for the sampled operators."""
     cursor = conn.cursor()
+    # SQL Server has a limit on parameters, but for ~100-200 IDs this is fine
+    placeholders = ','.join(['?' for _ in operator_ids])
+    query = f"SELECT * FROM {table_name} WHERE OperatorID IN ({placeholders})"
     
-    if not operator_ids:
-        print("⚠️  No operators to export status tracker for")
-        return
+    print(f"\n🔗 Exporting {table_name} for sampled operators...")
+    cursor.execute(query, operator_ids)
+    rows = [row_to_dict(cursor, row) for row in cursor.fetchall()]
     
-    operator_ids_list = "', '".join(operator_ids)
-    
-    print("\n📊 Exporting status tracker...")
-    cursor.execute(f"""
-        SELECT *
-        FROM pay_StatusTracker
-        WHERE OperatorID IN ('{operator_ids_list}')
-        ORDER BY OperatorID, Date DESC
-    """)
-    
-    status_tracker = [row_to_dict(cursor, row) for row in cursor.fetchall()]
-    
-    output_file = os.path.join(OUTPUT_DIR, 'pay_StatusTracker.json')
+    output_file = os.path.join(OUTPUT_DIR, output_filename)
     with open(output_file, 'w', encoding='utf-8') as f:
-        json.dump(status_tracker, f, indent=2, ensure_ascii=False)
-    
-    print(f"✅ Exported {len(status_tracker)} status tracker records")
-    print(f"   Exported to: {output_file}")
+        json.dump(rows, f, indent=2, ensure_ascii=False)
+    print(f"✅ Exported {len(rows)} records to {output_filename}")
 
-def export_table(conn, table_name, output_filename=None, where_clause=""):
+def export_cert_types(conn):
+    """Export pay_CertTypes with specific required fields."""
+    cursor = conn.cursor()
+    print("\n📜 Exporting pay_CertTypes (Specific Fields)...")
+    
+    # Query updated to include your requested fields
+    query = """
+        SELECT 
+            ID, 
+            Certification, 
+            Description, 
+            DivisionID, 
+            isFleet, 
+            isProvider, 
+            isDeleted, 
+            MobileAppOrder, 
+            DocumentTypeID
+        FROM pay_CertTypes
+        WHERE (isDeleted = 0 OR isDeleted IS NULL)
+        ORDER BY DivisionID, MobileAppOrder
+    """
+    cursor.execute(query)
+    rows = [row_to_dict(cursor, row) for row in cursor.fetchall()]
+    
+    output_file = os.path.join(OUTPUT_DIR, 'pay_CertTypes.json')
+    with open(output_file, 'w', encoding='utf-8') as f:
+        json.dump(rows, f, indent=2, ensure_ascii=False)
+    print(f"✅ Exported {len(rows)} CertTypes")
+
+def export_table(conn, table_name, output_filename, where_clause=""):
     """Export a complete table to JSON."""
     cursor = conn.cursor()
-    
-    if output_filename is None:
-        output_filename = f'{table_name}.json'
-    
     query = f"SELECT * FROM {table_name}"
     if where_clause:
         query += f" WHERE {where_clause}"
     
     print(f"\n📋 Exporting {table_name}...")
     cursor.execute(query)
-    
     rows = [row_to_dict(cursor, row) for row in cursor.fetchall()]
     
     output_file = os.path.join(OUTPUT_DIR, output_filename)
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(rows, f, indent=2, ensure_ascii=False)
-    
     print(f"✅ Exported {len(rows)} records")
-    print(f"   Exported to: {output_file}")
 
 def main():
-    """Main export function."""
     print("=" * 60)
     print("SQL Database to JSON Export")
     print("=" * 60)
     
-    # Ensure output directory exists
     os.makedirs(OUTPUT_DIR, exist_ok=True)
-    print(f"\n📁 Output directory: {OUTPUT_DIR}")
-    
-    # Connect to database
     conn = connect_to_database()
     
     try:
-        # Export operators with sampling (max 10 per division/status)
+        # 1. Export Operators (Sampled)
         operator_ids = export_operators(conn, max_per_division_status=10)
         
-        # Export certifications for sampled operators
-        export_certifications(conn, operator_ids)
+        # 2. Export Related Child Data
+        export_related_data(conn, 'pay_Certifications', operator_ids, 'pay_Certifications.json')
+        export_related_data(conn, 'pay_StatusTracker', operator_ids, 'pay_StatusTracker.json')
         
-        # Export status tracker for sampled operators
-        export_status_tracker(conn, operator_ids)
+        # 3. Export Reference Tables
+        # Updated CertTypes function with your specific fields
+        export_cert_types(conn)
         
-        # Export reference tables (full export, no sampling)
-        print("\n📋 Exporting pay_StatusTypes (all fields)...")
-        cursor = conn.cursor()
-        cursor.execute("""
-            SELECT *
-            FROM pay_StatusTypes
-            WHERE (isDeleted = 0 OR isDeleted IS NULL)
-            ORDER BY DivisionID, 
-                CASE WHEN ISNUMERIC(OrderID) = 1 THEN CAST(OrderID as INT) ELSE 999 END
-        """)
-        status_types = [row_to_dict(cursor, row) for row in cursor.fetchall()]
-        output_file = os.path.join(OUTPUT_DIR, 'pay_StatusTypes.json')
-        with open(output_file, 'w', encoding='utf-8') as f:
-            json.dump(status_types, f, indent=2, ensure_ascii=False)
-        print(f"✅ Exported {len(status_types)} status types")
-        print(f"   Exported to: {output_file}")
+        export_table(conn, 'pay_StatusTypes', 'pay_StatusTypes.json', 
+                     "(isDeleted = 0 OR isDeleted IS NULL)")
         
         export_table(conn, 'pay_PizzaStatus', 'pay_PizzaStatuses.json')
-        
-        export_table(conn, 'pay_CertTypes', 'pay_CertTypes.json',
-                     where_clause="(isDeleted = 0 OR isDeleted IS NULL)")
-        
         export_table(conn, 'pay_Clients', 'pay_Clients.json')
         
         print("\n" + "=" * 60)
@@ -275,7 +191,6 @@ def main():
         raise
     finally:
         conn.close()
-        print("\n🔒 Database connection closed")
 
 if __name__ == '__main__':
     main()

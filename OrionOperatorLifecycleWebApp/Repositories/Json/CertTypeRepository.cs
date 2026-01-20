@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using OrionOperatorLifecycleWebApp.Models;
 
 namespace OrionOperatorLifecycleWebApp.Repositories
@@ -55,8 +56,42 @@ namespace OrionOperatorLifecycleWebApp.Repositories
 
         public void SaveAll(List<CertType> certTypes)
         {
+            if (certTypes == null || certTypes.Count == 0)
+            {
+                return; // Nothing to save
+            }
+
+            // MERGE logic: Load existing, update/add modified items, preserve others
+            var existing = GetAll();
+            var existingById = existing.ToDictionary(c => c.Id ?? "", c => c);
+
+            foreach (var certType in certTypes)
+            {
+                var id = certType.Id ?? "";
+                if (string.IsNullOrEmpty(id) || id.StartsWith("TEMP-"))
+                {
+                    // New item - generate a real ID and add
+                    certType.Id = System.Guid.NewGuid().ToString();
+                    existing.Add(certType);
+                }
+                else if (existingById.ContainsKey(id))
+                {
+                    // Update existing item
+                    var idx = existing.FindIndex(c => c.Id == id);
+                    if (idx >= 0)
+                    {
+                        existing[idx] = certType;
+                    }
+                }
+                else
+                {
+                    // New item with ID - add it
+                    existing.Add(certType);
+                }
+            }
+
             var options = new System.Text.Json.JsonSerializerOptions { WriteIndented = true };
-            var json = System.Text.Json.JsonSerializer.Serialize(certTypes, options);
+            var json = System.Text.Json.JsonSerializer.Serialize(existing, options);
             System.IO.File.WriteAllText(_filePath, json);
         }
     }

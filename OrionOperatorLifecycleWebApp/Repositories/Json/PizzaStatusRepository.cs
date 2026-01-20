@@ -26,10 +26,42 @@ namespace OrionOperatorLifecycleWebApp.Repositories
 
         public void SaveAll(List<PizzaStatus> pizzaStatuses)
         {
-            if (pizzaStatuses == null) throw new ArgumentNullException(nameof(pizzaStatuses));
+            if (pizzaStatuses == null || pizzaStatuses.Count == 0)
+            {
+                return; // Nothing to save
+            }
+
+            // MERGE logic: Load existing, update/add modified items, preserve others
+            var existing = GetAll();
+            var existingById = existing.ToDictionary(p => p.Id ?? "", p => p);
+
+            foreach (var pizzaStatus in pizzaStatuses)
+            {
+                var id = pizzaStatus.Id ?? "";
+                if (string.IsNullOrEmpty(id))
+                {
+                    // New item without ID - generate one and add
+                    pizzaStatus.Id = System.Guid.NewGuid().ToString();
+                    existing.Add(pizzaStatus);
+                }
+                else if (existingById.ContainsKey(id))
+                {
+                    // Update existing item
+                    var idx = existing.FindIndex(p => p.Id == id);
+                    if (idx >= 0)
+                    {
+                        existing[idx] = pizzaStatus;
+                    }
+                }
+                else
+                {
+                    // New item with ID - add it
+                    existing.Add(pizzaStatus);
+                }
+            }
 
             var options = new JsonSerializerOptions { WriteIndented = true };
-            var json = JsonSerializer.Serialize(pizzaStatuses, options);
+            var json = JsonSerializer.Serialize(existing, options);
             File.WriteAllText(_filePath, json);
         }
     }

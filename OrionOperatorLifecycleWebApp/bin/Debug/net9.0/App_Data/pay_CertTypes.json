@@ -484,7 +484,7 @@
     "Certification": "Driver\u0027s License",
     "Description": "Drivers License",
     "DivisionID": "5 - CA",
-    "PizzaStatusID": "D884F3D1-8AA3-48A3-B172-DF754283F4C2",
+    "PizzaStatusID": null,
     "isDeleted": false
   },
   {
@@ -3044,7 +3044,7 @@
     "Certification": "Purchase Your Courses",
     "Description": "Website to purchase discounted CTAA and Def Drive Courses",
     "DivisionID": "11 - GA",
-    "PizzaStatusID": null,
+    "PizzaStatusID": "D884F3D1-8AA3-48A3-B172-DF754283F4C2",
     "isDeleted": false
   },
   {
@@ -3108,7 +3108,7 @@
     "Certification": "Social Security Card",
     "Description": "Social Security Card",
     "DivisionID": "5 - CA",
-    "PizzaStatusID": "D884F3D1-8AA3-48A3-B172-DF754283F4C2",
+    "PizzaStatusID": null,
     "isDeleted": false
   },
   {
@@ -5188,7 +5188,7 @@
     "Certification": "Purchase Your Courses",
     "Description": "Website that offers discounted CTAA and Def Drive Courses",
     "DivisionID": "5 - CA",
-    "PizzaStatusID": null,
+    "PizzaStatusID": "D884F3D1-8AA3-48A3-B172-DF754283F4C2",
     "isDeleted": false
   },
   {
@@ -5476,7 +5476,7 @@
     "Certification": "Driver\u0027s License",
     "Description": "Drivers License",
     "DivisionID": "8 - OH",
-    "PizzaStatusID": "D884F3D1-8AA3-48A3-B172-DF754283F4C2",
+    "PizzaStatusID": "9814CCF3-6F40-4480-BB3B-76DA6E727947",
     "isDeleted": false
   },
   {
@@ -6308,7 +6308,7 @@
     "Certification": "Purchase Your Courses",
     "Description": "Website that offers discounted CTAA and Def Drive Courses",
     "DivisionID": "2 - IL",
-    "PizzaStatusID": null,
+    "PizzaStatusID": "D884F3D1-8AA3-48A3-B172-DF754283F4C2",
     "isDeleted": false
   },
   {

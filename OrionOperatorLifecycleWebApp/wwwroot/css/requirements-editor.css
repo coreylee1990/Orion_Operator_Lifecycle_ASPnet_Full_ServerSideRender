@@ -743,13 +743,16 @@ h1 {
 
         .operator-item {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            align-items: center;
+            gap: 12px;
             padding: 10px 16px;
             background: #ffffff;
             border: 1px solid #dee2e6;
             border-radius: 6px;
             margin-bottom: 8px;
             transition: all 0.2s ease;
+            cursor: pointer;
         }
 
         .operator-item:hover {
@@ -766,6 +769,48 @@ h1 {
         .operator-item.operator-overdue:hover {
             border-color: rgba(239, 68, 68, 0.7);
             background: rgba(239, 68, 68, 0.15);
+        }
+
+        .operator-avatar {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1382CA, #0ea5e9);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .operator-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            min-width: 0;
+        }
+
+        .operator-meta {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .complete-badge {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0acf97, #34d399);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
         }
 
         .operator-name-row {
@@ -822,18 +867,17 @@ h1 {
 
         .operator-progress {
             width: 100%;
-            height: 20px;
+            height: 6px;
             background: #e9ecef;
-            border-radius: 10px;
+            border-radius: 3px;
             overflow: hidden;
             display: flex;
-            border: 1px solid #dee2e6;
         }
 
         .operator-progress-segment {
             height: 100%;
             transition: width 0.3s ease;
-            min-width: 3px;
+            min-width: 2px;
         }
 
         .operator-progress-segment.valid {

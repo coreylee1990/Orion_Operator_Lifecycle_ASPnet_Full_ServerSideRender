@@ -25,10 +25,11 @@ if (useSqlDatabase)
         options.UseSqlServer(connectionString, sqlOptions =>
         {
             // Enable automatic retry on transient failures (Azure SQL connection drops, etc.)
+            // Include common Azure SQL transient error numbers
             sqlOptions.EnableRetryOnFailure(
-                maxRetryCount: 5,
+                maxRetryCount: 6,
                 maxRetryDelay: TimeSpan.FromSeconds(30),
-                errorNumbersToAdd: null);
+                errorNumbersToAdd: new[] { 10054, 10053, 10060, 40613, 40501, 40197, 49918, 49919, 49920 });
         }));
 
     // Register SQL Repositories

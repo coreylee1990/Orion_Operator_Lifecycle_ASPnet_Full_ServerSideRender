@@ -796,18 +796,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 if (cancelLoadData) { isLoadingData = false; return; }
 
-                // Load cert types from API endpoint, scoped strictly to the
-                // PizzaStatuses that are actually visible in the workflow.
+                // Load all cert types from API endpoint to ensure general certifications
+                // (like Driver's License with PizzaStatusID=null) are available for add/search.
+                // We rely on client-side filtering (handleCertInput) to narrow down the list.
                 let certTypesUrl = '/api/data/certtypes';
                 const queryParams = [];
-                if (visiblePizzaStatusIds.length > 0) {
-                    queryParams.push('pizzaStatusIds=' + encodeURIComponent(visiblePizzaStatusIds.join(',')));
-                }
-                // Retain clientId as a hint for any future server-side logic,
-                // though the primary filter is PizzaStatusId.
-                if (mainClientFilter && mainClientFilter !== '') {
-                    queryParams.push('clientId=' + encodeURIComponent(mainClientFilter));
-                }
+                // Query params removed to force loading ALL cert types
+                
                 queryParams.push('v=' + Date.now());
                 if (queryParams.length > 0) {
                     certTypesUrl += '?' + queryParams.join('&');
@@ -970,21 +965,36 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             if (divStatuses.length > 0) {
-                // Group by status name to avoid duplicates in ALL mode
-                if (mainDivisionFilter === 'ALL') {
-                    const statusMap = new Map();
-                    divStatuses.forEach(st => {
-                        if (!statusMap.has(st.Status)) {
-                            statusMap.set(st.Status, st);
+                // Deduplicate by status name to avoid showing duplicates
+                // This handles both ALL mode and specific division mode
+                const statusMap = new Map();
+                divStatuses.forEach(st => {
+                    const stId = st.ID || st.Id;
+                    // Use Status + DivisionID as key to avoid cross-division duplicates in ALL mode
+                    const divisionKey = mainDivisionFilter === 'ALL' ? '' : (st.DivisionID || st.DivisionId || '');
+                    const key = `${st.Status}||${divisionKey}`;
+                    
+                    if (!statusMap.has(key)) {
+                        statusMap.set(key, st);
+                    } else {
+                        // If duplicate found, keep the one with lower OrderID (or first encountered)
+                        const existing = statusMap.get(key);
+                        const existingOrder = parseInt(existing.OrderID) || 9999;
+                        const currentOrder = parseInt(st.OrderID) || 9999;
+                        if (currentOrder < existingOrder) {
+                            console.warn(`Duplicate StatusType found: "${st.Status}" in division ${divisionKey}. Keeping ID ${stId} (Order ${currentOrder}) over ID ${existing.ID || existing.Id} (Order ${existingOrder})`);
+                            statusMap.set(key, st);
+                        } else {
+                            console.warn(`Duplicate StatusType found: "${st.Status}" in division ${divisionKey}. Keeping ID ${existing.ID || existing.Id} (Order ${existingOrder}), discarding ID ${stId} (Order ${currentOrder})`);
                         }
-                    });
-                    divStatuses = Array.from(statusMap.values());
-                    divStatuses.sort((a, b) => {
-                        const ordA = parseInt(a.OrderID) || 9999;
-                        const ordB = parseInt(b.OrderID) || 9999;
-                        return ordA - ordB;
-                    });
-                }
+                    }
+                });
+                divStatuses = Array.from(statusMap.values());
+                divStatuses.sort((a, b) => {
+                    const ordA = parseInt(a.OrderID) || 9999;
+                    const ordB = parseInt(b.OrderID) || 9999;
+                    return ordA - ordB;
+                });
                 
                 currentWorkflow = divStatuses.map((st, idx) => ({
                     step: (parseInt(st.OrderID) || (idx + 1)),
@@ -1022,14 +1032,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Update the underlying statusType object directly via reference
                 if (item.originalObj) {
                     item.originalObj.OrderID = newOrder;
+                    const objId = item.originalObj.ID || item.originalObj.Id;  // Handle case variations
+                    if (objId) modifiedStatusTypeIds.add(objId);  // Track modified
                 }
                 
                 // Also find and update in the global statusTypes array by Status + DivisionID
                 const globalStatusType = statusTypes.find(st => 
-                    st.Status === item.status && st.DivisionID === mainDivisionFilter
+                    st.Status === item.status && (st.DivisionID === mainDivisionFilter || st.DivisionId === mainDivisionFilter)
                 );
                 if (globalStatusType) {
                     globalStatusType.OrderID = newOrder;
+                    const stId = globalStatusType.ID || globalStatusType.Id;  // Handle case variations
+                    if (stId) modifiedStatusTypeIds.add(stId);  // Track modified
                 }
             });
             
@@ -1523,9 +1537,11 @@ document.addEventListener('DOMContentLoaded', function() {
                                 if (op.LastName === 'Quainton') {
                                 }
 
-                                const total = validCount + missingCount; // Only count valid and missing, exclude expired
-                                const validPercent = total > 0 ? (validCount / total * 100) : 0;
-                                const isComplete = total > 0 && validCount === total;
+                                const totalAll = validCount + expiredCount + missingCount;
+                                const validPercent = totalAll > 0 ? (validCount / totalAll * 100) : 0;
+                                const expiredPercent = totalAll > 0 ? (expiredCount / totalAll * 100) : 0;
+                                const missingPercent = totalAll > 0 ? (missingCount / totalAll * 100) : 0;
+                                const isComplete = totalAll > 0 && validCount === totalAll;
 
                                 // Calculate days in current status
                                 const daysInStatus = getOperatorDaysInStatus(op.ID);
@@ -1536,8 +1552,26 @@ document.addEventListener('DOMContentLoaded', function() {
                                     </span>` : '';
                                 
                                 // Cert count display (valid/total)
-                                const certCountDisplay = total > 0 ? 
-                                    `<span class="operator-cert-count" title="${validCount} valid, ${missingCount} missing">${validCount}/${total}</span>` : '';
+                                const certCountDisplay = totalAll > 0 ? 
+                                    `<span class="operator-cert-count" title="${validCount} valid, ${expiredCount} expired, ${missingCount} missing">${validCount}/${totalAll}</span>` : '';
+
+                                // Build progress bar HTML
+                                let progressBarHtml = '';
+                                if (totalAll > 0) {
+                                    progressBarHtml = `
+                                        <div class="operator-progress" title="${validCount} valid, ${expiredCount} expired, ${missingCount} missing">
+                                            ${validPercent > 0 ? `<div class="operator-progress-segment valid" style="width: ${validPercent}%"></div>` : ''}
+                                            ${expiredPercent > 0 ? `<div class="operator-progress-segment expired" style="width: ${expiredPercent}%"></div>` : ''}
+                                            ${missingPercent > 0 ? `<div class="operator-progress-segment missing" style="width: ${missingPercent}%"></div>` : ''}
+                                        </div>
+                                    `;
+                                } else {
+                                    progressBarHtml = `
+                                        <div class="operator-progress" title="No certifications required">
+                                            <div class="operator-progress-segment no-data" style="width: 100%"></div>
+                                        </div>
+                                    `;
+                                }
 
                                 // Render operator card directly (no server fetch needed)
                                 const opName = (op.FirstName || '') + ' ' + (op.LastName || '');
@@ -1550,6 +1584,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <div class="operator-avatar">${opInitials}</div>
                                         <div class="operator-info">
                                             <span class="operator-name">${opName.trim() || 'Unknown'}</span>
+                                            ${progressBarHtml}
                                             <div class="operator-meta">
                                                 ${daysDisplay}
                                                 ${certCountDisplay}
@@ -1776,54 +1811,103 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            // Get current division filter (use selectedDivision for edit mode)
-            const currentFilter = editMode ? selectedDivision : mainDivisionFilter;
+            // Get the current step's status info
+            const currentStep = currentWorkflow[stepIndex];
+            if (!currentStep) {
+                dropdown.classList.remove('active');
+                return;
+            }
             
-            // Filter certifications by search term
-            let matches = allExistingCerts.filter(cert => 
-                cert.name.toLowerCase().includes(value)
-            );
+            const statusName = currentStep.status;
+            const pizzaStatusId = currentStep.originalObj?.PizzaStatusID || currentStep.originalObj?.PizzaStatusId;
             
-            // Filter by division if specific division selected
-            if (currentFilter !== 'ALL') {
-                const beforeCount = matches.length;
-                matches = matches.filter(cert => {
-                    // Check if ANY of the cert's individual entries (cert types) match the filter division
-                    const hasMatch = cert.entries.some(entry => {
-                        // Handle both "12 - PA" and "12-PA" formats
-                        const divNum = currentFilter.replace(' - ', '-').split('-')[0];
-                        const matches = entry.division && entry.division.includes(divNum);
-                        return matches;
-                    });
-                    return hasMatch;
-                });
-                if (matches.length > 0 && matches.length <= 3) {
+            // Get the PizzaStatus to find Client info
+            let clientId = null;
+            if (pizzaStatusId && pizzaStatuses && Array.isArray(pizzaStatuses)) {
+                const ps = pizzaStatuses.find(p => (p.ID || p.Id) === pizzaStatusId);
+                if (ps) {
+                    clientId = ps.ClientId || ps.ClientID || ps.clientId || ps.clientID;
                 }
             }
             
-            // Limit to top 20 matches
-            matches = matches.slice(0, 20);
+            // Get certs already on this status (to exclude from suggestions)
+            const existingCertsOnStatus = getRequiredCertsForStatus(statusName, pizzaStatusId);
+            const existingCertNamesNormalized = new Set(existingCertsOnStatus.map(c => normalizeCertName(c)));
             
-            if (matches.length === 0) {
-                const filterMsg = currentFilter !== 'ALL' ? ` for division ${currentFilter}` : '';
+            // Build filtered list of available certs
+            let availableCerts = [];
+            
+            if (certTypes && Array.isArray(certTypes)) {
+                // Group certs by name for display
+                const certsMap = new Map();
+                
+                certTypes.forEach(ct => {
+                    const certName = ct.Certification;
+                    if (!certName) return;
+                    
+                    // Skip deleted certs
+                    if (ct.isDeleted === true || ct.IsDeleted === true) return;
+                    
+                    const ctDivision = ct.DivisionID || ct.DivisionId;
+                    const ctPizzaStatusId = ct.PizzaStatusID || ct.PizzaStatusId;
+                    
+                    // Filter by division
+                    if (mainDivisionFilter !== 'ALL' && ctDivision !== mainDivisionFilter) return;
+                    
+                    // Only allow whitelisted divisions
+                    if (ctDivision && !ALLOWED_DIVISIONS.includes(ctDivision)) return;
+                    
+                    // Filter by Client if we have a client filter
+                    if (clientId && ctPizzaStatusId) {
+                        const ctPizzaStatus = pizzaStatuses.find(p => (p.ID || p.Id) === ctPizzaStatusId);
+                        if (ctPizzaStatus) {
+                            const ctClientId = ctPizzaStatus.ClientId || ctPizzaStatus.ClientID;
+                            if (ctClientId && ctClientId !== clientId) return;
+                        }
+                    }
+                    
+                    // Skip if already on this status
+                    if (existingCertNamesNormalized.has(normalizeCertName(certName))) return;
+                    
+                    // Search filter
+                    if (!certName.toLowerCase().includes(value)) return;
+                    
+                    // Group by cert name
+                    if (!certsMap.has(certName)) {
+                        certsMap.set(certName, {
+                            name: certName,
+                            divisions: new Set(),
+                            pizzaStatuses: new Set()
+                        });
+                    }
+                    const entry = certsMap.get(certName);
+                    if (ctDivision) entry.divisions.add(ctDivision);
+                    if (ctPizzaStatusId) entry.pizzaStatuses.add(ctPizzaStatusId);
+                });
+                
+                availableCerts = Array.from(certsMap.values()).map(data => ({
+                    name: data.name,
+                    divisions: Array.from(data.divisions).sort(),
+                    divisionCount: data.divisions.size,
+                    pizzaStatusCount: data.pizzaStatuses.size
+                }));
+                
+                // Sort by division count (most common first)
+                availableCerts.sort((a, b) => b.divisionCount - a.divisionCount);
+            }
+            
+            // Limit to top 20 matches
+            availableCerts = availableCerts.slice(0, 20);
+            
+            if (availableCerts.length === 0) {
+                const filterMsg = mainDivisionFilter !== 'ALL' ? ` for division ${mainDivisionFilter}` : '';
                 dropdown.innerHTML = `<div class="autocomplete-no-results">No matches found${filterMsg}. Press Enter to add as new certification.</div>`;
                 dropdown.classList.add('active');
             } else {
-                dropdown.innerHTML = matches.map((cert, idx) => {
-                    let displayDivisions = cert.divisions;
-                    
-                    // If filtering, only show matching divisions in the subtitle to reduce noise
-                    if (currentFilter !== 'ALL') {
-                        // Use helper to find matches
-                        displayDivisions = displayDivisions.filter(d => isDivisionMatch(d, currentFilter));
-                    }
-                    
-                    // Filter to only show allowed divisions (whitelist)
-                    displayDivisions = displayDivisions.filter(d => ALLOWED_DIVISIONS.includes(d));
-                    
-                    const divisionsText = displayDivisions.length > 0 
-                        ? displayDivisions.slice(0, 3).join(', ') + (displayDivisions.length > 3 ? '...' : '')
-                        : (currentFilter !== 'ALL' ? currentFilter : 'No division');
+                dropdown.innerHTML = availableCerts.map((cert, idx) => {
+                    const divisionsText = cert.divisions.length > 0 
+                        ? cert.divisions.slice(0, 3).join(', ') + (cert.divisions.length > 3 ? '...' : '')
+                        : (mainDivisionFilter !== 'ALL' ? mainDivisionFilter : 'No division');
                     
                     return `
                         <div class="autocomplete-item ${idx === 0 ? 'highlighted' : ''}" 
@@ -2124,13 +2208,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     if (item.originalObj) {
                         item.originalObj.OrderID = newOrder;
+                        const objId = item.originalObj.ID || item.originalObj.Id;  // Handle case variations
+                        if (objId) modifiedStatusTypeIds.add(objId);  // Track modified
                     }
                     
                     const globalStatusType = statusTypes.find(st => 
-                        st.Status === item.status && st.DivisionID === mainDivisionFilter
+                        st.Status === item.status && (st.DivisionID === mainDivisionFilter || st.DivisionId === mainDivisionFilter)
                     );
                     if (globalStatusType) {
                         globalStatusType.OrderID = newOrder;
+                        const stId = globalStatusType.ID || globalStatusType.Id;  // Handle case variations
+                        if (stId) modifiedStatusTypeIds.add(stId);  // Track modified
                     }
                 });
                 
@@ -2649,25 +2737,34 @@ function addCert(statusName, stepIndex) {
         return;
     }
 
-    // Find the PizzaStatusID for this status and division
+    // Find the PizzaStatusID for this status and division (handle case variations)
     let pizzaStatusId = null;
     if (statusTypes && Array.isArray(statusTypes)) {
-        const st = statusTypes.find(s => s.Status === statusName && s.DivisionID === mainDivisionFilter);
-        if (st && st.PizzaStatusID) pizzaStatusId = st.PizzaStatusID;
+        const st = statusTypes.find(s => 
+            s.Status === statusName && 
+            (s.DivisionID === mainDivisionFilter || s.DivisionId === mainDivisionFilter)
+        );
+        if (st) pizzaStatusId = st.PizzaStatusID || st.PizzaStatusId;
     }
 
     // Check if this cert type is already assigned to a different PizzaStatusID in this division
-    const existing = certTypes.find(ct =>
-        normalizeCertName(ct.Certification) === normalizeCertName(certName) &&
-        ct.DivisionID === mainDivisionFilter &&
-        ct.PizzaStatusID &&
-        ct.PizzaStatusID !== pizzaStatusId
-    );
+    const existing = certTypes.find(ct => {
+        const ctDivision = ct.DivisionID || ct.DivisionId;
+        const ctPizzaStatusId = ct.PizzaStatusID || ct.PizzaStatusId;
+        return normalizeCertName(ct.Certification) === normalizeCertName(certName) &&
+               ctDivision === mainDivisionFilter &&
+               ctPizzaStatusId &&
+               ctPizzaStatusId !== pizzaStatusId;
+    });
 
     if (existing) {
         // Find the status name for the existing PizzaStatusID
         let oldStatus = '';
-        const st = statusTypes.find(s => s.PizzaStatusID === existing.PizzaStatusID && s.DivisionID === mainDivisionFilter);
+        const existingPizzaStatusId = existing.PizzaStatusID || existing.PizzaStatusId;
+        const st = statusTypes.find(s => 
+            (s.PizzaStatusID === existingPizzaStatusId || s.PizzaStatusId === existingPizzaStatusId) && 
+            (s.DivisionID === mainDivisionFilter || s.DivisionId === mainDivisionFilter)
+        );
         if (st) oldStatus = st.Status;
         showCertDuplicateModal(certName, oldStatus, statusName, stepIndex);
         return;
@@ -2675,70 +2772,114 @@ function addCert(statusName, stepIndex) {
 
     addCertToStatus(statusName, certName);
     if (input) input.value = '';
+    
+    // Close the autocomplete dropdown
+    const dropdown = document.getElementById(`autocomplete_${stepIndex}`);
+    if (dropdown) dropdown.classList.remove('active');
+    
     renderWorkflow();
     markUnsaved();
 }
 
 function addCertToStatus(statusName, certName) {
-    // Find the PizzaStatusID for this status and division
+    // Find the PizzaStatusID for this status and division (handle case variations)
     let pizzaStatusId = null;
     if (statusTypes && Array.isArray(statusTypes)) {
-        const st = statusTypes.find(s => s.Status === statusName && s.DivisionID === mainDivisionFilter);
-        if (st && st.PizzaStatusID) pizzaStatusId = st.PizzaStatusID;
+        const st = statusTypes.find(s => 
+            s.Status === statusName && 
+            (s.DivisionID === mainDivisionFilter || s.DivisionId === mainDivisionFilter)
+        );
+        if (st) pizzaStatusId = st.PizzaStatusID || st.PizzaStatusId;
     }
-    // Check if it already exists - if so, we may need to update PizzaStatusID
-    const existingCert = certTypes.find(ct =>
-        normalizeCertName(ct.Certification) === normalizeCertName(certName) &&
-        ct.DivisionID === mainDivisionFilter
-    );
-    if (existingCert && existingCert.PizzaStatusID !== pizzaStatusId) {
-        // Update existing cert's PizzaStatusID
-        existingCert.PizzaStatusID = pizzaStatusId;
-        if (existingCert.ID) modifiedCertTypeIds.add(existingCert.ID);  // Track modified
-    } else if (!existingCert) {
+    
+    // Check if it already exists in this division - if so, we may need to update PizzaStatusID
+    const existingCert = certTypes.find(ct => {
+        const ctDivision = ct.DivisionID || ct.DivisionId;
+        return normalizeCertName(ct.Certification) === normalizeCertName(certName) &&
+               ctDivision === mainDivisionFilter;
+    });
+    
+    if (existingCert) {
+        const existingPizzaStatusId = existingCert.PizzaStatusID || existingCert.PizzaStatusId;
+        if (existingPizzaStatusId !== pizzaStatusId) {
+            // Update existing cert's PizzaStatusID
+            existingCert.PizzaStatusID = pizzaStatusId;
+            existingCert.PizzaStatusId = pizzaStatusId;
+            existingCert.isDeleted = false;  // Ensure not deleted
+            existingCert.IsDeleted = false;
+            const certId = existingCert.ID || existingCert.Id;
+            if (certId) modifiedCertTypeIds.add(certId);  // Track modified
+            console.log(`Updated existing CertType "${certName}" to PizzaStatusID ${pizzaStatusId}`);
+        }
+    } else {
+        // Create new CertType entry
         const newId = 'TEMP-' + Math.random().toString(36).substr(2, 9);
-        certTypes.push({
+        const newCertType = {
             ID: newId,
+            Id: newId,
             Certification: certName,
             PizzaStatusID: pizzaStatusId,
+            PizzaStatusId: pizzaStatusId,
             DivisionID: mainDivisionFilter,
+            DivisionId: mainDivisionFilter,
             CertificationType: 'Added in Session',
-            CertificationID: newId
-        });
+            CertificationID: newId,
+            isDeleted: false,
+            IsDeleted: false
+        };
+        certTypes.push(newCertType);
         modifiedCertTypeIds.add(newId);  // Track new item
+        console.log(`Added new CertType "${certName}" with ID ${newId} to PizzaStatusID ${pizzaStatusId}`);
     }
 }
 
         // Remove certification
-        function removeCert(e, statusName, certName) {
-            e.stopPropagation();
-            
+        function removeCert(statusName, certName) {
+            // Note: event handling done via onclick, no need for e.stopPropagation here
             if (confirm(`Remove "${certName}" from ${statusName}?`)) {
                 removeCertFromStatus(statusName, certName);
                 renderWorkflow();
                 markUnsaved();
             }
         }
+        
+        // Expose to window for inline onclick handlers
+        window.removeCert = removeCert;
 
 function removeCertFromStatus(statusName, certName) {
-    // Find the PizzaStatusID for this status and division
+    // Find the PizzaStatusID for this status and division (handle case variations)
     let pizzaStatusId = null;
     if (statusTypes && Array.isArray(statusTypes)) {
-        const st = statusTypes.find(s => s.Status === statusName && s.DivisionID === mainDivisionFilter);
-        if (st && st.PizzaStatusID) pizzaStatusId = st.PizzaStatusID;
+        const st = statusTypes.find(s => 
+            s.Status === statusName && 
+            (s.DivisionID === mainDivisionFilter || s.DivisionId === mainDivisionFilter)
+        );
+        if (st) pizzaStatusId = st.PizzaStatusID || st.PizzaStatusId;
     }
+    
     let updatedCount = 0;
     certTypes.forEach(ct => {
+        const ctPizzaStatusId = ct.PizzaStatusID || ct.PizzaStatusId;
+        const ctDivision = ct.DivisionID || ct.DivisionId;
+        
         if (
             normalizeCertName(ct.Certification) === normalizeCertName(certName) &&
-            ct.PizzaStatusID === pizzaStatusId &&
-            ct.DivisionID === mainDivisionFilter
+            ctPizzaStatusId === pizzaStatusId &&
+            ctDivision === mainDivisionFilter
         ) {
-            ct.PizzaStatusID = null; // or ""
-            if (ct.ID) modifiedCertTypeIds.add(ct.ID);  // Track modified
+            // Clear PizzaStatusID to "remove" from this status
+            ct.PizzaStatusID = null;
+            ct.PizzaStatusId = null;
+            const certId = ct.ID || ct.Id;  // Handle case variations
+            if (certId) modifiedCertTypeIds.add(certId);  // Track modified
             updatedCount++;
+            console.log(`Removed CertType "${certName}" (ID: ${certId}) from PizzaStatusID ${pizzaStatusId}`);
         }
     });
+    
+    if (updatedCount === 0) {
+        console.warn(`No CertType found to remove: "${certName}" from status "${statusName}" in division "${mainDivisionFilter}"`);
+    }
 }
 
         // Delete entire status from a division
@@ -2814,10 +2955,10 @@ function removeCertFromStatus(statusName, certName) {
         // Execute the actual status deletion after confirmation
         function executeStatusDeletion(statusName, divisionId) {
 
-            // 1. Find the StatusType record
+            // 1. Find the StatusType record (handle case variations)
             const statusRecord = statusTypes.find(st => 
                 st.Status === statusName && 
-                st.DivisionID === divisionId
+                (st.DivisionID === divisionId || st.DivisionId === divisionId)
             );
 
             if (!statusRecord) {
@@ -2828,16 +2969,19 @@ function removeCertFromStatus(statusName, certName) {
             // 2. Mark as deleted
             statusRecord.isDeleted = true;
             statusRecord.IsDelete = true;
-            if (statusRecord.ID) modifiedStatusTypeIds.add(statusRecord.ID);  // Track modified
-            const deletedOrderId = parseInt(statusRecord.OrderID);
+            const statusId = statusRecord.ID || statusRecord.Id;  // Handle case variations
+            if (statusId) modifiedStatusTypeIds.add(statusId);  // Track modified
+            const deletedOrderId = parseInt(statusRecord.OrderID || statusRecord.OrderId);
             // 3. Shift OrderID of subsequent statuses
             let shiftedCount = 0;
             statusTypes.forEach(st => {
-                if (st.DivisionID === divisionId && st.Status !== statusName) {
-                    const currentOrder = parseInt(st.OrderID);
+                const stDivisionId = st.DivisionID || st.DivisionId;
+                if (stDivisionId === divisionId && st.Status !== statusName) {
+                    const currentOrder = parseInt(st.OrderID || st.OrderId);
                     if (!isNaN(currentOrder) && currentOrder > deletedOrderId) {
                         st.OrderID = (currentOrder - 1).toString();
-                        if (st.ID) modifiedStatusTypeIds.add(st.ID);  // Track modified
+                        const stId = st.ID || st.Id;  // Handle case variations
+                        if (stId) modifiedStatusTypeIds.add(stId);  // Track modified
                         shiftedCount++;
                     }
                 }
@@ -2914,7 +3058,11 @@ function removeCertFromStatus(statusName, certName) {
             try {
                 // Save ONLY modified cert types
                 if (modifiedCertTypeIds.size > 0) {
-                    const modifiedCertTypes = certTypes.filter(ct => ct.ID && modifiedCertTypeIds.has(ct.ID)).map(ct => ({ ...ct }));
+                    console.log(`modifiedCertTypeIds Set contains: ${Array.from(modifiedCertTypeIds).join(', ')}`);
+                    const modifiedCertTypes = certTypes.filter(ct => {
+                        const ctId = ct.ID || ct.Id;
+                        return ctId && modifiedCertTypeIds.has(ctId);
+                    }).map(ct => ({ ...ct }));
                     console.log(`Saving ${modifiedCertTypes.length} modified cert types (out of ${certTypes.length} total)`);
                     const responseCertTypes = await fetch('/api/data/certtypes', {
                         method: 'POST',
@@ -2938,7 +3086,11 @@ function removeCertFromStatus(statusName, certName) {
             try {
                 // Save ONLY modified status types
                 if (modifiedStatusTypeIds.size > 0) {
-                    const modifiedStatusTypes = statusTypes.filter(st => st.ID && modifiedStatusTypeIds.has(st.ID)).map(st => ({ ...st }));
+                    console.log(`modifiedStatusTypeIds Set contains: ${Array.from(modifiedStatusTypeIds).join(', ')}`);
+                    const modifiedStatusTypes = statusTypes.filter(st => {
+                        const stId = st.ID || st.Id;
+                        return stId && modifiedStatusTypeIds.has(stId);
+                    }).map(st => ({ ...st }));
                     console.log(`Saving ${modifiedStatusTypes.length} modified status types (out of ${statusTypes.length} total)`);
                     const responseStatusTypes = await fetch('/api/data/statustypes', {
                         method: 'POST',
@@ -4005,20 +4157,22 @@ function removeCertFromStatus(statusName, certName) {
                 // 1. Shift existing orders DOWN
                 let shiftedCountDown = 0;
                 statusTypes.forEach(st => {
-                    if (st.DivisionID === division && 
+                    const stDivisionId = st.DivisionID || st.DivisionId;
+                    if (stDivisionId === division && 
                         !(st.isDeleted === true || st.IsDelete === true) && 
                         st.Status !== statusName) { // Don't shift the one we are about to update if it exists
-                        const currentOrd = parseInt(st.OrderID) || 0;
+                        const currentOrd = parseInt(st.OrderID || st.OrderId) || 0;
                         if (currentOrd >= targetOrder) {
                             st.OrderID = (currentOrd + 1).toString();
-                            if (st.ID) modifiedStatusTypeIds.add(st.ID);  // Track modified
+                            const stId = st.ID || st.Id;  // Handle case variations
+                            if (stId) modifiedStatusTypeIds.add(stId);  // Track modified
                             shiftedCountDown++;
                         }
                     }
                 });
 
                 // 2. Find or Create StatusType Record
-                let stRecord = statusTypes.find(st => st.DivisionID === division && st.Status === statusName);
+                let stRecord = statusTypes.find(st => (st.DivisionID || st.DivisionId) === division && st.Status === statusName);
                 let wasDeleted = false;
                 if (stRecord) {
                     // If status was deleted, mark as restored and always update all key fields
@@ -4030,7 +4184,8 @@ function removeCertFromStatus(statusName, certName) {
                     // Defensive: update Description and RecordAt if missing
                     if (!stRecord.Description) stRecord.Description = statusName;
                     if (!stRecord.RecordAt) stRecord.RecordAt = new Date().toISOString();
-                    if (stRecord.ID) modifiedStatusTypeIds.add(stRecord.ID);  // Track modified
+                    const stRecordId = stRecord.ID || stRecord.Id;  // Handle case variations
+                    if (stRecordId) modifiedStatusTypeIds.add(stRecordId);  // Track modified
                 } else {
                     const newId = crypto.randomUUID ? crypto.randomUUID() : 'NEW-' + Math.random().toString(36).substr(2,9);
                     stRecord = {
@@ -4056,11 +4211,13 @@ function removeCertFromStatus(statusName, certName) {
                 // Shift OrderID for all statuses at or after the new one (except the one just added/restored)
                 let shiftedCountUp = 0;
                 statusTypes.forEach(st => {
-                    if (st.DivisionID === division && st.Status !== statusName) {
-                        const currentOrd = parseInt(st.OrderID) || 0;
+                    const stDivisionId = st.DivisionID || st.DivisionId;
+                    if (stDivisionId === division && st.Status !== statusName) {
+                        const currentOrd = parseInt(st.OrderID || st.OrderId) || 0;
                         if (currentOrd >= targetOrder) {
                             st.OrderID = (currentOrd + 1).toString();
-                            if (st.ID) modifiedStatusTypeIds.add(st.ID);  // Track modified
+                            const stId = st.ID || st.Id;  // Handle case variations
+                            if (stId) modifiedStatusTypeIds.add(stId);  // Track modified
                             shiftedCountUp++;
                         }
                     }
