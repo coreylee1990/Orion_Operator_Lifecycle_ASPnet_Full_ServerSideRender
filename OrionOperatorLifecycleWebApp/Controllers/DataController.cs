@@ -164,16 +164,27 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                 }
 
                 [HttpGet("certtypes")]
-                public IActionResult GetCertTypes()
+                public IActionResult GetCertTypes([FromQuery] string? clientId, [FromQuery] string? pizzaStatusIds)
                 {
-                    // Use cache for static data
-                    var json = _cache.GetOrCreate(CACHE_KEY_CERTTYPES, entry =>
+                    // Highest priority: when PizzaStatus IDs are specified, scope cert types
+                    // strictly to those statuses. This matches the UI's "visible statuses" set.
+                    if (!string.IsNullOrWhiteSpace(pizzaStatusIds))
                     {
-                        entry.AbsoluteExpirationRelativeToNow = CACHE_DURATION;
-                        var data = _certTypeService.GetAllCertTypes();
-                        var jsonOptions = new JsonSerializerOptions { PropertyNamingPolicy = null };
-                        
-                        var mappedData = data.Select(c => new {
+                        var ids = pizzaStatusIds
+                            .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                            .Where(id => !string.IsNullOrWhiteSpace(id))
+                            .ToList();
+
+                        if (ids.Count == 0)
+                        {
+                            var emptyJson = JsonSerializer.Serialize(Array.Empty<object>(), new JsonSerializerOptions { PropertyNamingPolicy = null });
+                            return Content(emptyJson, "application/json");
+                        }
+
+                        var scopedData = _certTypeService.GetCertTypesForPizzaStatuses(ids);
+                        var scopedJsonOptions = new JsonSerializerOptions { PropertyNamingPolicy = null };
+
+                        var mappedScopedData = scopedData.Select(c => new {
                             ID = c.Id,
                             Certification = c.Certification,
                             Description = c.Description,
@@ -182,9 +193,50 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                             isDeleted = c.IsDeleted,
                         });
 
-                        return JsonSerializer.Serialize(mappedData, jsonOptions);
+                        var scopedJson = JsonSerializer.Serialize(mappedScopedData, scopedJsonOptions);
+                        return Content(scopedJson, "application/json");
+                    }
+
+                    // When no clientId is provided, treat cert types as static data and cache.
+                    if (string.IsNullOrWhiteSpace(clientId))
+                    {
+                        var jsonAll = _cache.GetOrCreate(CACHE_KEY_CERTTYPES, entry =>
+                        {
+                            entry.AbsoluteExpirationRelativeToNow = CACHE_DURATION;
+                            var data = _certTypeService.GetAllCertTypes();
+                            var jsonOptions = new JsonSerializerOptions { PropertyNamingPolicy = null };
+
+                            var mappedData = data.Select(c => new {
+                                ID = c.Id,
+                                Certification = c.Certification,
+                                Description = c.Description,
+                                DivisionID = c.DivisionId,
+                                PizzaStatusID = c.PizzaStatusId,
+                                isDeleted = c.IsDeleted,
+                            });
+
+                            return JsonSerializer.Serialize(mappedData, jsonOptions);
+                        });
+
+                        return Content(jsonAll, "application/json");
+                    }
+
+                    // For client-scoped requests, bypass the DataController cache and
+                    // rely on the service/repository for efficient filtering.
+                    var clientData = _certTypeService.GetCertTypesForClient(clientId);
+                    var clientJsonOptions = new JsonSerializerOptions { PropertyNamingPolicy = null };
+
+                    var mappedClientData = clientData.Select(c => new {
+                        ID = c.Id,
+                        Certification = c.Certification,
+                        Description = c.Description,
+                        DivisionID = c.DivisionId,
+                        PizzaStatusID = c.PizzaStatusId,
+                        isDeleted = c.IsDeleted,
                     });
-                    return Content(json, "application/json");
+
+                    var clientJson = JsonSerializer.Serialize(mappedClientData, clientJsonOptions);
+                    return Content(clientJson, "application/json");
                 }
 
                 [HttpGet("pizzastatuses")]

@@ -24,20 +24,32 @@ namespace OrionOperatorLifecycleWebApp.Repositories.Sql
 
         public void SaveAll(List<StatusType> statusTypes)
         {
-            // Sync logic: Upsert incoming items.
+            if (statusTypes == null || statusTypes.Count == 0)
+            {
+                return;
+            }
+
+            // Pure writes only - no SELECT queries.
             foreach (var status in statusTypes)
             {
-                var existing = _context.StatusTypes.Find(status.Id);
-                if (existing != null)
-                {
-                    _context.Entry(existing).CurrentValues.SetValues(status);
-                }
-                else
+                if (string.IsNullOrWhiteSpace(status.Id))
                 {
                     _context.StatusTypes.Add(status);
                 }
+                else
+                {
+                    _context.StatusTypes.Attach(status);
+                    _context.Entry(status).State = EntityState.Modified;
+                }
             }
+
             _context.SaveChanges();
+
+            // Detach all to avoid tracking issues
+            foreach (var status in statusTypes)
+            {
+                _context.Entry(status).State = EntityState.Detached;
+            }
         }
     }
 }

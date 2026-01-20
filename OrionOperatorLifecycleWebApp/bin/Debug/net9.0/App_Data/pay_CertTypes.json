@@ -3044,7 +3044,7 @@
     "Certification": "Purchase Your Courses",
     "Description": "Website to purchase discounted CTAA and Def Drive Courses",
     "DivisionID": "11 - GA",
-    "PizzaStatusID": "D884F3D1-8AA3-48A3-B172-DF754283F4C2",
+    "PizzaStatusID": null,
     "isDeleted": false
   },
   {
@@ -5188,7 +5188,7 @@
     "Certification": "Purchase Your Courses",
     "Description": "Website that offers discounted CTAA and Def Drive Courses",
     "DivisionID": "5 - CA",
-    "PizzaStatusID": "D884F3D1-8AA3-48A3-B172-DF754283F4C2",
+    "PizzaStatusID": null,
     "isDeleted": false
   },
   {
@@ -6308,7 +6308,7 @@
     "Certification": "Purchase Your Courses",
     "Description": "Website that offers discounted CTAA and Def Drive Courses",
     "DivisionID": "2 - IL",
-    "PizzaStatusID": "D884F3D1-8AA3-48A3-B172-DF754283F4C2",
+    "PizzaStatusID": null,
     "isDeleted": false
   },
   {

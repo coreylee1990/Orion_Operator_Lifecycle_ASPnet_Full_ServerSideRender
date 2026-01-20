@@ -24,20 +24,32 @@ namespace OrionOperatorLifecycleWebApp.Repositories.Sql
 
         public void SaveAll(List<PizzaStatus> pizzaStatuses)
         {
+            if (pizzaStatuses == null || pizzaStatuses.Count == 0)
+            {
+                return;
+            }
+
+            // Pure writes only - no SELECT queries.
             foreach (var pizzaStatus in pizzaStatuses)
             {
-                var existing = _context.PizzaStatuses.Find(pizzaStatus.Id);
-                if (existing != null)
+                if (string.IsNullOrWhiteSpace(pizzaStatus.Id))
                 {
-                    _context.Entry(existing).CurrentValues.SetValues(pizzaStatus);
+                    _context.PizzaStatuses.Add(pizzaStatus);
                 }
                 else
                 {
-                    _context.PizzaStatuses.Add(pizzaStatus);
+                    _context.PizzaStatuses.Attach(pizzaStatus);
+                    _context.Entry(pizzaStatus).State = EntityState.Modified;
                 }
             }
 
             _context.SaveChanges();
+
+            // Detach all to avoid tracking issues
+            foreach (var pizzaStatus in pizzaStatuses)
+            {
+                _context.Entry(pizzaStatus).State = EntityState.Detached;
+            }
         }
     }
 }

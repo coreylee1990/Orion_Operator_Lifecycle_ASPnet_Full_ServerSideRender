@@ -30,6 +30,40 @@
 			"type": "shell",
 			"command": "dotnet build OrionOperatorLifecycleWebApp/OrionOperatorLifecycleWebApp.csproj",
 			"group": "build"
+		},
+		{
+			"label": "Build OrionOperatorLifecycleWebApp",
+			"type": "shell",
+			"command": "dotnet build",
+			"group": "build"
+		},
+		{
+			"label": "Build OrionOperatorLifecycleWebApp after CertType changes",
+			"type": "shell",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"OrionOperatorLifecycleWebApp/OrionOperatorLifecycleWebApp.csproj"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$mscompile"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Build OrionOperatorLifecycleWebApp after JS fix",
+			"type": "shell",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"OrionOperatorLifecycleWebApp/OrionOperatorLifecycleWebApp.csproj"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$mscompile"
+			],
+			"group": "build"
 		}
 	]
 }

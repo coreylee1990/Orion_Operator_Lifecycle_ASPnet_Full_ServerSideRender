@@ -97,3 +97,15 @@
         </div>
     </div>
 </div>
+
+@* Per-operator move button: only when all required certs are present for this status *@
+@if (missingCount == 0 && certStatusMap != null && certStatusMap.Count > 0)
+{
+    <div class="operator-modal-actions" style="margin-top: 16px; text-align: right;">
+        <button type="button"
+                class="btn btn-success btn-sm"
+                onclick="moveOperatorToNextStatusFromProfile('@op.Id');">
+            Move to next status
+        </button>
+    </div>
+}

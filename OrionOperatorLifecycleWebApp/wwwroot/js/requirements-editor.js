@@ -258,6 +258,15 @@ document.addEventListener('DOMContentLoaded', function() {
         let statusTracker = [];  // Track how long operators have been in each status
         let editedRequirements = {};
 
+        // Change tracking - only save items that were actually modified
+        const modifiedCertTypeIds = new Set();
+        const modifiedStatusTypeIds = new Set();
+        const modifiedPizzaStatusIds = new Set();
+
+        // Loading/saving coordination flags
+        let isLoadingData = false;
+        let cancelLoadData = false;
+
         // Divisions to include (whitelist)
         const ALLOWED_DIVISIONS = [
             '2 - IL', '3 - TX', '5 - CA', '6 - FL', '7 - MI', '8 - OH', '10 - OR', '11 - GA', '12 - PA'
@@ -567,6 +576,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Load data
         async function loadData() {
+            if (isLoadingData) return;
+            isLoadingData = true;
+            cancelLoadData = false;
+
             try {
                 
                 // Cache buster to force fresh load
@@ -578,6 +591,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     throw new Error('Failed to load clients: ' + clientsResponse.status);
                 }
                 clients = await clientsResponse.json();
+
+                if (cancelLoadData) { isLoadingData = false; return; }
                 
                 // Normalize ID property
                 clients.forEach(c => {
@@ -619,6 +634,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     throw new Error('Failed to load status types: ' + statusTypesResponse.status);
                 }
                 statusTypes = await statusTypesResponse.json();
+
+                if (cancelLoadData) { isLoadingData = false; return; }
                 
                 // Normalize statusTypes properties
                 statusTypes.forEach(st => {
@@ -647,6 +664,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 const firstWhitelistedDivision = divisions.find(div => ALLOWED_DIVISIONS.includes(div));
                 
                 // Select first whitelisted division, or first division (from sorted list), or ALL
+                if (cancelLoadData) { isLoadingData = false; return; }
+
                 if (firstWhitelistedDivision) {
                     initialDivision = firstWhitelistedDivision;
                 } else if (divisions.length > 0) {
@@ -659,6 +678,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     throw new Error('Failed to load operators data: ' + operatorsResponse.status);
                 }
                 const operatorsData = await operatorsResponse.json();
+                if (cancelLoadData) { isLoadingData = false; return; }
                 operators = operatorsData.operators || [];
                 certifications = operatorsData.certifications || [];
                 
@@ -690,32 +710,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Set the division filter to the loaded division
                 mainDivisionFilter = initialDivision;
-                // Load cert types from API endpoint
-                const certTypesResponse = await fetch('/api/data/certtypes' + cacheBuster);
-                if (!certTypesResponse.ok) {
-                    throw new Error('Failed to load cert types: ' + certTypesResponse.status);
-                }
-                certTypes = await certTypesResponse.json();
-                if (certTypes.length > 0) {
-                } else {
-                    console.warn('   ⚠️ No CertTypes returned from API');
-                }
-                
-                // Populate CertType name on each certification by joining with certTypes
-                certifications.forEach(cert => {
-                    const certType = certTypes.find(ct => ct.ID === cert.CertTypeID);
-                    if (certType) {
-                        cert.CertType = certType.Certification;
-                    }
-                });
-                
-                
-                // Load pizza statuses for client filtering
+
+                if (cancelLoadData) { isLoadingData = false; return; }
+
+                // Load pizza statuses for client filtering and for determining
+                // which PizzaStatuses are actually visible in the workflow.
                 const pizzaStatusesResponse = await fetch('/api/data/pizzastatuses' + cacheBuster);
                 if (!pizzaStatusesResponse.ok) {
                     throw new Error('Failed to load pizza statuses: ' + pizzaStatusesResponse.status);
                 }
                 pizzaStatuses = await pizzaStatusesResponse.json();
+
+                if (cancelLoadData) { isLoadingData = false; return; }
                 
                 // Normalize ID and ClientId properties
                 pizzaStatuses.forEach(ps => {
@@ -730,7 +736,102 @@ document.addEventListener('DOMContentLoaded', function() {
                         ps.ClientID = ps.ClientId;
                     }
                 });
-                
+
+                // Build a map of PizzaStatus by ID for quick lookup
+                const pizzaStatusMap = {};
+                pizzaStatuses.forEach(p => {
+                    const id = p.ID || p.Id;
+                    if (id) {
+                        pizzaStatusMap[id] = p;
+                    }
+                });
+
+                // Determine which StatusTypes are actually visible for the current
+                // division/client filters using the same rules as initializeDynamicWorkflow.
+                let visibleStatusTypes = statusTypes.filter(st => {
+                    const stDivision = st.DivisionID || st.DivisionId || st.divisionId || st.divisionID;
+                    const stPizzaStatusId = st.PizzaStatusID || st.PizzaStatusId || st.pizzaStatusId || st.pizzaStatusID;
+                    const stIsDeleted = st.isDeleted ?? st.IsDeleted ?? st.IsDelete ?? st.isDelete;
+                    const stFleet = st.Fleet ?? st.fleet ?? 0;
+                    const stProviders = st.Providers ?? st.providers ?? 0;
+
+                    // Must have PizzaStatusID
+                    if (!stPizzaStatusId) return false;
+
+                    // Must have matching PizzaStatus in map
+                    const ps = pizzaStatusMap[stPizzaStatusId];
+                    if (!ps) return false;
+
+                    // Deleted filter - must not be deleted
+                    if (stIsDeleted === true || stIsDeleted === 1 || String(stIsDeleted).trim() === '1' || String(stIsDeleted).trim().toLowerCase() === 'true') return false;
+
+                    // Operator-only filter: Fleet must be 0/false (not Fleet status)
+                    if (stFleet === 1 || stFleet === true || String(stFleet).trim() === '1') return false;
+
+                    // Operator-only filter: Providers must be 0/false (not Provider status)
+                    if (stProviders === 1 || stProviders === true || String(stProviders).trim() === '1') return false;
+
+                    // CRITICAL: PizzaStatus MUST have IsOperator = 1/true to be an Operator status
+                    const psIsOperator = ps.IsOperator ?? ps.isOperator;
+                    if (psIsOperator !== true && psIsOperator !== 1) return false;
+
+                    // Division filter
+                    if (mainDivisionFilter !== 'ALL' && stDivision !== mainDivisionFilter) return false;
+
+                    // Client filter: Only show StatusTypes whose PizzaStatus matches the selected client
+                    if (mainClientFilter) {
+                        const psClientId = ps.ClientId || ps.ClientID || ps.clientId || ps.clientID;
+                        if (psClientId !== mainClientFilter) return false;
+                    }
+
+                    return true;
+                });
+
+                // Collect the distinct PizzaStatus IDs for the visible statuses only
+                const visiblePizzaStatusIds = Array.from(new Set(
+                    visibleStatusTypes
+                        .map(st => st.PizzaStatusID || st.PizzaStatusId || st.pizzaStatusId || st.pizzaStatusID)
+                        .filter(id => !!id)
+                ));
+
+                if (cancelLoadData) { isLoadingData = false; return; }
+
+                // Load cert types from API endpoint, scoped strictly to the
+                // PizzaStatuses that are actually visible in the workflow.
+                let certTypesUrl = '/api/data/certtypes';
+                const queryParams = [];
+                if (visiblePizzaStatusIds.length > 0) {
+                    queryParams.push('pizzaStatusIds=' + encodeURIComponent(visiblePizzaStatusIds.join(',')));
+                }
+                // Retain clientId as a hint for any future server-side logic,
+                // though the primary filter is PizzaStatusId.
+                if (mainClientFilter && mainClientFilter !== '') {
+                    queryParams.push('clientId=' + encodeURIComponent(mainClientFilter));
+                }
+                queryParams.push('v=' + Date.now());
+                if (queryParams.length > 0) {
+                    certTypesUrl += '?' + queryParams.join('&');
+                }
+
+                const certTypesResponse = await fetch(certTypesUrl);
+                if (!certTypesResponse.ok) {
+                    throw new Error('Failed to load cert types: ' + certTypesResponse.status);
+                }
+                certTypes = await certTypesResponse.json();
+                if (certTypes.length > 0) {
+                } else {
+                    console.warn('   ⚠️ No CertTypes returned from API');
+                }
+
+                if (cancelLoadData) { isLoadingData = false; return; }
+
+                // Populate CertType name on each certification by joining with certTypes
+                certifications.forEach(cert => {
+                    const certType = certTypes.find(ct => ct.ID === cert.CertTypeID);
+                    if (certType) {
+                        cert.CertType = certType.Certification;
+                    }
+                });
                 // Sync with window.pizzaStatuses for global access
                 window.pizzaStatuses = pizzaStatuses;
                 
@@ -751,6 +852,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Sync with window.statusTypes so initializeDynamicWorkflow uses the same array
                 window.statusTypes = statusTypes;
+
+                if (cancelLoadData) { isLoadingData = false; return; }
                 
                 // Load status tracker for operator duration tracking
                 const statusTrackerResponse = await fetch('/api/data/statustracker' + cacheBuster);
@@ -766,16 +869,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Removed certRequirements and originalCertRequirements logic related to pizzaStatusRequirements
                 // Build list of all existing certifications
                 buildExistingCertsList();
-                // Initialize workflow - ALWAYS use dynamic workflow
-                initializeDynamicWorkflow();
-                renderWorkflow();
-                updateStats();
-                populateMainDivisionFilter();
+
+                if (!cancelLoadData) {
+                    // Initialize workflow - ALWAYS use dynamic workflow
+                    initializeDynamicWorkflow();
+                    renderWorkflow();
+                    updateStats();
+                    populateMainDivisionFilter();
+                }
             } catch (error) {
                 console.error('❌ Error loading data:', error);
                 console.error('❌ Error stack:', error.stack);
                 console.error('❌ Error message:', error.message);
                 alert('Error loading data: ' + error.message + '\nCheck console for details.');
+            } finally {
+                isLoadingData = false;
             }
         }
 
@@ -1031,10 +1139,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             addDragAndDropListeners();
 
-            // After re-rendering in-place (no re-init), reload operator and
-            // certification partials so that CertTypes and operator cards
-            // repopulate correctly after drag/drop or arrow moves.
-            loadOperatorPartials();
+            // Update status containers with days info (operator cards are rendered inline now)
+            updateStatusContainersWithDaysInfo();
         }
 
         // Render the workflow
@@ -1123,55 +1229,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
-            // Load operator partial views after initial render
-            loadOperatorPartials();
+            // Update status containers with days info (operator cards are rendered inline now)
+            updateStatusContainersWithDaysInfo();
 
             // Add drag and drop event listeners
             addDragAndDropListeners();
         }
 
-        /**
-         * Load operator partial views to replace placeholders
-         */
-        async function loadOperatorPartials() {
-            const operatorPlaceholders = document.querySelectorAll('.operator-item-placeholder');
-            const certPlaceholders = document.querySelectorAll('.cert-badge-placeholder');
-            
-            // Load in batches to avoid overwhelming the server
-            const batchSize = 10;
-            for (let i = 0; i < operatorPlaceholders.length; i += batchSize) {
-                const batch = Array.from(operatorPlaceholders).slice(i, i + batchSize);
-                await Promise.all(batch.map(async (placeholder) => {
-                    const operatorId = placeholder.getAttribute('data-operator-id');
-                    const statusName = placeholder.getAttribute('data-status-name');
-                    const statusIndex = placeholder.getAttribute('data-status-index');
-                    const pizzaStatusId = placeholder.getAttribute('data-pizza-status-id');
-                    
-                    const html = await renderOperatorCardPartial(operatorId, statusName, statusIndex, pizzaStatusId);
-                    if (html) {
-                        placeholder.outerHTML = html;
-                    }
-                }));
-            }
-            
-            // After loading operator cards, update status containers with days info and red border
-            updateStatusContainersWithDaysInfo();
-
-            // Load cert badges
-            for (let i = 0; i < certPlaceholders.length; i += batchSize) {
-                const batch = Array.from(certPlaceholders).slice(i, i + batchSize);
-                await Promise.all(batch.map(async (placeholder) => {
-                    const certName = placeholder.getAttribute('data-cert-name');
-                    const statusName = placeholder.getAttribute('data-status-name');
-                    
-                    const html = await renderCertBadgePartial(certName, statusName);
-                    if (html) {
-                        placeholder.outerHTML = html;
-                    }
-                }));
-            }
-        }
-        
         /**
          * Update status containers with days information and apply red border if needed
          */
@@ -1461,6 +1525,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                                 const total = validCount + missingCount; // Only count valid and missing, exclude expired
                                 const validPercent = total > 0 ? (validCount / total * 100) : 0;
+                                const isComplete = total > 0 && validCount === total;
 
                                 // Calculate days in current status
                                 const daysInStatus = getOperatorDaysInStatus(op.ID);
@@ -1474,8 +1539,24 @@ document.addEventListener('DOMContentLoaded', function() {
                                 const certCountDisplay = total > 0 ? 
                                     `<span class="operator-cert-count" title="${validCount} valid, ${missingCount} missing">${validCount}/${total}</span>` : '';
 
+                                // Render operator card directly (no server fetch needed)
+                                const opName = (op.FirstName || '') + ' ' + (op.LastName || '');
+                                const opInitials = ((op.FirstName || '?')[0] + (op.LastName || '?')[0]).toUpperCase();
+                                
                                 return `
-                                    <div class="operator-item-placeholder" data-operator-id="${op.ID}" data-status-name="${statusName}" data-status-index="${index}" data-pizza-status-id="${pizzaStatusId || ''}"></div>
+                                    <div class="operator-item ${isComplete ? 'operator-complete' : ''}" 
+                                         data-operator-id="${op.ID}"
+                                         onclick="showOperatorProfileModal('${op.ID}')">
+                                        <div class="operator-avatar">${opInitials}</div>
+                                        <div class="operator-info">
+                                            <span class="operator-name">${opName.trim() || 'Unknown'}</span>
+                                            <div class="operator-meta">
+                                                ${daysDisplay}
+                                                ${certCountDisplay}
+                                            </div>
+                                        </div>
+                                        ${isComplete ? '<span class="complete-badge" title="All required certs">✓</span>' : ''}
+                                    </div>
                                 `;
                             }).join('') : 
                             '<div class="operator-item"><span style="color: #94a3b8;">No operators in this step</span></div>'
@@ -1488,7 +1569,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="cert-list cert-list-editable drop-zone" data-status="${statusName}" ondrop="handleCertDrop(event, this)" ondragover="handleCertDragOver(event)">
                         ${certsToDisplay.length > 0 ? 
                             certsToDisplay.slice(0, 50).map(cert => {
-                                return `<span class="cert-badge-placeholder" data-cert-name="${cert}" data-status-name="${statusName}"></span>`;
+                                // Render cert badge directly (no server fetch needed)
+                                return `<span class="cert-badge" draggable="true" ondragstart="handleCertDragStart(event, '${cert.replace(/'/g, "\\'")}')"
+                                    data-cert="${cert}" data-status="${statusName}" title="${cert}">
+                                    ${cert}
+                                    <button class="remove-cert-btn" onclick="removeCert('${statusName}', '${cert.replace(/'/g, "\\'")}')" title="Remove">×</button>
+                                </span>`;
                             }).join('') :
                             '<span style="color: #94a3b8;">No new certifications required at this step</span>'
                         }
@@ -2107,7 +2193,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Update statistics - compute everything on the client
-        function updateStats() {
+        async function updateStats() {
             // Filter operators by division
             let filteredOperators = operators;
             if (mainDivisionFilter !== 'ALL') {
@@ -2176,112 +2262,148 @@ document.addEventListener('DOMContentLoaded', function() {
                 workflowData.push(statusCounts.get(flow.status) || 0);
             });
 
-            // Calculate compliance on the client: total fulfilled required cert slots vs total required slots
+            // Calculate compliance: prefer server aggregate, fall back to client-side calculation
             let totalRequiredSlots = 0;
             let fulfilledSlots = 0;
             let compliancePercent = 0;
 
-            try {
-                if (
-                    mainDivisionFilter &&
-                    mainDivisionFilter !== 'ALL' &&
-                    Array.isArray(filteredOperators) &&
-                    filteredOperators.length > 0 &&
-                    Array.isArray(currentWorkflow) &&
-                    currentWorkflow.length > 0 &&
-                    Array.isArray(certTypes) &&
-                    certTypes.length > 0
-                ) {
-                    // Build a map from status name (uppercased) to workflow step / StatusType
-                    const flowMap = new Map();
-                    currentWorkflow.forEach(flow => {
-                        if (flow && flow.status && flow.originalObj) {
-                            flowMap.set(String(flow.status).toUpperCase(), flow.originalObj);
-                        }
-                    });
+            // Try server endpoint first for authoritative aggregate
+            let serverResult = null;
+            if (mainDivisionFilter && mainDivisionFilter !== 'ALL') {
+                try {
+                    let url = `/Requirements/GetComplianceSummary?divisionId=${encodeURIComponent(mainDivisionFilter)}`;
+                    if (mainClientFilter) {
+                        url += `&clientId=${encodeURIComponent(mainClientFilter)}`;
+                    }
 
-                    filteredOperators.forEach(op => {
-                        const opStatus = op.Status;
-                        const opId = op.ID || op.Id;
-                        if (!opStatus || !opId) {
-                            return;
-                        }
+                    const resp = await fetch(url);
+                    if (resp.ok) {
+                        const data = await resp.json();
+                        serverResult = {
+                            totalRequiredSlots: data.totalRequiredSlots || 0,
+                            fulfilledSlots: data.fulfilledSlots || 0,
+                            percent: data.percent || 0
+                        };
+                    }
+                } catch (e) {
+                    // If the endpoint fails for any reason, we'll fall back to client-side calculation
+                }
+            }
 
-                        const statusType = flowMap.get(String(opStatus).toUpperCase());
-                        if (!statusType) {
-                            return;
-                        }
-
-                        const stPizzaStatusId =
-                            statusType.PizzaStatusID ||
-                            statusType.PizzaStatusId ||
-                            statusType.pizzaStatusId ||
-                            statusType.pizzaStatusID;
-                        const stDivisionId =
-                            statusType.DivisionID ||
-                            statusType.DivisionId ||
-                            statusType.divisionId ||
-                            statusType.divisionID;
-
-                        if (!stPizzaStatusId || stDivisionId !== mainDivisionFilter) {
-                            return;
-                        }
-
-                        // Required cert types for this PizzaStatusID + division
-                        const requiredCertTypes = certTypes.filter(ct => {
-                            const ctPizzaStatusId =
-                                ct.PizzaStatusID ||
-                                ct.PizzaStatusId ||
-                                ct.pizzaStatusId ||
-                                ct.pizzaStatusID;
-                            const ctDivisionId =
-                                ct.DivisionID ||
-                                ct.DivisionId ||
-                                ct.divisionId ||
-                                ct.divisionID;
-                            const ctIsDeleted = ct.IsDeleted ?? ct.isDeleted ?? ct.isDelete;
-
-                            if (!ctPizzaStatusId || ctIsDeleted === true) return false;
-                            if (ctPizzaStatusId !== stPizzaStatusId) return false;
-                            if (ctDivisionId !== mainDivisionFilter) return false;
-                            return true;
+            if (serverResult) {
+                totalRequiredSlots = serverResult.totalRequiredSlots;
+                fulfilledSlots = serverResult.fulfilledSlots;
+                compliancePercent = serverResult.percent;
+            } else {
+                // Fallback: compute on client using the same definition as operator cards
+                try {
+                    if (
+                        mainDivisionFilter &&
+                        mainDivisionFilter !== 'ALL' &&
+                        Array.isArray(filteredOperators) &&
+                        filteredOperators.length > 0 &&
+                        Array.isArray(currentWorkflow) &&
+                        currentWorkflow.length > 0 &&
+                        Array.isArray(certTypes) &&
+                        certTypes.length > 0
+                    ) {
+                        // Build a map from status name (uppercased) to workflow step / StatusType
+                        const flowMap = new Map();
+                        currentWorkflow.forEach(flow => {
+                            if (flow && flow.status && flow.originalObj) {
+                                flowMap.set(String(flow.status).toUpperCase(), flow.originalObj);
+                            }
                         });
 
-                        if (requiredCertTypes.length === 0) {
-                            return;
-                        }
-
-                        const opCerts = (op.certifications && Array.isArray(op.certifications))
-                            ? op.certifications
-                            : certifications.filter(c => (c.OperatorID || c.OperatorId) === opId);
-
-                        requiredCertTypes.forEach(ct => {
-                            const ctId = ct.ID || ct.Id;
-                            if (!ctId) {
+                        filteredOperators.forEach(op => {
+                            const opStatus = op.Status;
+                            const opId = op.ID || op.Id;
+                            if (!opStatus || !opId) {
                                 return;
                             }
 
-                            const hasCert = opCerts.some(c => {
-                                const cCertTypeId = c.CertTypeID || c.CertTypeId;
-                                const isDeleted = c.IsDeleted === true || c.isDeleted === true;
-                                const isApproved = c.IsApproved === true || c.isApproved === true;
-                                if (!cCertTypeId || isDeleted || !isApproved) return false;
-                                return cCertTypeId === ctId;
+                            const statusType = flowMap.get(String(opStatus).toUpperCase());
+                            if (!statusType) {
+                                return;
+                            }
+
+                            const stPizzaStatusId =
+                                statusType.PizzaStatusID ||
+                                statusType.PizzaStatusId ||
+                                statusType.pizzaStatusId ||
+                                statusType.pizzaStatusID;
+                            const stDivisionId =
+                                statusType.DivisionID ||
+                                statusType.DivisionId ||
+                                statusType.divisionId ||
+                                statusType.divisionID;
+
+                            // In some JSON-backed datasets DivisionId may be missing on StatusType;
+                            // only enforce a division match when a division is actually present.
+                            if (!stPizzaStatusId) {
+                                return;
+                            }
+                            if (stDivisionId && stDivisionId !== mainDivisionFilter) {
+                                return;
+                            }
+
+                            // Required cert types for this PizzaStatusID + division
+                            const requiredCertTypes = certTypes.filter(ct => {
+                                const ctPizzaStatusId =
+                                    ct.PizzaStatusID ||
+                                    ct.PizzaStatusId ||
+                                    ct.pizzaStatusId ||
+                                    ct.pizzaStatusID;
+                                const ctDivisionId =
+                                    ct.DivisionID ||
+                                    ct.DivisionId ||
+                                    ct.divisionId ||
+                                    ct.divisionID;
+                                const ctIsDeleted = ct.IsDeleted ?? ct.isDeleted ?? ct.isDelete;
+
+                                if (!ctPizzaStatusId || ctIsDeleted === true) return false;
+                                if (ctPizzaStatusId !== stPizzaStatusId) return false;
+                                // As with StatusType, only enforce division matching when DivisionId exists on the cert type.
+                                if (ctDivisionId && ctDivisionId !== mainDivisionFilter) return false;
+                                return true;
                             });
 
-                            totalRequiredSlots++;
-                            if (hasCert) {
-                                fulfilledSlots++;
+                            if (requiredCertTypes.length === 0) {
+                                return;
                             }
-                        });
-                    });
 
-                    if (totalRequiredSlots > 0) {
-                        compliancePercent = Math.round((fulfilledSlots / totalRequiredSlots) * 100);
+                            const opCerts = (op.certifications && Array.isArray(op.certifications))
+                                ? op.certifications
+                                : certifications.filter(c => (c.OperatorID || c.OperatorId) === opId);
+
+                            requiredCertTypes.forEach(ct => {
+                                const ctId = ct.ID || ct.Id;
+                                if (!ctId) {
+                                    return;
+                                }
+
+                                const hasCert = opCerts.some(c => {
+                                    const cCertTypeId = c.CertTypeID || c.CertTypeId;
+                                    const isDeleted = c.IsDeleted === true || c.isDeleted === true;
+                                    const isApproved = c.IsApproved === true || c.isApproved === true;
+                                    if (!cCertTypeId || isDeleted || !isApproved) return false;
+                                    return cCertTypeId === ctId;
+                                });
+
+                                totalRequiredSlots++;
+                                if (hasCert) {
+                                    fulfilledSlots++;
+                                }
+                            });
+                        });
+
+                        if (totalRequiredSlots > 0) {
+                            compliancePercent = Math.round((fulfilledSlots / totalRequiredSlots) * 100);
+                        }
                     }
+                } catch (e) {
+                    // Swallow errors for safety; if anything goes wrong, chart stays at zero
                 }
-            } catch (e) {
-                // Swallow errors for safety; if anything goes wrong, chart stays at zero
             }
 
             currentCompliancePercent = compliancePercent;
@@ -2564,21 +2686,26 @@ function addCertToStatus(statusName, certName) {
         const st = statusTypes.find(s => s.Status === statusName && s.DivisionID === mainDivisionFilter);
         if (st && st.PizzaStatusID) pizzaStatusId = st.PizzaStatusID;
     }
-    // Check if it already exists
-    const exists = certTypes.some(ct =>
+    // Check if it already exists - if so, we may need to update PizzaStatusID
+    const existingCert = certTypes.find(ct =>
         normalizeCertName(ct.Certification) === normalizeCertName(certName) &&
-        ct.PizzaStatusID === pizzaStatusId &&
         ct.DivisionID === mainDivisionFilter
     );
-    if (!exists) {
+    if (existingCert && existingCert.PizzaStatusID !== pizzaStatusId) {
+        // Update existing cert's PizzaStatusID
+        existingCert.PizzaStatusID = pizzaStatusId;
+        if (existingCert.ID) modifiedCertTypeIds.add(existingCert.ID);  // Track modified
+    } else if (!existingCert) {
+        const newId = 'TEMP-' + Math.random().toString(36).substr(2, 9);
         certTypes.push({
+            ID: newId,
             Certification: certName,
             PizzaStatusID: pizzaStatusId,
             DivisionID: mainDivisionFilter,
             CertificationType: 'Added in Session',
-            CertificationID: 'TEMP-' + Math.random().toString(36).substr(2, 9)
+            CertificationID: newId
         });
-    } else {
+        modifiedCertTypeIds.add(newId);  // Track new item
     }
 }
 
@@ -2608,6 +2735,7 @@ function removeCertFromStatus(statusName, certName) {
             ct.DivisionID === mainDivisionFilter
         ) {
             ct.PizzaStatusID = null; // or ""
+            if (ct.ID) modifiedCertTypeIds.add(ct.ID);  // Track modified
             updatedCount++;
         }
     });
@@ -2700,6 +2828,7 @@ function removeCertFromStatus(statusName, certName) {
             // 2. Mark as deleted
             statusRecord.isDeleted = true;
             statusRecord.IsDelete = true;
+            if (statusRecord.ID) modifiedStatusTypeIds.add(statusRecord.ID);  // Track modified
             const deletedOrderId = parseInt(statusRecord.OrderID);
             // 3. Shift OrderID of subsequent statuses
             let shiftedCount = 0;
@@ -2708,6 +2837,7 @@ function removeCertFromStatus(statusName, certName) {
                     const currentOrder = parseInt(st.OrderID);
                     if (!isNaN(currentOrder) && currentOrder > deletedOrderId) {
                         st.OrderID = (currentOrder - 1).toString();
+                        if (st.ID) modifiedStatusTypeIds.add(st.ID);  // Track modified
                         shiftedCount++;
                     }
                 }
@@ -2767,22 +2897,38 @@ function removeCertFromStatus(statusName, certName) {
                 return;
             }
 
+            // If data is still loading, request cancellation so we can prioritize saving
+            cancelLoadData = true;
+
+            const saveBtn = document.getElementById('saveBtn');
+            const originalLabel = saveBtn ? saveBtn.innerHTML : '';
+
+            if (saveBtn) {
+                saveBtn.disabled = true;
+                saveBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Saving...';
+            }
+
             let saveLog = '';
             let saveSuccess = true;
 
             try {
-                // Save cert types
-                const cleanCertTypes = certTypes.map(ct => ({ ...ct }));
-                const responseCertTypes = await fetch('/api/data/certtypes', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(cleanCertTypes, null, 4)
-                });
-                if (responseCertTypes.ok) {
-                    saveLog += '✓ Cert types saved successfully.\n';
+                // Save ONLY modified cert types
+                if (modifiedCertTypeIds.size > 0) {
+                    const modifiedCertTypes = certTypes.filter(ct => ct.ID && modifiedCertTypeIds.has(ct.ID)).map(ct => ({ ...ct }));
+                    console.log(`Saving ${modifiedCertTypes.length} modified cert types (out of ${certTypes.length} total)`);
+                    const responseCertTypes = await fetch('/api/data/certtypes', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(modifiedCertTypes, null, 4)
+                    });
+                    if (responseCertTypes.ok) {
+                        saveLog += `✓ Cert types saved (${modifiedCertTypes.length} items).\n`;
+                    } else {
+                        saveLog += `✗ Failed to save cert types: ${responseCertTypes.status} ${responseCertTypes.statusText}\n`;
+                        saveSuccess = false;
+                    }
                 } else {
-                    saveLog += `✗ Failed to save cert types: ${responseCertTypes.status} ${responseCertTypes.statusText}\n`;
-                    saveSuccess = false;
+                    saveLog += '○ No cert types modified.\n';
                 }
             } catch (err) {
                 saveLog += `✗ Error during save: ${err.message || err}\n`;
@@ -2790,21 +2936,24 @@ function removeCertFromStatus(statusName, certName) {
             }
 
             try {
-                // Save status types (including deleted and reordered)
-                const cleanStatusTypes = statusTypes.map(st => ({ ...st }));
-                // Log any items for the current division to verify OrderID updates
-                const currentDivItems = cleanStatusTypes.filter(st => st.DivisionID === mainDivisionFilter);
-                const responseStatusTypes = await fetch('/api/data/statustypes', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(cleanStatusTypes)
-                });
-                if (responseStatusTypes.ok) {
-                    saveLog += '✓ Status types saved successfully.\n';
+                // Save ONLY modified status types
+                if (modifiedStatusTypeIds.size > 0) {
+                    const modifiedStatusTypes = statusTypes.filter(st => st.ID && modifiedStatusTypeIds.has(st.ID)).map(st => ({ ...st }));
+                    console.log(`Saving ${modifiedStatusTypes.length} modified status types (out of ${statusTypes.length} total)`);
+                    const responseStatusTypes = await fetch('/api/data/statustypes', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(modifiedStatusTypes)
+                    });
+                    if (responseStatusTypes.ok) {
+                        saveLog += `✓ Status types saved (${modifiedStatusTypes.length} items).\n`;
+                    } else {
+                        const errorText = await responseStatusTypes.text();
+                        saveLog += `✗ Failed to save status types: ${responseStatusTypes.status} ${responseStatusTypes.statusText} - ${errorText}\n`;
+                        saveSuccess = false;
+                    }
                 } else {
-                    const errorText = await responseStatusTypes.text();
-                    saveLog += `✗ Failed to save status types: ${responseStatusTypes.status} ${responseStatusTypes.statusText} - ${errorText}\n`;
-                    saveSuccess = false;
+                    saveLog += '○ No status types modified.\n';
                 }
             } catch (err) {
                 saveLog += `✗ Error during save (status types): ${err.message || err}\n`;
@@ -2812,19 +2961,24 @@ function removeCertFromStatus(statusName, certName) {
             }
 
             try {
-                // Save pizza statuses (including IsAuto flag)
-                const cleanPizzaStatuses = pizzaStatuses.map(ps => ({ ...ps }));
-                const responsePizzaStatuses = await fetch('/api/data/pizzastatuses', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(cleanPizzaStatuses)
-                });
-                if (responsePizzaStatuses.ok) {
-                    saveLog += '✓ Pizza statuses saved successfully.\n';
+                // Save ONLY modified pizza statuses
+                if (modifiedPizzaStatusIds.size > 0) {
+                    const modifiedPizzaStatuses = pizzaStatuses.filter(ps => ps.ID && modifiedPizzaStatusIds.has(ps.ID)).map(ps => ({ ...ps }));
+                    console.log(`Saving ${modifiedPizzaStatuses.length} modified pizza statuses (out of ${pizzaStatuses.length} total)`);
+                    const responsePizzaStatuses = await fetch('/api/data/pizzastatuses', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(modifiedPizzaStatuses)
+                    });
+                    if (responsePizzaStatuses.ok) {
+                        saveLog += `✓ Pizza statuses saved (${modifiedPizzaStatuses.length} items).\n`;
+                    } else {
+                        const errorText = await responsePizzaStatuses.text();
+                        saveLog += `✗ Failed to save pizza statuses: ${responsePizzaStatuses.status} ${responsePizzaStatuses.statusText} - ${errorText}\n`;
+                        saveSuccess = false;
+                    }
                 } else {
-                    const errorText = await responsePizzaStatuses.text();
-                    saveLog += `✗ Failed to save pizza statuses: ${responsePizzaStatuses.status} ${responsePizzaStatuses.statusText} - ${errorText}\n`;
-                    saveSuccess = false;
+                    saveLog += '○ No pizza statuses modified.\n';
                 }
             } catch (err) {
                 saveLog += `✗ Error during save (pizza statuses): ${err.message || err}\n`;
@@ -2837,6 +2991,10 @@ function removeCertFromStatus(statusName, certName) {
             // Update UI based on result
             if (saveSuccess) {
                 hasUnsavedChanges = false;
+                // Clear the modification tracking sets
+                modifiedCertTypeIds.clear();
+                modifiedStatusTypeIds.clear();
+                modifiedPizzaStatusIds.clear();
                 document.getElementById('unsavedIndicator').style.display = 'none';
                 document.getElementById('saveBtn').style.display = 'none';
                 // Refresh the page after a short delay to allow user to see the alert
@@ -2845,6 +3003,11 @@ function removeCertFromStatus(statusName, certName) {
                 hasUnsavedChanges = true;
                 document.getElementById('unsavedIndicator').style.display = 'block';
                 document.getElementById('saveBtn').style.display = 'inline-block';
+
+                if (saveBtn) {
+                    saveBtn.disabled = false;
+                    saveBtn.innerHTML = originalLabel;
+                }
             }
         }
 
@@ -2880,6 +3043,7 @@ function removeCertFromStatus(statusName, certName) {
                 if (idMatch) {
                     ps.IsAuto = isAuto;
                     ps.isAuto = isAuto;
+                    if (ps.ID) modifiedPizzaStatusIds.add(ps.ID);  // Track modified
                 }
             });
 
@@ -2944,6 +3108,95 @@ function removeCertFromStatus(statusName, certName) {
                     btn.textContent = 'Move to next status';
                 }
             }
+        }
+
+        // Compute the next status for a given operator based on the current workflow
+        function computeNextStatusForOperator(operatorId) {
+            if (!operatorId || !Array.isArray(currentWorkflow) || currentWorkflow.length === 0) {
+                return null;
+            }
+
+            const op = operators.find(o => o.ID === operatorId || o.Id === operatorId);
+            if (!op || !op.Status) {
+                return null;
+            }
+
+            const opStatusUpper = String(op.Status).toUpperCase();
+
+            // Find current workflow step for this operator's status
+            const currentStep = currentWorkflow.find(flow =>
+                flow && flow.status && String(flow.status).toUpperCase() === opStatusUpper
+            );
+            if (!currentStep) {
+                return null;
+            }
+
+            const currentPizzaStatusId = currentStep.originalObj
+                ? (currentStep.originalObj.PizzaStatusID || currentStep.originalObj.PizzaStatusId || currentStep.originalObj.pizzaStatusId || currentStep.originalObj.pizzaStatusID)
+                : null;
+
+            // Find the next step in the workflow with a different PizzaStatusID (if available)
+            let nextStep = null;
+            const currentOrder = typeof currentStep.step === 'number' ? currentStep.step : parseInt(currentStep.originalObj?.OrderID) || 0;
+
+            currentWorkflow.forEach(flow => {
+                if (!flow || !flow.status) return;
+                const flowOrder = typeof flow.step === 'number' ? flow.step : parseInt(flow.originalObj?.OrderID) || 0;
+                if (flowOrder <= currentOrder) return;
+
+                const flowPizzaStatusId = flow.originalObj
+                    ? (flow.originalObj.PizzaStatusID || flow.originalObj.PizzaStatusId || flow.originalObj.pizzaStatusId || flow.originalObj.pizzaStatusID)
+                    : null;
+
+                if (currentPizzaStatusId && flowPizzaStatusId && flowPizzaStatusId === currentPizzaStatusId) {
+                    // Skip same PizzaStatusID to mirror auto-advance behavior
+                    return;
+                }
+
+                if (!nextStep || flowOrder < (typeof nextStep.step === 'number' ? nextStep.step : parseInt(nextStep.originalObj?.OrderID) || Number.MAX_SAFE_INTEGER)) {
+                    nextStep = flow;
+                }
+            });
+
+            if (!nextStep) {
+                return null;
+            }
+
+            const nextStatusName = nextStep.status;
+            const nextStatusId = nextStep.statusId || nextStep.id || nextStep.Id || (nextStep.originalObj && (nextStep.originalObj.Id || nextStep.originalObj.ID));
+            const nextOrderId = String(typeof nextStep.step === 'number' ? nextStep.step : (nextStep.originalObj?.OrderID || ''));
+
+            if (!nextStatusName || !nextStatusId) {
+                return null;
+            }
+
+            return {
+                nextStatusName,
+                nextStatusId,
+                nextOrderId
+            };
+        }
+
+        // Handler for "Next status" button on operator cards
+        function moveOperatorToNextStatusFromCard(operatorId) {
+            const next = computeNextStatusForOperator(operatorId);
+            if (!next) {
+                alert('No next status is configured for this operator in the current workflow.');
+                return;
+            }
+
+            autoMoveOperatorToNextStatus(operatorId, next.nextStatusId, next.nextStatusName, next.nextOrderId);
+        }
+
+        // Handler for "Move to next status" button in the Operator Profile modal
+        function moveOperatorToNextStatusFromProfile(operatorId) {
+            const next = computeNextStatusForOperator(operatorId);
+            if (!next) {
+                alert('No next status is configured for this operator in the current workflow.');
+                return;
+            }
+
+            autoMoveOperatorToNextStatus(operatorId, next.nextStatusId, next.nextStatusName, next.nextOrderId);
         }
 
         // ===== CONTROL CENTER FEATURES =====
@@ -3321,23 +3574,90 @@ function removeCertFromStatus(statusName, certName) {
         }
 
         // Export as CSV
+        // Generates an Excel-friendly layout with a clear table per division
+        // (based on the currently queried workflow only).
         function exportAsCSV() {
-            let csv = 'Status,Order,Certification,Level,Operators With Cert,Total Operators,Compliance %\n';
-            
-            currentWorkflow.forEach(step => {
-                const pizzaStatusId = step.originalObj ? step.originalObj.PizzaStatusID : null;
-                const allCerts = getRequiredCertsForStatus(step.status, pizzaStatusId);
-                allCerts.forEach(cert => {
-                    const withCert = operators.filter(op => 
-                        op.certifications?.some(c => certNamesMatch(c.CertType, cert))
-                    ).length;
-                    const compliance = ((withCert / operators.length) * 100).toFixed(1);
-                    
-                    csv += `"${step.status}",${step.step},"${cert}",required,${withCert},${operators.length},${compliance}%\n`;
-                });
+            function esc(value) {
+                if (value === null || value === undefined) return '';
+                const s = String(value).replace(/"/g, '""');
+                return `"${s}"`;
+            }
+
+            const lines = [];
+            const today = new Date().toISOString().split('T')[0];
+
+            const statusTypesArr = window.statusTypes || [];
+            const pizzaStatusesArr = window.pizzaStatuses || [];
+            const pizzaStatusMap = {};
+            pizzaStatusesArr.forEach(p => {
+                const id = p.ID || p.Id || p.id;
+                if (id) {
+                    pizzaStatusMap[id] = p;
+                }
             });
-            
-            downloadFile(`operator_lifecycle_requirements_${new Date().toISOString().split('T')[0]}.csv`, csv, 'text/csv');
+
+            // Group current workflow steps by division based on the underlying StatusType
+            const byDivision = new Map();
+            currentWorkflow.forEach(step => {
+                const st = step.originalObj || {};
+                const divisionId = st.DivisionID || st.DivisionId || st.divisionId || st.divisionID || mainDivisionFilter || 'ALL';
+                if (!byDivision.has(divisionId)) {
+                    byDivision.set(divisionId, []);
+                }
+                byDivision.get(divisionId).push(step);
+            });
+
+            const divisionIds = Array.from(byDivision.keys());
+            divisionIds.forEach((divisionId, idx) => {
+                const steps = byDivision.get(divisionId) || [];
+                if (!steps.length) return;
+
+                // Section header
+                lines.push(`Division,${esc(divisionId)}`);
+                // Table header
+                lines.push('Status,Order,Pizza Status,PizzaStatusId,Required Certification');
+
+                // Ensure steps are ordered by their current step field
+                steps
+                    .slice()
+                    .sort((a, b) => (a.step || 0) - (b.step || 0))
+                    .forEach(step => {
+                        const st = step.originalObj || {};
+                        const pizzaStatusId = st.PizzaStatusID || st.PizzaStatusId || st.pizzaStatusId || st.pizzaStatusID || null;
+                        const ps = pizzaStatusId ? pizzaStatusMap[pizzaStatusId] : null;
+                        const pizzaStatusName = ps ? (ps.Status || ps.status || ps.Name || ps.name || '') : '';
+
+                        const allCerts = getRequiredCertsForStatus(step.status, pizzaStatusId) || [];
+
+                        if (allCerts.length === 0) {
+                            lines.push([
+                                esc(step.status),
+                                esc(step.step),
+                                esc(pizzaStatusName),
+                                esc(pizzaStatusId || ''),
+                                ''
+                            ].join(','));
+                        } else {
+                            allCerts.forEach(cert => {
+                                lines.push([
+                                    esc(step.status),
+                                    esc(step.step),
+                                    esc(pizzaStatusName),
+                                    esc(pizzaStatusId || ''),
+                                    esc(cert)
+                                ].join(','));
+                            });
+                        }
+                    });
+
+                // Blank line between divisions
+                if (idx < divisionIds.length - 1) {
+                    lines.push('');
+                }
+            });
+
+            const csv = lines.join('\n');
+            downloadFile(`operator_lifecycle_requirements_${today}.csv`, csv, 'text/csv');
             closeExportModal();
         }
 
@@ -3691,6 +4011,7 @@ function removeCertFromStatus(statusName, certName) {
                         const currentOrd = parseInt(st.OrderID) || 0;
                         if (currentOrd >= targetOrder) {
                             st.OrderID = (currentOrd + 1).toString();
+                            if (st.ID) modifiedStatusTypeIds.add(st.ID);  // Track modified
                             shiftedCountDown++;
                         }
                     }
@@ -3709,9 +4030,12 @@ function removeCertFromStatus(statusName, certName) {
                     // Defensive: update Description and RecordAt if missing
                     if (!stRecord.Description) stRecord.Description = statusName;
                     if (!stRecord.RecordAt) stRecord.RecordAt = new Date().toISOString();
+                    if (stRecord.ID) modifiedStatusTypeIds.add(stRecord.ID);  // Track modified
                 } else {
+                    const newId = crypto.randomUUID ? crypto.randomUUID() : 'NEW-' + Math.random().toString(36).substr(2,9);
                     stRecord = {
-                        Id: crypto.randomUUID ? crypto.randomUUID() : 'NEW-' + Math.random().toString(36).substr(2,9),
+                        ID: newId,
+                        Id: newId,
                         Status: statusName,
                         DivisionID: division,
                         OrderID: targetOrder.toString(),
@@ -3723,6 +4047,7 @@ function removeCertFromStatus(statusName, certName) {
                         __IMTINDEX__: 0
                     };
                     statusTypes.push(stRecord);
+                    modifiedStatusTypeIds.add(newId);  // Track new item
                 }
 
                 // 3. Update Pizza Status Mapping (REMOVED: pizzaStatusRequirements is deprecated)
@@ -3735,6 +4060,7 @@ function removeCertFromStatus(statusName, certName) {
                         const currentOrd = parseInt(st.OrderID) || 0;
                         if (currentOrd >= targetOrder) {
                             st.OrderID = (currentOrd + 1).toString();
+                            if (st.ID) modifiedStatusTypeIds.add(st.ID);  // Track modified
                             shiftedCountUp++;
                         }
                     }

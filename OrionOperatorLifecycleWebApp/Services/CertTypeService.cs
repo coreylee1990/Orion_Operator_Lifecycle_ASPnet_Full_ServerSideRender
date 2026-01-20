@@ -27,6 +27,39 @@ namespace OrionOperatorLifecycleWebApp.Services
             }) ?? new List<CertType>();
         }
 
+        public List<CertType> GetCertTypesForClient(string clientId)
+        {
+            if (string.IsNullOrWhiteSpace(clientId))
+            {
+                return GetAllCertTypes();
+            }
+
+            // For client-scoped queries, delegate directly to the repository.
+            // Caching is handled only for the full GetAllCertTypes path to avoid
+            // complex invalidation of per-client entries on save.
+            return _repository.GetByClient(clientId) ?? new List<CertType>();
+        }
+
+        public List<CertType> GetCertTypesForPizzaStatuses(IEnumerable<string> pizzaStatusIds)
+        {
+            if (pizzaStatusIds == null)
+            {
+                return new List<CertType>();
+            }
+
+            var ids = pizzaStatusIds
+                .Where(id => !string.IsNullOrWhiteSpace(id))
+                .ToList();
+
+            if (ids.Count == 0)
+            {
+                return new List<CertType>();
+            }
+
+            // No caching here: this is a highly scoped, per-view query.
+            return _repository.GetByPizzaStatusIds(ids) ?? new List<CertType>();
+        }
+
         public void SaveAllCertTypes(List<CertType> certTypes)
         {
             _repository.SaveAll(certTypes);

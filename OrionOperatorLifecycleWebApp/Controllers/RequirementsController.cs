@@ -17,6 +17,7 @@ namespace OrionOperatorLifecycleWebApp.Controllers
         private readonly IRequirementService _requirementService;
         private readonly ICertTypeService _certTypeService;
         private readonly IStatusTrackerService _statusTrackerService;
+        private readonly IAutoAdvanceService _autoAdvanceService;
 
         public RequirementsController(
             IOperatorService operatorService,
@@ -25,7 +26,8 @@ namespace OrionOperatorLifecycleWebApp.Controllers
             IStatusTypeService statusTypeService,
             IRequirementService requirementService,
             ICertTypeService certTypeService,
-            IStatusTrackerService statusTrackerService)
+            IStatusTrackerService statusTrackerService,
+            IAutoAdvanceService autoAdvanceService)
         {
             _operatorService = operatorService;
             _certificationService = certificationService;
@@ -34,6 +36,33 @@ namespace OrionOperatorLifecycleWebApp.Controllers
             _requirementService = requirementService;
             _certTypeService = certTypeService;
             _statusTrackerService = statusTrackerService;
+            _autoAdvanceService = autoAdvanceService;
+        }
+
+        // FUTURE: API endpoint to delegate a single operator auto-advance to the
+        // AutoAdvanceService. Not currently used by the Requirements editor UI.
+        [HttpPost]
+        public async Task<IActionResult> AutoAdvanceOperator([FromBody] string operatorId)
+        {
+            if (string.IsNullOrWhiteSpace(operatorId))
+            {
+                return BadRequest(new { error = "operatorId is required" });
+            }
+
+            var result = await _autoAdvanceService.AdvanceOperatorIfEligibleAsync(operatorId, "ManualAutoAdvanceFromUI");
+
+            var op = _operatorService.GetOperatorById(operatorId);
+            if (op == null)
+            {
+                return NotFound(new { error = "Operator not found after auto-advance" });
+            }
+
+            return Json(new
+            {
+                op.Id,
+                op.Status,
+                op.StatusId
+            });
         }
 
         // GET: /Requirements/
@@ -487,7 +516,8 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                 return Json(new List<AutoAdvanceCandidate>());
             }
 
-            var allCertifications = _certificationService.GetCertificationsByDivision(divisionId);
+            // Use all certifications and filter by operator/requirements; this works for both SQL and JSON backends
+            var allCertifications = _certificationService.GetAllCertifications();
             var allStatusTypes = _statusTypeService.GetStatusTypesByDivision(divisionId);
             var allCertTypes = _certTypeService.GetAllCertTypes();
             var allPizzaStatuses = _pizzaStatusService.GetAllPizzaStatuses();
@@ -661,7 +691,8 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                 return Json(new { totalRequiredSlots = 0, fulfilledSlots = 0, percent = 0 });
             }
 
-            var allCertifications = _certificationService.GetCertificationsByDivision(divisionId);
+            // Use all certifications and filter by operator/requirements; this works for both SQL and JSON backends
+            var allCertifications = _certificationService.GetAllCertifications();
             var allStatusTypes = _statusTypeService.GetStatusTypesByDivision(divisionId);
             var allCertTypes = _certTypeService.GetAllCertTypes();
             var allPizzaStatuses = _pizzaStatusService.GetAllPizzaStatuses();

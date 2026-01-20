@@ -22,7 +22,14 @@ if (useSqlDatabase)
 {
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
     builder.Services.AddDbContext<OrionDbContext>(options =>
-        options.UseSqlServer(connectionString));
+        options.UseSqlServer(connectionString, sqlOptions =>
+        {
+            // Enable automatic retry on transient failures (Azure SQL connection drops, etc.)
+            sqlOptions.EnableRetryOnFailure(
+                maxRetryCount: 5,
+                maxRetryDelay: TimeSpan.FromSeconds(30),
+                errorNumbersToAdd: null);
+        }));
 
     // Register SQL Repositories
     builder.Services.AddScoped<IOperatorRepository, SqlOperatorRepository>();

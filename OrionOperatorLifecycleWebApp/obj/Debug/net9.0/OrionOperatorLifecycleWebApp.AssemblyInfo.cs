@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OrionOperatorLifecycleWebApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2b1526f2325aabafa435d4b0e41e3eb4da6784ed")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+892a22cae6842a14996653927c7f62da0ee98505")]
 [assembly: System.Reflection.AssemblyProductAttribute("OrionOperatorLifecycleWebApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OrionOperatorLifecycleWebApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
