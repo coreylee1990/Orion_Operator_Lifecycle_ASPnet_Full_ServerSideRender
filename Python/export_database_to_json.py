@@ -111,6 +111,25 @@ def export_related_data(conn, table_name, operator_ids, output_filename):
         json.dump(rows, f, indent=2, ensure_ascii=False)
     print(f"✅ Exported {len(rows)} records to {output_filename}")
 
+def export_certifications(conn, operator_ids):
+    """Export pay_Certifications for sampled operators, filtering for isApproved=1."""
+    if not operator_ids:
+        return
+    
+    cursor = conn.cursor()
+    placeholders = ','.join(['?' for _ in operator_ids])
+    # Filter for approved certifications
+    query = f"SELECT * FROM pay_Certifications WHERE isApproved = 1 AND OperatorID IN ({placeholders})"
+    
+    print(f"\n🔗 Exporting pay_Certifications (isApproved=1) for sampled operators...")
+    cursor.execute(query, operator_ids)
+    rows = [row_to_dict(cursor, row) for row in cursor.fetchall()]
+    
+    output_file = os.path.join(OUTPUT_DIR, 'pay_Certifications.json')
+    with open(output_file, 'w', encoding='utf-8') as f:
+        json.dump(rows, f, indent=2, ensure_ascii=False)
+    print(f"✅ Exported {len(rows)} approved certifications to pay_Certifications.json")
+
 def export_cert_types(conn):
     """Export pay_CertTypes with specific required fields."""
     cursor = conn.cursor()
@@ -123,6 +142,7 @@ def export_cert_types(conn):
             Certification, 
             Description, 
             DivisionID, 
+            PizzaStatusID,
             isFleet, 
             isProvider, 
             isDeleted, 
@@ -169,7 +189,8 @@ def main():
         operator_ids = export_operators(conn, max_per_division_status=10)
         
         # 2. Export Related Child Data
-        export_related_data(conn, 'pay_Certifications', operator_ids, 'pay_Certifications.json')
+        export_certifications(conn, operator_ids)
+        # export_related_data(conn, 'pay_Certifications', operator_ids, 'pay_Certifications.json')
         export_related_data(conn, 'pay_StatusTracker', operator_ids, 'pay_StatusTracker.json')
         
         # 3. Export Reference Tables

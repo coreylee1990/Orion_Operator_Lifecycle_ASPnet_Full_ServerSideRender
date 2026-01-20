@@ -97,18 +97,19 @@ namespace OrionOperatorLifecycleWebApp.Controllers
 
             if (string.IsNullOrEmpty(divisionId) || divisionId == "ALL")
             {
-                // Load ALL operators (already includes certs from repository)
+                // Load ALL operators
                 operators = _operatorService.GetAllOperators();
             }
             else
             {
-                // Load only operators for this division (optimized query with certs included)
+                // Load only operators for this division
                 operators = _operatorService.GetOperatorsByDivision(divisionId);
             }
 
-            // Certifications are already loaded with operators from the repository
-            // No need to load separately - this eliminates an extra DB query
-            var certifications = operators.SelectMany(op => op.Certifications ?? new List<Certification>()).ToList();
+            // Load certifications separately since Operator.Certifications is [JsonIgnore]
+            // and not populated by the repository
+            var operatorIds = operators.Select(op => op.Id).ToList();
+            var certifications = _certificationService.GetCertificationsByOperatorIds(operatorIds);
 
             return Json(new { operators, certifications });
         }
@@ -277,12 +278,13 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                     .ToList();
 
                 // Get all operators in this division
-                var allOperators = _operatorService.GetAllOperators()
-                    .Where(op => op.DivisionId == division)
-                    .ToList();
+                var allOperators = _operatorService.GetOperatorsByDivision(division);
 
-                // Load certifications only for this division
-                var allCertifications = _certificationService.GetCertificationsByDivision(division);
+                // Get operator IDs to load their certifications
+                var operatorIds = allOperators.Select(op => op.Id).ToList();
+                
+                // Load certifications for these operators (not by division - certs don't have division)
+                var allCertifications = _certificationService.GetCertificationsByOperatorIds(operatorIds);
 
                 // Filter operators by status that uses this PizzaStatusId
                 foreach (var op in allOperators)
@@ -298,7 +300,7 @@ namespace OrionOperatorLifecycleWebApp.Controllers
                     // Load certifications for this operator
                     var operatorCerts = allCertifications.Where(c => c.OperatorId == op.Id).ToList();
                     
-                    // Check if operator has this cert
+                    // Check if operator has this cert by CertTypeId
                     var cert = operatorCerts.FirstOrDefault(c =>
                         c.CertTypeId == certType.Id &&
                         c.IsDeleted != true &&

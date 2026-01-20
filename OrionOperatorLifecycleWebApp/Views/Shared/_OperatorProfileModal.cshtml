@@ -1,13 +1,29 @@
 <!-- Operator Profile Modal Partial -->
 <div class="operator-modal" id="operatorModal">
-    <div class="operator-modal-content">
+    <div class="operator-modal-content" onclick="event.stopPropagation()">
         <div class="operator-modal-header">
-            <h2 id="operatorModalName">Operator Profile</h2>
-            <p class="operator-modal-subtitle" id="operatorModalSubtitle"></p>
-            <button class="close-operator-modal" onclick="closeOperatorModal()">×</button>
+            <h2 id="operatorModalName" style="color: #333;">Operator Profile</h2>
+            <p class="operator-modal-subtitle" id="operatorModalSubtitle" style="color: #555;"></p>
+            <button type="button" id="operatorModalCloseBtn" class="close-operator-modal" style="cursor: pointer; z-index: 9999; position: absolute; top: 15px; right: 15px; background: #fff; border: 2px solid #dc3545; color: #dc3545; font-size: 24px; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">×</button>
         </div>
-        <div class="operator-modal-body" id="operatorModalBody">
+        <div class="operator-modal-body" id="operatorModalBody" style="color: #333;">
             <!-- Content will be dynamically generated -->
         </div>
     </div>
 </div>
+<script>
+(function() {
+    // Close modal on backdrop click
+    document.getElementById('operatorModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            this.style.display = 'none';
+        }
+    });
+    // Close modal on X button click
+    document.getElementById('operatorModalCloseBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        document.getElementById('operatorModal').style.display = 'none';
+    });
+})();
+</script>

@@ -44,6 +44,190 @@ async function renderCertBadgePartial(certName, statusName) {
 // Modal Functions
 // ======================
 
+// Show operator profile modal
+function showOperatorProfileModal(operatorId) {
+    const operator = operators.find(op => op.ID === operatorId);
+    if (!operator) {
+        console.error('Operator not found:', operatorId);
+        return;
+    }
+
+    const modal = document.getElementById('operatorModal');
+    if (!modal) return;
+
+    // Populate header
+    document.getElementById('operatorModalName').textContent = `${operator.FirstName} ${operator.LastName}`;
+    document.getElementById('operatorModalSubtitle').innerHTML = `${operator.DivisionID || 'No Division'} • ${operator.Status || 'No Status'}<br><span style="font-size: 10px; color: #999;">Operator ID: ${operatorId}</span>`;
+
+    // Get operator's status and division
+    const opDivision = operator.DivisionID || '';
+    const opStatus = operator.Status || '';
+    
+    // Find the PizzaStatusID for this operator's status/division
+    let pizzaStatusId = null;
+    if (statusTypes && Array.isArray(statusTypes)) {
+        const st = statusTypes.find(s => s.Status === opStatus && s.DivisionID === opDivision);
+        if (st && st.PizzaStatusID) pizzaStatusId = st.PizzaStatusID;
+    }
+    
+    // Get required CertTypes for this PizzaStatusID and Division
+    let requiredCertTypes = [];
+    if (pizzaStatusId && certTypes && Array.isArray(certTypes)) {
+        requiredCertTypes = certTypes.filter(ct => 
+            ct.PizzaStatusID === pizzaStatusId && 
+            ct.DivisionID === opDivision && 
+            ct.isDeleted !== true && 
+            ct.isDeleted !== 'true'
+        );
+    }
+    
+    // Get operator's certifications
+    const operatorCerts = operator.certifications || [];
+    
+    // Build sets for comparison
+    const operatorCertTypeIds = new Set(operatorCerts.map(c => c.CertTypeID).filter(Boolean));
+    
+    // Categorize required certs
+    const hasCerts = []; // Certs operator has (green)
+    const missingCerts = []; // Certs operator is missing (red)
+    
+    requiredCertTypes.forEach(reqCert => {
+        const certTypeId = reqCert.ID;
+        const certName = reqCert.Certification || 'Unknown';
+        
+        // Check if operator has this cert
+        const operatorCert = operatorCerts.find(c => c.CertTypeID === certTypeId);
+        
+        if (operatorCert) {
+            // Operator has this cert
+            const certDate = operatorCert.Date ? new Date(operatorCert.Date).toLocaleDateString() : 'No Date';
+            hasCerts.push({
+                name: certName,
+                date: certDate,
+                certTypeId: certTypeId
+            });
+        } else {
+            // Operator is missing this cert
+            missingCerts.push({
+                name: certName,
+                certTypeId: certTypeId
+            });
+        }
+    });
+
+    // Populate modal body
+    const modalBody = document.getElementById('operatorModalBody');
+    
+    let html = '';
+    
+    // Calculate progress percentage
+    const totalRequired = requiredCertTypes.length;
+    const completedCount = hasCerts.length;
+    const progressPercent = totalRequired > 0 ? Math.round((completedCount / totalRequired) * 100) : 0;
+    
+    // Bootstrap Progress Bar (Extra Large)
+    html += `<div class="mb-4">
+        <div class="d-flex justify-content-between mb-1">
+            <span style="color: #333; font-weight: 600;">Certification Progress</span>
+            <span style="color: #333; font-weight: 600;">${completedCount} / ${totalRequired}</span>
+        </div>
+        <div class="progress" style="height: 2rem; border-radius: 0.5rem;">
+            <div class="progress-bar ${progressPercent === 100 ? 'bg-success' : progressPercent >= 50 ? 'bg-primary' : 'bg-warning'}" 
+                 role="progressbar" 
+                 style="width: ${progressPercent}%; font-size: 1rem; font-weight: 600;" 
+                 aria-valuenow="${progressPercent}" 
+                 aria-valuemin="0" 
+                 aria-valuemax="100">
+                ${progressPercent}%
+            </div>
+        </div>
+    </div>`;
+    
+    // Has certs section (green)
+    if (hasCerts.length > 0) {
+        html += `<h6 style="color: #28a745; margin-bottom: 8px;"><i class="fas fa-check-circle"></i> Completed Certifications (${hasCerts.length})</h6>`;
+        html += `<div class="mb-4">`;
+        hasCerts.forEach(cert => {
+            html += `
+                <div class="cert-item d-flex justify-content-between align-items-center" style="padding: 10px; border-left: 4px solid #28a745; background: #d4edda; margin-bottom: 4px; border-radius: 4px;">
+                    <div>
+                        <strong style="color: #155724;">${cert.name}</strong>
+                        <div style="font-size: 10px; color: #999;">CertType ID: ${cert.certTypeId}</div>
+                    </div>
+                    <div class="text-end">
+                        <span style="font-size: 12px; color: #555;">${cert.date}</span>
+                    </div>
+                </div>
+            `;
+        });
+        html += `</div>`;
+    }
+    
+    // Missing certs section (red)
+    if (missingCerts.length > 0) {
+        html += `<h6 style="color: #dc3545; margin-bottom: 8px;"><i class="fas fa-times-circle"></i> Missing Certifications (${missingCerts.length})</h6>`;
+        html += `<div class="mb-4">`;
+        missingCerts.forEach(cert => {
+            html += `
+                <div class="cert-item d-flex justify-content-between align-items-center" style="padding: 10px; border-left: 4px solid #dc3545; background: #f8d7da; margin-bottom: 4px; border-radius: 4px;">
+                    <div>
+                        <strong style="color: #721c24;">${cert.name}</strong>
+                        <div style="font-size: 10px; color: #999;">CertType ID: ${cert.certTypeId}</div>
+                    </div>
+                    <div class="text-end">
+                        <span class="badge bg-danger">Missing</span>
+                    </div>
+                </div>
+            `;
+        });
+        html += `</div>`;
+    }
+    
+    // Handle case where no required certs are defined
+    if (requiredCertTypes.length === 0) {
+        html = `<div class="alert alert-info" style="color: #333;">No certification requirements defined for this status.</div>`;
+        
+        // Still show what certs the operator has
+        if (operatorCerts.length > 0) {
+            html += `<h6 style="color: #333; margin-bottom: 8px;">Operator's Certifications (${operatorCerts.length})</h6>`;
+            html += `<div>`;
+            operatorCerts.forEach(cert => {
+                const certDate = cert.Date ? new Date(cert.Date).toLocaleDateString() : 'No Date';
+                html += `
+                    <div class="cert-item d-flex justify-content-between align-items-center" style="padding: 10px; border-bottom: 1px solid #eee;">
+                        <div>
+                            <strong style="color: #333;">${cert.Cert || 'Unknown'}</strong>
+                            <div style="font-size: 10px; color: #999;">CertType ID: ${cert.CertTypeID || 'N/A'}</div>
+                        </div>
+                        <div class="small text-muted">${certDate}</div>
+                    </div>
+                `;
+            });
+            html += `</div>`;
+        }
+    }
+    
+    modalBody.innerHTML = html;
+
+    // Show modal
+    modal.style.display = 'flex';
+}
+
+function closeOperatorModal(event) {
+    if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+    }
+    const modal = document.getElementById('operatorModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// Expose globally for onclick handlers
+window.closeOperatorModal = closeOperatorModal;
+window.showOperatorProfileModal = showOperatorProfileModal;
+
 // Show the duplicate cert modal
 async function showCertDuplicateModal(certName, oldStatus, newStatus, stepIndex) {
     const modalBody = document.getElementById('certDuplicateModalBody');
@@ -91,6 +275,16 @@ async function showCertDuplicateModal(certName, oldStatus, newStatus, stepIndex)
 
 // Confirm move on modal button click
 document.addEventListener('DOMContentLoaded', function() {
+    // Close operator modal when clicking outside
+    const operatorModal = document.getElementById('operatorModal');
+    if (operatorModal) {
+        operatorModal.addEventListener('click', function(event) {
+            if (event.target === operatorModal) {
+                closeOperatorModal();
+            }
+        });
+    }
+
     // Cert Duplicate Modal Confirm
     const certConfirmBtn = document.getElementById('certDuplicateModalConfirmBtn');
     if (certConfirmBtn) {
@@ -1479,11 +1673,13 @@ document.addEventListener('DOMContentLoaded', function() {
                                 const opDivision = op.DivisionID || '';
                                 const opStatus = op.Status || '';
                                 
-                                // Find the operator's PizzaStatusId from statusTypes
+                                // Find the operator's PizzaStatusId and config from statusTypes
                                 let pizzaStatusId = null;
+                                let statusTypeConfig = null;
+
                                 if (statusTypes && Array.isArray(statusTypes)) {
-                                    const st = statusTypes.find(s => s.Status === opStatus && s.DivisionID === opDivision);
-                                    if (st && st.PizzaStatusID) pizzaStatusId = st.PizzaStatusID;
+                                    statusTypeConfig = statusTypes.find(s => s.Status === opStatus && s.DivisionID === opDivision);
+                                    if (statusTypeConfig && statusTypeConfig.PizzaStatusID) pizzaStatusId = statusTypeConfig.PizzaStatusID;
                                 }
                                 
                                 // Get all cert types for this PizzaStatusId and Division (not deleted)
@@ -1545,9 +1741,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
                                 // Calculate days in current status
                                 const daysInStatus = getOperatorDaysInStatus(op.ID);
-                                const isOverdue = daysInStatus !== null && daysInStatus >= 30;
+                                
+                                // Conditional logic for overdue status based on StatusTypes configuration
+                                let isOverdue = false;
+                                let overdueThreshold = 30; // Default threshold
+                                
+                                if (statusTypeConfig) {
+                                    // Check if status has a custom DaysInStatus limit
+                                    if (statusTypeConfig.DaysInStatusLimit && statusTypeConfig.DaysInStatusLimit > 0) {
+                                        overdueThreshold = statusTypeConfig.DaysInStatusLimit;
+                                    }
+                                    
+                                    // Check if overdue warning is enabled for this status
+                                    if (statusTypeConfig.EnableOverdueWarning === true || statusTypeConfig.EnableOverdueWarning === 'true') {
+                                        isOverdue = daysInStatus !== null && daysInStatus >= overdueThreshold;
+                                    }
+                                } else {
+                                    // Fallback to default behavior if status config not found
+                                     isOverdue = daysInStatus !== null && daysInStatus >= 30;
+                                }
+
                                 const daysDisplay = daysInStatus !== null ? 
-                                    `<span class="operator-days-in-status ${isOverdue ? 'overdue' : ''}" title="Days in current status">
+                                    `<span class="operator-days-in-status ${isOverdue ? 'overdue' : ''}" title="Days in current status (Limit: ${overdueThreshold} days)">
                                         ${isOverdue ? '⚠️ ' : ''}${daysInStatus}d
                                     </span>` : '';
                                 
@@ -1555,20 +1770,25 @@ document.addEventListener('DOMContentLoaded', function() {
                                 const certCountDisplay = totalAll > 0 ? 
                                     `<span class="operator-cert-count" title="${validCount} valid, ${expiredCount} expired, ${missingCount} missing">${validCount}/${totalAll}</span>` : '';
 
-                                // Build progress bar HTML
+                                // Build Bootstrap progress bar HTML - EXTRA LARGE
                                 let progressBarHtml = '';
+                                const completedPercent = totalAll > 0 ? Math.round((validCount / totalAll) * 100) : 0;
+                                const progressColorClass = completedPercent === 100 ? 'bg-success' : completedPercent >= 50 ? 'bg-primary' : completedPercent > 0 ? 'bg-warning' : 'bg-secondary';
+                                
                                 if (totalAll > 0) {
                                     progressBarHtml = `
-                                        <div class="operator-progress" title="${validCount} valid, ${expiredCount} expired, ${missingCount} missing">
-                                            ${validPercent > 0 ? `<div class="operator-progress-segment valid" style="width: ${validPercent}%"></div>` : ''}
-                                            ${expiredPercent > 0 ? `<div class="operator-progress-segment expired" style="width: ${expiredPercent}%"></div>` : ''}
-                                            ${missingPercent > 0 ? `<div class="operator-progress-segment missing" style="width: ${missingPercent}%"></div>` : ''}
+                                        <div class="progress" style="height: 20px; width: 100%; margin-top: 6px; border-radius: 6px; background-color: #e9ecef;" title="${validCount} of ${totalAll} certs completed">
+                                            <div class="progress-bar ${progressColorClass}" role="progressbar" style="width: ${completedPercent}%; font-size: 11px; font-weight: bold; line-height: 20px;" aria-valuenow="${completedPercent}" aria-valuemin="0" aria-valuemax="100">
+                                                ${validCount}/${totalAll}
+                                            </div>
                                         </div>
                                     `;
                                 } else {
                                     progressBarHtml = `
-                                        <div class="operator-progress" title="No certifications required">
-                                            <div class="operator-progress-segment no-data" style="width: 100%"></div>
+                                        <div class="progress" style="height: 20px; width: 100%; margin-top: 6px; border-radius: 6px; background-color: #e9ecef;" title="No certifications required">
+                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: 100%; font-size: 10px; line-height: 20px;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                                N/A
+                                            </div>
                                         </div>
                                     `;
                                 }
@@ -1606,9 +1826,11 @@ document.addEventListener('DOMContentLoaded', function() {
                             certsToDisplay.slice(0, 50).map(cert => {
                                 // Render cert badge directly (no server fetch needed)
                                 return `<span class="cert-badge" draggable="true" ondragstart="handleCertDragStart(event, '${cert.replace(/'/g, "\\'")}')"
-                                    data-cert="${cert}" data-status="${statusName}" title="${cert}">
+                                    data-cert="${cert}" data-status="${statusName}" title="${cert}"
+                                    onclick="showCertDetails('${cert.replace(/'/g, "\\'")}', '${statusName}'); event.stopPropagation();"
+                                    style="cursor: pointer;">
                                     ${cert}
-                                    <button class="remove-cert-btn" onclick="removeCert('${statusName}', '${cert.replace(/'/g, "\\'")}')" title="Remove">×</button>
+                                    <button class="remove-cert-btn" onclick="event.stopPropagation(); removeCert('${statusName}', '${cert.replace(/'/g, "\\'")}')" title="Remove">×</button>
                                 </span>`;
                             }).join('') :
                             '<span style="color: #94a3b8;">No new certifications required at this step</span>'
