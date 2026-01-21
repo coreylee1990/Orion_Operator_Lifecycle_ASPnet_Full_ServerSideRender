@@ -207,6 +207,57 @@ function showOperatorProfileModal(operatorId) {
         }
     }
     
+    // Check if operator can advance (all required certs met AND IsAuto is true on PizzaStatus)
+    const canAdvance = missingCerts.length === 0 && requiredCertTypes.length > 0;
+    let pizzaStatusIsAuto = false;
+    
+    if (pizzaStatusId && pizzaStatuses && Array.isArray(pizzaStatuses)) {
+        const pizzaStat = pizzaStatuses.find(ps => ps.ID === pizzaStatusId || ps.Id === pizzaStatusId);
+        if (pizzaStat) {
+            pizzaStatusIsAuto = pizzaStat.IsAuto === true || pizzaStat.isAuto === true;
+        }
+    }
+    
+    // Show advance button if operator has all certs and status is auto-advance
+    if (canAdvance && pizzaStatusIsAuto) {
+        const nextStatus = computeNextStatusForOperator(operatorId);
+        if (nextStatus) {
+            html += `
+                <div class="mt-4 pt-3" style="border-top: 2px solid #28a745;">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <span class="badge bg-success me-2">✓ Ready to Advance</span>
+                            <span style="color: #333;">All certifications complete for auto-advance status</span>
+                        </div>
+                        <button type="button" class="btn btn-success" 
+                                onclick="moveOperatorToNextStatusFromProfile('${operatorId}')">
+                            <i class="bi bi-arrow-right-circle"></i> Advance to "${nextStatus.nextStatusName}"
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+    } else if (canAdvance) {
+        // Has all certs but not auto-advance - still show option
+        const nextStatus = computeNextStatusForOperator(operatorId);
+        if (nextStatus) {
+            html += `
+                <div class="mt-4 pt-3" style="border-top: 2px solid #17a2b8;">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <span class="badge bg-info me-2">✓ All Certs Complete</span>
+                            <span style="color: #333;">Ready to move to next status</span>
+                        </div>
+                        <button type="button" class="btn btn-outline-primary" 
+                                onclick="moveOperatorToNextStatusFromProfile('${operatorId}')">
+                            <i class="bi bi-arrow-right-circle"></i> Move to "${nextStatus.nextStatusName}"
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+    }
+    
     modalBody.innerHTML = html;
 
     // Show modal
@@ -1065,6 +1116,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     renderWorkflow();
                     updateStats();
                     populateMainDivisionFilter();
+                    
+                    // Check for auto-advance candidates on initial page load
+                    checkAutoAdvanceOnInit();
                 }
             } catch (error) {
                 console.error('❌ Error loading data:', error);
@@ -1778,7 +1832,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 if (totalAll > 0) {
                                     progressBarHtml = `
                                         <div class="progress" style="height: 20px; width: 100%; margin-top: 6px; border-radius: 6px; background-color: #e9ecef;" title="${validCount} of ${totalAll} certs completed">
-                                            <div class="progress-bar ${progressColorClass}" role="progressbar" style="width: ${completedPercent}%; font-size: 11px; font-weight: bold; line-height: 20px;" aria-valuenow="${completedPercent}" aria-valuemin="0" aria-valuemax="100">
+                                            <div class="progress-bar ${progressColorClass}" role="progressbar" style="width: ${completedPercent}%; font-size: 11px; font-weight: bold; line-height: 20px;" aria-valuenow="${completedPercent}" aria-valuemin="0" aria-valuemin="100">
                                                 ${validCount}/${totalAll}
                                             </div>
                                         </div>
@@ -1793,12 +1847,38 @@ document.addEventListener('DOMContentLoaded', function() {
                                     `;
                                 }
 
+                                // Check if this is an auto-advance eligible operator
+                                let canAutoAdvance = false;
+                                if (isComplete && totalAll > 0 && pizzaStatusId && pizzaStatuses && Array.isArray(pizzaStatuses)) {
+                                    const pizzaStat = pizzaStatuses.find(ps => ps.ID === pizzaStatusId || ps.Id === pizzaStatusId);
+                                    if (pizzaStat && (pizzaStat.IsAuto === true || pizzaStat.isAuto === true)) {
+                                        canAutoAdvance = true;
+                                    }
+                                }
+
+                                // Advance button HTML (shown when complete and auto-advance)
+                                const advanceButtonHtml = canAutoAdvance ? `
+                                    <button type="button" class="btn btn-sm btn-success operator-advance-btn" 
+                                            onclick="event.stopPropagation(); moveOperatorToNextStatusFromCard('${op.ID}')"
+                                            title="All certs complete - Click to advance to next status"
+                                            style="margin-top: 6px; font-size: 11px; padding: 2px 8px;">
+                                        ⬆ Advance
+                                    </button>
+                                ` : (isComplete && totalAll > 0 ? `
+                                    <button type="button" class="btn btn-sm btn-outline-secondary operator-advance-btn" 
+                                            onclick="event.stopPropagation(); moveOperatorToNextStatusFromCard('${op.ID}')"
+                                            title="All certs complete - Click to move to next status"
+                                            style="margin-top: 6px; font-size: 11px; padding: 2px 8px;">
+                                        → Next
+                                    </button>
+                                ` : '');
+
                                 // Render operator card directly (no server fetch needed)
                                 const opName = (op.FirstName || '') + ' ' + (op.LastName || '');
                                 const opInitials = ((op.FirstName || '?')[0] + (op.LastName || '?')[0]).toUpperCase();
                                 
                                 return `
-                                    <div class="operator-item ${isComplete ? 'operator-complete' : ''}" 
+                                    <div class="operator-item ${isComplete ? 'operator-complete' : ''} ${canAutoAdvance ? 'operator-auto-advance' : ''}" 
                                          data-operator-id="${op.ID}"
                                          onclick="showOperatorProfileModal('${op.ID}')">
                                         <div class="operator-avatar">${opInitials}</div>
@@ -1808,6 +1888,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                             <div class="operator-meta">
                                                 ${daysDisplay}
                                                 ${certCountDisplay}
+                                                ${advanceButtonHtml}
                                             </div>
                                         </div>
                                         ${isComplete ? '<span class="complete-badge" title="All required certs">✓</span>' : ''}
@@ -3573,6 +3654,12 @@ function removeCertFromStatus(statusName, certName) {
             autoMoveOperatorToNextStatus(operatorId, next.nextStatusId, next.nextStatusName, next.nextOrderId);
         }
 
+        // Expose advance functions globally for onclick handlers
+        window.autoMoveOperatorToNextStatus = autoMoveOperatorToNextStatus;
+        window.moveOperatorToNextStatusFromCard = moveOperatorToNextStatusFromCard;
+        window.moveOperatorToNextStatusFromProfile = moveOperatorToNextStatusFromProfile;
+        window.computeNextStatusForOperator = computeNextStatusForOperator;
+
         // ===== CONTROL CENTER FEATURES =====
 
         // Global search
@@ -3842,63 +3929,164 @@ function removeCertFromStatus(statusName, certName) {
         }
 
         // Check for auto-advance candidates for the current division and show modal
+        // Uses the SAME client-side logic as the operator card advance buttons
         async function checkAutoAdvanceOnInit() {
             if (!mainDivisionFilter || mainDivisionFilter === 'ALL') {
                 return;
             }
 
             try {
-                let url = `/Requirements/GetAutoAdvanceCandidates?divisionId=${encodeURIComponent(mainDivisionFilter)}`;
-                if (mainClientFilter) {
-                    url += `&clientId=${encodeURIComponent(mainClientFilter)}`;
-                }
-
-                const response = await fetch(url);
-                if (!response.ok) {
+                // Use client-side data (same as operator cards) to find auto-advance candidates
+                const candidates = [];
+                
+                if (!operators || !Array.isArray(operators) || operators.length === 0) {
                     return;
                 }
 
-                const candidates = await response.json();
-                if (!candidates || !Array.isArray(candidates) || candidates.length === 0) {
+                // For each operator in the current division
+                operators.forEach(op => {
+                    const opDivision = op.DivisionID || op.DivisionId || '';
+                    if (opDivision !== mainDivisionFilter) return;
+                    
+                    const opStatus = op.Status || '';
+                    if (!opStatus) return;
+                    
+                    // Find the StatusType for this operator's status
+                    let statusTypeConfig = null;
+                    let pizzaStatusId = null;
+                    if (statusTypes && Array.isArray(statusTypes)) {
+                        statusTypeConfig = statusTypes.find(s => s.Status === opStatus && s.DivisionID === opDivision);
+                        if (statusTypeConfig && statusTypeConfig.PizzaStatusID) {
+                            pizzaStatusId = statusTypeConfig.PizzaStatusID;
+                        }
+                    }
+                    
+                    if (!pizzaStatusId) return;
+                    
+                    // Check if PizzaStatus has IsAuto = true
+                    let pizzaStat = null;
+                    let isAuto = false;
+                    if (pizzaStatuses && Array.isArray(pizzaStatuses)) {
+                        pizzaStat = pizzaStatuses.find(ps => ps.ID === pizzaStatusId || ps.Id === pizzaStatusId);
+                        if (pizzaStat) {
+                            isAuto = pizzaStat.IsAuto === true || pizzaStat.isAuto === true;
+                        }
+                    }
+                    
+                    if (!isAuto) return; // Only consider auto-advance statuses
+                    
+                    // Get required cert types for this PizzaStatus and Division
+                    let requiredCertTypes = [];
+                    if (certTypes && Array.isArray(certTypes)) {
+                        requiredCertTypes = certTypes.filter(ct => 
+                            ct.PizzaStatusID === pizzaStatusId && 
+                            ct.DivisionID === opDivision && 
+                            ct.isDeleted !== true && 
+                            ct.isDeleted !== 'true' && 
+                            String(ct.isDeleted) !== 'true'
+                        );
+                    }
+                    
+                    if (requiredCertTypes.length === 0) return; // Skip if no required certs defined
+                    
+                    // Get operator's certifications
+                    const operatorCerts = op.certifications || [];
+                    
+                    // Count valid and missing certs (same logic as operator cards)
+                    let validCount = 0;
+                    let missingCount = 0;
+
+                    requiredCertTypes.forEach(certType => {
+                        const certTypeId = certType.ID;
+                        
+                        const cert = operatorCerts.find(c => {
+                            if (c.CertTypeID !== certTypeId) return false;
+                            if (c.IsDeleted === '1' || c.IsDeleted === 1 || c.IsDeleted === true) return false;
+                            if (c.isApproved !== '1' && c.isApproved !== 1 && c.isApproved !== true) return false;
+                            return true;
+                        });
+                        
+                        if (cert) {
+                            validCount++;
+                        } else {
+                            missingCount++;
+                        }
+                    });
+                    
+                    // Only include if ALL certs are present (no missing)
+                    if (missingCount > 0) return;
+                    
+                    // Compute next status
+                    const nextStatus = computeNextStatusForOperator(op.ID);
+                    if (!nextStatus) return;
+                    
+                    candidates.push({
+                        operatorId: op.ID,
+                        operatorName: `${op.FirstName || ''} ${op.LastName || ''}`.trim() || 'Unknown',
+                        currentStatus: opStatus,
+                        nextStatusName: nextStatus.nextStatusName,
+                        nextStatusId: nextStatus.nextStatusId,
+                        nextOrderId: nextStatus.nextOrderId,
+                        validCount: validCount,
+                        totalRequired: requiredCertTypes.length
+                    });
+                });
+
+                if (candidates.length === 0) {
+                    console.log('No auto-advance candidates found for division:', mainDivisionFilter);
                     return;
                 }
+
+                console.log(`Found ${candidates.length} auto-advance candidates:`, candidates);
 
                 const body = document.getElementById('autoAdvanceModalBody');
                 if (!body) return;
 
                 let html = '';
-                html += `<p style="margin-bottom: 10px;">The following operators have all required certifications for an auto-advance status in division <strong>${mainDivisionFilter}</strong>.</p>`;
+                html += `<div class="alert alert-success mb-3">
+                    <strong>🎉 ${candidates.length} operator${candidates.length !== 1 ? 's' : ''} ready to advance!</strong><br>
+                    The following operators have completed all required certifications for their auto-advance status.
+                </div>`;
                 html += '<div class="table-responsive">';
-                html += '<table class="table table-sm align-middle mb-0">';
-                html += '<thead><tr>' +
+                html += '<table class="table table-sm table-hover align-middle mb-0">';
+                html += '<thead class="table-light"><tr>' +
                     '<th>Operator</th>' +
+                    '<th>Certs</th>' +
                     '<th>Current Status</th>' +
                     '<th>Next Status</th>' +
                     '<th style="width: 1%; white-space: nowrap;">Action</th>' +
                     '</tr></thead><tbody>';
 
-                candidates.forEach((c, idx) => {
-                    const opName = c.OperatorName || c.operatorName || 'Unknown';
-                    const currentStatus = c.CurrentStatusName || c.currentStatusName || '';
-                    const nextStatus = c.NextStatusName || c.nextStatusName || '';
-                    const nextStatusId = c.NextStatusId || c.nextStatusId || '';
-                    const nextOrderId = c.NextOrderId || c.nextOrderId || '';
-                    const opId = c.OperatorId || c.operatorId || '';
+                candidates.forEach((c) => {
                     html += `<tr>` +
-                        `<td>${opName}</td>` +
-                        `<td>${currentStatus}</td>` +
-                        `<td>${nextStatus}</td>` +
+                        `<td><strong>${c.operatorName}</strong></td>` +
+                        `<td><span class="badge bg-success">${c.validCount}/${c.totalRequired}</span></td>` +
+                        `<td>${c.currentStatus}</td>` +
+                        `<td><span class="text-primary">${c.nextStatusName}</span></td>` +
                         `<td>` +
                         `<button type="button" class="btn btn-sm btn-success" ` +
-                        `onclick="autoMoveOperatorToNextStatus('${opId}','${nextStatusId}','${nextStatus}','${nextOrderId}', this)">` +
-                        `Move to next status` +
+                        `onclick="autoMoveOperatorToNextStatus('${c.operatorId}','${c.nextStatusId}','${c.nextStatusName}','${c.nextOrderId}', this)">` +
+                        `⬆ Advance` +
                         `</button>` +
                         `</td>` +
                         `</tr>`;
                 });
 
                 html += '</tbody></table></div>';
+                
+                // Add "Advance All" button if multiple candidates
+                if (candidates.length > 1) {
+                    html += `<div class="mt-3 text-end">
+                        <button type="button" class="btn btn-success" onclick="advanceAllAutoAdvanceCandidates()">
+                            ⬆ Advance All ${candidates.length} Operators
+                        </button>
+                    </div>`;
+                }
+                
                 body.innerHTML = html;
+                
+                // Store candidates for bulk advance
+                window.autoAdvanceCandidates = candidates;
 
                 const modalEl = document.getElementById('autoAdvanceModal');
                 if (modalEl) {
@@ -3915,6 +4103,68 @@ function removeCertFromStatus(statusName, certName) {
                 console.error('Error checking auto-advance candidates:', err);
             }
         }
+        
+        // Advance all auto-advance candidates
+        async function advanceAllAutoAdvanceCandidates() {
+            const candidates = window.autoAdvanceCandidates || [];
+            if (candidates.length === 0) {
+                alert('No candidates to advance.');
+                return;
+            }
+            
+            const confirmed = confirm(`Are you sure you want to advance all ${candidates.length} operators to their next status?`);
+            if (!confirmed) return;
+            
+            let successCount = 0;
+            let failCount = 0;
+            
+            for (const c of candidates) {
+                try {
+                    const payload = {
+                        OperatorIds: [c.operatorId],
+                        NewStatusName: c.nextStatusName,
+                        NewStatusId: c.nextStatusId,
+                        NewOrderId: c.nextOrderId || ''
+                    };
+
+                    const response = await fetch('/api/data/operators/bulkupdatestatus', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.ok) {
+                        successCount++;
+                        // Update local data
+                        operators.forEach(op => {
+                            if (op.ID === c.operatorId || op.Id === c.operatorId) {
+                                op.Status = c.nextStatusName;
+                            }
+                        });
+                    } else {
+                        failCount++;
+                    }
+                } catch (err) {
+                    failCount++;
+                    console.error('Error advancing operator:', c.operatorId, err);
+                }
+            }
+            
+            alert(`Advanced ${successCount} operator${successCount !== 1 ? 's' : ''} successfully.${failCount > 0 ? ` ${failCount} failed.` : ''}`);
+            
+            // Close modal and refresh
+            const modalEl = document.getElementById('autoAdvanceModal');
+            if (modalEl && window.bootstrap && window.bootstrap.Modal) {
+                const modal = window.bootstrap.Modal.getInstance(modalEl);
+                if (modal) modal.hide();
+            }
+            
+            markUnsaved();
+            renderWorkflow();
+        }
+        
+        // Expose globally
+        window.advanceAllAutoAdvanceCandidates = advanceAllAutoAdvanceCandidates;
 
         // Bulk add certification to multiple statuses
         function showBulkAddModal() {

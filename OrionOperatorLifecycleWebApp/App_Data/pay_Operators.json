@@ -8,11 +8,7 @@
     "DivisionID": "10 - OR",
     "Status": "APPROVED FOR CONTRACTING",
     "StatusID": "7D7F4649-C0B8-4B98-BAD6-F38A01E80B7B",
-    "IsDeleted": false,
-    "RecordAt": "2025-04-14T23:02:13.473000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-09T20:14:25.897000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "5CB56314-5D4D-436D-8D39-8743F94EF93D",
@@ -23,11 +19,7 @@
     "DivisionID": "10 - OR",
     "Status": "CREDENTIALING",
     "StatusID": "F63AB621-F393-4926-90E0-9E035811F052",
-    "IsDeleted": false,
-    "RecordAt": "2025-11-15T22:54:09.477000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-30T17:28:00.287000",
-    "UpdateBy": "765fde89-088f-4859-8025-6962b6610ec2"
+    "isDeleted": false
   },
   {
     "ID": "47DFE00B-B97F-48C1-B4E2-85E8898D5F11",
@@ -38,11 +30,7 @@
     "DivisionID": "10 - OR",
     "Status": "IN-SERVICE",
     "StatusID": "86B8CD33-E1FD-465B-98A8-BA4400C0CE23",
-    "IsDeleted": false,
-    "RecordAt": "2025-08-14T18:41:57.687000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-19T16:47:44.140000",
-    "UpdateBy": "ea65616f-47ef-440f-8299-351c06163b34"
+    "isDeleted": false
   },
   {
     "ID": "C921C7E7-4A5B-4F10-8E7B-CAE29206EFFB",
@@ -53,11 +41,7 @@
     "DivisionID": "10 - OR",
     "Status": "IN-SERVICE",
     "StatusID": "86B8CD33-E1FD-465B-98A8-BA4400C0CE23",
-    "IsDeleted": false,
-    "RecordAt": "2025-12-02T18:35:17.453000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-14T19:26:30.913000",
-    "UpdateBy": "ea65616f-47ef-440f-8299-351c06163b34"
+    "isDeleted": false
   },
   {
     "ID": "13C53248-4B24-4186-9A82-91B2109166EA",
@@ -68,11 +52,7 @@
     "DivisionID": "10 - OR",
     "Status": "IN-SERVICE",
     "StatusID": "86B8CD33-E1FD-465B-98A8-BA4400C0CE23",
-    "IsDeleted": false,
-    "RecordAt": "2025-12-02T18:46:04.663000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-14T18:25:09.730000",
-    "UpdateBy": "041052fc-4409-4416-b85a-7f81c5ccfc71"
+    "isDeleted": false
   },
   {
     "ID": "1269A6B1-D3F9-4F39-B995-6757804CFC34",
@@ -83,11 +63,7 @@
     "DivisionID": "10 - OR",
     "Status": "IN-SERVICE",
     "StatusID": "86B8CD33-E1FD-465B-98A8-BA4400C0CE23",
-    "IsDeleted": false,
-    "RecordAt": "2023-07-27T14:34:34",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-03T00:17:28.267000",
-    "UpdateBy": "3240221f-48fd-4689-98ae-88f7ec59f52b"
+    "isDeleted": false
   },
   {
     "ID": "A19E7474-16BB-4DA6-B21C-BEDE91A5730C",
@@ -98,11 +74,7 @@
     "DivisionID": "10 - OR",
     "Status": "IN-SERVICE",
     "StatusID": "86B8CD33-E1FD-465B-98A8-BA4400C0CE23",
-    "IsDeleted": false,
-    "RecordAt": "2023-06-16T17:10:43.523000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-19T20:36:54.783000",
-    "UpdateBy": "f0fa1143-d916-420f-9d00-0af9668d68ea"
+    "isDeleted": false
   },
   {
     "ID": "E84DE24E-0786-434D-8547-AB57FCCB9A24",
@@ -113,11 +85,7 @@
     "DivisionID": "10 - OR",
     "Status": "IN-SERVICE",
     "StatusID": "86B8CD33-E1FD-465B-98A8-BA4400C0CE23",
-    "IsDeleted": false,
-    "RecordAt": "2025-06-24T18:25:10.530000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-19T15:41:51.540000",
-    "UpdateBy": "f0fa1143-d916-420f-9d00-0af9668d68ea"
+    "isDeleted": false
   },
   {
     "ID": "176F68F3-A1DE-4594-9B90-32DB903B0360",
@@ -128,11 +96,7 @@
     "DivisionID": "10 - OR",
     "Status": "ONBOARDING",
     "StatusID": "F63AB621-F393-4926-90E0-9E035811F052",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-06T07:33:23.443000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T18:50:59.293000",
-    "UpdateBy": "765fde89-088f-4859-8025-6962b6610ec2"
+    "isDeleted": false
   },
   {
     "ID": "5F01F8D8-CDA0-4E36-9D7A-C6E53F66FF75",
@@ -143,11 +107,7 @@
     "DivisionID": "10 - OR",
     "Status": "REGISTRATION",
     "StatusID": "3A0C9054-B0C0-4B0B-A10A-7A61696BC91E",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-12T21:22:56.597000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T21:02:10.640000",
-    "UpdateBy": "f404a780-b743-4559-b3d0-7b49e0d383ea"
+    "isDeleted": false
   },
   {
     "ID": "A3527731-F964-44D8-B3A2-017054088C85",
@@ -158,11 +118,7 @@
     "DivisionID": "10 - OR",
     "Status": "REGISTRATION",
     "StatusID": "3A0C9054-B0C0-4B0B-A10A-7A61696BC91E",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-20T20:36:34.583000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T20:44:24.970000",
-    "UpdateBy": "3d1b3739-2240-4227-811f-787a514b5f70"
+    "isDeleted": false
   },
   {
     "ID": "BB746492-8156-438F-8BDE-95C2DAA933F5",
@@ -173,11 +129,7 @@
     "DivisionID": "10 - OR",
     "Status": "REGISTRATION",
     "StatusID": "3A0C9054-B0C0-4B0B-A10A-7A61696BC91E",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-15T18:30:59.657000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T18:53:09.333000",
-    "UpdateBy": "765fde89-088f-4859-8025-6962b6610ec2"
+    "isDeleted": false
   },
   {
     "ID": "9FA9EC9E-9D36-4F18-8F27-8A359B843334",
@@ -188,11 +140,7 @@
     "DivisionID": "10 - OR",
     "Status": "REGISTRATION",
     "StatusID": "3A0C9054-B0C0-4B0B-A10A-7A61696BC91E",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-14T16:12:51.703000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T18:52:58.040000",
-    "UpdateBy": "765fde89-088f-4859-8025-6962b6610ec2"
+    "isDeleted": false
   },
   {
     "ID": "1696D72B-B577-4019-AB83-582E7AFAEC10",
@@ -203,11 +151,7 @@
     "DivisionID": "10 - OR",
     "Status": "REGISTRATION",
     "StatusID": "3A0C9054-B0C0-4B0B-A10A-7A61696BC91E",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-13T17:58:04.047000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T18:52:47.443000",
-    "UpdateBy": "765fde89-088f-4859-8025-6962b6610ec2"
+    "isDeleted": false
   },
   {
     "ID": "A8C49F72-E4D3-45BA-8A99-0167E85FAEE6",
@@ -218,11 +162,7 @@
     "DivisionID": "10 - OR",
     "Status": "REGISTRATION",
     "StatusID": "84B76237-8C85-4B6D-93EC-52783CB9048B",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-15T17:37:04.383000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T18:52:36.380000",
-    "UpdateBy": "765fde89-088f-4859-8025-6962b6610ec2"
+    "isDeleted": false
   },
   {
     "ID": "4C6275E2-E866-44A5-802C-8794E6C157B2",
@@ -233,11 +173,7 @@
     "DivisionID": "10 - OR",
     "Status": "REGISTRATION",
     "StatusID": "84B76237-8C85-4B6D-93EC-52783CB9048B",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-12T22:14:48.540000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T18:52:25.143000",
-    "UpdateBy": "765fde89-088f-4859-8025-6962b6610ec2"
+    "isDeleted": false
   },
   {
     "ID": "BA8A88AE-59FB-4149-A0F9-88CA0A84A4E1",
@@ -248,11 +184,7 @@
     "DivisionID": "10 - OR",
     "Status": "REGISTRATION",
     "StatusID": "84B76237-8C85-4B6D-93EC-52783CB9048B",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-15T18:51:40.380000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T18:52:15.160000",
-    "UpdateBy": "765fde89-088f-4859-8025-6962b6610ec2"
+    "isDeleted": false
   },
   {
     "ID": "EF0A14E7-9B78-4FFE-94D8-A3A06815B3B9",
@@ -263,11 +195,7 @@
     "DivisionID": "10 - OR",
     "Status": "REGISTRATION",
     "StatusID": "84B76237-8C85-4B6D-93EC-52783CB9048B",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-08T17:01:53.173000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T18:52:03.007000",
-    "UpdateBy": "765fde89-088f-4859-8025-6962b6610ec2"
+    "isDeleted": false
   },
   {
     "ID": "5EF509B7-35C6-4A34-86F1-202BEED09E30",
@@ -278,11 +206,7 @@
     "DivisionID": "10 - OR",
     "Status": "REGISTRATION",
     "StatusID": "3A0C9054-B0C0-4B0B-A10A-7A61696BC91E",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-16T19:22:01",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T18:51:51.847000",
-    "UpdateBy": "765fde89-088f-4859-8025-6962b6610ec2"
+    "isDeleted": false
   },
   {
     "ID": "2044C77D-E6A0-45E6-8472-8CF015CA3E2B",
@@ -293,11 +217,7 @@
     "DivisionID": "10 - OR",
     "Status": "TERM",
     "StatusID": "35520EF6-D982-4699-9EDE-07F393BBB476",
-    "IsDeleted": false,
-    "RecordAt": "2025-07-29T21:19:54.050000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-17T03:45:24.553000",
-    "UpdateBy": "f0fa1143-d916-420f-9d00-0af9668d68ea"
+    "isDeleted": false
   },
   {
     "ID": "2153FC71-EBEC-4C97-9EEC-A9D15E3723BC",
@@ -308,11 +228,7 @@
     "DivisionID": "10 - OR",
     "Status": "TERM",
     "StatusID": "35520EF6-D982-4699-9EDE-07F393BBB476",
-    "IsDeleted": false,
-    "RecordAt": "2025-10-02T16:44:50.103000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-17T03:31:42.477000",
-    "UpdateBy": "f0fa1143-d916-420f-9d00-0af9668d68ea"
+    "isDeleted": false
   },
   {
     "ID": "8F016D11-F7B8-4364-AC16-DD58D0A13A2A",
@@ -323,11 +239,7 @@
     "DivisionID": "10 - OR",
     "Status": "TERMINATED",
     "StatusID": "35520EF6-D982-4699-9EDE-07F393BBB476",
-    "IsDeleted": false,
-    "RecordAt": "2024-02-08T05:53:23.160000",
-    "RecordBy": "5ab5fa2c-e83f-4da4-bf8c-b643c7e708a9",
-    "UpdateAt": "2026-01-09T21:33:01.103000",
-    "UpdateBy": "d6f67f29-71f8-4789-9e0e-ed7c1639e9be"
+    "isDeleted": false
   },
   {
     "ID": "EADDC3C6-94F0-4BEB-84BD-BB4107554035",
@@ -338,11 +250,7 @@
     "DivisionID": "10 - OR",
     "Status": "TERMINATED",
     "StatusID": "35520EF6-D982-4699-9EDE-07F393BBB476",
-    "IsDeleted": false,
-    "RecordAt": "2025-11-21T02:16:01.443000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-08T21:08:42.550000",
-    "UpdateBy": "ea65616f-47ef-440f-8299-351c06163b34"
+    "isDeleted": false
   },
   {
     "ID": "A4D0FC43-B25C-45FA-A293-57B3952308A4",
@@ -353,11 +261,7 @@
     "DivisionID": "1000 - Majestic",
     "Status": "REGISTRATION",
     "StatusID": "C3312B05-4B57-405A-A22F-BC85AF90CA18",
-    "IsDeleted": false,
-    "RecordAt": "2025-05-01T23:36:08.467000",
-    "RecordBy": null,
-    "UpdateAt": "2025-05-01T23:37:45.713000",
-    "UpdateBy": "1ab2e58e-3b18-4865-94de-fa81897bc9cb"
+    "isDeleted": false
   },
   {
     "ID": "1DCFE0D3-4D0C-4314-B64F-CD38CD0188D6",
@@ -368,11 +272,7 @@
     "DivisionID": "1000 - Majestic",
     "Status": "REGISTRATION",
     "StatusID": "C3312B05-4B57-405A-A22F-BC85AF90CA18",
-    "IsDeleted": false,
-    "RecordAt": "2025-04-03T03:08:52.980000",
-    "RecordBy": null,
-    "UpdateAt": "2025-05-01T11:12:33.083000",
-    "UpdateBy": "007a643b-4343-423f-b37a-bb4b743dc162"
+    "isDeleted": false
   },
   {
     "ID": "243C975B-AB39-4B0F-A5A4-541CE20CD7E5",
@@ -383,11 +283,7 @@
     "DivisionID": "11 - GA",
     "Status": "IN-SERVICE",
     "StatusID": "8CF15612-DF81-4E0D-9375-5F050752C3A3",
-    "IsDeleted": false,
-    "RecordAt": "2023-12-12T12:03:28",
-    "RecordBy": "933d2dec-e0fc-4c47-bc6e-d858c569ac24",
-    "UpdateAt": "2026-01-16T19:52:14.407000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "FA622920-91AD-45E7-89BD-6FE05B86C2FA",
@@ -398,11 +294,7 @@
     "DivisionID": "11 - GA",
     "Status": "IN-SERVICE",
     "StatusID": "8CF15612-DF81-4E0D-9375-5F050752C3A3",
-    "IsDeleted": false,
-    "RecordAt": "2025-08-16T18:36:57.100000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-08T19:42:33.790000",
-    "UpdateBy": "12b4fd33-8c77-48da-98e2-e847776e200f"
+    "isDeleted": false
   },
   {
     "ID": "4E5082CE-53AD-4B6C-98D8-255BC0C15DE5",
@@ -413,11 +305,7 @@
     "DivisionID": "11 - GA",
     "Status": "IN-SERVICE",
     "StatusID": "8CF15612-DF81-4E0D-9375-5F050752C3A3",
-    "IsDeleted": false,
-    "RecordAt": "2025-08-12T16:44:16.420000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-07T14:52:35.160000",
-    "UpdateBy": "12b4fd33-8c77-48da-98e2-e847776e200f"
+    "isDeleted": false
   },
   {
     "ID": "DA74927D-840C-4B8E-B0E6-577C42CBCD50",
@@ -426,13 +314,9 @@
     "Email": "mcnattm272@gmail.com",
     "Mobile": "(678) 520-1112",
     "DivisionID": "11 - GA",
-    "Status": "ORIENTATION-BIG STAR SAFETY & SERVICE",
+    "Status": "ORIENTATION-BIG STAR SAFETY \u0026 SERVICE",
     "StatusID": "A2B3E951-D4F3-4F34-BB54-F15DBD5C7F8C",
-    "IsDeleted": false,
-    "RecordAt": "2025-10-24T03:23:18.167000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-13T14:37:41.803000",
-    "UpdateBy": "765fde89-088f-4859-8025-6962b6610ec2"
+    "isDeleted": false
   },
   {
     "ID": "4A582FF2-5495-4757-914C-5FA28609A12B",
@@ -443,11 +327,7 @@
     "DivisionID": "11 - GA",
     "Status": "REGISTRATION",
     "StatusID": "6573D73D-100D-497C-B896-2D54F4EE89C0",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-14T01:22:57.390000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-19T18:20:42.540000",
-    "UpdateBy": "fa0dea1b-622b-47c5-b4bb-ebcd0518428d"
+    "isDeleted": false
   },
   {
     "ID": "450FE203-BCBD-4523-A838-B47347EBD0C5",
@@ -458,11 +338,7 @@
     "DivisionID": "11 - GA",
     "Status": "REGISTRATION",
     "StatusID": "7DCBA003-CF11-4ACC-88DA-415E61A3AF7F",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-19T01:31:32.720000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-19T01:36:48.330000",
-    "UpdateBy": "1dbf7f6d-4e10-40a1-8ff7-844edf10f56c"
+    "isDeleted": false
   },
   {
     "ID": "34E504FB-E2A5-49AF-817D-D057E90F96B1",
@@ -473,11 +349,7 @@
     "DivisionID": "11 - GA",
     "Status": "REGISTRATION",
     "StatusID": "7DCBA003-CF11-4ACC-88DA-415E61A3AF7F",
-    "IsDeleted": false,
-    "RecordAt": "2025-12-17T07:44:06.980000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-17T19:47:02.930000",
-    "UpdateBy": "9d7775f2-d835-45df-a6ec-dd07fe198f30"
+    "isDeleted": false
   },
   {
     "ID": "561151A7-12D0-4142-8B1F-9AC3846FC2A4",
@@ -488,11 +360,7 @@
     "DivisionID": "11 - GA",
     "Status": "REGISTRATION",
     "StatusID": "7DCBA003-CF11-4ACC-88DA-415E61A3AF7F",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-15T04:35:52.320000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-16T04:51:30.213000",
-    "UpdateBy": "7d309ad5-bb3d-46b4-959d-90f5aa8e5aa1"
+    "isDeleted": false
   },
   {
     "ID": "BFC4EE0A-956B-482C-A47D-508E71ADEC94",
@@ -503,11 +371,7 @@
     "DivisionID": "11 - GA",
     "Status": "REGISTRATION",
     "StatusID": "6573D73D-100D-497C-B896-2D54F4EE89C0",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-13T13:18:49.900000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-15T19:50:31.670000",
-    "UpdateBy": "087e3cf5-407f-4788-9630-31350f2e166c"
+    "isDeleted": false
   },
   {
     "ID": "7846814C-0150-4196-9C6B-35E284998E27",
@@ -518,11 +382,7 @@
     "DivisionID": "11 - GA",
     "Status": "REGISTRATION",
     "StatusID": "6573D73D-100D-497C-B896-2D54F4EE89C0",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-14T01:18:24.217000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-14T22:20:31.077000",
-    "UpdateBy": "59e0467a-c792-474c-b345-40011c447b17"
+    "isDeleted": false
   },
   {
     "ID": "CEFF5672-0738-4D65-BA86-4555152F1AB1",
@@ -533,11 +393,7 @@
     "DivisionID": "11 - GA",
     "Status": "REGISTRATION",
     "StatusID": "7DCBA003-CF11-4ACC-88DA-415E61A3AF7F",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-14T05:28:18.567000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-14T05:41:59.513000",
-    "UpdateBy": "f77086b9-5c37-462f-a749-4afd5358f052"
+    "isDeleted": false
   },
   {
     "ID": "69C62D1B-2253-4741-AD26-C9678112206C",
@@ -548,11 +404,7 @@
     "DivisionID": "11 - GA",
     "Status": "REGISTRATION",
     "StatusID": "7DCBA003-CF11-4ACC-88DA-415E61A3AF7F",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-14T01:30:42.967000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-14T01:42:34.477000",
-    "UpdateBy": "1e8a8a14-cf4b-4148-aacd-ebe1d0532aa3"
+    "isDeleted": false
   },
   {
     "ID": "01131127-55D6-408C-99ED-19AFEB3CAFA0",
@@ -563,11 +415,7 @@
     "DivisionID": "11 - GA",
     "Status": "REGISTRATION",
     "StatusID": "6573D73D-100D-497C-B896-2D54F4EE89C0",
-    "IsDeleted": false,
-    "RecordAt": "2025-10-10T15:46:36.857000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-13T16:04:10.777000",
-    "UpdateBy": "416c5ad0-7219-4c41-a21c-834984aa13cb"
+    "isDeleted": false
   },
   {
     "ID": "5009F756-6A7D-46F9-94AF-DDBE554B0A33",
@@ -578,11 +426,7 @@
     "DivisionID": "11 - GA",
     "Status": "REGISTRATION",
     "StatusID": "8CF15612-DF81-4E0D-9375-5F050752C3A3",
-    "IsDeleted": false,
-    "RecordAt": "2025-07-26T19:04:28.883000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-12T20:23:59.227000",
-    "UpdateBy": "7f10ac12-a4b8-446d-b355-bc45776515b4"
+    "isDeleted": false
   },
   {
     "ID": "278BE6A4-5274-4F59-A8E9-790C64B85A43",
@@ -593,11 +437,7 @@
     "DivisionID": "11 - GA",
     "Status": "SBPC APPROVED FOR SERVICE",
     "StatusID": "4BFA6ADF-597B-4435-AC5F-1E310E236A41",
-    "IsDeleted": false,
-    "RecordAt": "2025-04-16T18:00:49.987000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-22T15:10:13.010000",
-    "UpdateBy": "7f10ac12-a4b8-446d-b355-bc45776515b4"
+    "isDeleted": false
   },
   {
     "ID": "0F61EFF6-68EF-4D31-989A-BCF3F4F0424B",
@@ -608,11 +448,7 @@
     "DivisionID": "11 - GA",
     "Status": "TERMINATED",
     "StatusID": "23642C81-8BCB-4A83-841F-651C347358C7",
-    "IsDeleted": false,
-    "RecordAt": "2025-10-05T17:06:42.617000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-19T22:04:39.863000",
-    "UpdateBy": "12b4fd33-8c77-48da-98e2-e847776e200f"
+    "isDeleted": false
   },
   {
     "ID": "AD48D8AB-D99B-4091-9241-E65B36BFB78D",
@@ -623,11 +459,7 @@
     "DivisionID": "12 - PA",
     "Status": "COMPLIANCE REVIEW",
     "StatusID": "8B6C849B-AE1B-4BF0-BF46-1D1A71157D7E",
-    "IsDeleted": false,
-    "RecordAt": "2024-08-02T19:45:42.743000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-22T21:26:23.857000",
-    "UpdateBy": "d6f67f29-71f8-4789-9e0e-ed7c1639e9be"
+    "isDeleted": false
   },
   {
     "ID": "ED20DEC9-6BE2-45BC-B057-D78B89992F4C",
@@ -638,11 +470,7 @@
     "DivisionID": "12 - PA",
     "Status": "IN-SERVICE",
     "StatusID": "E93910D9-B364-4E42-ADC0-FFA8FEC11CD2",
-    "IsDeleted": false,
-    "RecordAt": "2024-10-08T21:11:03.057000",
-    "RecordBy": "b6923e03-23bf-4b82-b1c8-76ed6675ba53",
-    "UpdateAt": "2026-01-20T18:12:00.950000",
-    "UpdateBy": "7f10ac12-a4b8-446d-b355-bc45776515b4"
+    "isDeleted": false
   },
   {
     "ID": "DB3EDFAA-AF4C-454A-8080-29CD5869DBBC",
@@ -653,11 +481,7 @@
     "DivisionID": "12 - PA",
     "Status": "IN-SERVICE",
     "StatusID": "E93910D9-B364-4E42-ADC0-FFA8FEC11CD2",
-    "IsDeleted": false,
-    "RecordAt": "2025-03-31T22:22:50.117000",
-    "RecordBy": "d1612e57-9c5e-4ea3-b632-6a7205b4bf97",
-    "UpdateAt": "2026-01-20T15:18:02.870000",
-    "UpdateBy": "d6f67f29-71f8-4789-9e0e-ed7c1639e9be"
+    "isDeleted": false
   },
   {
     "ID": "EA9942C7-540F-4443-9743-D1B2B58DD050",
@@ -668,11 +492,7 @@
     "DivisionID": "12 - PA",
     "Status": "IN-SERVICE",
     "StatusID": "E93910D9-B364-4E42-ADC0-FFA8FEC11CD2",
-    "IsDeleted": false,
-    "RecordAt": "2025-12-22T18:11:43.383000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-16T21:12:16.310000",
-    "UpdateBy": "d6f67f29-71f8-4789-9e0e-ed7c1639e9be"
+    "isDeleted": false
   },
   {
     "ID": "0DBA6A17-CC08-445B-A673-E92EE466C5A5",
@@ -683,11 +503,7 @@
     "DivisionID": "12 - PA",
     "Status": "IN-SERVICE",
     "StatusID": "E93910D9-B364-4E42-ADC0-FFA8FEC11CD2",
-    "IsDeleted": false,
-    "RecordAt": "2024-10-26T01:45:00.377000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-08T17:41:26.223000",
-    "UpdateBy": "d6f67f29-71f8-4789-9e0e-ed7c1639e9be"
+    "isDeleted": false
   },
   {
     "ID": "AE833BA6-528E-43E9-AFC7-09DC2E718A32",
@@ -698,11 +514,7 @@
     "DivisionID": "12 - PA",
     "Status": "IN-SERVICE",
     "StatusID": "E93910D9-B364-4E42-ADC0-FFA8FEC11CD2",
-    "IsDeleted": false,
-    "RecordAt": "2024-09-08T23:14:10.293000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-07T21:41:21.310000",
-    "UpdateBy": "d6f67f29-71f8-4789-9e0e-ed7c1639e9be"
+    "isDeleted": false
   },
   {
     "ID": "8C43BEE2-032B-4688-9F90-701C98BC69A8",
@@ -713,11 +525,7 @@
     "DivisionID": "12 - PA",
     "Status": "IN-SERVICE",
     "StatusID": "E93910D9-B364-4E42-ADC0-FFA8FEC11CD2",
-    "IsDeleted": false,
-    "RecordAt": "2025-12-19T18:59:56.177000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-07T17:09:20.897000",
-    "UpdateBy": "d6f67f29-71f8-4789-9e0e-ed7c1639e9be"
+    "isDeleted": false
   },
   {
     "ID": "B7740372-F756-450A-B5C9-665ECDBFF2FE",
@@ -728,11 +536,7 @@
     "DivisionID": "12 - PA",
     "Status": "IN-SERVICE",
     "StatusID": "E93910D9-B364-4E42-ADC0-FFA8FEC11CD2",
-    "IsDeleted": false,
-    "RecordAt": "2024-07-25T03:43:00.330000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-03T17:13:35.210000",
-    "UpdateBy": "d6f67f29-71f8-4789-9e0e-ed7c1639e9be"
+    "isDeleted": false
   },
   {
     "ID": "CC876758-AC51-4187-A4D0-157AA0FCCF25",
@@ -743,11 +547,7 @@
     "DivisionID": "12 - PA",
     "Status": "IN-SERVICE",
     "StatusID": "E93910D9-B364-4E42-ADC0-FFA8FEC11CD2",
-    "IsDeleted": false,
-    "RecordAt": "2025-09-22T15:05:15.233000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-02T17:06:21.937000",
-    "UpdateBy": "d6f67f29-71f8-4789-9e0e-ed7c1639e9be"
+    "isDeleted": false
   },
   {
     "ID": "1ADDD57C-10FC-4BA1-8B51-4D031EEF0EA5",
@@ -758,11 +558,7 @@
     "DivisionID": "12 - PA",
     "Status": "IN-SERVICE",
     "StatusID": "E93910D9-B364-4E42-ADC0-FFA8FEC11CD2",
-    "IsDeleted": false,
-    "RecordAt": "2025-11-24T23:36:48.807000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-31T18:11:32.450000",
-    "UpdateBy": "d6f67f29-71f8-4789-9e0e-ed7c1639e9be"
+    "isDeleted": false
   },
   {
     "ID": "2DA2F73C-AA6E-41EB-B34B-99AE4611C68E",
@@ -773,11 +569,7 @@
     "DivisionID": "12 - PA",
     "Status": "IN-SERVICE",
     "StatusID": "E93910D9-B364-4E42-ADC0-FFA8FEC11CD2",
-    "IsDeleted": false,
-    "RecordAt": "2024-11-26T14:14:11.510000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-30T22:27:58.200000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "8747F81B-5046-403D-8C1A-B8BB694EF482",
@@ -788,11 +580,7 @@
     "DivisionID": "12 - PA",
     "Status": "ONBOARDING",
     "StatusID": "B8698A50-FEFF-43BC-90FF-6ED1CAE6C41B",
-    "IsDeleted": false,
-    "RecordAt": "2024-08-12T15:07:41.597000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T20:20:29.243000",
-    "UpdateBy": "080dc687-edb8-4d30-8122-bbfa29491c0f"
+    "isDeleted": false
   },
   {
     "ID": "6A2C9E0D-D083-4FA3-BB93-B43416DB0764",
@@ -803,11 +591,7 @@
     "DivisionID": "12 - PA",
     "Status": "OUT OF SERVICE",
     "StatusID": "2892B645-B6FA-4C37-8F4E-E4A54202AE20",
-    "IsDeleted": false,
-    "RecordAt": "2024-09-12T15:26:45.043000",
-    "RecordBy": "b6923e03-23bf-4b82-b1c8-76ed6675ba53",
-    "UpdateAt": "2026-01-20T19:36:52.647000",
-    "UpdateBy": "d6f67f29-71f8-4789-9e0e-ed7c1639e9be"
+    "isDeleted": false
   },
   {
     "ID": "9E71A405-11B1-4FD8-BA71-7DEE593CD576",
@@ -818,11 +602,7 @@
     "DivisionID": "12 - PA",
     "Status": "OUT OF SERVICE",
     "StatusID": "2892B645-B6FA-4C37-8F4E-E4A54202AE20",
-    "IsDeleted": false,
-    "RecordAt": "2025-01-13T17:19:32.943000",
-    "RecordBy": "74d20c26-f0e8-4c18-b4f3-cbe71a6b050d",
-    "UpdateAt": "2026-01-15T12:59:35.177000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "6B04F8D0-E6D5-4504-BA61-E4C680D91285",
@@ -833,11 +613,7 @@
     "DivisionID": "12 - PA",
     "Status": "OUT OF SERVICE",
     "StatusID": "2892B645-B6FA-4C37-8F4E-E4A54202AE20",
-    "IsDeleted": false,
-    "RecordAt": "2024-11-24T22:49:18.287000",
-    "RecordBy": "9161cdc2-1428-4140-9554-f9fcb7a74919",
-    "UpdateAt": "2026-01-14T22:00:24.520000",
-    "UpdateBy": "41B51F69-6149-4FCD-AF66-4397D952020A"
+    "isDeleted": false
   },
   {
     "ID": "5E098E39-7D07-4975-B257-00F401344249",
@@ -848,11 +624,7 @@
     "DivisionID": "12 - PA",
     "Status": "OUT OF SERVICE",
     "StatusID": "2892B645-B6FA-4C37-8F4E-E4A54202AE20",
-    "IsDeleted": false,
-    "RecordAt": "2025-10-09T17:33:19.023000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-09T21:24:09.487000",
-    "UpdateBy": "bc995352-554e-4712-88b8-1710d5471808"
+    "isDeleted": false
   },
   {
     "ID": "C1467B04-73E4-403D-B239-4A0B9B9E40BE",
@@ -863,11 +635,7 @@
     "DivisionID": "12 - PA",
     "Status": "OUT OF SERVICE",
     "StatusID": "2892B645-B6FA-4C37-8F4E-E4A54202AE20",
-    "IsDeleted": false,
-    "RecordAt": "2024-08-01T03:20:33.607000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-08T18:18:00.257000",
-    "UpdateBy": "d6f67f29-71f8-4789-9e0e-ed7c1639e9be"
+    "isDeleted": false
   },
   {
     "ID": "1F1F1EEE-6643-4C94-A3C7-7DA1EDE36180",
@@ -878,11 +646,7 @@
     "DivisionID": "12 - PA",
     "Status": "OUT OF SERVICE",
     "StatusID": "2892B645-B6FA-4C37-8F4E-E4A54202AE20",
-    "IsDeleted": false,
-    "RecordAt": "2025-10-04T04:17:14.443000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-19T22:09:08.537000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "D810CAB8-B5CA-4644-9390-C3D679627BA9",
@@ -893,11 +657,7 @@
     "DivisionID": "12 - PA",
     "Status": "OUT OF SERVICE",
     "StatusID": "2892B645-B6FA-4C37-8F4E-E4A54202AE20",
-    "IsDeleted": false,
-    "RecordAt": "2024-10-21T16:44:08.560000",
-    "RecordBy": "7cd5892e-219b-4713-92af-b47aa372253f",
-    "UpdateAt": "2025-12-09T22:00:05.260000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "B907CD56-9551-4050-AC31-AF3E8F84E762",
@@ -908,11 +668,7 @@
     "DivisionID": "12 - PA",
     "Status": "OUT OF SERVICE",
     "StatusID": "2892B645-B6FA-4C37-8F4E-E4A54202AE20",
-    "IsDeleted": false,
-    "RecordAt": "2024-07-12T21:36:38.367000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-09T16:17:03.220000",
-    "UpdateBy": "d6f67f29-71f8-4789-9e0e-ed7c1639e9be"
+    "isDeleted": false
   },
   {
     "ID": "C53DDFDC-D097-40F6-9957-4B6CADAADDD7",
@@ -923,11 +679,7 @@
     "DivisionID": "12 - PA",
     "Status": "REGISTRATION",
     "StatusID": "9850D839-103E-4559-8A15-D390FCC68803",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-20T01:54:18.807000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T20:01:31.803000",
-    "UpdateBy": "a097ea8a-87fc-4aa5-b875-b94c6b56b2d8"
+    "isDeleted": false
   },
   {
     "ID": "E5743F92-40E0-4FD8-8C7B-0C1325B34F1D",
@@ -938,11 +690,7 @@
     "DivisionID": "12 - PA",
     "Status": "REGISTRATION",
     "StatusID": "9850D839-103E-4559-8A15-D390FCC68803",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-17T03:07:13.510000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-17T03:54:29.780000",
-    "UpdateBy": "e58831db-b5b2-4f6d-9063-193f60422806"
+    "isDeleted": false
   },
   {
     "ID": "AD4E4FDD-6B1B-495E-9D6E-FA10E8059D46",
@@ -953,11 +701,7 @@
     "DivisionID": "12 - PA",
     "Status": "REGISTRATION",
     "StatusID": "3F40B4B1-E98E-45FA-8F6A-08C41177C734",
-    "IsDeleted": false,
-    "RecordAt": "2025-12-22T21:50:10.060000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-16T20:50:27.103000",
-    "UpdateBy": "a1d23522-38be-42d9-8b4a-4c0b1156f31c"
+    "isDeleted": false
   },
   {
     "ID": "1B3565C1-E9D0-4DE2-942B-E72AC4A4887F",
@@ -968,11 +712,7 @@
     "DivisionID": "12 - PA",
     "Status": "REGISTRATION",
     "StatusID": "B8698A50-FEFF-43BC-90FF-6ED1CAE6C41B",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-07T22:52:56.957000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-14T21:50:25.453000",
-    "UpdateBy": "a6e32ab7-04fc-45a1-b00c-d6f812da9acd"
+    "isDeleted": false
   },
   {
     "ID": "4CBE49F3-E1CA-49ED-940F-FF1E396442D4",
@@ -983,11 +723,7 @@
     "DivisionID": "12 - PA",
     "Status": "REGISTRATION",
     "StatusID": "3F40B4B1-E98E-45FA-8F6A-08C41177C734",
-    "IsDeleted": false,
-    "RecordAt": "2025-12-26T22:17:50.033000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-12T20:50:37.423000",
-    "UpdateBy": "ecd41153-ee6a-4381-8067-cb6d2ac18c7e"
+    "isDeleted": false
   },
   {
     "ID": "50CAECAD-35A7-454A-8F3B-556F07DD19AB",
@@ -998,11 +734,7 @@
     "DivisionID": "12 - PA",
     "Status": "REGISTRATION",
     "StatusID": "548AB58E-A17E-4898-A7C1-153E82156E33",
-    "IsDeleted": false,
-    "RecordAt": "2025-05-21T21:50:18.887000",
-    "RecordBy": "9161cdc2-1428-4140-9554-f9fcb7a74919",
-    "UpdateAt": "2026-01-09T02:50:25.957000",
-    "UpdateBy": "DD120D9D-2151-4340-8710-474F548F1F24"
+    "isDeleted": false
   },
   {
     "ID": "0495CCA1-19BF-48E9-BD6E-DCF8C09E99A0",
@@ -1013,11 +745,7 @@
     "DivisionID": "12 - PA",
     "Status": "REGISTRATION",
     "StatusID": "B8698A50-FEFF-43BC-90FF-6ED1CAE6C41B",
-    "IsDeleted": false,
-    "RecordAt": "2025-12-01T23:14:02.540000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-08T23:20:32.290000",
-    "UpdateBy": "beadce4a-7ea7-4b04-8605-4f41aaa287c1"
+    "isDeleted": false
   },
   {
     "ID": "E4E4502E-29A2-40BA-A3CE-ACDFC0D611D9",
@@ -1028,11 +756,7 @@
     "DivisionID": "12 - PA",
     "Status": "REGISTRATION",
     "StatusID": "9850D839-103E-4559-8A15-D390FCC68803",
-    "IsDeleted": false,
-    "RecordAt": "2025-11-13T17:18:46.890000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-06T23:46:52.120000",
-    "UpdateBy": "74d20c26-f0e8-4c18-b4f3-cbe71a6b050d"
+    "isDeleted": false
   },
   {
     "ID": "D769D763-C427-407D-91EA-01E644D6E7B5",
@@ -1043,11 +767,7 @@
     "DivisionID": "12 - PA",
     "Status": "REGISTRATION",
     "StatusID": "9850D839-103E-4559-8A15-D390FCC68803",
-    "IsDeleted": false,
-    "RecordAt": "2025-12-17T13:58:08.750000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-06T23:46:15.047000",
-    "UpdateBy": "d46f2d56-e572-4180-9f7b-7b92d4c6f28e"
+    "isDeleted": false
   },
   {
     "ID": "B67AD39A-3675-4B16-910A-6D503B0BC322",
@@ -1058,11 +778,7 @@
     "DivisionID": "12 - PA",
     "Status": "REGISTRATION",
     "StatusID": "9850D839-103E-4559-8A15-D390FCC68803",
-    "IsDeleted": false,
-    "RecordAt": "2025-08-13T14:17:44.017000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-06T23:45:32.263000",
-    "UpdateBy": "5060a1f1-d75a-4548-b1dd-bda6f24bf8a3"
+    "isDeleted": false
   },
   {
     "ID": "5FAF5230-C0B8-4C40-AF5F-E70ABE9F8D50",
@@ -1073,11 +789,7 @@
     "DivisionID": "12 - PA",
     "Status": "TERM",
     "StatusID": "F37A9F7C-693C-4F27-B0ED-AD76F464EC76",
-    "IsDeleted": false,
-    "RecordAt": "2024-10-29T09:44:37.147000",
-    "RecordBy": "ec6af737-549e-4bfc-8fe1-f280108e3e92",
-    "UpdateAt": "2025-12-20T16:51:13.653000",
-    "UpdateBy": "b3952739-a3a1-4546-91e5-e315e30766df"
+    "isDeleted": false
   },
   {
     "ID": "110C63B4-432E-420F-864D-6E16FD8B5EF6",
@@ -1088,11 +800,7 @@
     "DivisionID": "12 - PA",
     "Status": "TERM",
     "StatusID": "F37A9F7C-693C-4F27-B0ED-AD76F464EC76",
-    "IsDeleted": false,
-    "RecordAt": "2025-05-15T14:11:08.707000",
-    "RecordBy": "74d20c26-f0e8-4c18-b4f3-cbe71a6b050d",
-    "UpdateAt": "2025-12-19T15:49:15.920000",
-    "UpdateBy": "d6f67f29-71f8-4789-9e0e-ed7c1639e9be"
+    "isDeleted": false
   },
   {
     "ID": "8C8384C8-0F96-4A84-8CC9-80E2BC88B93F",
@@ -1103,11 +811,7 @@
     "DivisionID": "12 - PA",
     "Status": "TERM",
     "StatusID": "F37A9F7C-693C-4F27-B0ED-AD76F464EC76",
-    "IsDeleted": false,
-    "RecordAt": "2025-09-13T00:40:33.297000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-09T23:31:36.907000",
-    "UpdateBy": "d6f67f29-71f8-4789-9e0e-ed7c1639e9be"
+    "isDeleted": false
   },
   {
     "ID": "81F81EC1-8DE4-430B-9E97-3961F8E673DF",
@@ -1118,11 +822,7 @@
     "DivisionID": "12 - PA",
     "Status": "TERM",
     "StatusID": "F37A9F7C-693C-4F27-B0ED-AD76F464EC76",
-    "IsDeleted": false,
-    "RecordAt": "2024-12-29T21:30:56.710000",
-    "RecordBy": "9161cdc2-1428-4140-9554-f9fcb7a74919",
-    "UpdateAt": "2025-12-09T23:31:21.293000",
-    "UpdateBy": "d6f67f29-71f8-4789-9e0e-ed7c1639e9be"
+    "isDeleted": false
   },
   {
     "ID": "7E642892-5D9F-4933-B402-01F63EC74D79",
@@ -1133,11 +833,7 @@
     "DivisionID": "12 - PA",
     "Status": "TERMINATED",
     "StatusID": "F37A9F7C-693C-4F27-B0ED-AD76F464EC76",
-    "IsDeleted": false,
-    "RecordAt": "2025-09-23T17:52:00.157000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T16:44:37.993000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "924D36A1-1E32-4C4F-8782-B1FD8072B2F2",
@@ -1148,11 +844,7 @@
     "DivisionID": "12 - PA",
     "Status": "TERMINATED",
     "StatusID": "F37A9F7C-693C-4F27-B0ED-AD76F464EC76",
-    "IsDeleted": false,
-    "RecordAt": "2024-08-29T20:28:40.570000",
-    "RecordBy": "74d20c26-f0e8-4c18-b4f3-cbe71a6b050d",
-    "UpdateAt": "2026-01-20T16:16:17.837000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "99B3EB62-BE03-422C-8CB0-591247CC9BC2",
@@ -1163,11 +855,7 @@
     "DivisionID": "2 - IL",
     "Status": "IN-SERVICE",
     "StatusID": "E4ED5BC0-CEEB-432E-943A-0B5B89DD08AE",
-    "IsDeleted": false,
-    "RecordAt": "2023-04-22T21:02:47",
-    "RecordBy": "f744b466-c473-47f2-aeb8-0e1b612df731",
-    "UpdateAt": "2026-01-06T20:05:30.177000",
-    "UpdateBy": "f744b466-c473-47f2-aeb8-0e1b612df731"
+    "isDeleted": false
   },
   {
     "ID": "7C754972-705A-43C0-98E6-6BF201C4DEE4",
@@ -1178,11 +866,7 @@
     "DivisionID": "2 - IL",
     "Status": "IN-SERVICE",
     "StatusID": "E4ED5BC0-CEEB-432E-943A-0B5B89DD08AE",
-    "IsDeleted": false,
-    "RecordAt": "2022-11-08T23:41:17",
-    "RecordBy": "f6ae9ef5-120e-430f-be81-1c3830b42df6",
-    "UpdateAt": "2026-01-05T18:17:14.680000",
-    "UpdateBy": "d6f67f29-71f8-4789-9e0e-ed7c1639e9be"
+    "isDeleted": false
   },
   {
     "ID": "1036B59B-1DBA-4702-9FE4-FB48D02240A8",
@@ -1193,11 +877,7 @@
     "DivisionID": "2 - IL",
     "Status": "IN-SERVICE",
     "StatusID": "E4ED5BC0-CEEB-432E-943A-0B5B89DD08AE",
-    "IsDeleted": false,
-    "RecordAt": "2025-07-11T03:18:07.827000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-30T18:47:49.550000",
-    "UpdateBy": "d6f67f29-71f8-4789-9e0e-ed7c1639e9be"
+    "isDeleted": false
   },
   {
     "ID": "BBA0B128-A052-4B9F-977A-A311880147A7",
@@ -1208,11 +888,7 @@
     "DivisionID": "2 - IL",
     "Status": "IN-SERVICE",
     "StatusID": "E4ED5BC0-CEEB-432E-943A-0B5B89DD08AE",
-    "IsDeleted": false,
-    "RecordAt": "2025-11-09T01:19:57.990000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-24T16:24:34.393000",
-    "UpdateBy": "d6f67f29-71f8-4789-9e0e-ed7c1639e9be"
+    "isDeleted": false
   },
   {
     "ID": "B0F492F6-F883-4823-884B-A3CCD57A6B5B",
@@ -1223,11 +899,7 @@
     "DivisionID": "2 - IL",
     "Status": "IN-SERVICE",
     "StatusID": "E4ED5BC0-CEEB-432E-943A-0B5B89DD08AE",
-    "IsDeleted": false,
-    "RecordAt": "2025-12-02T03:26:28.617000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-17T15:52:10.523000",
-    "UpdateBy": "d6f67f29-71f8-4789-9e0e-ed7c1639e9be"
+    "isDeleted": false
   },
   {
     "ID": "3D0B3318-C0E4-438C-ABAF-4D9F732B59E2",
@@ -1238,11 +910,7 @@
     "DivisionID": "2 - IL",
     "Status": "OUT OF SERVICE",
     "StatusID": "469275C6-4F3A-4A4B-A401-F247CA9EB47D",
-    "IsDeleted": false,
-    "RecordAt": null,
-    "RecordBy": null,
-    "UpdateAt": "2026-01-08T14:59:04.240000",
-    "UpdateBy": "bc995352-554e-4712-88b8-1710d5471808"
+    "isDeleted": false
   },
   {
     "ID": "1DEA1586-94A1-447E-B812-3059A6EBF71C",
@@ -1253,11 +921,7 @@
     "DivisionID": "2 - IL",
     "Status": "REGISTRATION",
     "StatusID": "7800FCAD-2FAA-42AE-8220-192D8E61ED01",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-20T20:35:41.277000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T20:47:04.933000",
-    "UpdateBy": "a21b48c2-e3c2-4d09-b0dc-4708c81ce6b9"
+    "isDeleted": false
   },
   {
     "ID": "BC713CE9-A18E-430E-B39F-642A92592C87",
@@ -1268,11 +932,7 @@
     "DivisionID": "2 - IL",
     "Status": "REGISTRATION",
     "StatusID": "7800FCAD-2FAA-42AE-8220-192D8E61ED01",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-20T03:34:53.447000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T03:41:33.857000",
-    "UpdateBy": "4e317456-4b02-43bd-b8a3-8ba924186669"
+    "isDeleted": false
   },
   {
     "ID": "04865F6E-1037-4C30-93E5-5F5C8B167C49",
@@ -1283,11 +943,7 @@
     "DivisionID": "2 - IL",
     "Status": "REGISTRATION",
     "StatusID": "2BE1FDAD-0305-46D8-B204-73B29E0D5640",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-17T15:20:36.970000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-19T18:20:48.353000",
-    "UpdateBy": "28c6e361-4057-41d8-88fb-65b2f96082b7"
+    "isDeleted": false
   },
   {
     "ID": "90FF4060-0A32-497C-A8B5-735B06129709",
@@ -1298,11 +954,7 @@
     "DivisionID": "2 - IL",
     "Status": "REGISTRATION",
     "StatusID": "7800FCAD-2FAA-42AE-8220-192D8E61ED01",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-17T14:51:22.317000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-17T20:51:41.323000",
-    "UpdateBy": "27b952df-aa5e-4daf-8556-915ec7d0208e"
+    "isDeleted": false
   },
   {
     "ID": "225A6FA1-19AE-44E4-914D-601A4FA35D12",
@@ -1313,11 +965,7 @@
     "DivisionID": "2 - IL",
     "Status": "REGISTRATION",
     "StatusID": "2BE1FDAD-0305-46D8-B204-73B29E0D5640",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-14T14:57:32.680000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-15T22:40:49.023000",
-    "UpdateBy": "7b0c6137-2689-437d-b915-55a0d093ff08"
+    "isDeleted": false
   },
   {
     "ID": "9F4B173A-6F62-4A81-B3A9-9BC4A9278C69",
@@ -1328,11 +976,7 @@
     "DivisionID": "2 - IL",
     "Status": "REGISTRATION",
     "StatusID": "2BE1FDAD-0305-46D8-B204-73B29E0D5640",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-14T13:51:16.053000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-15T20:20:33.220000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "022B23BF-01BE-4A2A-AA4F-BFB5FEE55B3C",
@@ -1343,11 +987,7 @@
     "DivisionID": "2 - IL",
     "Status": "REGISTRATION",
     "StatusID": "7800FCAD-2FAA-42AE-8220-192D8E61ED01",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-13T19:44:08.397000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-13T20:35:23.497000",
-    "UpdateBy": "e3cfbaa9-9ece-41cd-b796-0dcd13df9aed"
+    "isDeleted": false
   },
   {
     "ID": "F2603040-5FDD-4B33-A5F1-D1BA217E57A7",
@@ -1358,11 +998,7 @@
     "DivisionID": "2 - IL",
     "Status": "REGISTRATION",
     "StatusID": "2BE1FDAD-0305-46D8-B204-73B29E0D5640",
-    "IsDeleted": false,
-    "RecordAt": "2025-12-22T14:18:37.927000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-06T23:04:51.883000",
-    "UpdateBy": "483b7993-6723-4443-ba20-bf543cd36e5d"
+    "isDeleted": false
   },
   {
     "ID": "A65E88C9-A878-45F3-A21E-FDFD3D982CBA",
@@ -1373,11 +1009,7 @@
     "DivisionID": "2 - IL",
     "Status": "REGISTRATION",
     "StatusID": "E4ED5BC0-CEEB-432E-943A-0B5B89DD08AE",
-    "IsDeleted": false,
-    "RecordAt": "2024-11-20T03:55:22.397000",
-    "RecordBy": "7b0c6137-2689-437d-b915-55a0d093ff08",
-    "UpdateAt": "2025-11-25T17:46:13.623000",
-    "UpdateBy": "4e83a7b6-910a-47da-adcf-0e23d9a7843d"
+    "isDeleted": false
   },
   {
     "ID": "083BCBD0-C61A-4214-9D4F-4B391D88A845",
@@ -1388,11 +1020,7 @@
     "DivisionID": "2 - IL",
     "Status": "REGISTRATION",
     "StatusID": "E4ED5BC0-CEEB-432E-943A-0B5B89DD08AE",
-    "IsDeleted": false,
-    "RecordAt": "2025-07-08T17:09:29.650000",
-    "RecordBy": "7b0c6137-2689-437d-b915-55a0d093ff08",
-    "UpdateAt": "2025-11-20T14:58:42.243000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "E7D02B95-4E7C-41EF-B599-BA0563A0DDEE",
@@ -1403,11 +1031,7 @@
     "DivisionID": "2 - IL",
     "Status": "TERM",
     "StatusID": "01299D7E-BE3C-4C12-A756-26900A1127CF",
-    "IsDeleted": false,
-    "RecordAt": "2024-07-10T17:08:41.553000",
-    "RecordBy": "414b8b1e-b702-4a4f-8a2d-7a1b628b120c",
-    "UpdateAt": "2025-12-30T19:03:43.270000",
-    "UpdateBy": "d6f67f29-71f8-4789-9e0e-ed7c1639e9be"
+    "isDeleted": false
   },
   {
     "ID": "683B78A2-DDF0-40B1-8411-5159B9F78284",
@@ -1418,11 +1042,7 @@
     "DivisionID": "2 - IL",
     "Status": "TERM",
     "StatusID": "01299D7E-BE3C-4C12-A756-26900A1127CF",
-    "IsDeleted": false,
-    "RecordAt": "2025-07-08T15:10:02.007000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-30T19:03:07.487000",
-    "UpdateBy": "d6f67f29-71f8-4789-9e0e-ed7c1639e9be"
+    "isDeleted": false
   },
   {
     "ID": "AFBB1487-57D9-42C9-AEAF-0B1B7F5AC0A8",
@@ -1433,11 +1053,7 @@
     "DivisionID": "3 - TX",
     "Status": "2F22355A-A64E-43FF-B523-68F5D915376B",
     "StatusID": "2F22355A-A64E-43FF-B523-68F5D915376B",
-    "IsDeleted": false,
-    "RecordAt": "2024-09-24T18:25:48.413000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-06T05:41:37.203000",
-    "UpdateBy": "7f10ac12-a4b8-446d-b355-bc45776515b4"
+    "isDeleted": false
   },
   {
     "ID": "EFAC76DC-2562-441C-8D5F-890E179BC115",
@@ -1448,11 +1064,7 @@
     "DivisionID": "3 - TX",
     "Status": "APPROVED FOR LEASING",
     "StatusID": "9F098511-E116-4DC7-902A-D2C7EA2EDA20",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-12T21:17:21.193000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-12T21:32:53.067000",
-    "UpdateBy": "5f4d2ae7-ce31-4f21-99ff-e59af9bf88c6"
+    "isDeleted": false
   },
   {
     "ID": "328A9D4D-7035-4E26-8D45-30A5F51A0339",
@@ -1463,11 +1075,7 @@
     "DivisionID": "3 - TX",
     "Status": "CREDENTIALING",
     "StatusID": "36889218-5043-4719-A1C7-E2D73BED2F26",
-    "IsDeleted": false,
-    "RecordAt": "2024-10-03T20:32:16.073000",
-    "RecordBy": "ec6af737-549e-4bfc-8fe1-f280108e3e92",
-    "UpdateAt": "2026-01-16T20:20:45.343000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "DDF85D26-C7B7-4CF2-BD18-646698AE70AC",
@@ -1478,11 +1086,7 @@
     "DivisionID": "3 - TX",
     "Status": "CREDENTIALING",
     "StatusID": "1F0E7EFD-D5F0-4A7F-8FFE-5FEC757E1041",
-    "IsDeleted": false,
-    "RecordAt": "2025-06-25T23:39:21.303000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-13T19:37:20.967000",
-    "UpdateBy": "765fde89-088f-4859-8025-6962b6610ec2"
+    "isDeleted": false
   },
   {
     "ID": "F829C4A3-E262-4200-81D0-5F82C71BB236",
@@ -1493,11 +1097,7 @@
     "DivisionID": "3 - TX",
     "Status": "IN-SERVICE",
     "StatusID": "20E10408-FFAA-4B91-AFC4-8DCF9A0CBB84",
-    "IsDeleted": false,
-    "RecordAt": "2025-08-22T16:47:33",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-16T23:17:26.113000",
-    "UpdateBy": "5367cce3-c5f6-46fe-9722-eaa4cec0ad4d"
+    "isDeleted": false
   },
   {
     "ID": "CE23950C-02DD-4D34-A76E-9B67F807B3F3",
@@ -1508,11 +1108,7 @@
     "DivisionID": "3 - TX",
     "Status": "IN-SERVICE",
     "StatusID": "20E10408-FFAA-4B91-AFC4-8DCF9A0CBB84",
-    "IsDeleted": false,
-    "RecordAt": "2025-09-22T22:29:03.270000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-16T17:34:23.143000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "77D56C08-B5E2-4718-97AE-2CB23D5C2809",
@@ -1523,11 +1119,7 @@
     "DivisionID": "3 - TX",
     "Status": "IN-SERVICE",
     "StatusID": "20E10408-FFAA-4B91-AFC4-8DCF9A0CBB84",
-    "IsDeleted": false,
-    "RecordAt": "2024-08-27T20:52:14.113000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-16T14:49:52.807000",
-    "UpdateBy": "5367cce3-c5f6-46fe-9722-eaa4cec0ad4d"
+    "isDeleted": false
   },
   {
     "ID": "6C5B5147-E238-4CDD-B4A6-A5B8F1DDC780",
@@ -1538,11 +1130,7 @@
     "DivisionID": "3 - TX",
     "Status": "IN-SERVICE",
     "StatusID": "20E10408-FFAA-4B91-AFC4-8DCF9A0CBB84",
-    "IsDeleted": false,
-    "RecordAt": "2024-08-30T18:38:26.087000",
-    "RecordBy": "60d33c96-31c1-4ab6-87a3-adbc27386c47",
-    "UpdateAt": "2026-01-14T21:27:55.810000",
-    "UpdateBy": "5367cce3-c5f6-46fe-9722-eaa4cec0ad4d"
+    "isDeleted": false
   },
   {
     "ID": "810AC1CF-0A2D-4E79-A846-750B43517D90",
@@ -1553,11 +1141,7 @@
     "DivisionID": "3 - TX",
     "Status": "IN-SERVICE",
     "StatusID": "20E10408-FFAA-4B91-AFC4-8DCF9A0CBB84",
-    "IsDeleted": false,
-    "RecordAt": "2025-12-16T00:29:47.947000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-14T12:43:07.123000",
-    "UpdateBy": "5367cce3-c5f6-46fe-9722-eaa4cec0ad4d"
+    "isDeleted": false
   },
   {
     "ID": "ADD22A46-FB7A-4109-9BE0-1066963A75B4",
@@ -1568,11 +1152,7 @@
     "DivisionID": "3 - TX",
     "Status": "IN-SERVICE",
     "StatusID": "20E10408-FFAA-4B91-AFC4-8DCF9A0CBB84",
-    "IsDeleted": false,
-    "RecordAt": "2025-12-22T15:35:42.020000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-14T12:42:16.353000",
-    "UpdateBy": "5367cce3-c5f6-46fe-9722-eaa4cec0ad4d"
+    "isDeleted": false
   },
   {
     "ID": "586D76BE-CDEF-4545-B257-37FF3FAB6489",
@@ -1583,11 +1163,7 @@
     "DivisionID": "3 - TX",
     "Status": "IN-SERVICE",
     "StatusID": "20E10408-FFAA-4B91-AFC4-8DCF9A0CBB84",
-    "IsDeleted": false,
-    "RecordAt": "2025-11-10T17:53:52.133000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-13T23:25:41.683000",
-    "UpdateBy": "8c095170-8330-4fe0-92fd-483890abbd61"
+    "isDeleted": false
   },
   {
     "ID": "7D72BC79-3CD7-4DFD-8F57-19324C6CAD87",
@@ -1598,11 +1174,7 @@
     "DivisionID": "3 - TX",
     "Status": "IN-SERVICE",
     "StatusID": "20E10408-FFAA-4B91-AFC4-8DCF9A0CBB84",
-    "IsDeleted": false,
-    "RecordAt": "2024-09-17T17:01:52.590000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-13T17:25:11.453000",
-    "UpdateBy": "5367cce3-c5f6-46fe-9722-eaa4cec0ad4d"
+    "isDeleted": false
   },
   {
     "ID": "99ADC2AD-3EAD-4B3F-AC7E-C415B08D0751",
@@ -1613,11 +1185,7 @@
     "DivisionID": "3 - TX",
     "Status": "IN-SERVICE",
     "StatusID": "20E10408-FFAA-4B91-AFC4-8DCF9A0CBB84",
-    "IsDeleted": false,
-    "RecordAt": "2025-11-17T02:00:59.950000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-13T15:57:24.097000",
-    "UpdateBy": "080dc687-edb8-4d30-8122-bbfa29491c0f"
+    "isDeleted": false
   },
   {
     "ID": "8C34A55F-3EDE-4399-A619-8253F6681E74",
@@ -1628,11 +1196,7 @@
     "DivisionID": "3 - TX",
     "Status": "IN-SERVICE",
     "StatusID": "20E10408-FFAA-4B91-AFC4-8DCF9A0CBB84",
-    "IsDeleted": false,
-    "RecordAt": "2025-09-16T02:35:59.603000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-10T00:42:13.737000",
-    "UpdateBy": "5367cce3-c5f6-46fe-9722-eaa4cec0ad4d"
+    "isDeleted": false
   },
   {
     "ID": "3F31D9F6-89C2-4F1D-AD5D-A0C03F8203FA",
@@ -1643,11 +1207,7 @@
     "DivisionID": "3 - TX",
     "Status": "ONBOARDING",
     "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
-    "IsDeleted": false,
-    "RecordAt": "2024-09-24T00:06:41.353000",
-    "RecordBy": "63d52e18-088a-4726-ba05-ac8021e91890",
-    "UpdateAt": "2026-01-20T19:17:33.133000",
-    "UpdateBy": "080dc687-edb8-4d30-8122-bbfa29491c0f"
+    "isDeleted": false
   },
   {
     "ID": "49E7AAC0-7525-4301-BA97-FE409FCEB3E2",
@@ -1658,11 +1218,7 @@
     "DivisionID": "3 - TX",
     "Status": "ONBOARDING",
     "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
-    "IsDeleted": false,
-    "RecordAt": "2025-05-02T23:10:12.733000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-17T20:58:21.633000",
-    "UpdateBy": "e1d1ac35-3335-4c35-a70e-79d29c1438c8"
+    "isDeleted": false
   },
   {
     "ID": "9940E94F-5FB4-4551-B10D-567008FEF2ED",
@@ -1673,11 +1229,7 @@
     "DivisionID": "3 - TX",
     "Status": "ONBOARDING",
     "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
-    "IsDeleted": false,
-    "RecordAt": "2025-06-05T17:51:10.137000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-13T18:16:05.153000",
-    "UpdateBy": "080dc687-edb8-4d30-8122-bbfa29491c0f"
+    "isDeleted": false
   },
   {
     "ID": "BDDFF659-D0AF-4F24-8BD7-CF0283A41D59",
@@ -1688,11 +1240,7 @@
     "DivisionID": "3 - TX",
     "Status": "ONBOARDING",
     "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
-    "IsDeleted": false,
-    "RecordAt": null,
-    "RecordBy": null,
-    "UpdateAt": "2026-01-09T23:02:33.777000",
-    "UpdateBy": "0469cd58-d6bb-44c6-9bee-d6bf15a23e68"
+    "isDeleted": false
   },
   {
     "ID": "E8CD9014-003C-48AB-93D1-C639C17EE6BE",
@@ -1701,13 +1249,9 @@
     "Email": "esha12389@gmail.com",
     "Mobile": "(682) 291-7543",
     "DivisionID": "3 - TX",
-    "Status": "ORIENTATION-BIG STAR SAFETY & SERVICE",
+    "Status": "ORIENTATION-BIG STAR SAFETY \u0026 SERVICE",
     "StatusID": "1A544845-CA14-43DB-884F-E5F0DAC6D877",
-    "IsDeleted": false,
-    "RecordAt": "2024-09-09T19:24:49.453000",
-    "RecordBy": "647d9e21-ed49-4c58-a043-7e7b51ec4288",
-    "UpdateAt": "2026-01-14T22:03:40.450000",
-    "UpdateBy": "eb0fe21d-e4c5-4cd4-b7f7-50539ede61e6"
+    "isDeleted": false
   },
   {
     "ID": "18B4666C-8D25-4379-BEFC-866F4DD11418",
@@ -1718,11 +1262,7 @@
     "DivisionID": "3 - TX",
     "Status": "OUT OF SERVICE",
     "StatusID": "2F22355A-A64E-43FF-B523-68F5D915376B",
-    "IsDeleted": false,
-    "RecordAt": "2025-11-05T00:24:04.010000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T15:53:45.207000",
-    "UpdateBy": "765fde89-088f-4859-8025-6962b6610ec2"
+    "isDeleted": false
   },
   {
     "ID": "67D8E6F2-7D99-4BE3-80E8-98830F3DC04D",
@@ -1733,11 +1273,7 @@
     "DivisionID": "3 - TX",
     "Status": "OUT OF SERVICE",
     "StatusID": "2F22355A-A64E-43FF-B523-68F5D915376B",
-    "IsDeleted": false,
-    "RecordAt": "2025-06-18T18:01:08.920000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-02T17:31:55.390000",
-    "UpdateBy": "765fde89-088f-4859-8025-6962b6610ec2"
+    "isDeleted": false
   },
   {
     "ID": "9A1B24A7-8E33-4940-881A-6B0A372391EA",
@@ -1748,11 +1284,7 @@
     "DivisionID": "3 - TX",
     "Status": "REGISTRATION",
     "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-14T17:45:14.423000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T21:07:06.033000",
-    "UpdateBy": "60d33c96-31c1-4ab6-87a3-adbc27386c47"
+    "isDeleted": false
   },
   {
     "ID": "A848F166-4E6F-495B-89F0-74023A9D1DD0",
@@ -1763,11 +1295,7 @@
     "DivisionID": "3 - TX",
     "Status": "REGISTRATION",
     "StatusID": "7D975BBA-A0F6-4849-B592-9A6892BF142F",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-16T18:12:54.250000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T21:03:15.167000",
-    "UpdateBy": "b9ac26ca-82be-4da7-bc88-a72a98bb3e9a"
+    "isDeleted": false
   },
   {
     "ID": "D13A0088-A44A-40C9-A0C5-22B33D8ACFD1",
@@ -1778,11 +1306,7 @@
     "DivisionID": "3 - TX",
     "Status": "REGISTRATION",
     "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
-    "IsDeleted": false,
-    "RecordAt": "2025-12-30T18:18:22.300000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T20:45:01.640000",
-    "UpdateBy": "57ac0b12-212d-4271-b5f0-45b0bf8ce695"
+    "isDeleted": false
   },
   {
     "ID": "224D357F-4641-4FA3-8019-99DD766996B1",
@@ -1793,11 +1317,7 @@
     "DivisionID": "3 - TX",
     "Status": "REGISTRATION",
     "StatusID": "7D975BBA-A0F6-4849-B592-9A6892BF142F",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-20T20:30:30.043000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T20:37:00.197000",
-    "UpdateBy": "e21fdcb2-ba32-4b96-bdda-5f064bdcf101"
+    "isDeleted": false
   },
   {
     "ID": "B040AA5B-9F7E-43DF-ABCE-80DC07C87669",
@@ -1808,11 +1328,7 @@
     "DivisionID": "3 - TX",
     "Status": "REGISTRATION",
     "StatusID": "7D975BBA-A0F6-4849-B592-9A6892BF142F",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-06T16:43:59.617000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T20:14:10.507000",
-    "UpdateBy": "55874e9a-3139-4897-9276-620c274e3ae7"
+    "isDeleted": false
   },
   {
     "ID": "6FF4699C-7C3F-4704-BA3E-27C055803487",
@@ -1823,11 +1339,7 @@
     "DivisionID": "3 - TX",
     "Status": "REGISTRATION",
     "StatusID": "7D975BBA-A0F6-4849-B592-9A6892BF142F",
-    "IsDeleted": false,
-    "RecordAt": "2025-12-29T19:17:06.517000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T20:08:35.637000",
-    "UpdateBy": "080dc687-edb8-4d30-8122-bbfa29491c0f"
+    "isDeleted": false
   },
   {
     "ID": "FE57E36C-74CF-405A-BCA3-B02B331B05AD",
@@ -1838,11 +1350,7 @@
     "DivisionID": "3 - TX",
     "Status": "REGISTRATION",
     "StatusID": "7D975BBA-A0F6-4849-B592-9A6892BF142F",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-03T18:42:00.080000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T20:08:13.637000",
-    "UpdateBy": "080dc687-edb8-4d30-8122-bbfa29491c0f"
+    "isDeleted": false
   },
   {
     "ID": "B7B196E4-42C0-4A1C-B42F-DBBE117668BB",
@@ -1853,11 +1361,7 @@
     "DivisionID": "3 - TX",
     "Status": "REGISTRATION",
     "StatusID": "7D975BBA-A0F6-4849-B592-9A6892BF142F",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-05T21:38:45.313000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T20:01:03.483000",
-    "UpdateBy": "080dc687-edb8-4d30-8122-bbfa29491c0f"
+    "isDeleted": false
   },
   {
     "ID": "502D7ED8-452B-404C-A02C-6435A7A6DFD3",
@@ -1868,11 +1372,7 @@
     "DivisionID": "3 - TX",
     "Status": "REGISTRATION",
     "StatusID": "7D975BBA-A0F6-4849-B592-9A6892BF142F",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-03T05:21:19.810000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T20:00:29.223000",
-    "UpdateBy": "080dc687-edb8-4d30-8122-bbfa29491c0f"
+    "isDeleted": false
   },
   {
     "ID": "B53D1212-E1BB-4650-81C8-7C7B2751AB79",
@@ -1883,11 +1383,7 @@
     "DivisionID": "3 - TX",
     "Status": "REGISTRATION",
     "StatusID": "7D975BBA-A0F6-4849-B592-9A6892BF142F",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-03T07:19:08.400000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T20:00:18.470000",
-    "UpdateBy": "080dc687-edb8-4d30-8122-bbfa29491c0f"
+    "isDeleted": false
   },
   {
     "ID": "D1EE0AC0-EE98-43C1-AE0F-ECF7C60E5729",
@@ -1898,11 +1394,7 @@
     "DivisionID": "3 - TX",
     "Status": "TERM",
     "StatusID": "42763137-455A-436A-BB6A-0C0CAB7F7EE0",
-    "IsDeleted": false,
-    "RecordAt": "2024-08-27T21:57:52.657000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-22T15:33:13.640000",
-    "UpdateBy": "5367cce3-c5f6-46fe-9722-eaa4cec0ad4d"
+    "isDeleted": false
   },
   {
     "ID": "032E4464-DC42-4ADA-A18A-F2079E9AE5BA",
@@ -1913,11 +1405,7 @@
     "DivisionID": "3 - TX",
     "Status": "TERM",
     "StatusID": "42763137-455A-436A-BB6A-0C0CAB7F7EE0",
-    "IsDeleted": false,
-    "RecordAt": "2024-12-20T22:05:38.913000",
-    "RecordBy": "60d33c96-31c1-4ab6-87a3-adbc27386c47",
-    "UpdateAt": "2025-12-19T23:50:09.217000",
-    "UpdateBy": "b3952739-a3a1-4546-91e5-e315e30766df"
+    "isDeleted": false
   },
   {
     "ID": "9C31B131-CE11-4D8B-BE31-8E31C14ACC14",
@@ -1928,11 +1416,7 @@
     "DivisionID": "3 - TX",
     "Status": "TERM",
     "StatusID": "42763137-455A-436A-BB6A-0C0CAB7F7EE0",
-    "IsDeleted": false,
-    "RecordAt": "2025-04-07T11:52:35.873000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-17T13:43:48.797000",
-    "UpdateBy": "b3952739-a3a1-4546-91e5-e315e30766df"
+    "isDeleted": false
   },
   {
     "ID": "D900127A-CF0A-41F4-94C8-ABAA0FA4BC79",
@@ -1943,11 +1427,7 @@
     "DivisionID": "3 - TX",
     "Status": "TERM",
     "StatusID": "42763137-455A-436A-BB6A-0C0CAB7F7EE0",
-    "IsDeleted": false,
-    "RecordAt": "2025-05-16T13:40:18.120000",
-    "RecordBy": "60d33c96-31c1-4ab6-87a3-adbc27386c47",
-    "UpdateAt": "2025-12-09T14:59:13.570000",
-    "UpdateBy": "b3952739-a3a1-4546-91e5-e315e30766df"
+    "isDeleted": false
   },
   {
     "ID": "9CBF2E98-681F-4278-9DBF-D11C5D811006",
@@ -1958,11 +1438,7 @@
     "DivisionID": "3 - TX",
     "Status": "TERMINATED",
     "StatusID": "42763137-455A-436A-BB6A-0C0CAB7F7EE0",
-    "IsDeleted": false,
-    "RecordAt": "2025-03-24T17:45:07.570000",
-    "RecordBy": "60d33c96-31c1-4ab6-87a3-adbc27386c47",
-    "UpdateAt": "2026-01-20T16:40:10.777000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "24EEFDA9-1DDA-4DEB-8631-3FF6202E8A3A",
@@ -1973,11 +1449,7 @@
     "DivisionID": "3 - TX",
     "Status": "TERMINATED",
     "StatusID": "42763137-455A-436A-BB6A-0C0CAB7F7EE0",
-    "IsDeleted": false,
-    "RecordAt": "2025-05-19T17:28:36.537000",
-    "RecordBy": "60d33c96-31c1-4ab6-87a3-adbc27386c47",
-    "UpdateAt": "2026-01-20T16:38:45.440000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "2253FE0A-88FF-40DA-8C8D-09D8394A2419",
@@ -1988,11 +1460,7 @@
     "DivisionID": "3 - TX",
     "Status": "TERMINATED",
     "StatusID": "42763137-455A-436A-BB6A-0C0CAB7F7EE0",
-    "IsDeleted": false,
-    "RecordAt": "2025-09-26T20:34:59.783000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T16:37:08.563000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "62BB2C41-D9C3-4A8E-A7B0-C4227105BAC5",
@@ -2003,11 +1471,7 @@
     "DivisionID": "3 - TX",
     "Status": "TERMINATED",
     "StatusID": "42763137-455A-436A-BB6A-0C0CAB7F7EE0",
-    "IsDeleted": false,
-    "RecordAt": "2025-06-09T17:30:20.383000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T16:35:26.963000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "7C903BCB-4B09-47AF-9D42-24522BE82283",
@@ -2018,11 +1482,7 @@
     "DivisionID": "3 - TX",
     "Status": "TERMINATED",
     "StatusID": "42763137-455A-436A-BB6A-0C0CAB7F7EE0",
-    "IsDeleted": false,
-    "RecordAt": "2025-05-15T13:54:54.327000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-11T21:41:47.380000",
-    "UpdateBy": "5367cce3-c5f6-46fe-9722-eaa4cec0ad4d"
+    "isDeleted": false
   },
   {
     "ID": "B1F475A7-87F5-4002-824F-30DC83A99EFF",
@@ -2033,11 +1493,7 @@
     "DivisionID": "3 - TX",
     "Status": "TERMINATED",
     "StatusID": "42763137-455A-436A-BB6A-0C0CAB7F7EE0",
-    "IsDeleted": false,
-    "RecordAt": "2024-08-30T18:50:24.557000",
-    "RecordBy": "60d33c96-31c1-4ab6-87a3-adbc27386c47",
-    "UpdateAt": "2026-01-09T19:26:12.380000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "922224E5-3426-480B-8D09-70377A657508",
@@ -2048,11 +1504,7 @@
     "DivisionID": "3 - TX",
     "Status": "TERMINATED",
     "StatusID": "42763137-455A-436A-BB6A-0C0CAB7F7EE0",
-    "IsDeleted": false,
-    "RecordAt": "2025-06-23T18:20:13.157000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-08T21:27:56.017000",
-    "UpdateBy": "5367cce3-c5f6-46fe-9722-eaa4cec0ad4d"
+    "isDeleted": false
   },
   {
     "ID": "EAC5D6DA-7303-48B6-9842-5A4294BAE798",
@@ -2063,11 +1515,7 @@
     "DivisionID": "3 - TX",
     "Status": "TERMINATED",
     "StatusID": "42763137-455A-436A-BB6A-0C0CAB7F7EE0",
-    "IsDeleted": false,
-    "RecordAt": "2024-12-23T16:07:35.593000",
-    "RecordBy": "ec6af737-549e-4bfc-8fe1-f280108e3e92",
-    "UpdateAt": "2026-01-06T18:00:44.050000",
-    "UpdateBy": "5367cce3-c5f6-46fe-9722-eaa4cec0ad4d"
+    "isDeleted": false
   },
   {
     "ID": "DFBE71F8-8887-4A40-8875-6E45EE647BA2",
@@ -2078,11 +1526,7 @@
     "DivisionID": "3 - TX",
     "Status": "TERMINATED",
     "StatusID": "42763137-455A-436A-BB6A-0C0CAB7F7EE0",
-    "IsDeleted": false,
-    "RecordAt": "2025-05-20T16:11:08.023000",
-    "RecordBy": "ec6af737-549e-4bfc-8fe1-f280108e3e92",
-    "UpdateAt": "2026-01-02T20:30:46.360000",
-    "UpdateBy": "5367cce3-c5f6-46fe-9722-eaa4cec0ad4d"
+    "isDeleted": false
   },
   {
     "ID": "28AFBDD6-7BC1-490C-B374-8D440920E93C",
@@ -2093,11 +1537,7 @@
     "DivisionID": "3 - TX",
     "Status": "TERMINATED",
     "StatusID": "42763137-455A-436A-BB6A-0C0CAB7F7EE0",
-    "IsDeleted": false,
-    "RecordAt": "2025-06-02T19:40:22.840000",
-    "RecordBy": "ec6af737-549e-4bfc-8fe1-f280108e3e92",
-    "UpdateAt": "2026-01-02T20:29:49.503000",
-    "UpdateBy": "5367cce3-c5f6-46fe-9722-eaa4cec0ad4d"
+    "isDeleted": false
   },
   {
     "ID": "0A0E0E66-D407-40B4-A00E-2CFBA244CA62",
@@ -2108,11 +1548,7 @@
     "DivisionID": "4 - NV",
     "Status": "NEW",
     "StatusID": "CEB886FB-28CE-41A6-BABC-0B92EB27CEC5",
-    "IsDeleted": false,
-    "RecordAt": "2023-09-01T20:04:57.587000",
-    "RecordBy": null,
-    "UpdateAt": "2023-09-01T20:05:09.440000",
-    "UpdateBy": null
+    "isDeleted": false
   },
   {
     "ID": "1BC687A2-30D4-4351-BA08-B5F5F4F5FA4E",
@@ -2123,11 +1559,7 @@
     "DivisionID": "4 - NV",
     "Status": "NEW",
     "StatusID": "66F6AFD9-CE4A-43F3-A548-340C8A2E44DD",
-    "IsDeleted": false,
-    "RecordAt": null,
-    "RecordBy": null,
-    "UpdateAt": "2021-04-22T12:57:40.800000",
-    "UpdateBy": "bb3dc9ab-acae-493b-8768-91bc44094533"
+    "isDeleted": false
   },
   {
     "ID": "228FC026-B4C8-4D20-9725-64A25F1163FF",
@@ -2138,11 +1570,7 @@
     "DivisionID": "5 - CA",
     "Status": "IN-SERVICE",
     "StatusID": "73AEAF4E-937E-47E3-8AD2-5E4115132D2D",
-    "IsDeleted": false,
-    "RecordAt": "2023-06-28T18:42:27",
-    "RecordBy": "c48a1a9e-d2fa-4544-a202-3ae0897b64b7",
-    "UpdateAt": "2026-01-20T00:24:08.070000",
-    "UpdateBy": "b3952739-a3a1-4546-91e5-e315e30766df"
+    "isDeleted": false
   },
   {
     "ID": "24935A28-FD1D-40B8-BD3D-34D4E95E3805",
@@ -2153,11 +1581,7 @@
     "DivisionID": "5 - CA",
     "Status": "IN-SERVICE",
     "StatusID": "73AEAF4E-937E-47E3-8AD2-5E4115132D2D",
-    "IsDeleted": false,
-    "RecordAt": "2024-12-31T21:11:13.200000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-15T13:12:26.893000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "0306798A-A5C2-4F97-A7F9-DBFE4C476657",
@@ -2168,11 +1592,7 @@
     "DivisionID": "5 - CA",
     "Status": "IN-SERVICE",
     "StatusID": "73AEAF4E-937E-47E3-8AD2-5E4115132D2D",
-    "IsDeleted": false,
-    "RecordAt": "2025-07-29T20:10:55.177000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-14T19:32:45.427000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "7074E93D-9DA1-4DCB-A0AF-FB40FCDC5ED5",
@@ -2183,11 +1603,7 @@
     "DivisionID": "5 - CA",
     "Status": "IN-SERVICE",
     "StatusID": "73AEAF4E-937E-47E3-8AD2-5E4115132D2D",
-    "IsDeleted": false,
-    "RecordAt": null,
-    "RecordBy": null,
-    "UpdateAt": "2026-01-12T18:25:29.077000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "A515E0C5-92DC-4D51-A736-8B35CE5001E2",
@@ -2198,11 +1614,7 @@
     "DivisionID": "5 - CA",
     "Status": "IN-SERVICE",
     "StatusID": "73AEAF4E-937E-47E3-8AD2-5E4115132D2D",
-    "IsDeleted": false,
-    "RecordAt": "2023-12-10T22:10:39.733000",
-    "RecordBy": "efa249b3-7c87-4788-9f1d-e72889c4f1c2",
-    "UpdateAt": "2026-01-08T21:20:24.320000",
-    "UpdateBy": "79044876-1744-4a76-80f9-f8f9aa555e7c"
+    "isDeleted": false
   },
   {
     "ID": "52B5FF4D-02A3-4E51-91ED-B01456FF0745",
@@ -2213,11 +1625,7 @@
     "DivisionID": "5 - CA",
     "Status": "IN-SERVICE",
     "StatusID": "73AEAF4E-937E-47E3-8AD2-5E4115132D2D",
-    "IsDeleted": false,
-    "RecordAt": "2023-12-12T01:51:27",
-    "RecordBy": "c48a1a9e-d2fa-4544-a202-3ae0897b64b7",
-    "UpdateAt": "2026-01-07T17:48:43.533000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "413FA7CA-FBF7-4D24-AEAE-492FC3D1FF15",
@@ -2228,11 +1636,7 @@
     "DivisionID": "5 - CA",
     "Status": "IN-SERVICE",
     "StatusID": "73AEAF4E-937E-47E3-8AD2-5E4115132D2D",
-    "IsDeleted": false,
-    "RecordAt": "2024-11-18T01:41:11.283000",
-    "RecordBy": "c48a1a9e-d2fa-4544-a202-3ae0897b64b7",
-    "UpdateAt": "2025-12-18T01:27:05.743000",
-    "UpdateBy": "79044876-1744-4a76-80f9-f8f9aa555e7c"
+    "isDeleted": false
   },
   {
     "ID": "77769C9B-6EE2-4990-B025-B6C4714386E8",
@@ -2243,11 +1647,7 @@
     "DivisionID": "5 - CA",
     "Status": "IN-SERVICE",
     "StatusID": "73AEAF4E-937E-47E3-8AD2-5E4115132D2D",
-    "IsDeleted": false,
-    "RecordAt": "2025-01-07T17:43:28.187000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-11T21:18:30.837000",
-    "UpdateBy": "79044876-1744-4a76-80f9-f8f9aa555e7c"
+    "isDeleted": false
   },
   {
     "ID": "31D318C5-5636-4B83-B32D-9174A73AFE4F",
@@ -2258,11 +1658,7 @@
     "DivisionID": "5 - CA",
     "Status": "OUT OF SERVICE",
     "StatusID": "2BAEB620-9D0B-4B08-A018-7335608B5A19",
-    "IsDeleted": false,
-    "RecordAt": null,
-    "RecordBy": null,
-    "UpdateAt": "2025-12-18T20:00:37.830000",
-    "UpdateBy": "79044876-1744-4a76-80f9-f8f9aa555e7c"
+    "isDeleted": false
   },
   {
     "ID": "9FD17D6D-6C31-4643-AE81-198FAB64F917",
@@ -2271,13 +1667,9 @@
     "Email": "ryanmainess@gmail.com",
     "Mobile": "(925) 501-6689",
     "DivisionID": "5 - CA",
-    "Status": "REGISTRATION",
-    "StatusID": "73AEAF4E-937E-47E3-8AD2-5E4115132D2D",
-    "IsDeleted": false,
-    "RecordAt": "2024-01-19T01:04:22.027000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T19:21:34.790000",
-    "UpdateBy": "a03642e7-d026-405e-b7da-0db7578b5a12"
+    "Status": "ORIENTATION-BIG STAR SAFETY \u0026 SERVICE",
+    "StatusID": "67F7A941-87A7-4748-AB3B-C228406D7785",
+    "isDeleted": false
   },
   {
     "ID": "18F2607C-BB31-47F6-88F6-C1BBCE51C0FD",
@@ -2288,11 +1680,7 @@
     "DivisionID": "5 - CA",
     "Status": "REGISTRATION",
     "StatusID": "A624FDCF-F800-436D-AA69-5E8F6D9B05EA",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-20T19:01:00.540000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T19:07:36.247000",
-    "UpdateBy": "efa249b3-7c87-4788-9f1d-e72889c4f1c2"
+    "isDeleted": false
   },
   {
     "ID": "7F06A78E-6370-402C-B985-D80560C2DC13",
@@ -2301,13 +1689,9 @@
     "Email": "antoinefowler11@gmail.com",
     "Mobile": "(628) 202-6896",
     "DivisionID": "5 - CA",
-    "Status": "REGISTRATION",
-    "StatusID": "73AEAF4E-937E-47E3-8AD2-5E4115132D2D",
-    "IsDeleted": false,
-    "RecordAt": "2024-05-31T16:05:44.143000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-09T03:15:01.420000",
-    "UpdateBy": "064a1c88-f197-4a56-94a7-4b5e948e1147"
+    "Status": "DOT SCREENING",
+    "StatusID": "61D79667-F275-422F-A6A4-AC3FCD855066",
+    "isDeleted": false
   },
   {
     "ID": "BE229AD8-324C-4F8E-99E2-B8E41985F47F",
@@ -2318,11 +1702,7 @@
     "DivisionID": "5 - CA",
     "Status": "REGISTRATION",
     "StatusID": "A624FDCF-F800-436D-AA69-5E8F6D9B05EA",
-    "IsDeleted": false,
-    "RecordAt": "2025-12-19T03:23:19.853000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-06T23:46:20.630000",
-    "UpdateBy": "080dc687-edb8-4d30-8122-bbfa29491c0f"
+    "isDeleted": false
   },
   {
     "ID": "3DCEF51D-F999-4096-B2B7-2D4F76B14F4A",
@@ -2331,13 +1711,9 @@
     "Email": "twannymoe@gmail.com",
     "Mobile": "(279) 386-4347",
     "DivisionID": "5 - CA",
-    "Status": "REGISTRATION",
-    "StatusID": "73AEAF4E-937E-47E3-8AD2-5E4115132D2D",
-    "IsDeleted": false,
-    "RecordAt": "2025-09-30T22:45:16.513000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-30T03:46:14.470000",
-    "UpdateBy": "8c39d9ef-e82e-4651-8e97-0615cabefc31"
+    "Status": "DOT SCREENING",
+    "StatusID": "61D79667-F275-422F-A6A4-AC3FCD855066",
+    "isDeleted": false
   },
   {
     "ID": "AAAE51DE-AA6F-4105-B897-CB271DB9A132",
@@ -2346,13 +1722,9 @@
     "Email": "sammyybb1234@gmail.com",
     "Mobile": "(925) 995-7291",
     "DivisionID": "5 - CA",
-    "Status": "REGISTRATION",
-    "StatusID": "11EF6817-E21A-4D36-BBF2-2E20F41D785E",
-    "IsDeleted": false,
-    "RecordAt": "2025-11-07T05:01:30.680000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-13T14:57:07.777000",
-    "UpdateBy": "edfadef8-80e5-4cd1-95fa-0b6f5faddfe0"
+    "Status": "DOT SCREENING",
+    "StatusID": "61D79667-F275-422F-A6A4-AC3FCD855066",
+    "isDeleted": false
   },
   {
     "ID": "CF85F123-0512-490A-B260-F0D4D3277A35",
@@ -2361,13 +1733,9 @@
     "Email": "aquamandill@gmail.com",
     "Mobile": "(925) 895-1212",
     "DivisionID": "5 - CA",
-    "Status": "REGISTRATION",
-    "StatusID": "73AEAF4E-937E-47E3-8AD2-5E4115132D2D",
-    "IsDeleted": false,
-    "RecordAt": "2024-02-09T19:54:50.973000",
-    "RecordBy": "c48a1a9e-d2fa-4544-a202-3ae0897b64b7",
-    "UpdateAt": "2025-11-20T16:10:36.980000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "Status": "DOT SCREENING",
+    "StatusID": "61D79667-F275-422F-A6A4-AC3FCD855066",
+    "isDeleted": false
   },
   {
     "ID": "5AB3379D-5357-4FC9-AFE7-DD2546A9AF6A",
@@ -2376,13 +1744,9 @@
     "Email": "wendydthomas14@gmail.com",
     "Mobile": "(925) 262-6798",
     "DivisionID": "5 - CA",
-    "Status": "REGISTRATION",
-    "StatusID": "73AEAF4E-937E-47E3-8AD2-5E4115132D2D",
-    "IsDeleted": false,
-    "RecordAt": "2025-06-17T23:29:26.933000",
-    "RecordBy": "c48a1a9e-d2fa-4544-a202-3ae0897b64b7",
-    "UpdateAt": "2025-11-20T16:06:04.333000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "Status": "DOT SCREENING",
+    "StatusID": "61D79667-F275-422F-A6A4-AC3FCD855066",
+    "isDeleted": false
   },
   {
     "ID": "298B5F4A-4D76-492F-ABCC-18DD2FC1B8E3",
@@ -2391,13 +1755,9 @@
     "Email": "clarktarryn@yahoo.com",
     "Mobile": "(510) 860-5817",
     "DivisionID": "5 - CA",
-    "Status": "REGISTRATION",
-    "StatusID": "73AEAF4E-937E-47E3-8AD2-5E4115132D2D",
-    "IsDeleted": false,
-    "RecordAt": "2025-09-24T17:41:37.770000",
-    "RecordBy": null,
-    "UpdateAt": "2025-10-31T14:35:24.287000",
-    "UpdateBy": "7f10ac12-a4b8-446d-b355-bc45776515b4"
+    "Status": "DOT SCREENING",
+    "StatusID": "61D79667-F275-422F-A6A4-AC3FCD855066",
+    "isDeleted": false
   },
   {
     "ID": "3F9CED33-BB56-4491-B091-3D792638A20C",
@@ -2406,13 +1766,9 @@
     "Email": "lenardbanks925@gmail.com",
     "Mobile": "(925) 752-6805",
     "DivisionID": "5 - CA",
-    "Status": "REGISTRATION",
-    "StatusID": "73AEAF4E-937E-47E3-8AD2-5E4115132D2D",
-    "IsDeleted": false,
-    "RecordAt": "2024-11-05T18:18:34.703000",
-    "RecordBy": "c48a1a9e-d2fa-4544-a202-3ae0897b64b7",
-    "UpdateAt": "2025-10-20T23:15:41.880000",
-    "UpdateBy": "c48a1a9e-d2fa-4544-a202-3ae0897b64b7"
+    "Status": "DOT SCREENING",
+    "StatusID": "61D79667-F275-422F-A6A4-AC3FCD855066",
+    "isDeleted": false
   },
   {
     "ID": "D6DE8DD0-5581-492C-B4CC-D465760F5457",
@@ -2423,11 +1779,7 @@
     "DivisionID": "6 - FL",
     "Status": "IN-SERVICE",
     "StatusID": "5784C955-A664-4271-9A5C-9EC818D56E18",
-    "IsDeleted": false,
-    "RecordAt": "2025-04-29T01:40:47.853000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-19T14:27:49.923000",
-    "UpdateBy": "3240221f-48fd-4689-98ae-88f7ec59f52b"
+    "isDeleted": false
   },
   {
     "ID": "5A76E8EB-913D-414E-960D-A03DC36A8C3E",
@@ -2438,11 +1790,7 @@
     "DivisionID": "6 - FL",
     "Status": "IN-SERVICE",
     "StatusID": "5784C955-A664-4271-9A5C-9EC818D56E18",
-    "IsDeleted": false,
-    "RecordAt": "2025-01-02T17:30:26.550000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-12T16:22:19.780000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "48F3C62B-6E3F-494B-B20A-1E8FF0DD4FD2",
@@ -2453,11 +1801,7 @@
     "DivisionID": "6 - FL",
     "Status": "IN-SERVICE",
     "StatusID": "5784C955-A664-4271-9A5C-9EC818D56E18",
-    "IsDeleted": false,
-    "RecordAt": "2024-08-11T21:28:39.627000",
-    "RecordBy": "70fee2ef-3498-425f-a4e8-a89d685d2f81",
-    "UpdateAt": "2026-01-09T15:35:51.927000",
-    "UpdateBy": "3240221f-48fd-4689-98ae-88f7ec59f52b"
+    "isDeleted": false
   },
   {
     "ID": "3C0FBEA9-5198-4060-B3E9-C2C84377A614",
@@ -2468,11 +1812,7 @@
     "DivisionID": "6 - FL",
     "Status": "IN-SERVICE",
     "StatusID": "5784C955-A664-4271-9A5C-9EC818D56E18",
-    "IsDeleted": false,
-    "RecordAt": "2025-07-21T23:00:36.957000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-05T20:37:27.827000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "16790AC3-3A18-4C36-A637-DFD0F88FA7D4",
@@ -2483,11 +1823,7 @@
     "DivisionID": "6 - FL",
     "Status": "IN-SERVICE",
     "StatusID": "5784C955-A664-4271-9A5C-9EC818D56E18",
-    "IsDeleted": false,
-    "RecordAt": "2023-08-01T14:50:36",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-09T22:35:04.523000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "69074639-C5F6-4088-A91F-7A7981449D8D",
@@ -2498,11 +1834,7 @@
     "DivisionID": "6 - FL",
     "Status": "ONBOARDING",
     "StatusID": "85F8103E-F6A4-4EC1-9BD5-842FB4BED561",
-    "IsDeleted": false,
-    "RecordAt": "2025-12-02T17:50:31.767000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-17T13:13:21.253000",
-    "UpdateBy": "5d203efc-bf70-4fc9-8183-19239340cf89"
+    "isDeleted": false
   },
   {
     "ID": "3795F8BA-51B3-408A-A38D-B7D78742FB7E",
@@ -2513,11 +1845,7 @@
     "DivisionID": "6 - FL",
     "Status": "OUT OF SERVICE",
     "StatusID": "EA630AC9-1B42-4173-8D0E-4108178D24DE",
-    "IsDeleted": false,
-    "RecordAt": "2025-02-17T15:28:30.653000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-22T20:23:52.707000",
-    "UpdateBy": "3240221f-48fd-4689-98ae-88f7ec59f52b"
+    "isDeleted": false
   },
   {
     "ID": "21770EB9-0849-44EA-A2D9-D621EB666884",
@@ -2528,11 +1856,7 @@
     "DivisionID": "6 - FL",
     "Status": "REGISTRATION",
     "StatusID": "DA38607E-012F-45D7-B379-667729775A68",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-20T17:48:48.213000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T21:05:39.773000",
-    "UpdateBy": "34126541-6476-421c-9b6c-4f9fd344e62c"
+    "isDeleted": false
   },
   {
     "ID": "1D8FF9A2-4533-472F-8083-BC4BE6138EBC",
@@ -2543,11 +1867,7 @@
     "DivisionID": "6 - FL",
     "Status": "REGISTRATION",
     "StatusID": "DA38607E-012F-45D7-B379-667729775A68",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-20T20:47:00.293000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T20:51:56.510000",
-    "UpdateBy": "8febf57f-3d49-4250-a59d-71f2e8beabf3"
+    "isDeleted": false
   },
   {
     "ID": "66025385-8F3D-45D5-8FFD-A73F2CD496BA",
@@ -2558,11 +1878,7 @@
     "DivisionID": "6 - FL",
     "Status": "REGISTRATION",
     "StatusID": "DA38607E-012F-45D7-B379-667729775A68",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-12T21:04:05.957000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T19:53:02.240000",
-    "UpdateBy": "67bea684-78e5-4b4d-a305-d460c9b25424"
+    "isDeleted": false
   },
   {
     "ID": "28BC986B-D995-470F-9C9A-5F5DDEDF337D",
@@ -2573,11 +1889,7 @@
     "DivisionID": "6 - FL",
     "Status": "REGISTRATION",
     "StatusID": "5784C955-A664-4271-9A5C-9EC818D56E18",
-    "IsDeleted": false,
-    "RecordAt": "2024-02-16T01:56:39.843000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T19:06:01.990000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "6ADEB8A8-89C6-4C7E-BAFE-667AABF3FB9A",
@@ -2588,11 +1900,7 @@
     "DivisionID": "6 - FL",
     "Status": "REGISTRATION",
     "StatusID": "DA38607E-012F-45D7-B379-667729775A68",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-20T18:15:18.440000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T18:51:10.797000",
-    "UpdateBy": "f96917bf-536a-4013-934f-41a125798f02"
+    "isDeleted": false
   },
   {
     "ID": "2B41E971-35A0-43A0-B832-5D975F00A008",
@@ -2603,11 +1911,7 @@
     "DivisionID": "6 - FL",
     "Status": "REGISTRATION",
     "StatusID": "DA38607E-012F-45D7-B379-667729775A68",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-20T17:52:51.920000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T18:18:19.040000",
-    "UpdateBy": "866441f3-6c7b-4ea5-a654-121bc986fe30"
+    "isDeleted": false
   },
   {
     "ID": "DC2A7304-5245-4FAA-9B84-AD2ED149BEBA",
@@ -2618,11 +1922,7 @@
     "DivisionID": "6 - FL",
     "Status": "REGISTRATION",
     "StatusID": "C5E5F514-11C4-4539-9B5A-B9A8ED62CF76",
-    "IsDeleted": false,
-    "RecordAt": "2025-10-21T16:18:50.500000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T18:05:15.027000",
-    "UpdateBy": "bc3c281f-5e31-4178-8882-74b9d5c87823"
+    "isDeleted": false
   },
   {
     "ID": "ADC4AEE6-BF01-47A9-9D25-C14680F9A39D",
@@ -2633,11 +1933,7 @@
     "DivisionID": "6 - FL",
     "Status": "REGISTRATION",
     "StatusID": "DA38607E-012F-45D7-B379-667729775A68",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-20T17:30:12.973000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T17:43:41.047000",
-    "UpdateBy": "dae7bf89-20d4-4290-a8cb-29b2a3384a2a"
+    "isDeleted": false
   },
   {
     "ID": "034D9784-3F82-4F38-896A-6D58415FF46E",
@@ -2648,11 +1944,7 @@
     "DivisionID": "6 - FL",
     "Status": "REGISTRATION",
     "StatusID": "DA38607E-012F-45D7-B379-667729775A68",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-20T17:23:04.580000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T17:30:35.317000",
-    "UpdateBy": "bc2f6047-dc53-479e-ab57-680348e0cd38"
+    "isDeleted": false
   },
   {
     "ID": "F8A29721-8648-45A6-8D3C-D7CEE1DB75F2",
@@ -2663,11 +1955,7 @@
     "DivisionID": "6 - FL",
     "Status": "REGISTRATION",
     "StatusID": "DA38607E-012F-45D7-B379-667729775A68",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-20T17:22:32.767000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T17:29:59.073000",
-    "UpdateBy": "3de55e60-a85a-4506-b06f-ac073ed64111"
+    "isDeleted": false
   },
   {
     "ID": "533287F3-08A4-4B29-A506-A961E6D0404A",
@@ -2678,11 +1966,7 @@
     "DivisionID": "6 - FL",
     "Status": "TERM",
     "StatusID": "512DFA6B-9C4E-46A5-80C9-E3F19F0C323F",
-    "IsDeleted": false,
-    "RecordAt": "2025-02-05T13:14:17.033000",
-    "RecordBy": "6ba7dc5e-4626-4899-9931-daf70ba862a9",
-    "UpdateAt": "2025-12-28T21:49:50.923000",
-    "UpdateBy": "3240221f-48fd-4689-98ae-88f7ec59f52b"
+    "isDeleted": false
   },
   {
     "ID": "91373E8D-C0FD-4B01-80EB-707E79E1B4F8",
@@ -2693,11 +1977,7 @@
     "DivisionID": "6 - FL",
     "Status": "TERM",
     "StatusID": "512DFA6B-9C4E-46A5-80C9-E3F19F0C323F",
-    "IsDeleted": false,
-    "RecordAt": "2024-06-26T15:41:32.167000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-17T21:47:05.220000",
-    "UpdateBy": "3240221f-48fd-4689-98ae-88f7ec59f52b"
+    "isDeleted": false
   },
   {
     "ID": "F4F19C4F-9187-417C-89BA-484E86436694",
@@ -2708,11 +1988,7 @@
     "DivisionID": "6 - FL",
     "Status": "TERM",
     "StatusID": "512DFA6B-9C4E-46A5-80C9-E3F19F0C323F",
-    "IsDeleted": false,
-    "RecordAt": "2025-10-16T01:48:56.253000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-17T00:56:06.560000",
-    "UpdateBy": "3240221f-48fd-4689-98ae-88f7ec59f52b"
+    "isDeleted": false
   },
   {
     "ID": "B1CA77F1-AC90-48A2-B515-C0796A20B172",
@@ -2723,11 +1999,7 @@
     "DivisionID": "7 - MI",
     "Status": "8A1CC050-5B51-4D70-8698-F93283A42F90",
     "StatusID": "8A1CC050-5B51-4D70-8698-F93283A42F90",
-    "IsDeleted": false,
-    "RecordAt": "2022-12-31T17:53:54",
-    "RecordBy": "27943aba-9533-4bb3-b201-db08e7505104",
-    "UpdateAt": "2026-01-09T05:42:55.307000",
-    "UpdateBy": "750256c4-8ad5-48cc-9956-01545d15c0b1"
+    "isDeleted": false
   },
   {
     "ID": "E511C100-EBCF-4CD0-8984-C62A1B63EFFF",
@@ -2738,11 +2010,7 @@
     "DivisionID": "7 - MI",
     "Status": "CREDENTIALING",
     "StatusID": "79A5B3FB-ACEE-4665-AF34-26B6E97A0DA3",
-    "IsDeleted": false,
-    "RecordAt": "2025-05-29T23:54:29.750000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-07T21:33:46.310000",
-    "UpdateBy": "080dc687-edb8-4d30-8122-bbfa29491c0f"
+    "isDeleted": false
   },
   {
     "ID": "41F4D2E3-0BEF-4E9F-93EC-3CA74D8C9310",
@@ -2753,11 +2021,7 @@
     "DivisionID": "7 - MI",
     "Status": "DISQUALIFIED",
     "StatusID": "A7F6633A-8AE1-4F2A-9884-CC2381255D31",
-    "IsDeleted": false,
-    "RecordAt": "2023-06-20T17:17:05",
-    "RecordBy": "264431ae-58d1-4a5b-a142-b6f364e58635",
-    "UpdateAt": "2026-01-20T16:57:05.770000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "2ADF3C83-F3AC-435A-A49A-8157D0117F78",
@@ -2768,11 +2032,7 @@
     "DivisionID": "7 - MI",
     "Status": "DOT SCREENING",
     "StatusID": "318AB4DE-1723-4404-B49C-F4A675CB4403",
-    "IsDeleted": false,
-    "RecordAt": "2025-11-11T22:39:28.730000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-02T19:17:17.733000",
-    "UpdateBy": "080dc687-edb8-4d30-8122-bbfa29491c0f"
+    "isDeleted": false
   },
   {
     "ID": "6E89BDD9-BD7E-4D5F-B2B4-E081BE0C6383",
@@ -2783,11 +2043,7 @@
     "DivisionID": "7 - MI",
     "Status": "IN-SERVICE",
     "StatusID": "82C99C5F-173B-4820-819A-CCFEAD15ADC5",
-    "IsDeleted": false,
-    "RecordAt": "2025-11-12T21:51:48.290000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-17T19:01:06.573000",
-    "UpdateBy": "813c3d2b-c53e-4737-897a-f60225e3f325"
+    "isDeleted": false
   },
   {
     "ID": "1CB1411B-D58F-4649-AFD2-FC5048EF26C7",
@@ -2798,11 +2054,7 @@
     "DivisionID": "7 - MI",
     "Status": "IN-SERVICE",
     "StatusID": "82C99C5F-173B-4820-819A-CCFEAD15ADC5",
-    "IsDeleted": false,
-    "RecordAt": "2025-04-02T17:36:12.497000",
-    "RecordBy": "264431ae-58d1-4a5b-a142-b6f364e58635",
-    "UpdateAt": "2026-01-16T17:16:11.097000",
-    "UpdateBy": "813c3d2b-c53e-4737-897a-f60225e3f325"
+    "isDeleted": false
   },
   {
     "ID": "7B582D4D-83AE-4722-939E-419D30A26913",
@@ -2813,11 +2065,7 @@
     "DivisionID": "7 - MI",
     "Status": "IN-SERVICE",
     "StatusID": "82C99C5F-173B-4820-819A-CCFEAD15ADC5",
-    "IsDeleted": false,
-    "RecordAt": "2023-02-14T10:16:54",
-    "RecordBy": "27943aba-9533-4bb3-b201-db08e7505104",
-    "UpdateAt": "2026-01-15T19:02:40.650000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "80C9B95F-05AE-44CF-AE4F-8E9D4B6F33E9",
@@ -2828,11 +2076,7 @@
     "DivisionID": "7 - MI",
     "Status": "IN-SERVICE",
     "StatusID": "82C99C5F-173B-4820-819A-CCFEAD15ADC5",
-    "IsDeleted": false,
-    "RecordAt": "2025-11-20T19:17:21.450000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-15T15:36:36.107000",
-    "UpdateBy": "813c3d2b-c53e-4737-897a-f60225e3f325"
+    "isDeleted": false
   },
   {
     "ID": "96446A53-4EE0-4F13-8790-3680ABB7276E",
@@ -2843,11 +2087,7 @@
     "DivisionID": "7 - MI",
     "Status": "IN-SERVICE",
     "StatusID": "82C99C5F-173B-4820-819A-CCFEAD15ADC5",
-    "IsDeleted": false,
-    "RecordAt": null,
-    "RecordBy": null,
-    "UpdateAt": "2026-01-12T23:18:45.547000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "CF244AA7-B314-47F6-899D-F294E4D13B11",
@@ -2858,11 +2098,7 @@
     "DivisionID": "7 - MI",
     "Status": "IN-SERVICE",
     "StatusID": "82C99C5F-173B-4820-819A-CCFEAD15ADC5",
-    "IsDeleted": false,
-    "RecordAt": "2024-12-27T16:25:35.473000",
-    "RecordBy": "264431ae-58d1-4a5b-a142-b6f364e58635",
-    "UpdateAt": "2025-12-29T17:15:34.920000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "DC1A2BF1-30B0-4B32-BE75-1933DB46121C",
@@ -2873,11 +2109,7 @@
     "DivisionID": "7 - MI",
     "Status": "IN-SERVICE",
     "StatusID": "82C99C5F-173B-4820-819A-CCFEAD15ADC5",
-    "IsDeleted": false,
-    "RecordAt": "2022-12-21T00:01:21",
-    "RecordBy": "27943aba-9533-4bb3-b201-db08e7505104",
-    "UpdateAt": "2025-12-26T09:50:28.897000",
-    "UpdateBy": "750256c4-8ad5-48cc-9956-01545d15c0b1"
+    "isDeleted": false
   },
   {
     "ID": "09A12E28-1EE9-4CFA-8BFA-928D88003F0D",
@@ -2888,11 +2120,7 @@
     "DivisionID": "7 - MI",
     "Status": "IN-SERVICE",
     "StatusID": "82C99C5F-173B-4820-819A-CCFEAD15ADC5",
-    "IsDeleted": false,
-    "RecordAt": "2022-12-21T02:57:14",
-    "RecordBy": "27943aba-9533-4bb3-b201-db08e7505104",
-    "UpdateAt": "2025-12-26T09:50:19.540000",
-    "UpdateBy": "750256c4-8ad5-48cc-9956-01545d15c0b1"
+    "isDeleted": false
   },
   {
     "ID": "4241A8CB-F1BF-40D4-A8CE-40931B3D6331",
@@ -2903,11 +2131,7 @@
     "DivisionID": "7 - MI",
     "Status": "IN-SERVICE",
     "StatusID": "82C99C5F-173B-4820-819A-CCFEAD15ADC5",
-    "IsDeleted": false,
-    "RecordAt": "2022-12-21T03:03:56",
-    "RecordBy": "27943aba-9533-4bb3-b201-db08e7505104",
-    "UpdateAt": "2025-12-26T09:50:09.450000",
-    "UpdateBy": "750256c4-8ad5-48cc-9956-01545d15c0b1"
+    "isDeleted": false
   },
   {
     "ID": "AC3C3C0A-8FB0-4665-A7AA-E5A0B9DBB62D",
@@ -2918,11 +2142,7 @@
     "DivisionID": "7 - MI",
     "Status": "IN-SERVICE",
     "StatusID": "82C99C5F-173B-4820-819A-CCFEAD15ADC5",
-    "IsDeleted": false,
-    "RecordAt": "2025-10-13T17:31:00.843000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-23T15:28:27.713000",
-    "UpdateBy": "813c3d2b-c53e-4737-897a-f60225e3f325"
+    "isDeleted": false
   },
   {
     "ID": "B344C307-6EF5-4CB2-87B5-E87F7FBD6DF7",
@@ -2931,13 +2151,9 @@
     "Email": "ingramr1998@gmail.com",
     "Mobile": "(313) 353-9919",
     "DivisionID": "7 - MI",
-    "Status": "ORIENTATION-BIG STAR SAFETY & SERVICE",
+    "Status": "ORIENTATION-BIG STAR SAFETY \u0026 SERVICE",
     "StatusID": "4185B583-698B-42AB-9EA8-5F7D2161E658",
-    "IsDeleted": false,
-    "RecordAt": "2025-11-14T01:01:42.903000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-06T23:01:54.330000",
-    "UpdateBy": "7f10ac12-a4b8-446d-b355-bc45776515b4"
+    "isDeleted": false
   },
   {
     "ID": "F9B2881B-00BF-431E-A676-A3D5C0F56C53",
@@ -2948,11 +2164,7 @@
     "DivisionID": "7 - MI",
     "Status": "OUT OF SERVICE",
     "StatusID": "8A1CC050-5B51-4D70-8698-F93283A42F90",
-    "IsDeleted": false,
-    "RecordAt": "2023-04-21T15:20:49",
-    "RecordBy": "264431ae-58d1-4a5b-a142-b6f364e58635",
-    "UpdateAt": "2026-01-09T23:20:07.580000",
-    "UpdateBy": "b3952739-a3a1-4546-91e5-e315e30766df"
+    "isDeleted": false
   },
   {
     "ID": "D7F04752-2F83-4BF5-9EE0-20171E4ABA40",
@@ -2963,11 +2175,7 @@
     "DivisionID": "7 - MI",
     "Status": "OUT OF SERVICE",
     "StatusID": "8A1CC050-5B51-4D70-8698-F93283A42F90",
-    "IsDeleted": false,
-    "RecordAt": "2025-04-29T18:05:33.280000",
-    "RecordBy": "264431ae-58d1-4a5b-a142-b6f364e58635",
-    "UpdateAt": "2026-01-08T17:54:43.650000",
-    "UpdateBy": "813c3d2b-c53e-4737-897a-f60225e3f325"
+    "isDeleted": false
   },
   {
     "ID": "C2B3CB25-070F-44FB-997C-DC3472E3B5F1",
@@ -2978,11 +2186,7 @@
     "DivisionID": "7 - MI",
     "Status": "OUT OF SERVICE",
     "StatusID": "8A1CC050-5B51-4D70-8698-F93283A42F90",
-    "IsDeleted": false,
-    "RecordAt": "2024-10-22T21:32:24.770000",
-    "RecordBy": "264431ae-58d1-4a5b-a142-b6f364e58635",
-    "UpdateAt": "2025-12-12T19:30:23.017000",
-    "UpdateBy": "813c3d2b-c53e-4737-897a-f60225e3f325"
+    "isDeleted": false
   },
   {
     "ID": "605AF928-CB17-4862-8034-C9DD9DB0A25B",
@@ -2993,11 +2197,7 @@
     "DivisionID": "7 - MI",
     "Status": "REGISTRATION",
     "StatusID": "C7CCF570-2AEF-4E70-B55B-17F93F00735A",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-20T19:52:40.667000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T20:02:15.713000",
-    "UpdateBy": "a59aeb2f-480e-4421-b6d1-d9596409f903"
+    "isDeleted": false
   },
   {
     "ID": "254D5988-81CA-4BFB-A386-867C0DE1124B",
@@ -3008,11 +2208,7 @@
     "DivisionID": "7 - MI",
     "Status": "REGISTRATION",
     "StatusID": "C7CCF570-2AEF-4E70-B55B-17F93F00735A",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-20T18:36:49.940000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T18:47:48.277000",
-    "UpdateBy": "fd9a799e-f5e7-4a17-bcbf-34cc75ccedf8"
+    "isDeleted": false
   },
   {
     "ID": "9DD9ECAA-E850-4C88-AA7E-F78EDBD354B9",
@@ -3023,11 +2219,7 @@
     "DivisionID": "7 - MI",
     "Status": "REGISTRATION",
     "StatusID": "C7CCF570-2AEF-4E70-B55B-17F93F00735A",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-20T17:30:58.300000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T17:40:59.107000",
-    "UpdateBy": "91980f0c-e824-424a-9756-9fb741210616"
+    "isDeleted": false
   },
   {
     "ID": "C5DF9449-5C9B-497E-B234-BE9671C77F08",
@@ -3038,11 +2230,7 @@
     "DivisionID": "7 - MI",
     "Status": "REGISTRATION",
     "StatusID": "318AB4DE-1723-4404-B49C-F4A675CB4403",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-07T17:02:29.770000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T00:20:28.350000",
-    "UpdateBy": "dabd53c6-d46e-4dac-be53-fc515ab0c032"
+    "isDeleted": false
   },
   {
     "ID": "806A3ED4-46F2-4D6E-9553-13045E8B2E8C",
@@ -3053,11 +2241,7 @@
     "DivisionID": "7 - MI",
     "Status": "REGISTRATION",
     "StatusID": "685D0FD7-469B-494C-BF74-1D5722903F23",
-    "IsDeleted": false,
-    "RecordAt": "2025-12-17T19:32:33.100000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-19T22:16:44.640000",
-    "UpdateBy": "7bd1d5df-4ec8-4f77-a959-e4b36914c6f5"
+    "isDeleted": false
   },
   {
     "ID": "3F4590D5-4F94-41E2-80A3-64B4CEF10E22",
@@ -3068,11 +2252,7 @@
     "DivisionID": "7 - MI",
     "Status": "REGISTRATION",
     "StatusID": "C7CCF570-2AEF-4E70-B55B-17F93F00735A",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-12T20:43:32.390000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-19T19:51:07.857000",
-    "UpdateBy": "51d7e44c-b562-4fed-b5fd-e6ba0388d0a9"
+    "isDeleted": false
   },
   {
     "ID": "53B9A4E8-ED86-43A3-BB08-DB453887BA4A",
@@ -3083,11 +2263,7 @@
     "DivisionID": "7 - MI",
     "Status": "REGISTRATION",
     "StatusID": "C7CCF570-2AEF-4E70-B55B-17F93F00735A",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-15T22:55:45.873000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-19T18:16:49.173000",
-    "UpdateBy": "303e0f9e-0115-487e-93db-e7442bba91b7"
+    "isDeleted": false
   },
   {
     "ID": "17753895-166A-4FA3-935E-DFC5E1DF6574",
@@ -3098,11 +2274,7 @@
     "DivisionID": "7 - MI",
     "Status": "REGISTRATION",
     "StatusID": "C7CCF570-2AEF-4E70-B55B-17F93F00735A",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-14T13:40:19.303000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-19T16:16:48.790000",
-    "UpdateBy": "1f918140-a06b-4042-a26e-c1019ad129c0"
+    "isDeleted": false
   },
   {
     "ID": "D90069E9-6DC2-4015-9B20-B89E983D262A",
@@ -3113,11 +2285,7 @@
     "DivisionID": "7 - MI",
     "Status": "REGISTRATION",
     "StatusID": "C7CCF570-2AEF-4E70-B55B-17F93F00735A",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-17T08:20:58.240000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-17T08:24:51.887000",
-    "UpdateBy": "d5101bed-0880-4998-84cd-e640e903a378"
+    "isDeleted": false
   },
   {
     "ID": "B98C1DFD-9D4A-42F8-B5BB-29983DEFC7C7",
@@ -3128,11 +2296,7 @@
     "DivisionID": "7 - MI",
     "Status": "REGISTRATION",
     "StatusID": "685D0FD7-469B-494C-BF74-1D5722903F23",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-15T16:11:44.860000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-16T14:21:17.047000",
-    "UpdateBy": "40810d63-1440-40b9-a63f-c76550897bb3"
+    "isDeleted": false
   },
   {
     "ID": "1DE58DF3-6CD6-4752-ADDA-ED933631D15D",
@@ -3143,11 +2307,7 @@
     "DivisionID": "7 - MI",
     "Status": "SBPC APPROVED FOR SERVICE",
     "StatusID": "A5C169C3-FA6E-46F4-B64F-03CA600E49DE",
-    "IsDeleted": false,
-    "RecordAt": "2025-10-13T11:40:24.570000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-16T22:18:54.907000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "771A5AC2-1461-412B-8C08-5F92350963CD",
@@ -3158,11 +2318,7 @@
     "DivisionID": "7 - MI",
     "Status": "SBPC APPROVED FOR SERVICE",
     "StatusID": "A5C169C3-FA6E-46F4-B64F-03CA600E49DE",
-    "IsDeleted": false,
-    "RecordAt": "2023-08-01T19:57:42.483000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-13T15:17:18.680000",
-    "UpdateBy": "7f10ac12-a4b8-446d-b355-bc45776515b4"
+    "isDeleted": false
   },
   {
     "ID": "82EFCAA7-1A7A-445C-B510-32F589C8A75D",
@@ -3173,11 +2329,7 @@
     "DivisionID": "7 - MI",
     "Status": "TERMINATED",
     "StatusID": "566DA8ED-E851-4308-9611-C8CB935ECC73",
-    "IsDeleted": false,
-    "RecordAt": "2025-10-13T16:02:37.717000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-05T18:31:35.543000",
-    "UpdateBy": "7f10ac12-a4b8-446d-b355-bc45776515b4"
+    "isDeleted": false
   },
   {
     "ID": "4C86E920-3C05-4528-ADCB-D29910903938",
@@ -3188,11 +2340,7 @@
     "DivisionID": "8 - OH",
     "Status": "APPROVED FOR LEASING",
     "StatusID": "A7304407-A5A3-4647-8AA8-E10258BFB059",
-    "IsDeleted": false,
-    "RecordAt": "2025-09-08T02:21:05.747000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-14T23:04:44.190000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "238EBB0F-FE9B-41DF-89AA-423EA4AFE98D",
@@ -3203,11 +2351,7 @@
     "DivisionID": "8 - OH",
     "Status": "IN-SERVICE",
     "StatusID": "397D52F5-C0B6-47F5-BF9F-D643D955018E",
-    "IsDeleted": false,
-    "RecordAt": "2025-12-01T19:44:54.950000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T16:01:34.720000",
-    "UpdateBy": "765fde89-088f-4859-8025-6962b6610ec2"
+    "isDeleted": false
   },
   {
     "ID": "4B0C4FF3-FF94-4889-9B77-2317F173333E",
@@ -3218,11 +2362,7 @@
     "DivisionID": "8 - OH",
     "Status": "IN-SERVICE",
     "StatusID": "397D52F5-C0B6-47F5-BF9F-D643D955018E",
-    "IsDeleted": false,
-    "RecordAt": "2025-10-30T18:05:47.047000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-14T18:44:39.387000",
-    "UpdateBy": "fc0b8b98-59dd-4f4d-9d71-ffd28569bff2"
+    "isDeleted": false
   },
   {
     "ID": "EA085C89-E733-45C7-8F5D-79F0877D4269",
@@ -3233,11 +2373,7 @@
     "DivisionID": "8 - OH",
     "Status": "IN-SERVICE",
     "StatusID": "397D52F5-C0B6-47F5-BF9F-D643D955018E",
-    "IsDeleted": false,
-    "RecordAt": null,
-    "RecordBy": null,
-    "UpdateAt": "2026-01-13T15:36:21.893000",
-    "UpdateBy": "fc0b8b98-59dd-4f4d-9d71-ffd28569bff2"
+    "isDeleted": false
   },
   {
     "ID": "5DCE3744-9793-4F73-86C4-E8D26BB90E46",
@@ -3248,11 +2384,7 @@
     "DivisionID": "8 - OH",
     "Status": "IN-SERVICE",
     "StatusID": "397D52F5-C0B6-47F5-BF9F-D643D955018E",
-    "IsDeleted": false,
-    "RecordAt": "2023-04-09T03:29:22",
-    "RecordBy": "3898af12-99fe-48b0-9ae2-003bbc67ce82",
-    "UpdateAt": "2026-01-12T13:18:35.450000",
-    "UpdateBy": "fc0b8b98-59dd-4f4d-9d71-ffd28569bff2"
+    "isDeleted": false
   },
   {
     "ID": "A007787A-FA25-45CE-80BA-3D4C88DA1126",
@@ -3263,11 +2395,7 @@
     "DivisionID": "8 - OH",
     "Status": "IN-SERVICE",
     "StatusID": "397D52F5-C0B6-47F5-BF9F-D643D955018E",
-    "IsDeleted": false,
-    "RecordAt": "2025-10-27T17:34:46.383000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-06T15:35:48.133000",
-    "UpdateBy": "fc0b8b98-59dd-4f4d-9d71-ffd28569bff2"
+    "isDeleted": false
   },
   {
     "ID": "CEF13D16-8EC4-4236-A7F1-091449497DFC",
@@ -3278,11 +2406,7 @@
     "DivisionID": "8 - OH",
     "Status": "IN-SERVICE",
     "StatusID": "397D52F5-C0B6-47F5-BF9F-D643D955018E",
-    "IsDeleted": false,
-    "RecordAt": null,
-    "RecordBy": null,
-    "UpdateAt": "2026-01-06T14:28:21.707000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "005143AD-B7BC-463F-B904-E7789AA67822",
@@ -3293,11 +2417,7 @@
     "DivisionID": "8 - OH",
     "Status": "IN-SERVICE",
     "StatusID": "397D52F5-C0B6-47F5-BF9F-D643D955018E",
-    "IsDeleted": false,
-    "RecordAt": "2025-10-16T18:23:20.493000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-02T17:46:18.313000",
-    "UpdateBy": "fc0b8b98-59dd-4f4d-9d71-ffd28569bff2"
+    "isDeleted": false
   },
   {
     "ID": "FCD20722-3BEE-4013-85A7-4FE8C1258B7D",
@@ -3308,11 +2428,7 @@
     "DivisionID": "8 - OH",
     "Status": "IN-SERVICE",
     "StatusID": "397D52F5-C0B6-47F5-BF9F-D643D955018E",
-    "IsDeleted": false,
-    "RecordAt": "2025-09-03T18:02:21.070000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-28T18:06:12.383000",
-    "UpdateBy": "fc0b8b98-59dd-4f4d-9d71-ffd28569bff2"
+    "isDeleted": false
   },
   {
     "ID": "5CB0C570-E3EA-4554-B7B3-EE97B30DB124",
@@ -3323,11 +2439,7 @@
     "DivisionID": "8 - OH",
     "Status": "IN-SERVICE",
     "StatusID": "397D52F5-C0B6-47F5-BF9F-D643D955018E",
-    "IsDeleted": false,
-    "RecordAt": null,
-    "RecordBy": null,
-    "UpdateAt": "2025-12-26T22:59:42.153000",
-    "UpdateBy": "ed1bff51-b4c6-411e-b223-0cb549b55be4"
+    "isDeleted": false
   },
   {
     "ID": "13C33CDA-A72D-4AF6-B999-4E08A1525490",
@@ -3338,11 +2450,7 @@
     "DivisionID": "8 - OH",
     "Status": "IN-SERVICE",
     "StatusID": "397D52F5-C0B6-47F5-BF9F-D643D955018E",
-    "IsDeleted": false,
-    "RecordAt": null,
-    "RecordBy": null,
-    "UpdateAt": "2025-12-16T15:13:34.633000",
-    "UpdateBy": "fc0b8b98-59dd-4f4d-9d71-ffd28569bff2"
+    "isDeleted": false
   },
   {
     "ID": "F2F61E35-C5E5-4E0F-B616-C6C99DB311EA",
@@ -3353,11 +2461,7 @@
     "DivisionID": "8 - OH",
     "Status": "OUT OF SERVICE",
     "StatusID": "B4709CA2-5DBC-4B92-9A61-E5783C5634A1",
-    "IsDeleted": false,
-    "RecordAt": "2025-11-04T16:01:55.870000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T15:21:11.067000",
-    "UpdateBy": "7f10ac12-a4b8-446d-b355-bc45776515b4"
+    "isDeleted": false
   },
   {
     "ID": "0BE018F7-71B4-48A6-BB6B-8015BEB670EF",
@@ -3368,11 +2472,7 @@
     "DivisionID": "8 - OH",
     "Status": "OUT OF SERVICE",
     "StatusID": "B4709CA2-5DBC-4B92-9A61-E5783C5634A1",
-    "IsDeleted": false,
-    "RecordAt": "2025-11-13T17:45:24.187000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-09T20:23:01.047000",
-    "UpdateBy": "fc0b8b98-59dd-4f4d-9d71-ffd28569bff2"
+    "isDeleted": false
   },
   {
     "ID": "E7F3DB27-DE72-4BB1-ADB3-D8353DA78F6B",
@@ -3383,11 +2483,7 @@
     "DivisionID": "8 - OH",
     "Status": "REGISTRATION",
     "StatusID": "3EB7FF39-1B2C-46AA-A186-1ABF2ABC4D40",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-20T20:25:49.980000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T20:30:07.527000",
-    "UpdateBy": "4f0246d3-3c4e-4d29-9321-0793bc438891"
+    "isDeleted": false
   },
   {
     "ID": "692A001B-12AB-4932-9ACC-0D2C003FC9CB",
@@ -3398,11 +2494,7 @@
     "DivisionID": "8 - OH",
     "Status": "REGISTRATION",
     "StatusID": "3EB7FF39-1B2C-46AA-A186-1ABF2ABC4D40",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-20T17:40:58.817000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T19:50:00.427000",
-    "UpdateBy": "6cefa27b-7560-4fea-8731-bb561a4d4144"
+    "isDeleted": false
   },
   {
     "ID": "0ABDB147-C2E7-4218-A8FE-16845F8A38FF",
@@ -3413,11 +2505,7 @@
     "DivisionID": "8 - OH",
     "Status": "REGISTRATION",
     "StatusID": "3EB7FF39-1B2C-46AA-A186-1ABF2ABC4D40",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-20T19:42:08.680000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T19:47:13.067000",
-    "UpdateBy": "562b20c6-0cd1-4b15-8721-2def96ab0893"
+    "isDeleted": false
   },
   {
     "ID": "1511310F-83F2-46AC-82A2-76B967714AB3",
@@ -3428,11 +2516,7 @@
     "DivisionID": "8 - OH",
     "Status": "REGISTRATION",
     "StatusID": "3EB7FF39-1B2C-46AA-A186-1ABF2ABC4D40",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-20T19:24:46.070000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T19:43:27.577000",
-    "UpdateBy": "7cc95b46-8c41-465c-9060-334e8959ff4d"
+    "isDeleted": false
   },
   {
     "ID": "523AFBCE-97AA-491D-9EC9-23AD9C68615E",
@@ -3443,11 +2527,7 @@
     "DivisionID": "8 - OH",
     "Status": "REGISTRATION",
     "StatusID": "3EB7FF39-1B2C-46AA-A186-1ABF2ABC4D40",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-20T19:31:47.717000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T19:43:10.150000",
-    "UpdateBy": "d7f266c4-583c-40e1-98cd-435ea0eb8dca"
+    "isDeleted": false
   },
   {
     "ID": "D59420AE-3772-4EFE-A3F0-3CF383C24FAA",
@@ -3458,11 +2538,7 @@
     "DivisionID": "8 - OH",
     "Status": "REGISTRATION",
     "StatusID": "3EB7FF39-1B2C-46AA-A186-1ABF2ABC4D40",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-20T19:03:04.190000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T19:07:08.383000",
-    "UpdateBy": "5641558c-bb4a-4b41-b58d-41245dcdb0cd"
+    "isDeleted": false
   },
   {
     "ID": "B2AE9E05-31F8-460B-8BC1-F1EC79B6F391",
@@ -3473,26 +2549,18 @@
     "DivisionID": "8 - OH",
     "Status": "REGISTRATION",
     "StatusID": "3EB7FF39-1B2C-46AA-A186-1ABF2ABC4D40",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-20T18:58:58.537000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T19:04:00.107000",
-    "UpdateBy": "1a57c1cf-ec05-48f8-bc67-cf05571bbd85"
+    "isDeleted": false
   },
   {
     "ID": "C2ABB938-D0E2-4312-99BE-6672A08C50BB",
     "FirstName": "Ritch D",
-    "LastName": "Josemond’s",
+    "LastName": "Josemond\u2019s",
     "Email": "jritchderdley@gmail.com",
     "Mobile": "(614) 483-8475",
     "DivisionID": "8 - OH",
     "Status": "REGISTRATION",
     "StatusID": "3EB7FF39-1B2C-46AA-A186-1ABF2ABC4D40",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-20T17:30:01.843000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T18:06:18.870000",
-    "UpdateBy": "3f0dc488-d8f7-4bdd-a2f5-a875d2d37ba9"
+    "isDeleted": false
   },
   {
     "ID": "FCE9D75D-909A-4A86-836D-F3B29FA77FAD",
@@ -3503,11 +2571,7 @@
     "DivisionID": "8 - OH",
     "Status": "REGISTRATION",
     "StatusID": "3EB7FF39-1B2C-46AA-A186-1ABF2ABC4D40",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-20T17:38:40.237000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-20T17:45:32.317000",
-    "UpdateBy": "88434e65-da05-4a6c-a35a-e23f7960a0e7"
+    "isDeleted": false
   },
   {
     "ID": "EAE792A9-9E70-4FEB-B37F-A1C21F014856",
@@ -3518,11 +2582,7 @@
     "DivisionID": "8 - OH",
     "Status": "REGISTRATION",
     "StatusID": "439DBB11-6C9F-4FD7-B90C-239A9BF01EFE",
-    "IsDeleted": false,
-    "RecordAt": "2026-01-06T04:24:53.763000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-19T23:50:31.073000",
-    "UpdateBy": "2343d7fd-8b95-4845-b105-f7276de4aab6"
+    "isDeleted": false
   },
   {
     "ID": "743E6C36-E8BE-4B4D-AD94-A6984A9A720E",
@@ -3533,11 +2593,7 @@
     "DivisionID": "8 - OH",
     "Status": "TERM",
     "StatusID": "31031C1B-C8B4-45FC-A0BE-A8E952A89388",
-    "IsDeleted": false,
-    "RecordAt": "2023-03-12T11:35:46",
-    "RecordBy": "28e44b11-fcfc-4140-95b6-08901397d7eb",
-    "UpdateAt": "2026-01-02T14:24:57.587000",
-    "UpdateBy": "fc0b8b98-59dd-4f4d-9d71-ffd28569bff2"
+    "isDeleted": false
   },
   {
     "ID": "F22C3F02-D2AA-4223-ABB7-3E9DC5B2B566",
@@ -3548,11 +2604,7 @@
     "DivisionID": "8 - OH",
     "Status": "TERM",
     "StatusID": "31031C1B-C8B4-45FC-A0BE-A8E952A89388",
-    "IsDeleted": false,
-    "RecordAt": null,
-    "RecordBy": null,
-    "UpdateAt": "2026-01-02T14:21:29.143000",
-    "UpdateBy": "fc0b8b98-59dd-4f4d-9d71-ffd28569bff2"
+    "isDeleted": false
   },
   {
     "ID": "2F4820A0-92FE-43F7-8E8E-C0CD5AF82B38",
@@ -3563,11 +2615,7 @@
     "DivisionID": "8 - OH",
     "Status": "TERM",
     "StatusID": "31031C1B-C8B4-45FC-A0BE-A8E952A89388",
-    "IsDeleted": false,
-    "RecordAt": "2025-03-24T14:36:57.270000",
-    "RecordBy": null,
-    "UpdateAt": "2025-12-19T19:22:09.143000",
-    "UpdateBy": "7f10ac12-a4b8-446d-b355-bc45776515b4"
+    "isDeleted": false
   },
   {
     "ID": "2EC1C984-A860-4A11-97F6-BE208CFF8BAE",
@@ -3578,11 +2626,7 @@
     "DivisionID": "8 - OH",
     "Status": "TERMINATED",
     "StatusID": "31031C1B-C8B4-45FC-A0BE-A8E952A89388",
-    "IsDeleted": false,
-    "RecordAt": "2024-01-23T19:46:32.633000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-09T21:10:18.390000",
-    "UpdateBy": "765fde89-088f-4859-8025-6962b6610ec2"
+    "isDeleted": false
   },
   {
     "ID": "458D7D6F-FDD8-48B4-9A29-A2EE0F3BD6A3",
@@ -3593,11 +2637,7 @@
     "DivisionID": "9 - AZ",
     "Status": "Credentialing",
     "StatusID": "172EA8DE-8FD2-4C8D-B1FB-E1AA0542900C",
-    "IsDeleted": false,
-    "RecordAt": "2025-05-09T18:15:08.677000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-06T23:37:39.520000",
-    "UpdateBy": "2b231215-6752-4968-b06a-0f66fe1cb58b"
+    "isDeleted": false
   },
   {
     "ID": "38F7DE1F-7ADE-49CA-9508-BC28F9EE648B",
@@ -3608,11 +2648,7 @@
     "DivisionID": "9 - AZ",
     "Status": "REGISTRATION",
     "StatusID": "B5810825-922A-4679-9397-06182DB05B2E",
-    "IsDeleted": false,
-    "RecordAt": "2024-05-21T21:25:29.773000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-06T23:41:32.290000",
-    "UpdateBy": null
+    "isDeleted": false
   },
   {
     "ID": "BA264B6A-A8BD-44F6-9691-DBCB9AB151C9",
@@ -3623,11 +2659,7 @@
     "DivisionID": "9 - AZ",
     "Status": "REGISTRATION",
     "StatusID": "B5810825-922A-4679-9397-06182DB05B2E",
-    "IsDeleted": false,
-    "RecordAt": "2024-05-21T21:17:46.540000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-06T23:41:31.420000",
-    "UpdateBy": null
+    "isDeleted": false
   },
   {
     "ID": "AFCBBCF2-B3BF-4715-BFAA-DFA3DED17185",
@@ -3638,11 +2670,7 @@
     "DivisionID": "9 - AZ",
     "Status": "REGISTRATION",
     "StatusID": "B5810825-922A-4679-9397-06182DB05B2E",
-    "IsDeleted": false,
-    "RecordAt": "2025-02-26T18:13:39.663000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-06T23:41:20.747000",
-    "UpdateBy": null
+    "isDeleted": false
   },
   {
     "ID": "61E3C9B8-060C-4FC2-98DE-69AAD10FE078",
@@ -3653,11 +2681,7 @@
     "DivisionID": "9 - AZ",
     "Status": "REGISTRATION",
     "StatusID": "B5810825-922A-4679-9397-06182DB05B2E",
-    "IsDeleted": false,
-    "RecordAt": "2025-05-29T21:44:47.603000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-06T23:41:12.610000",
-    "UpdateBy": null
+    "isDeleted": false
   },
   {
     "ID": "5FE7AD22-62E7-448D-8DA6-D87749186F19",
@@ -3668,11 +2692,7 @@
     "DivisionID": "9 - AZ",
     "Status": "REGISTRATION",
     "StatusID": "B5810825-922A-4679-9397-06182DB05B2E",
-    "IsDeleted": false,
-    "RecordAt": "2025-03-14T15:47:10.517000",
-    "RecordBy": "74e884e7-3a07-453e-9297-585302fdadae",
-    "UpdateAt": "2026-01-06T23:41:11.753000",
-    "UpdateBy": null
+    "isDeleted": false
   },
   {
     "ID": "358615DE-4E47-490D-8A70-7AE9A4C8B041",
@@ -3683,11 +2703,7 @@
     "DivisionID": "9 - AZ",
     "Status": "REGISTRATION",
     "StatusID": "B5810825-922A-4679-9397-06182DB05B2E",
-    "IsDeleted": false,
-    "RecordAt": "2024-09-06T06:08:52.660000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-06T23:41:10.120000",
-    "UpdateBy": "ada48610-ba4b-45e1-ac46-6881628d0db4"
+    "isDeleted": false
   },
   {
     "ID": "12580F6D-8EF3-4BC8-AD16-77C2466F683C",
@@ -3698,11 +2714,7 @@
     "DivisionID": "9 - AZ",
     "Status": "REGISTRATION",
     "StatusID": "B5810825-922A-4679-9397-06182DB05B2E",
-    "IsDeleted": false,
-    "RecordAt": "2024-09-17T16:10:52.990000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-06T23:41:01.247000",
-    "UpdateBy": null
+    "isDeleted": false
   },
   {
     "ID": "3A7229C4-09C5-4C49-9165-CB9E9BE3C2DE",
@@ -3713,11 +2725,7 @@
     "DivisionID": "9 - AZ",
     "Status": "REGISTRATION",
     "StatusID": "B5810825-922A-4679-9397-06182DB05B2E",
-    "IsDeleted": false,
-    "RecordAt": "2024-10-21T12:22:39.713000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-06T23:40:53.303000",
-    "UpdateBy": null
+    "isDeleted": false
   },
   {
     "ID": "3B07B256-5086-4BF7-98F8-540488B59E40",
@@ -3728,11 +2736,7 @@
     "DivisionID": "9 - AZ",
     "Status": "REGISTRATION",
     "StatusID": "B5810825-922A-4679-9397-06182DB05B2E",
-    "IsDeleted": false,
-    "RecordAt": "2025-07-27T00:53:25.797000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-06T23:40:41.783000",
-    "UpdateBy": null
+    "isDeleted": false
   },
   {
     "ID": "DCF697EC-5099-4061-870E-3099EAD2D766",
@@ -3743,10 +2747,6 @@
     "DivisionID": "9 - AZ",
     "Status": "REGISTRATION",
     "StatusID": "B5810825-922A-4679-9397-06182DB05B2E",
-    "IsDeleted": false,
-    "RecordAt": "2025-03-26T15:15:57.290000",
-    "RecordBy": null,
-    "UpdateAt": "2026-01-06T23:40:40.963000",
-    "UpdateBy": null
+    "isDeleted": false
   }
 ]

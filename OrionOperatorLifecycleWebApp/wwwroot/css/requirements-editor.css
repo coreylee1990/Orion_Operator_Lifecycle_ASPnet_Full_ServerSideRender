@@ -2206,6 +2206,25 @@ h1 {
     background: rgba(16, 185, 129, 0.12);
 }
 
+/* Operator card styling when auto-advance eligible (complete + IsAuto) */
+.operator-item.operator-auto-advance {
+    border-color: rgb(255 255 255 / 1);
+    background: rgb(255 255 255 / 54%);
+    box-shadow: 0 0 8px rgba(40, 167, 69, 0.3);
+    display: block;
+}
+
+.operator-item.operator-auto-advance:hover {
+    border-color: rgba(63, 152, 84, 0.633);
+    background: rgba(165, 255, 184, 0.341);
+    box-shadow: 0 0 8px rgba(40, 167, 69, 0.4);
+}
+
+/* Advance button in operator card */
+.operator-advance-btn {
+    margin-left: auto;
+}
+
 .operator-badges .operator-all-complete {
     margin-left: 6px;
     color: #10b981;
