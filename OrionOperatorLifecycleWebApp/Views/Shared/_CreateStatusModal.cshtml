@@ -1,0 +1,206 @@
+<!-- Create Status Modal -->
+<div class="modal fade" id="createStatusModal" tabindex="-1" aria-labelledby="createStatusModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title" id="createStatusModalLabel">
+                    <i class="bi bi-plus-lg"></i> Create New Status
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="createStatusForm">
+                    <!-- Basic Information -->
+                    <div class="card mb-3">
+                        <div class="card-header bg-light">
+                            <strong>Basic Information</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="createStatusName" class="form-label">Status Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="createStatusName" placeholder="e.g., Compliance Review" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="createStatusDivision" class="form-label">Division <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="createStatusDivision" readonly>
+                                    <small class="text-muted">Auto-populated from current division</small>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="createStatusDescription" class="form-label">Description</label>
+                                <textarea class="form-control" id="createStatusDescription" rows="2" placeholder="Optional description for this status"></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="createStatusOrderId" class="form-label">Order ID</label>
+                                    <input type="number" class="form-control" id="createStatusOrderId" min="1" placeholder="Position in workflow (1, 2, 3...)">
+                                    <small class="text-muted">Leave blank to add at end</small>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="createStatusAgeDaysAlert" class="form-label">Age Days Alert</label>
+                                    <input type="number" class="form-control" id="createStatusAgeDaysAlert" min="0" value="0" placeholder="Days before alert">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pizza Status Selection -->
+                    <div class="card mb-3">
+                        <div class="card-header bg-light">
+                            <strong>Pizza Status</strong>
+                            <small class="text-muted ms-2">(Links this status to a workflow category)</small>
+                        </div>
+                        <div class="card-body">
+                            <label for="createStatusPizzaStatusId" class="form-label">Select Pizza Status <span class="text-danger">*</span></label>
+                            <select class="form-select" id="createStatusPizzaStatusId" required>
+                                <option value="">-- Select a Pizza Status --</option>
+                            </select>
+                            <div id="pizzaStatusDetails" class="mt-3" style="display: none;">
+                                <div class="alert alert-info mb-0">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <small><strong>ID:</strong> <span id="psDetailId"></span></small><br>
+                                            <small><strong>Status:</strong> <span id="psDetailStatus"></span></small><br>
+                                            <small><strong>Description:</strong> <span id="psDetailDescription"></span></small>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <small><strong>Client ID:</strong> <span id="psDetailClientId"></span></small><br>
+                                            <small><strong>Is Operator:</strong> <span id="psDetailIsOperator"></span></small><br>
+                                            <small><strong>Is Provider:</strong> <span id="psDetailIsProvider"></span></small><br>
+                                            <small><strong>Is Auto:</strong> <span id="psDetailIsAuto"></span></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Entity Type Flags -->
+                    <div class="card mb-3">
+                        <div class="card-header bg-light">
+                            <strong>Entity Type</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-check form-switch mb-2">
+                                        <input class="form-check-input" type="checkbox" id="createStatusFleet">
+                                        <label class="form-check-label" for="createStatusFleet">
+                                            <strong>Fleet</strong>
+                                            <small class="text-muted d-block">This is a fleet-related status</small>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check form-switch mb-2">
+                                        <input class="form-check-input" type="checkbox" id="createStatusProviders">
+                                        <label class="form-check-label" for="createStatusProviders">
+                                            <strong>Providers</strong>
+                                            <small class="text-muted d-block">This is a provider-related status</small>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Status Flags -->
+                    <div class="card mb-3">
+                        <div class="card-header bg-light">
+                            <strong>Status Flags</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-check form-switch mb-2">
+                                        <input class="form-check-input" type="checkbox" id="createStatusCertFlag">
+                                        <label class="form-check-label" for="createStatusCertFlag">
+                                            <strong>Cert Flag</strong>
+                                            <small class="text-muted d-block">Has certification requirements</small>
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-switch mb-2">
+                                        <input class="form-check-input" type="checkbox" id="createStatusOutOfServiceFlag">
+                                        <label class="form-check-label" for="createStatusOutOfServiceFlag">
+                                            <strong>Out of Service Flag</strong>
+                                            <small class="text-muted d-block">Marks operator as out of service</small>
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-switch mb-2">
+                                        <input class="form-check-input" type="checkbox" id="createStatusIsTracked" checked>
+                                        <label class="form-check-label" for="createStatusIsTracked">
+                                            <strong>Is Tracked</strong>
+                                            <small class="text-muted d-block">Track time spent in this status</small>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check form-switch mb-2">
+                                        <input class="form-check-input" type="checkbox" id="createStatusIsHireEvent">
+                                        <label class="form-check-label" for="createStatusIsHireEvent">
+                                            <strong>Is Hire Event</strong>
+                                            <small class="text-muted d-block">Represents a hiring milestone</small>
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-switch mb-2">
+                                        <input class="form-check-input" type="checkbox" id="createStatusIsTermEvent">
+                                        <label class="form-check-label" for="createStatusIsTermEvent">
+                                            <strong>Is Term Event</strong>
+                                            <small class="text-muted d-block">Represents a termination event</small>
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-switch mb-2">
+                                        <input class="form-check-input" type="checkbox" id="createStatusIsProjectedFill">
+                                        <label class="form-check-label" for="createStatusIsProjectedFill">
+                                            <strong>Is Projected Fill</strong>
+                                            <small class="text-muted d-block">Used for projected fill calculations</small>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-info text-white" id="createStatusSubmitBtn" onclick="submitCreateStatus()">
+                    <i class="bi bi-plus-lg"></i> Create Status
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Populate pizza status details when selection changes
+document.getElementById('createStatusPizzaStatusId')?.addEventListener('change', function() {
+    const selectedId = this.value;
+    const detailsDiv = document.getElementById('pizzaStatusDetails');
+    
+    if (!selectedId) {
+        detailsDiv.style.display = 'none';
+        return;
+    }
+    
+    // Find the pizza status in the global array
+    const ps = (window.pizzaStatuses || []).find(p => (p.ID || p.Id) === selectedId);
+    if (!ps) {
+        detailsDiv.style.display = 'none';
+        return;
+    }
+    
+    // Populate details
+    document.getElementById('psDetailId').textContent = ps.ID || ps.Id || 'N/A';
+    document.getElementById('psDetailStatus').textContent = ps.Status || 'N/A';
+    document.getElementById('psDetailDescription').textContent = ps.Description || 'N/A';
+    document.getElementById('psDetailClientId').textContent = ps.ClientID || ps.ClientId || 'N/A';
+    document.getElementById('psDetailIsOperator').textContent = ps.IsOperator === true ? 'Yes' : ps.IsOperator === false ? 'No' : 'N/A';
+    document.getElementById('psDetailIsProvider').textContent = ps.IsProvider === true ? 'Yes' : ps.IsProvider === false ? 'No' : 'N/A';
+    document.getElementById('psDetailIsAuto').textContent = ps.isAuto === true || ps.IsAuto === true ? 'Yes' : 'No';
+    
+    detailsDiv.style.display = 'block';
+});
+</script>

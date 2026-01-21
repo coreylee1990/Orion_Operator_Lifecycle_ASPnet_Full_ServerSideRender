@@ -160,6 +160,35 @@ def export_cert_types(conn):
         json.dump(rows, f, indent=2, ensure_ascii=False)
     print(f"✅ Exported {len(rows)} CertTypes")
 
+def export_pizza_statuses(conn):
+    """Export pay_PizzaStatus with specific required fields."""
+    cursor = conn.cursor()
+    print("\n🍕 Exporting pay_PizzaStatus (Specific Fields)...")
+    
+    query = """
+        SELECT 
+            ID, 
+            Status, 
+            Description, 
+            ClientID, 
+            IsOperator, 
+            IsProvider,
+            isAuto,
+            MobileAppOrder,
+            isActive,
+            NounID,
+            SubNounID
+        FROM pay_PizzaStatus
+        ORDER BY ClientID, MobileAppOrder
+    """
+    cursor.execute(query)
+    rows = [row_to_dict(cursor, row) for row in cursor.fetchall()]
+    
+    output_file = os.path.join(OUTPUT_DIR, 'pay_PizzaStatuses.json')
+    with open(output_file, 'w', encoding='utf-8') as f:
+        json.dump(rows, f, indent=2, ensure_ascii=False)
+    print(f"✅ Exported {len(rows)} PizzaStatuses")
+
 def export_table(conn, table_name, output_filename, where_clause=""):
     """Export a complete table to JSON."""
     cursor = conn.cursor()
@@ -200,7 +229,7 @@ def main():
         export_table(conn, 'pay_StatusTypes', 'pay_StatusTypes.json', 
                      "(isDeleted = 0 OR isDeleted IS NULL)")
         
-        export_table(conn, 'pay_PizzaStatus', 'pay_PizzaStatuses.json')
+        export_pizza_statuses(conn)
         export_table(conn, 'pay_Clients', 'pay_Clients.json')
         
         print("\n" + "=" * 60)

@@ -37,5 +37,11 @@ namespace OrionOperatorLifecycleWebApp.Services
             _statusTypeRepository.SaveAll(statusTypes);
             _cache.Remove(CACHE_KEY_ALL); // Invalidate cache
         }
+
+        public void AddStatusType(StatusType statusType)
+        {
+            _statusTypeRepository.Add(statusType);
+            _cache.Remove(CACHE_KEY_ALL); // Invalidate cache
+        }
     }
 }

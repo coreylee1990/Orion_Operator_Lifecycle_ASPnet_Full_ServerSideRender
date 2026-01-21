@@ -1,6 +1,7 @@
 @await Html.PartialAsync("_CertDuplicateModal")
 @await Html.PartialAsync("_StatusDeleteWarningModal")
 @await Html.PartialAsync("_AutoAdvanceModal")
+@await Html.PartialAsync("_CreateStatusModal")
 @{
     ViewData["Title"] = "Operator Lifecycle - Requirements";
 }
@@ -30,6 +31,54 @@
                 <select id="mainDivisionFilter" onchange="handleMainDivisionFilter()" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #dee2e6; background: #ffffff; color: #313a46; font-size: 0.95rem;">
                     <option value="ALL">All Divisions</option>
                 </select>
+            </div>
+
+            <!-- STATUS TYPE FILTERS -->
+            <div class="status-type-filters" style="margin: 0; padding: 12px; background: #f1f5f9; border-radius: 8px;">
+                <label style="display: block; margin-bottom: 10px; color: #313a46; font-size: 0.9rem; font-weight: 600;">Status Type Filters</label>
+                
+                <!-- Entity Type (Radio buttons - mutually exclusive) -->
+                <div style="margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #dee2e6;">
+                    <small style="color: #64748b; font-weight: 600;">Entity Type:</small>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px;">
+                        <label class="filter-toggle" style="display: inline-flex; align-items: center; gap: 4px; cursor: pointer; font-size: 0.85rem; color: #313a46;">
+                            <input type="radio" name="entityTypeFilter" value="operators" checked onchange="handleStatusTypeFilterChange()"> Operators
+                        </label>
+                        <label class="filter-toggle" style="display: inline-flex; align-items: center; gap: 4px; cursor: pointer; font-size: 0.85rem; color: #313a46;">
+                            <input type="radio" name="entityTypeFilter" value="fleet" onchange="handleStatusTypeFilterChange()"> Fleet
+                        </label>
+                        <label class="filter-toggle" style="display: inline-flex; align-items: center; gap: 4px; cursor: pointer; font-size: 0.85rem; color: #313a46;">
+                            <input type="radio" name="entityTypeFilter" value="providers" onchange="handleStatusTypeFilterChange()"> Providers
+                        </label>
+                        <label class="filter-toggle" style="display: inline-flex; align-items: center; gap: 4px; cursor: pointer; font-size: 0.85rem; color: #313a46;">
+                            <input type="radio" name="entityTypeFilter" value="all" onchange="handleStatusTypeFilterChange()"> All
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Additional Filters (Checkboxes) -->
+                <div>
+                    <small style="color: #64748b; font-weight: 600;">Additional Filters:</small>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px;">
+                        <label class="filter-toggle" style="display: inline-flex; align-items: center; gap: 4px; cursor: pointer; font-size: 0.85rem; color: #313a46;" title="Only show statuses with certification requirements">
+                            <input type="checkbox" id="filterCertFlag" onchange="handleStatusTypeFilterChange()"> Has Certs
+                        </label>
+                        <label class="filter-toggle" style="display: inline-flex; align-items: center; gap: 4px; cursor: pointer; font-size: 0.85rem; color: #313a46;" title="Only show tracked statuses">
+                            <input type="checkbox" id="filterIsTracked" onchange="handleStatusTypeFilterChange()"> Tracked
+                        </label>
+                        <label class="filter-toggle" style="display: inline-flex; align-items: center; gap: 4px; cursor: pointer; font-size: 0.85rem; color: #313a46;" title="Hiring event statuses">
+                            <input type="checkbox" id="filterIsHireEvent" onchange="handleStatusTypeFilterChange()"> Hire Events
+                        </label>
+                        <label class="filter-toggle" style="display: inline-flex; align-items: center; gap: 4px; cursor: pointer; font-size: 0.85rem; color: #313a46;" title="Termination event statuses">
+                            <input type="checkbox" id="filterIsTermEvent" onchange="handleStatusTypeFilterChange()"> Term Events
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Filter Count -->
+                <div style="margin-top: 10px; text-align: center;">
+                    <small id="statusTypeFilterCount" style="color: #64748b;">Showing all status types</small>
+                </div>
             </div>
 
             <!-- ANALYTICS CARDS -->
@@ -167,6 +216,7 @@
 
 @await Html.PartialAsync("_ExportModal")
 @await Html.PartialAsync("_OperatorProfileModal")
+@await Html.PartialAsync("_CreatePizzaStatusModal")
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="/js/requirements-editor.js"></script>

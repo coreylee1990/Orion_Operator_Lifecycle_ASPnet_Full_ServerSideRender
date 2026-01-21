@@ -9,5 +9,6 @@ namespace OrionOperatorLifecycleWebApp.Repositories
         PizzaStatus GetById(string id);
         PizzaStatus GetByStatus(string status);
         void SaveAll(List<PizzaStatus> pizzaStatuses);
+        void Add(PizzaStatus pizzaStatus);
     }
 }

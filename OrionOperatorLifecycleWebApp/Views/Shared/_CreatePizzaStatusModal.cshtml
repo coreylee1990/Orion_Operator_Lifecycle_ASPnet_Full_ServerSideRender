@@ -1,0 +1,132 @@
+<!-- Create Pizza Status Modal -->
+<div class="modal fade" id="createPizzaStatusModal" tabindex="-1" aria-labelledby="createPizzaStatusModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="createPizzaStatusModalLabel">
+                    <i class="bi bi-collection me-2"></i>Create New Pizza Status
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="createPizzaStatusForm">
+                    <!-- Basic Information -->
+                    <div class="card mb-3">
+                        <div class="card-header bg-light">
+                            <strong>Basic Information</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="pizzaStatusName" class="form-label">Status Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="pizzaStatusName" 
+                                       placeholder="e.g., In Review, Pending Approval" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="pizzaStatusDescription" class="form-label">Description</label>
+                                <textarea class="form-control" id="pizzaStatusDescription" 
+                                          rows="2" placeholder="Brief description of this status"></textarea>
+                            </div>
+                            <!-- Client ID (hidden, auto-populated) -->
+                            <input type="hidden" id="pizzaStatusClientId">
+                        </div>
+                    </div>
+
+                    <!-- Entity Type -->
+                    <div class="card mb-3">
+                        <div class="card-header bg-light">
+                            <strong>Entity Type</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-check form-switch mb-2">
+                                        <input class="form-check-input" type="checkbox" id="pizzaStatusIsOperator">
+                                        <label class="form-check-label" for="pizzaStatusIsOperator">
+                                            <strong>Operators</strong>
+                                            <small class="text-muted d-block">Applies to operator workflows</small>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check form-switch mb-2">
+                                        <input class="form-check-input" type="checkbox" id="pizzaStatusIsProvider">
+                                        <label class="form-check-label" for="pizzaStatusIsProvider">
+                                            <strong>Providers</strong>
+                                            <small class="text-muted d-block">Applies to provider workflows</small>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <small class="text-muted">Leave both unchecked for generic statuses (e.g., claims, incidents).</small>
+                        </div>
+                    </div>
+
+                    <!-- Status Flags -->
+                    <div class="card mb-3">
+                        <div class="card-header bg-light">
+                            <strong>Status Flags</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-check form-switch mb-2">
+                                        <input class="form-check-input" type="checkbox" id="pizzaStatusIsAuto">
+                                        <label class="form-check-label" for="pizzaStatusIsAuto">
+                                            <strong>Auto-Advance Enabled</strong>
+                                            <small class="text-muted d-block">Entities can auto-advance when requirements are met</small>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check form-switch mb-2">
+                                        <input class="form-check-input" type="checkbox" id="pizzaStatusIsActive" checked>
+                                        <label class="form-check-label" for="pizzaStatusIsActive">
+                                            <strong>Is Active</strong>
+                                            <small class="text-muted d-block">Status is active and available for use</small>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Display Order & References -->
+                    <div class="card mb-3">
+                        <div class="card-header bg-light">
+                            <strong>Display Order & References</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="pizzaStatusMobileAppOrder" class="form-label">Mobile App Order</label>
+                                    <input type="number" class="form-control" id="pizzaStatusMobileAppOrder" min="0" placeholder="Display order">
+                                    <small class="text-muted">Order in mobile app</small>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="pizzaStatusNounId" class="form-label">Noun ID</label>
+                                    <input type="text" class="form-control" id="pizzaStatusNounId" placeholder="Optional">
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="pizzaStatusSubNounId" class="form-label">Sub Noun ID</label>
+                                    <input type="text" class="form-control" id="pizzaStatusSubNounId" placeholder="Optional">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Current Client Display -->
+                    <div class="alert alert-info mb-0">
+                        <i class="bi bi-info-circle me-1"></i>
+                        This Pizza Status will be created for the currently selected client: <strong id="pizzaStatusClientDisplay"></strong>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success" onclick="submitCreatePizzaStatus()">
+                    <i class="bi bi-plus-lg me-1"></i>Create Pizza Status
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -61,5 +61,23 @@ namespace OrionOperatorLifecycleWebApp.Repositories
             var json = JsonSerializer.Serialize(existing, options);
             File.WriteAllText(_filePath, json);
         }
+
+        public void Add(StatusType statusType)
+        {
+            if (statusType == null) return;
+
+            // Generate ID if not provided
+            if (string.IsNullOrEmpty(statusType.Id))
+            {
+                statusType.Id = System.Guid.NewGuid().ToString().ToUpper();
+            }
+
+            var existing = GetAll();
+            existing.Add(statusType);
+
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            var json = JsonSerializer.Serialize(existing, options);
+            File.WriteAllText(_filePath, json);
+        }
     }
 }

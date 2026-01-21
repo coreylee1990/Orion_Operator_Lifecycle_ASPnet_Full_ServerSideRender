@@ -56,6 +56,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9DZXJ0aWZpY2F0aW9uRGV0YWlsc1BhbmVsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/PC/Desktop/Orion_Operator_Lifecycle_ASPnet-main/OrionOperatorLifecycleWebApp/Views/Shared/_CreatePizzaStatusModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9DcmVhdGVQaXp6YVN0YXR1c01vZGFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC/Desktop/Orion_Operator_Lifecycle_ASPnet-main/OrionOperatorLifecycleWebApp/Views/Shared/_CreateStatusModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9DcmVhdGVTdGF0dXNNb2RhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/PC/Desktop/Orion_Operator_Lifecycle_ASPnet-main/OrionOperatorLifecycleWebApp/Views/Shared/_ExportModal.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9FeHBvcnRNb2RhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

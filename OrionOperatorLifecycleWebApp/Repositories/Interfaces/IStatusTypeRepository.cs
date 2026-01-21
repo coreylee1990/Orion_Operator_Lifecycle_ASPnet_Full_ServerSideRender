@@ -9,5 +9,6 @@ namespace OrionOperatorLifecycleWebApp.Repositories
         StatusType GetById(string id);
         List<StatusType> GetByDivision(string divisionId);
         void SaveAll(List<StatusType> statusTypes);
+        void Add(StatusType statusType);
     }
 }

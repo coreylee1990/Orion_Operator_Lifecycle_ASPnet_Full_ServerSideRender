@@ -1,5 +1,19 @@
 [
   {
+    "ID": "6BE8299D-6CAE-4E9C-8775-000A4B80D3A4",
+    "StatusID": "710EC10A-D41C-43BE-9CCF-B6A337EAFA7E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T14:00:35.163000",
+    "RecordAt": "2025-05-24T14:00:35.163000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "9ABDD327-230C-4F84-AC22-0030607FA3B3",
     "StatusID": "B8698A50-FEFF-43BC-90FF-6ED1CAE6C41B",
     "OperatorID": "B907CD56-9551-4050-AC31-AF3E8F84E762",
@@ -126,6 +140,20 @@
     "FleetID": null
   },
   {
+    "ID": "ED4339F2-5FBA-40D0-AEE0-012C408436A2",
+    "StatusID": "A7F6633A-8AE1-4F2A-9884-CC2381255D31",
+    "OperatorID": "E98ECB6B-C801-4FD2-BB42-F2EB942C7FF3",
+    "Date": "2025-06-09T20:17:35.603000",
+    "RecordAt": "2025-06-09T20:17:35.603000",
+    "RecordBy": "akram@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "7 - MI",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "A42E9788-1BB9-436D-BACB-016AA8CD2BFF",
     "StatusID": "20E10408-FFAA-4B91-AFC4-8DCF9A0CBB84",
     "OperatorID": "ADD22A46-FB7A-4109-9BE0-1066963A75B4",
@@ -135,20 +163,6 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "3 - TX",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
-    "ID": "B5EEFF09-C86F-4763-B3E9-0178F03EC676",
-    "StatusID": "DCD19706-CEBB-4559-9FE6-884CC7258539",
-    "OperatorID": "D769D763-C427-407D-91EA-01E644D6E7B5",
-    "Date": "2026-01-06T23:30:18.663000",
-    "RecordAt": "2026-01-06T23:30:18.663000",
-    "RecordBy": null,
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "12 - PA",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -244,6 +258,20 @@
     "Date": "2025-12-17T13:43:48.330000",
     "RecordAt": "2025-12-17T13:43:48.330000",
     "RecordBy": "david@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "5A944A16-CD00-4573-AD59-02AAAA9FB68F",
+    "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
+    "OperatorID": "B7A58196-2B6D-4740-BF57-054DC6DFED53",
+    "Date": "2026-01-06T23:04:47.927000",
+    "RecordAt": "2026-01-06T23:04:47.927000",
+    "RecordBy": null,
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "3 - TX",
@@ -476,6 +504,34 @@
     "FleetID": null
   },
   {
+    "ID": "B7887688-10B2-4E62-BB9A-05A2065D3943",
+    "StatusID": "710EC10A-D41C-43BE-9CCF-B6A337EAFA7E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T17:00:35.527000",
+    "RecordAt": "2025-05-24T17:00:35.527000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "9526BEB7-AF48-40AC-B3D2-05B420FB7046",
+    "StatusID": "C5E5F514-11C4-4539-9B5A-B9A8ED62CF76",
+    "OperatorID": "F8A29721-8648-45A6-8D3C-D7CEE1DB75F2",
+    "Date": "2026-01-21T00:50:30.330000",
+    "RecordAt": "2026-01-21T00:50:30.330000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "6 - FL",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "21E6E800-87B7-4560-8AFB-05DB922180D0",
     "StatusID": "E93910D9-B364-4E42-ADC0-FFA8FEC11CD2",
     "OperatorID": "2DA2F73C-AA6E-41EB-B34B-99AE4611C68E",
@@ -541,6 +597,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "A2DDBB19-C6C9-4B86-A47F-065CC99A2EC8",
+    "StatusID": "017E3B84-DF5F-4815-9682-2D9343D6574F",
+    "OperatorID": "54816C97-5653-42FD-B730-4BF857464CB9",
+    "Date": "2025-03-04T17:27:18.670000",
+    "RecordAt": "2025-03-04T17:27:18.670000",
+    "RecordBy": "armani@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "12 - PA",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -616,6 +686,20 @@
     "FleetID": null
   },
   {
+    "ID": "FDC788BB-ED24-4547-B71E-077ACD9079FD",
+    "StatusID": "990C4E17-6C75-4DDC-BF31-2C8F2E918B4F",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T13:00:45.530000",
+    "RecordAt": "2025-05-24T13:00:45.530000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "25ED3480-47E0-4255-9BEA-07A4F869CD63",
     "StatusID": "F63AB621-F393-4926-90E0-9E035811F052",
     "OperatorID": "47DFE00B-B97F-48C1-B4E2-85E8898D5F11",
@@ -686,6 +770,20 @@
     "FleetID": null
   },
   {
+    "ID": "E97CB153-705C-4FEF-A926-07DD6B764F02",
+    "StatusID": "710EC10A-D41C-43BE-9CCF-B6A337EAFA7E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T19:00:34.403000",
+    "RecordAt": "2025-05-24T19:00:34.403000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "8964EEE3-AF6E-4B2B-BA08-07E2D5988C0C",
     "StatusID": "2C3299DD-3F84-4DE7-968F-9CD3F0C9BC59",
     "OperatorID": "BBA0B128-A052-4B9F-977A-A311880147A7",
@@ -695,6 +793,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "2 - IL",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "F95F814C-F7CB-44DE-98AB-080D1F1D6975",
+    "StatusID": "990C4E17-6C75-4DDC-BF31-2C8F2E918B4F",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T14:00:37.583000",
+    "RecordAt": "2025-05-24T14:00:37.583000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -1022,6 +1134,20 @@
     "FleetID": null
   },
   {
+    "ID": "ABFCDF49-C660-419B-B9D9-0A6BA26561A4",
+    "StatusID": "710EC10A-D41C-43BE-9CCF-B6A337EAFA7E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T18:30:25.543000",
+    "RecordAt": "2025-05-24T18:30:25.543000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "600128B3-FC29-4819-8D7E-0A74F62E0226",
     "StatusID": "FF16C600-0C51-4DA2-9C3A-1A915A12A10E",
     "OperatorID": "96446A53-4EE0-4F13-8790-3680ABB7276E",
@@ -1213,6 +1339,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "10 - OR",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "82444637-3073-4E1F-84DB-0BBCD8C08E6E",
+    "StatusID": "40DA1D07-1190-4708-94A0-FEDE6C3EDF1E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T11:00:50.537000",
+    "RecordAt": "2025-05-24T11:00:50.537000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -1437,6 +1577,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "12 - PA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "4AD4868D-7702-4D5B-A094-0D85DA23964C",
+    "StatusID": "9441CC41-62D2-4558-B6DF-AE71171D2935",
+    "OperatorID": "4F612BE0-F52C-4D16-B3CB-0364EEDF455C",
+    "Date": "2025-09-22T16:15:49.413000",
+    "RecordAt": "2025-09-22T16:15:49.413000",
+    "RecordBy": "akram@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -1708,6 +1862,20 @@
     "FleetID": null
   },
   {
+    "ID": "06C51D7F-A9AC-4296-9375-0EA5D1135C2C",
+    "StatusID": "990C4E17-6C75-4DDC-BF31-2C8F2E918B4F",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T16:30:22.823000",
+    "RecordAt": "2025-05-24T16:30:22.823000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "0536D7AD-473C-41A7-8C77-0EB8F8BB8C61",
     "StatusID": "017E3B84-DF5F-4815-9682-2D9343D6574F",
     "OperatorID": "7E642892-5D9F-4933-B402-01F63EC74D79",
@@ -1717,20 +1885,6 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "12 - PA",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
-    "ID": "6BD801D0-CEA2-4979-B303-0F0E52E2EBCD",
-    "StatusID": "36889218-5043-4719-A1C7-E2D73BED2F26",
-    "OperatorID": "B7B196E4-42C0-4A1C-B42F-DBBE117668BB",
-    "Date": "2026-01-06T22:59:37.930000",
-    "RecordAt": "2026-01-06T22:59:37.930000",
-    "RecordBy": null,
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "3 - TX",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -1806,6 +1960,20 @@
     "FleetID": null
   },
   {
+    "ID": "50509F74-73B8-4861-A2CF-102519764496",
+    "StatusID": "080301B1-9E9E-496B-9B2D-9FD57F66A058",
+    "OperatorID": "225A6FA1-19AE-44E4-914D-601A4FA35D12",
+    "Date": "2026-01-21T00:50:31.457000",
+    "RecordAt": "2026-01-21T00:50:31.457000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "2 - IL",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "BFBFF43C-8CDB-4581-BD98-103001DBF3CF",
     "StatusID": "3F40B4B1-E98E-45FA-8F6A-08C41177C734",
     "OperatorID": "DB3EDFAA-AF4C-454A-8080-29CD5869DBBC",
@@ -1815,6 +1983,34 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "12 - PA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "A272354D-727C-46D5-A301-10391DF6FF5B",
+    "StatusID": "40DA1D07-1190-4708-94A0-FEDE6C3EDF1E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T11:30:27.290000",
+    "RecordAt": "2025-05-24T11:30:27.290000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "622B93C2-71F2-4A5C-8E61-103C42DE292C",
+    "StatusID": "14D7990F-6FE2-44EC-9BF2-F837596221B7",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T22:00:36.553000",
+    "RecordAt": "2025-05-24T22:00:36.553000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -1885,20 +2081,6 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "5 - CA",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
-    "ID": "F2023A5E-7D55-45CD-901F-10AA35C7D66C",
-    "StatusID": "A6A1F7DE-8E21-46E5-9325-80535CDA1446",
-    "OperatorID": "41F4D2E3-0BEF-4E9F-93EC-3CA74D8C9310",
-    "Date": "2023-07-05T18:03:14.277000",
-    "RecordAt": "2023-07-05T18:03:14.277000",
-    "RecordBy": "lauren@bigstartransit.com",
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "7 - MI",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -2081,6 +2263,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "3 - TX",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "6E7C6847-DC4F-4D9E-8C58-13A04A4E2699",
+    "StatusID": "40DA1D07-1190-4708-94A0-FEDE6C3EDF1E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T19:00:42.707000",
+    "RecordAt": "2025-05-24T19:00:42.707000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -2319,20 +2515,6 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "8 - OH",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
-    "ID": "3279286C-E5B3-4A97-8990-152BFFC0EF8E",
-    "StatusID": "BC1F0792-3E9D-4D85-B890-9D5F3EFAF14B",
-    "OperatorID": "28BC986B-D995-470F-9C9A-5F5DDEDF337D",
-    "Date": "2024-02-16T14:23:05.650000",
-    "RecordAt": "2024-02-16T14:23:05.650000",
-    "RecordBy": "zatoria@bigstartransit.com",
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "6 - FL",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -2772,6 +2954,20 @@
     "FleetID": null
   },
   {
+    "ID": "AC77A161-0C6D-46D7-86F8-194C3E72CCFC",
+    "StatusID": "40DA1D07-1190-4708-94A0-FEDE6C3EDF1E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T21:00:42.867000",
+    "RecordAt": "2025-05-24T21:00:42.867000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "D88C9C0C-07C9-4AF2-810C-19576297803E",
     "StatusID": "11EF6817-E21A-4D36-BBF2-2E20F41D785E",
     "OperatorID": "413FA7CA-FBF7-4D24-AEAE-492FC3D1FF15",
@@ -2837,6 +3033,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "6 - FL",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "DD1C8295-5103-43A7-A4EE-19F4699F06C3",
+    "StatusID": "14D7990F-6FE2-44EC-9BF2-F837596221B7",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T13:00:47.967000",
+    "RecordAt": "2025-05-24T13:00:47.967000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -3024,6 +3234,20 @@
     "FleetID": null
   },
   {
+    "ID": "CE05A0D6-7480-4EC0-85B6-1AF185FEA2BC",
+    "StatusID": "990C4E17-6C75-4DDC-BF31-2C8F2E918B4F",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T21:30:23.157000",
+    "RecordAt": "2025-05-24T21:30:23.157000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "2B96F77E-D97D-428F-AA80-1B0A135D8810",
     "StatusID": "1F0E7EFD-D5F0-4A7F-8FFE-5FEC757E1041",
     "OperatorID": "99ADC2AD-3EAD-4B3F-AC7E-C415B08D0751",
@@ -3052,6 +3276,20 @@
     "FleetID": null
   },
   {
+    "ID": "92256A65-EB02-49C1-A9BD-1B8DF1E9E9A4",
+    "StatusID": "14D7990F-6FE2-44EC-9BF2-F837596221B7",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T12:30:25.387000",
+    "RecordAt": "2025-05-24T12:30:25.387000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "EEF021E6-168C-40FC-84E0-1BD97BE9AFD1",
     "StatusID": "B1F3CBC4-4B92-41FB-82BF-31774EA6669D",
     "OperatorID": "6C5B5147-E238-4CDD-B4A6-A5B8F1DDC780",
@@ -3072,6 +3310,20 @@
     "Date": "2025-10-02T20:00:24.483000",
     "RecordAt": "2025-10-02T20:00:24.483000",
     "RecordBy": "zatoria@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "3C2484D8-625A-47A2-8127-1C2861FBA2F7",
+    "StatusID": "710EC10A-D41C-43BE-9CCF-B6A337EAFA7E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T11:30:19.307000",
+    "RecordAt": "2025-05-24T11:30:19.307000",
+    "RecordBy": null,
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "8 - OH",
@@ -3500,6 +3752,20 @@
     "FleetID": null
   },
   {
+    "ID": "B65448D6-AEB3-4DBB-8DFC-1FE6B76FBDA2",
+    "StatusID": "439DBB11-6C9F-4FD7-B90C-239A9BF01EFE",
+    "OperatorID": "692A001B-12AB-4932-9ACC-0D2C003FC9CB",
+    "Date": "2026-01-21T02:50:27.020000",
+    "RecordAt": "2026-01-21T02:50:27.020000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "DD3A6527-A6C3-4D03-9051-2018CF6BDF77",
     "StatusID": "A6A1F7DE-8E21-46E5-9325-80535CDA1446",
     "OperatorID": "B1CA77F1-AC90-48A2-B515-C0796A20B172",
@@ -3509,6 +3775,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "7 - MI",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "A9AD3581-AA92-4DC4-B873-2031B87210F0",
+    "StatusID": "40DA1D07-1190-4708-94A0-FEDE6C3EDF1E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T15:30:29.523000",
+    "RecordAt": "2025-05-24T15:30:29.523000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -3682,6 +3962,20 @@
     "FleetID": null
   },
   {
+    "ID": "29C9FAB9-9D1F-46AE-BE4D-2220539C5629",
+    "StatusID": "20E10408-FFAA-4B91-AFC4-8DCF9A0CBB84",
+    "OperatorID": "4F612BE0-F52C-4D16-B3CB-0364EEDF455C",
+    "Date": "2025-11-04T15:06:43.030000",
+    "RecordAt": "2025-11-04T15:06:43.030000",
+    "RecordBy": "zatoria@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "1B536048-9B99-4BE2-84EA-2230F288FADD",
     "StatusID": "1A544845-CA14-43DB-884F-E5F0DAC6D877",
     "OperatorID": "9CBF2E98-681F-4278-9DBF-D11C5D811006",
@@ -3705,6 +3999,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "5 - CA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "D7217D6E-0D54-4076-8C60-2250D303C4E4",
+    "StatusID": "14D7990F-6FE2-44EC-9BF2-F837596221B7",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T20:00:38.337000",
+    "RecordAt": "2025-05-24T20:00:38.337000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -3850,20 +4158,6 @@
     "FleetID": null
   },
   {
-    "ID": "7EF99E66-74B3-47F9-A51F-232D71ABC92D",
-    "StatusID": "9850D839-103E-4559-8A15-D390FCC68803",
-    "OperatorID": "D769D763-C427-407D-91EA-01E644D6E7B5",
-    "Date": "2026-01-06T23:35:45.943000",
-    "RecordAt": "2026-01-06T23:35:45.943000",
-    "RecordBy": null,
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "12 - PA",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
     "ID": "03190736-84A6-4786-8C32-232E4E511D89",
     "StatusID": "57822BB5-0824-456A-B7C7-49D1896C03C2",
     "OperatorID": "F9B2881B-00BF-431E-A676-A3D5C0F56C53",
@@ -3901,6 +4195,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "3 - TX",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "D1ED5D75-AE82-4C93-9A4D-239AE159A902",
+    "StatusID": "990C4E17-6C75-4DDC-BF31-2C8F2E918B4F",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T15:30:24.727000",
+    "RecordAt": "2025-05-24T15:30:24.727000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -4186,15 +4494,15 @@
     "FleetID": null
   },
   {
-    "ID": "D1E5F41E-5417-4728-A654-267EAA963CD1",
-    "StatusID": "EB309DDC-A302-4428-9E9F-8FC34A30A859",
-    "OperatorID": "28BC986B-D995-470F-9C9A-5F5DDEDF337D",
-    "Date": "2024-02-26T14:37:44.457000",
-    "RecordAt": "2024-02-26T14:37:44.457000",
-    "RecordBy": "zatoria@bigstartransit.com",
+    "ID": "D689770B-FD6B-4CDC-A0B8-2672C44AB7E6",
+    "StatusID": "710EC10A-D41C-43BE-9CCF-B6A337EAFA7E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T15:00:40.973000",
+    "RecordAt": "2025-05-24T15:00:40.973000",
+    "RecordBy": null,
     "UpdateAt": null,
     "UpdateBy": null,
-    "DivisionID": "6 - FL",
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -4452,20 +4760,6 @@
     "FleetID": null
   },
   {
-    "ID": "6AFA3F94-A787-4869-8FE7-29B1F7E490ED",
-    "StatusID": "C4EF163C-1090-4E76-AA5E-0357DC53AE76",
-    "OperatorID": "B67AD39A-3675-4B16-910A-6D503B0BC322",
-    "Date": "2026-01-06T22:57:45.043000",
-    "RecordAt": "2026-01-06T22:57:45.043000",
-    "RecordBy": null,
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "12 - PA",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
     "ID": "52B13DF2-9148-4A65-B11C-2A44816C9526",
     "StatusID": "EB309DDC-A302-4428-9E9F-8FC34A30A859",
     "OperatorID": "16790AC3-3A18-4C36-A637-DFD0F88FA7D4",
@@ -4489,6 +4783,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "11 - GA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "D0E3E41F-2FFB-42A4-8E1D-2A586B2C4A8B",
+    "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
+    "OperatorID": "5A051C04-1F20-4EAE-896D-787BEE0F95C8",
+    "Date": "2024-09-23T13:29:23.440000",
+    "RecordAt": "2024-09-23T13:29:23.440000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -4573,20 +4881,6 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "3 - TX",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
-    "ID": "3DFF48BD-434A-406E-8344-2B4A18ED1F8F",
-    "StatusID": "685D0FD7-469B-494C-BF74-1D5722903F23",
-    "OperatorID": "B98C1DFD-9D4A-42F8-B5BB-29983DEFC7C7",
-    "Date": "2026-01-16T14:21:16.720000",
-    "RecordAt": "2026-01-16T14:21:16.720000",
-    "RecordBy": null,
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "7 - MI",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -4783,6 +5077,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "3 - TX",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "4FF9FA00-0C5F-4F5A-98EB-2D26E6DCC388",
+    "StatusID": "990C4E17-6C75-4DDC-BF31-2C8F2E918B4F",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T20:30:22.163000",
+    "RecordAt": "2025-05-24T20:30:22.163000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -5026,6 +5334,20 @@
     "FleetID": null
   },
   {
+    "ID": "EE5602D6-9C70-43DF-8348-310B2FD75E94",
+    "StatusID": "990C4E17-6C75-4DDC-BF31-2C8F2E918B4F",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T19:30:23.233000",
+    "RecordAt": "2025-05-24T19:30:23.233000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "49F5A36B-CB45-42C3-A08A-31809CDC494E",
     "StatusID": "9611AC36-3AEE-4EDE-89B6-8B05DDFE7124",
     "OperatorID": "F22C3F02-D2AA-4223-ABB7-3E9DC5B2B566",
@@ -5049,6 +5371,34 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "10 - OR",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "6C42A291-8B80-4804-9868-31B2199E1EE9",
+    "StatusID": "2F22355A-A64E-43FF-B523-68F5D915376B",
+    "OperatorID": "4F612BE0-F52C-4D16-B3CB-0364EEDF455C",
+    "Date": "2026-01-21T02:02:18.717000",
+    "RecordAt": "2026-01-21T02:02:18.717000",
+    "RecordBy": "corporateaccounting@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "62BE7953-9272-4A0B-B58B-31C0B9E0E588",
+    "StatusID": "3A4A168F-3164-4962-ABB0-1E9F0620797A",
+    "OperatorID": "4F612BE0-F52C-4D16-B3CB-0364EEDF455C",
+    "Date": "2025-09-22T19:10:10.753000",
+    "RecordAt": "2025-09-22T19:10:10.753000",
+    "RecordBy": "armani@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -5105,6 +5455,34 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "7 - MI",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "ADB6A53A-5F6A-4351-9ADA-323EFD2478B5",
+    "StatusID": "710EC10A-D41C-43BE-9CCF-B6A337EAFA7E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T18:00:33.457000",
+    "RecordAt": "2025-05-24T18:00:33.457000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "2B57BB15-BE7F-43D4-A2F5-324CFC0AF447",
+    "StatusID": "14D7990F-6FE2-44EC-9BF2-F837596221B7",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T14:00:39.913000",
+    "RecordAt": "2025-05-24T14:00:39.913000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -5222,15 +5600,15 @@
     "FleetID": null
   },
   {
-    "ID": "EA055550-6892-434F-97A6-3372C1A5B994",
-    "StatusID": "865C05ED-20A1-42BD-9E41-964FF5F1D29D",
-    "OperatorID": "41F4D2E3-0BEF-4E9F-93EC-3CA74D8C9310",
-    "Date": "2023-07-07T21:23:19.237000",
-    "RecordAt": "2023-07-07T21:23:19.237000",
-    "RecordBy": "angelica@bigstartransit.com",
+    "ID": "D3C132E7-FAF6-4BC8-A133-333B7F07C230",
+    "StatusID": "40DA1D07-1190-4708-94A0-FEDE6C3EDF1E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T19:30:28.103000",
+    "RecordAt": "2025-05-24T19:30:28.103000",
+    "RecordBy": null,
     "UpdateAt": null,
     "UpdateBy": null,
-    "DivisionID": "7 - MI",
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -5292,20 +5670,6 @@
     "FleetID": null
   },
   {
-    "ID": "39BE4A75-5526-4DDB-BE5C-343803C341B8",
-    "StatusID": "5784C955-A664-4271-9A5C-9EC818D56E18",
-    "OperatorID": "28BC986B-D995-470F-9C9A-5F5DDEDF337D",
-    "Date": "2024-10-29T19:44:58.730000",
-    "RecordAt": "2024-10-29T19:44:58.730000",
-    "RecordBy": "akram@bigstartransit.com",
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "6 - FL",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
     "ID": "80750C1E-C15A-46ED-ADE6-34AC0944254C",
     "StatusID": "73AEAF4E-937E-47E3-8AD2-5E4115132D2D",
     "OperatorID": "298B5F4A-4D76-492F-ABCC-18DD2FC1B8E3",
@@ -5329,6 +5693,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "3 - TX",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "71FD5880-6599-4942-8B9F-34E673A6C4B7",
+    "StatusID": "14D7990F-6FE2-44EC-9BF2-F837596221B7",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T19:00:39.727000",
+    "RecordAt": "2025-05-24T19:00:39.727000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -5614,6 +5992,20 @@
     "FleetID": null
   },
   {
+    "ID": "978513B5-CA3B-473E-B943-37BE47B41907",
+    "StatusID": "017E3B84-DF5F-4815-9682-2D9343D6574F",
+    "OperatorID": "4CBE49F3-E1CA-49ED-940F-FF1E396442D4",
+    "Date": "2026-01-21T03:08:41.557000",
+    "RecordAt": "2026-01-21T03:08:41.557000",
+    "RecordBy": "compliance@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "12 - PA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "9B929975-0567-4D10-96BA-37C1C35F64B8",
     "StatusID": "DFE5F6DF-9F2A-41FC-8383-A6349CF74BBF",
     "OperatorID": "238EBB0F-FE9B-41DF-89AA-423EA4AFE98D",
@@ -5805,20 +6197,6 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "10 - OR",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
-    "ID": "EE426E18-4E8E-4E85-9AA9-39B04B1486A8",
-    "StatusID": "7D975BBA-A0F6-4849-B592-9A6892BF142F",
-    "OperatorID": "FE57E36C-74CF-405A-BCA3-B02B331B05AD",
-    "Date": "2026-01-06T23:33:09.903000",
-    "RecordAt": "2026-01-06T23:33:09.903000",
-    "RecordBy": null,
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "3 - TX",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -6020,6 +6398,20 @@
     "FleetID": null
   },
   {
+    "ID": "835FF01E-8A13-40F4-A0F3-3B275664A9E2",
+    "StatusID": "1A544845-CA14-43DB-884F-E5F0DAC6D877",
+    "OperatorID": "5A051C04-1F20-4EAE-896D-787BEE0F95C8",
+    "Date": "2024-10-01T23:29:16.257000",
+    "RecordAt": "2024-10-01T23:29:16.257000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "BE59F058-4EE7-42C5-9AE0-3B44C012DA55",
     "StatusID": "4BFFACDB-70AA-4916-A0D8-1C3FB1690F72",
     "OperatorID": "4241A8CB-F1BF-40D4-A8CE-40931B3D6331",
@@ -6029,6 +6421,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "7 - MI",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "09B40226-950A-4B68-B37C-3B4A390ECD08",
+    "StatusID": "14D7990F-6FE2-44EC-9BF2-F837596221B7",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T18:30:30.587000",
+    "RecordAt": "2025-05-24T18:30:30.587000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -6057,6 +6463,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "7 - MI",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "5B76C5D8-1F3F-4613-8C5F-3BB537CDF702",
+    "StatusID": "710EC10A-D41C-43BE-9CCF-B6A337EAFA7E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T16:00:45.110000",
+    "RecordAt": "2025-05-24T16:00:45.110000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -6118,6 +6538,20 @@
     "FleetID": null
   },
   {
+    "ID": "211949B1-695E-4349-BDBB-3C321CAB46F6",
+    "StatusID": "40DA1D07-1190-4708-94A0-FEDE6C3EDF1E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T18:30:32.827000",
+    "RecordAt": "2025-05-24T18:30:32.827000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "6E8F76F6-D76B-4FC4-8C86-3C49F548A493",
     "StatusID": "397D52F5-C0B6-47F5-BF9F-D643D955018E",
     "OperatorID": "743E6C36-E8BE-4B4D-AD94-A6984A9A720E",
@@ -6151,6 +6585,20 @@
     "OperatorID": "238EBB0F-FE9B-41DF-89AA-423EA4AFE98D",
     "Date": "2025-12-13T14:20:46.850000",
     "RecordAt": "2025-12-13T14:20:46.850000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "E124DD8D-2652-4AB7-A45F-3CCA15F093F2",
+    "StatusID": "14D7990F-6FE2-44EC-9BF2-F837596221B7",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T21:30:25.967000",
+    "RecordAt": "2025-05-24T21:30:25.967000",
     "RecordBy": null,
     "UpdateAt": null,
     "UpdateBy": null,
@@ -6804,6 +7252,20 @@
     "FleetID": null
   },
   {
+    "ID": "A072E416-3B5D-404F-A465-4398AE500A24",
+    "StatusID": "C5E5F514-11C4-4539-9B5A-B9A8ED62CF76",
+    "OperatorID": "6ADEB8A8-89C6-4C7E-BAFE-667AABF3FB9A",
+    "Date": "2026-01-21T02:50:28.270000",
+    "RecordAt": "2026-01-21T02:50:28.270000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "6 - FL",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "3F5D0597-02C9-49A8-A181-43B0028FCC8D",
     "StatusID": "0404897E-4715-43B8-8251-7053AF309C73",
     "OperatorID": "AD48D8AB-D99B-4091-9241-E65B36BFB78D",
@@ -6841,20 +7303,6 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "8 - OH",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
-    "ID": "DA3CE4F5-A6C8-47E1-80AC-43D1DF592085",
-    "StatusID": "7D975BBA-A0F6-4849-B592-9A6892BF142F",
-    "OperatorID": "B53D1212-E1BB-4650-81C8-7C7B2751AB79",
-    "Date": "2026-01-06T23:30:55.497000",
-    "RecordAt": "2026-01-06T23:30:55.497000",
-    "RecordBy": null,
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "3 - TX",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -7028,6 +7476,20 @@
     "FleetID": null
   },
   {
+    "ID": "D294B1F8-29F5-4295-8FCD-457B4E073FA2",
+    "StatusID": "990C4E17-6C75-4DDC-BF31-2C8F2E918B4F",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T12:30:23.150000",
+    "RecordAt": "2025-05-24T12:30:23.150000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "1E5B52BD-102E-4C63-8EA6-458D04CB3B60",
     "StatusID": "42763137-455A-436A-BB6A-0C0CAB7F7EE0",
     "OperatorID": "7C903BCB-4B09-47AF-9D42-24522BE82283",
@@ -7107,6 +7569,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "6 - FL",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "A5D3E3A4-6A86-4A6F-951E-46DF513691A4",
+    "StatusID": "990C4E17-6C75-4DDC-BF31-2C8F2E918B4F",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T14:30:25.920000",
+    "RecordAt": "2025-05-24T14:30:25.920000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -7238,20 +7714,6 @@
     "FleetID": null
   },
   {
-    "ID": "B6A2AFE9-783F-42BF-8017-47D65E9124C4",
-    "StatusID": "DCD19706-CEBB-4559-9FE6-884CC7258539",
-    "OperatorID": "B67AD39A-3675-4B16-910A-6D503B0BC322",
-    "Date": "2025-12-13T15:05:12.783000",
-    "RecordAt": "2025-12-13T15:05:12.783000",
-    "RecordBy": null,
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "12 - PA",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
     "ID": "E8BEEB52-FF6D-49F1-8448-4854D1585391",
     "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
     "OperatorID": "ADD22A46-FB7A-4109-9BE0-1066963A75B4",
@@ -7285,6 +7747,20 @@
     "OperatorID": "238EBB0F-FE9B-41DF-89AA-423EA4AFE98D",
     "Date": "2025-12-13T14:39:15.020000",
     "RecordAt": "2025-12-13T14:39:15.020000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "FD35C3AC-C4BF-45E5-9CCE-48A68B396617",
+    "StatusID": "710EC10A-D41C-43BE-9CCF-B6A337EAFA7E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T20:30:19.503000",
+    "RecordAt": "2025-05-24T20:30:19.503000",
     "RecordBy": null,
     "UpdateAt": null,
     "UpdateBy": null,
@@ -7345,6 +7821,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "2 - IL",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "992B37C3-8957-409A-9923-48DA7858D043",
+    "StatusID": "40DA1D07-1190-4708-94A0-FEDE6C3EDF1E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T13:00:50.310000",
+    "RecordAt": "2025-05-24T13:00:50.310000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -7602,6 +8092,20 @@
     "FleetID": null
   },
   {
+    "ID": "1CFAF457-722D-4B41-9AFF-4CE10CF2878D",
+    "StatusID": "40DA1D07-1190-4708-94A0-FEDE6C3EDF1E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T12:00:44.600000",
+    "RecordAt": "2025-05-24T12:00:44.600000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "97F13D7B-6BC6-47CD-8BE5-4D35E40B27E9",
     "StatusID": "11F65D9F-C4F6-4F19-9194-3FC3C0A4A06E",
     "OperatorID": "F4F19C4F-9187-417C-89BA-484E86436694",
@@ -7742,6 +8246,34 @@
     "FleetID": null
   },
   {
+    "ID": "72E026D7-6A76-424F-A810-4DE247523004",
+    "StatusID": "20E10408-FFAA-4B91-AFC4-8DCF9A0CBB84",
+    "OperatorID": "4F612BE0-F52C-4D16-B3CB-0364EEDF455C",
+    "Date": "2026-01-06T17:00:28.020000",
+    "RecordAt": "2026-01-06T17:00:28.020000",
+    "RecordBy": "jen@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "FE25B230-2635-4206-830F-4E2464F87914",
+    "StatusID": "710EC10A-D41C-43BE-9CCF-B6A337EAFA7E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T21:00:35.033000",
+    "RecordAt": "2025-05-24T21:00:35.033000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "BCB8992C-0C24-49A7-BF9B-4E5AB447C593",
     "StatusID": "52B23CCA-0D3B-470E-8C6B-875B2127406F",
     "OperatorID": "243C975B-AB39-4B0F-A5A4-541CE20CD7E5",
@@ -7798,6 +8330,20 @@
     "FleetID": null
   },
   {
+    "ID": "8907576B-CA53-497A-A66C-4F4AF4AB2CB8",
+    "StatusID": "990C4E17-6C75-4DDC-BF31-2C8F2E918B4F",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T18:00:36.417000",
+    "RecordAt": "2025-05-24T18:00:36.417000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "C2FB8A82-5304-4885-8A77-4F54C9A681A4",
     "StatusID": "512ACACB-1FF2-41AD-9095-E2758CD3D9C6",
     "OperatorID": "3795F8BA-51B3-408A-A38D-B7D78742FB7E",
@@ -7807,6 +8353,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "6 - FL",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "3141559F-3E09-415B-8B56-4F595B5CCC76",
+    "StatusID": "439DBB11-6C9F-4FD7-B90C-239A9BF01EFE",
+    "OperatorID": "1511310F-83F2-46AC-82A2-76B967714AB3",
+    "Date": "2026-01-21T01:50:27.840000",
+    "RecordAt": "2026-01-21T01:50:27.840000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -7905,6 +8465,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "6 - FL",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "5A392B60-83BE-4E7D-A71D-5066417C3255",
+    "StatusID": "710EC10A-D41C-43BE-9CCF-B6A337EAFA7E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T17:30:22.513000",
+    "RecordAt": "2025-05-24T17:30:22.513000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -8176,6 +8750,20 @@
     "FleetID": null
   },
   {
+    "ID": "09DC96CA-7114-4EAA-BC62-54A29A0AEF10",
+    "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
+    "OperatorID": "B7A58196-2B6D-4740-BF57-054DC6DFED53",
+    "Date": "2026-01-21T02:20:32.157000",
+    "RecordAt": "2026-01-21T02:20:32.157000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "3AFD777F-1CAB-4BEC-A32F-54BE05F4B10C",
     "StatusID": "1A544845-CA14-43DB-884F-E5F0DAC6D877",
     "OperatorID": "F829C4A3-E262-4200-81D0-5F82C71BB236",
@@ -8260,6 +8848,20 @@
     "FleetID": null
   },
   {
+    "ID": "BA61852F-7905-4BF1-99CD-55624175CC66",
+    "StatusID": "3F40B4B1-E98E-45FA-8F6A-08C41177C734",
+    "OperatorID": "AD4E4FDD-6B1B-495E-9D6E-FA10E8059D46",
+    "Date": "2026-01-21T03:06:55.747000",
+    "RecordAt": "2026-01-21T03:06:55.747000",
+    "RecordBy": "compliance@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "12 - PA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "5B3A7CD8-DDAA-454A-A8FF-556DA490D8B1",
     "StatusID": "11EF6817-E21A-4D36-BBF2-2E20F41D785E",
     "OperatorID": "413FA7CA-FBF7-4D24-AEAE-492FC3D1FF15",
@@ -8269,6 +8871,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "5 - CA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "4AA40EB6-9448-4BE7-B2FC-557EB26E84DC",
+    "StatusID": "EB309DDC-A302-4428-9E9F-8FC34A30A859",
+    "OperatorID": "583F37CB-4FC0-46D2-BEC7-8995CE88FB1B",
+    "Date": "2026-01-06T23:00:21.920000",
+    "RecordAt": "2026-01-06T23:00:21.920000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "6 - FL",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -8358,20 +8974,6 @@
     "FleetID": null
   },
   {
-    "ID": "B6B95F41-F0A2-4378-97B7-564EEB6571B5",
-    "StatusID": "7D975BBA-A0F6-4849-B592-9A6892BF142F",
-    "OperatorID": "B7B196E4-42C0-4A1C-B42F-DBBE117668BB",
-    "Date": "2026-01-06T23:33:30.990000",
-    "RecordAt": "2026-01-06T23:33:30.990000",
-    "RecordBy": null,
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "3 - TX",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
     "ID": "94AB245D-9906-4AC6-9986-565A35022EA0",
     "StatusID": "CE116B72-D18A-48EE-B173-2A887B85882D",
     "OperatorID": "6E89BDD9-BD7E-4D5F-B2B4-E081BE0C6383",
@@ -8381,20 +8983,6 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "7 - MI",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
-    "ID": "F8961263-B528-4EE2-A086-565B4F8D8E00",
-    "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
-    "OperatorID": "B7B196E4-42C0-4A1C-B42F-DBBE117668BB",
-    "Date": "2026-01-06T23:27:53.663000",
-    "RecordAt": "2026-01-06T23:27:53.663000",
-    "RecordBy": null,
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "3 - TX",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -8442,20 +9030,6 @@
     "FleetID": null
   },
   {
-    "ID": "C069404E-FC89-4574-BA91-569F147EE772",
-    "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
-    "OperatorID": "502D7ED8-452B-404C-A02C-6435A7A6DFD3",
-    "Date": "2026-01-06T23:03:05.377000",
-    "RecordAt": "2026-01-06T23:03:05.377000",
-    "RecordBy": null,
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "3 - TX",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
     "ID": "AD589B66-9BE5-42A1-95A1-56BB20EB53B1",
     "StatusID": "1A544845-CA14-43DB-884F-E5F0DAC6D877",
     "OperatorID": "586D76BE-CDEF-4545-B257-37FF3FAB6489",
@@ -8479,6 +9053,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "2 - IL",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "AC7202D6-6B11-41CB-8A3F-56F26D89E90F",
+    "StatusID": "36889218-5043-4719-A1C7-E2D73BED2F26",
+    "OperatorID": "4F612BE0-F52C-4D16-B3CB-0364EEDF455C",
+    "Date": "2025-09-02T17:52:17.773000",
+    "RecordAt": "2025-09-02T17:52:17.773000",
+    "RecordBy": "akram@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -8535,6 +9123,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "7 - MI",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "64F5365B-5F92-4361-818E-5836067FEF9E",
+    "StatusID": "9441CC41-62D2-4558-B6DF-AE71171D2935",
+    "OperatorID": "5A051C04-1F20-4EAE-896D-787BEE0F95C8",
+    "Date": "2024-10-10T21:26:54.697000",
+    "RecordAt": "2024-10-10T21:26:54.697000",
+    "RecordBy": "zatoria@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -8605,6 +9207,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "10 - OR",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "4D5AB2F8-4154-48B2-965E-591170D12D9B",
+    "StatusID": "14D7990F-6FE2-44EC-9BF2-F837596221B7",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T17:00:40.517000",
+    "RecordAt": "2025-05-24T17:00:40.517000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -8773,6 +9389,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "7 - MI",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "5230E420-691A-460D-8205-5A9E896AFE60",
+    "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
+    "OperatorID": "5A051C04-1F20-4EAE-896D-787BEE0F95C8",
+    "Date": "2026-01-20T22:40:26.040000",
+    "RecordAt": "2026-01-20T22:40:26.040000",
+    "RecordBy": "shauna@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -9044,6 +9674,20 @@
     "FleetID": null
   },
   {
+    "ID": "112BD4E4-AB67-4543-99F2-5D0FDC08FD8D",
+    "StatusID": "990C4E17-6C75-4DDC-BF31-2C8F2E918B4F",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T21:00:38.180000",
+    "RecordAt": "2025-05-24T21:00:38.180000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "4B60CACA-BB32-4B5B-9F5A-5D1D1C56CC97",
     "StatusID": "2BE1FDAD-0305-46D8-B204-73B29E0D5640",
     "OperatorID": "683B78A2-DDF0-40B1-8411-5159B9F78284",
@@ -9190,6 +9834,20 @@
     "Date": "2026-01-06T20:26:09.777000",
     "RecordAt": "2026-01-06T20:26:09.777000",
     "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "12 - PA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "C28E312A-E8D5-4924-ABC4-5F54345237F3",
+    "StatusID": "E93910D9-B364-4E42-ADC0-FFA8FEC11CD2",
+    "OperatorID": "54816C97-5653-42FD-B730-4BF857464CB9",
+    "Date": "2025-03-11T16:17:50.027000",
+    "RecordAt": "2025-03-11T16:17:50.027000",
+    "RecordBy": "saul@bigstartransit.com",
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "12 - PA",
@@ -9408,6 +10066,34 @@
     "FleetID": null
   },
   {
+    "ID": "02F8AED7-891E-406A-A16E-616DE5807699",
+    "StatusID": "14D7990F-6FE2-44EC-9BF2-F837596221B7",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T17:30:27.307000",
+    "RecordAt": "2025-05-24T17:30:27.307000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "D4260D53-1646-4507-A189-616F19FAB766",
+    "StatusID": "710EC10A-D41C-43BE-9CCF-B6A337EAFA7E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T19:30:20.560000",
+    "RecordAt": "2025-05-24T19:30:20.560000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "1C98A8B7-5EF7-4017-8418-618DB030FCB0",
     "StatusID": "11EF6817-E21A-4D36-BBF2-2E20F41D785E",
     "OperatorID": "24935A28-FD1D-40B8-BD3D-34D4E95E3805",
@@ -9543,20 +10229,6 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "3 - TX",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
-    "ID": "A385C613-5247-41CB-8BB0-629E0BA5CEBB",
-    "StatusID": "A6A1F7DE-8E21-46E5-9325-80535CDA1446",
-    "OperatorID": "41F4D2E3-0BEF-4E9F-93EC-3CA74D8C9310",
-    "Date": "2023-07-07T19:33:57.263000",
-    "RecordAt": "2023-07-07T19:33:57.263000",
-    "RecordBy": "angelica@bigstartransit.com",
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "7 - MI",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -9856,6 +10528,20 @@
     "FleetID": null
   },
   {
+    "ID": "E7598C6B-875D-4150-ADD0-6534DEC55F99",
+    "StatusID": "1A544845-CA14-43DB-884F-E5F0DAC6D877",
+    "OperatorID": "4F612BE0-F52C-4D16-B3CB-0364EEDF455C",
+    "Date": "2025-09-16T20:06:27.463000",
+    "RecordAt": "2025-09-16T20:06:27.463000",
+    "RecordBy": "akram@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "DD72880D-1C78-4A36-A76B-6566E6CB054B",
     "StatusID": "5784C955-A664-4271-9A5C-9EC818D56E18",
     "OperatorID": "D6DE8DD0-5581-492C-B4CC-D465760F5457",
@@ -9907,6 +10593,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "12 - PA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "BDA8AB5C-6F02-4F30-802F-65F8F635DF1E",
+    "StatusID": "79A5B3FB-ACEE-4665-AF34-26B6E97A0DA3",
+    "OperatorID": "E98ECB6B-C801-4FD2-BB42-F2EB942C7FF3",
+    "Date": "2026-01-06T20:25:37.357000",
+    "RecordAt": "2026-01-06T20:25:37.357000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "7 - MI",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -10178,39 +10878,11 @@
     "FleetID": null
   },
   {
-    "ID": "7C0A6C65-C4EA-4CF5-A673-67F3152E13CA",
-    "StatusID": "1F0E7EFD-D5F0-4A7F-8FFE-5FEC757E1041",
-    "OperatorID": "B7B196E4-42C0-4A1C-B42F-DBBE117668BB",
-    "Date": "2026-01-06T23:26:36.937000",
-    "RecordAt": "2026-01-06T23:26:36.937000",
-    "RecordBy": null,
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "3 - TX",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
     "ID": "2608839D-7365-4FC3-8F09-682441E89871",
     "StatusID": "2CF6D154-065E-4043-B6FC-71A7E7147B4B",
     "OperatorID": "E511C100-EBCF-4CD0-8984-C62A1B63EFFF",
     "Date": "2025-12-05T16:14:13.587000",
     "RecordAt": "2025-12-05T16:14:13.587000",
-    "RecordBy": "compliance@bigstartransit.com",
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "7 - MI",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
-    "ID": "7BBFE24D-793D-468A-AA88-684B75FC0DBB",
-    "StatusID": "A7F6633A-8AE1-4F2A-9884-CC2381255D31",
-    "OperatorID": "41F4D2E3-0BEF-4E9F-93EC-3CA74D8C9310",
-    "Date": "2026-01-20T16:57:05.397000",
-    "RecordAt": "2026-01-20T16:57:05.397000",
     "RecordBy": "compliance@bigstartransit.com",
     "UpdateAt": null,
     "UpdateBy": null,
@@ -10248,6 +10920,20 @@
     "FleetID": null
   },
   {
+    "ID": "B52096A6-A98F-4082-A0D3-689AE2460300",
+    "StatusID": "990C4E17-6C75-4DDC-BF31-2C8F2E918B4F",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T17:00:38.237000",
+    "RecordAt": "2025-05-24T17:00:38.237000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "EED42DF0-50A2-4960-BF92-68B25FB5B56E",
     "StatusID": "DCD19706-CEBB-4559-9FE6-884CC7258539",
     "OperatorID": "0495CCA1-19BF-48E9-BD6E-DCF8C09E99A0",
@@ -10262,11 +10948,39 @@
     "FleetID": null
   },
   {
+    "ID": "8EA471FD-6956-4D95-828B-68BE90EF0C86",
+    "StatusID": "439DBB11-6C9F-4FD7-B90C-239A9BF01EFE",
+    "OperatorID": "C2ABB938-D0E2-4312-99BE-6672A08C50BB",
+    "Date": "2026-01-21T02:20:30.043000",
+    "RecordAt": "2026-01-21T02:20:30.043000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "80226352-45AB-4861-8EE1-68CA7AFC3961",
     "StatusID": "7D975BBA-A0F6-4849-B592-9A6892BF142F",
     "OperatorID": "7D72BC79-3CD7-4DFD-8F57-19324C6CAD87",
     "Date": "2024-09-28T14:29:17.823000",
     "RecordAt": "2024-09-28T14:29:17.823000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "41D8DCD2-8316-4457-8360-68D7F0053D24",
+    "StatusID": "1F0E7EFD-D5F0-4A7F-8FFE-5FEC757E1041",
+    "OperatorID": "F625FD16-039B-4CA7-9B5F-EC9D8F151997",
+    "Date": "2026-01-12T21:20:27.613000",
+    "RecordAt": "2026-01-12T21:20:27.613000",
     "RecordBy": null,
     "UpdateAt": null,
     "UpdateBy": null,
@@ -10327,6 +11041,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "5 - CA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "13F22658-199C-40CA-BA90-6A2235B13D76",
+    "StatusID": "36889218-5043-4719-A1C7-E2D73BED2F26",
+    "OperatorID": "5A051C04-1F20-4EAE-896D-787BEE0F95C8",
+    "Date": "2024-09-24T14:41:37.080000",
+    "RecordAt": "2024-09-24T14:41:37.080000",
+    "RecordBy": "akram@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -10696,20 +11424,6 @@
     "FleetID": null
   },
   {
-    "ID": "BFCDB002-BA6F-4956-A242-6DFA551884B3",
-    "StatusID": "7D975BBA-A0F6-4849-B592-9A6892BF142F",
-    "OperatorID": "502D7ED8-452B-404C-A02C-6435A7A6DFD3",
-    "Date": "2026-01-06T23:31:08.060000",
-    "RecordAt": "2026-01-06T23:31:08.060000",
-    "RecordBy": null,
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "3 - TX",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
     "ID": "20D44B6A-0023-4536-B5DA-6E03100344A7",
     "StatusID": "E6A5D9EF-FD1B-4641-AC00-4257693D3CCE",
     "OperatorID": "B0F492F6-F883-4823-884B-A3CCD57A6B5B",
@@ -11074,6 +11788,34 @@
     "FleetID": null
   },
   {
+    "ID": "FE8D15EB-7C60-432A-98E8-7084A11EE37B",
+    "StatusID": "3F40B4B1-E98E-45FA-8F6A-08C41177C734",
+    "OperatorID": "0419E168-84CB-4038-BD66-3D1E9335597F",
+    "Date": "2025-03-19T15:15:25.557000",
+    "RecordAt": "2025-03-19T15:15:25.557000",
+    "RecordBy": "akram@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "12 - PA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "ED2D7891-84F2-422C-9930-70C1B2592EB7",
+    "StatusID": "14D7990F-6FE2-44EC-9BF2-F837596221B7",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T16:30:24.983000",
+    "RecordAt": "2025-05-24T16:30:24.983000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "4557FA9D-847E-46CC-9FEC-70E12774369A",
     "StatusID": "20E10408-FFAA-4B91-AFC4-8DCF9A0CBB84",
     "OperatorID": "6C5B5147-E238-4CDD-B4A6-A5B8F1DDC780",
@@ -11270,6 +12012,20 @@
     "FleetID": null
   },
   {
+    "ID": "CAE9CCC8-1B1D-4720-AC0F-7253A8FCD7D5",
+    "StatusID": "710EC10A-D41C-43BE-9CCF-B6A337EAFA7E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T12:00:36.630000",
+    "RecordAt": "2025-05-24T12:00:36.630000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "ECF7351A-CBC5-4476-823D-727646381887",
     "StatusID": "82C99C5F-173B-4820-819A-CCFEAD15ADC5",
     "OperatorID": "DC1A2BF1-30B0-4B32-BE75-1933DB46121C",
@@ -11293,6 +12049,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "12 - PA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "B3253992-B92B-4BC9-8A17-72B452B7C38E",
+    "StatusID": "2F22355A-A64E-43FF-B523-68F5D915376B",
+    "OperatorID": "4F612BE0-F52C-4D16-B3CB-0364EEDF455C",
+    "Date": "2025-10-29T22:06:03.313000",
+    "RecordAt": "2025-10-29T22:06:03.313000",
+    "RecordBy": "zatoria@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -11340,6 +12110,20 @@
     "FleetID": null
   },
   {
+    "ID": "A8D97CE3-A084-4633-A999-735B5B6E92A5",
+    "StatusID": "990C4E17-6C75-4DDC-BF31-2C8F2E918B4F",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T12:00:39.827000",
+    "RecordAt": "2025-05-24T12:00:39.827000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "3D5EF0A1-B7DA-4E91-8936-736DF55520C2",
     "StatusID": "67F7A941-87A7-4748-AB3B-C228406D7785",
     "OperatorID": "0306798A-A5C2-4F97-A7F9-DBFE4C476657",
@@ -11377,20 +12161,6 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "10 - OR",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
-    "ID": "4F079A12-E522-4D2E-AF2F-737BC38ED883",
-    "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
-    "OperatorID": "FE57E36C-74CF-405A-BCA3-B02B331B05AD",
-    "Date": "2026-01-06T23:05:01.480000",
-    "RecordAt": "2026-01-06T23:05:01.480000",
-    "RecordBy": null,
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "3 - TX",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -11522,6 +12292,20 @@
     "FleetID": null
   },
   {
+    "ID": "B3D0FDF6-BECC-4522-9A23-74F500BB7AB8",
+    "StatusID": "2CF6D154-065E-4043-B6FC-71A7E7147B4B",
+    "OperatorID": "E98ECB6B-C801-4FD2-BB42-F2EB942C7FF3",
+    "Date": "2026-01-06T23:03:15.823000",
+    "RecordAt": "2026-01-06T23:03:15.823000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "7 - MI",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "FBE171D3-99CB-4BC0-91C1-74F58FAB1A52",
     "StatusID": "82C99C5F-173B-4820-819A-CCFEAD15ADC5",
     "OperatorID": "96446A53-4EE0-4F13-8790-3680ABB7276E",
@@ -11615,6 +12399,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "10 - OR",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "A1A25D45-78E0-4721-9908-7650807C551C",
+    "StatusID": "40DA1D07-1190-4708-94A0-FEDE6C3EDF1E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T12:30:27.687000",
+    "RecordAt": "2025-05-24T12:30:27.687000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -11788,6 +12586,20 @@
     "FleetID": null
   },
   {
+    "ID": "4E59B71B-55C7-4F38-907A-77F645A92ABB",
+    "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
+    "OperatorID": "F625FD16-039B-4CA7-9B5F-EC9D8F151997",
+    "Date": "2026-01-12T17:50:42.970000",
+    "RecordAt": "2026-01-12T17:50:42.970000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "C183419F-25CD-4CF1-8F49-78138BA3EFC6",
     "StatusID": "C4EF163C-1090-4E76-AA5E-0357DC53AE76",
     "OperatorID": "1ADDD57C-10FC-4BA1-8B51-4D031EEF0EA5",
@@ -11942,6 +12754,34 @@
     "FleetID": null
   },
   {
+    "ID": "AE7F54C6-721B-4F06-8725-791A1FDDE39F",
+    "StatusID": "40DA1D07-1190-4708-94A0-FEDE6C3EDF1E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T22:00:39.027000",
+    "RecordAt": "2025-05-24T22:00:39.027000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "0231FC98-CD6E-4F33-8C46-79224C56EB28",
+    "StatusID": "84B76237-8C85-4B6D-93EC-52783CB9048B",
+    "OperatorID": "3F1BD38A-8961-40A4-B67D-55814530ED1E",
+    "Date": "2026-01-21T02:50:30.287000",
+    "RecordAt": "2026-01-21T02:50:30.287000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "10 - OR",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "B6B5E795-6359-4426-A0CB-79612E145891",
     "StatusID": "82C99C5F-173B-4820-819A-CCFEAD15ADC5",
     "OperatorID": "B1CA77F1-AC90-48A2-B515-C0796A20B172",
@@ -12021,20 +12861,6 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "5 - CA",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
-    "ID": "BC625690-D819-4956-BF3D-7A60F07F1CEF",
-    "StatusID": "685D0FD7-469B-494C-BF74-1D5722903F23",
-    "OperatorID": "B98C1DFD-9D4A-42F8-B5BB-29983DEFC7C7",
-    "Date": "2026-01-15T18:50:29.177000",
-    "RecordAt": "2026-01-15T18:50:29.177000",
-    "RecordBy": null,
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "7 - MI",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -12180,20 +13006,6 @@
     "FleetID": null
   },
   {
-    "ID": "3EC4A254-349B-4145-A4D5-7B8E100765EE",
-    "StatusID": "BC1F0792-3E9D-4D85-B890-9D5F3EFAF14B",
-    "OperatorID": "28BC986B-D995-470F-9C9A-5F5DDEDF337D",
-    "Date": "2024-02-16T15:20:23.323000",
-    "RecordAt": "2024-02-16T15:20:23.323000",
-    "RecordBy": "zatoria@bigstartransit.com",
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "6 - FL",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
     "ID": "B2519B43-A373-4261-B90D-7BA1B4607046",
     "StatusID": "67F7A941-87A7-4748-AB3B-C228406D7785",
     "OperatorID": "3F9CED33-BB56-4491-B091-3D792638A20C",
@@ -12287,6 +13099,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "3 - TX",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "C8D1D244-EE74-4218-94AD-7CB164D48419",
+    "StatusID": "14D7990F-6FE2-44EC-9BF2-F837596221B7",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T11:30:24.923000",
+    "RecordAt": "2025-05-24T11:30:24.923000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -12404,20 +13230,6 @@
     "FleetID": null
   },
   {
-    "ID": "D8DD8711-A4F4-49A5-8A4C-7E171DEE27BE",
-    "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
-    "OperatorID": "D13A0088-A44A-40C9-A0C5-22B33D8ACFD1",
-    "Date": "2026-01-07T15:13:15.300000",
-    "RecordAt": "2026-01-07T15:13:15.300000",
-    "RecordBy": null,
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "3 - TX",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
     "ID": "C3AF5E82-2B1C-4D23-AE1F-7E64E2F99E45",
     "StatusID": "FF95D7BE-164B-44F2-AB2F-E16F9B5C041D",
     "OperatorID": "EADDC3C6-94F0-4BEB-84BD-BB4107554035",
@@ -12460,15 +13272,29 @@
     "FleetID": null
   },
   {
-    "ID": "32FAA9A9-0453-4502-88F3-7F5207861054",
-    "StatusID": "82C99C5F-173B-4820-819A-CCFEAD15ADC5",
-    "OperatorID": "41F4D2E3-0BEF-4E9F-93EC-3CA74D8C9310",
-    "Date": "2023-10-17T13:10:56.777000",
-    "RecordAt": "2023-10-17T13:10:56.777000",
-    "RecordBy": "angelica@bigstartransit.com",
+    "ID": "4CEB292C-A25C-4C0E-8061-7F6BA15603B6",
+    "StatusID": "8B6C849B-AE1B-4BF0-BF46-1D1A71157D7E",
+    "OperatorID": "0419E168-84CB-4038-BD66-3D1E9335597F",
+    "Date": "2025-03-21T14:21:47.150000",
+    "RecordAt": "2025-03-21T14:21:47.150000",
+    "RecordBy": "armani@bigstartransit.com",
     "UpdateAt": null,
     "UpdateBy": null,
-    "DivisionID": "7 - MI",
+    "DivisionID": "12 - PA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "452520EF-010A-4943-8B49-7FA82A39ACFD",
+    "StatusID": "9F098511-E116-4DC7-902A-D2C7EA2EDA20",
+    "OperatorID": "4F612BE0-F52C-4D16-B3CB-0364EEDF455C",
+    "Date": "2025-09-24T19:40:49.190000",
+    "RecordAt": "2025-09-24T19:40:49.190000",
+    "RecordBy": "akram@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -12600,6 +13426,20 @@
     "FleetID": null
   },
   {
+    "ID": "AE66205C-2E89-42C1-98E3-80B62A4D85D2",
+    "StatusID": "8B6C849B-AE1B-4BF0-BF46-1D1A71157D7E",
+    "OperatorID": "54816C97-5653-42FD-B730-4BF857464CB9",
+    "Date": "2025-02-28T16:10:52.990000",
+    "RecordAt": "2025-02-28T16:10:52.990000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "12 - PA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "E7048BEE-3BEC-49E5-BC38-80DF43B2FCFB",
     "StatusID": "DF0471B7-B236-4890-B29A-95D93B45AA95",
     "OperatorID": "413FA7CA-FBF7-4D24-AEAE-492FC3D1FF15",
@@ -12656,20 +13496,6 @@
     "FleetID": null
   },
   {
-    "ID": "78A0E01A-296D-46B9-B494-8129AF028F4A",
-    "StatusID": "685D0FD7-469B-494C-BF74-1D5722903F23",
-    "OperatorID": "B98C1DFD-9D4A-42F8-B5BB-29983DEFC7C7",
-    "Date": "2026-01-15T18:20:28.027000",
-    "RecordAt": "2026-01-15T18:20:28.027000",
-    "RecordBy": null,
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "7 - MI",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
     "ID": "6416CCCD-B860-4E64-A657-8140AD9F97D3",
     "StatusID": "9632A8F6-C887-413E-8EEC-89FB3ADCA4DD",
     "OperatorID": "77769C9B-6EE2-4990-B025-B6C4714386E8",
@@ -12712,6 +13538,20 @@
     "FleetID": null
   },
   {
+    "ID": "B26CBA8B-1377-4471-A32D-81C52675320D",
+    "StatusID": "017E3B84-DF5F-4815-9682-2D9343D6574F",
+    "OperatorID": "4CBE49F3-E1CA-49ED-940F-FF1E396442D4",
+    "Date": "2026-01-20T22:17:13.293000",
+    "RecordAt": "2026-01-20T22:17:13.293000",
+    "RecordBy": "compliance@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "12 - PA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "E568F632-B7A2-4B7C-B81D-81F670957174",
     "StatusID": "A2B3E951-D4F3-4F34-BB54-F15DBD5C7F8C",
     "OperatorID": "278BE6A4-5274-4F59-A8E9-790C64B85A43",
@@ -12721,20 +13561,6 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "11 - GA",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
-    "ID": "9E8A272A-B5B7-4F28-8A6A-8220F1C441F4",
-    "StatusID": "BC1F0792-3E9D-4D85-B890-9D5F3EFAF14B",
-    "OperatorID": "28BC986B-D995-470F-9C9A-5F5DDEDF337D",
-    "Date": "2024-02-19T14:21:18.763000",
-    "RecordAt": "2024-02-19T14:21:18.763000",
-    "RecordBy": "zatoria@bigstartransit.com",
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "6 - FL",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -12861,6 +13687,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "5 - CA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "4CABC5D3-0933-432C-8A4C-83CA30E739F8",
+    "StatusID": "2F22355A-A64E-43FF-B523-68F5D915376B",
+    "OperatorID": "4F612BE0-F52C-4D16-B3CB-0364EEDF455C",
+    "Date": "2026-01-06T00:34:30.873000",
+    "RecordAt": "2026-01-06T00:34:30.873000",
+    "RecordBy": "corporateaccounting@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -13160,6 +14000,20 @@
     "FleetID": null
   },
   {
+    "ID": "F3ADADC9-4A09-41BA-A44F-88023AEF4CD0",
+    "StatusID": "40DA1D07-1190-4708-94A0-FEDE6C3EDF1E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T13:30:29.053000",
+    "RecordAt": "2025-05-24T13:30:29.053000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "AC2AB07B-D4F9-4ED6-90EC-8809B65AF0F4",
     "StatusID": "017E3B84-DF5F-4815-9682-2D9343D6574F",
     "OperatorID": "EA9942C7-540F-4443-9743-D1B2B58DD050",
@@ -13211,6 +14065,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "22EF41CE-D7E5-4A12-9815-889717B8D88F",
+    "StatusID": "C5E5F514-11C4-4539-9B5A-B9A8ED62CF76",
+    "OperatorID": "583F37CB-4FC0-46D2-BEC7-8995CE88FB1B",
+    "Date": "2026-01-06T23:27:26.620000",
+    "RecordAt": "2026-01-06T23:27:26.620000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "6 - FL",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -13351,20 +14219,6 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "6 - FL",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
-    "ID": "8475162F-C83A-47AB-9DF4-8A719A065752",
-    "StatusID": "DCD19706-CEBB-4559-9FE6-884CC7258539",
-    "OperatorID": "D769D763-C427-407D-91EA-01E644D6E7B5",
-    "Date": "2026-01-06T22:59:05.167000",
-    "RecordAt": "2026-01-06T22:59:05.167000",
-    "RecordBy": null,
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "12 - PA",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -13608,20 +14462,6 @@
     "FleetID": null
   },
   {
-    "ID": "BC4D507F-0AF7-4262-9791-8C4B76F6A1E8",
-    "StatusID": "C5E5F514-11C4-4539-9B5A-B9A8ED62CF76",
-    "OperatorID": "DC2A7304-5245-4FAA-9B84-AD2ED149BEBA",
-    "Date": "2026-01-07T15:11:52.197000",
-    "RecordAt": "2026-01-07T15:11:52.197000",
-    "RecordBy": null,
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "6 - FL",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
     "ID": "E158E85A-7404-475A-8A38-8C76AECC216F",
     "StatusID": "B8698A50-FEFF-43BC-90FF-6ED1CAE6C41B",
     "OperatorID": "0495CCA1-19BF-48E9-BD6E-DCF8C09E99A0",
@@ -13692,20 +14532,6 @@
     "FleetID": null
   },
   {
-    "ID": "A1C2B0B0-1236-44AC-848E-8CF650B138C7",
-    "StatusID": "15B6FDDC-E858-4600-AF1D-CE54F8D25357",
-    "OperatorID": "28BC986B-D995-470F-9C9A-5F5DDEDF337D",
-    "Date": "2024-02-28T16:16:22.087000",
-    "RecordAt": "2024-02-28T16:16:22.087000",
-    "RecordBy": "zatoria@bigstartransit.com",
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "6 - FL",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
     "ID": "3F6933BA-70DF-4B03-8FA8-8D4942F3A9A3",
     "StatusID": "C5E5F514-11C4-4539-9B5A-B9A8ED62CF76",
     "OperatorID": "48F3C62B-6E3F-494B-B20A-1E8FF0DD4FD2",
@@ -13715,6 +14541,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "6 - FL",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "86A68864-4903-4F72-A9EC-8D4E9007757F",
+    "StatusID": "40DA1D07-1190-4708-94A0-FEDE6C3EDF1E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T16:30:27.180000",
+    "RecordAt": "2025-05-24T16:30:27.180000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -13860,20 +14700,6 @@
     "FleetID": null
   },
   {
-    "ID": "75A812E2-8912-4BCF-850F-8ED2B597B2BC",
-    "StatusID": "4BFFACDB-70AA-4916-A0D8-1C3FB1690F72",
-    "OperatorID": "41F4D2E3-0BEF-4E9F-93EC-3CA74D8C9310",
-    "Date": "2023-06-23T18:01:18.863000",
-    "RecordAt": "2023-06-23T18:01:18.863000",
-    "RecordBy": "lauren@bigstartransit.com",
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "7 - MI",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
     "ID": "DC7A6B71-1738-48D8-8E6D-8F39D563EED4",
     "StatusID": "0D227DBB-7780-4040-BB27-6362ADC4ECC2",
     "OperatorID": "16790AC3-3A18-4C36-A637-DFD0F88FA7D4",
@@ -13953,20 +14779,6 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "8 - OH",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
-    "ID": "D7B2C03E-AFB8-4780-B190-8FEA821BFD70",
-    "StatusID": "1F0E7EFD-D5F0-4A7F-8FFE-5FEC757E1041",
-    "OperatorID": "B7B196E4-42C0-4A1C-B42F-DBBE117668BB",
-    "Date": "2026-01-06T22:59:31.847000",
-    "RecordAt": "2026-01-06T22:59:31.847000",
-    "RecordBy": null,
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "3 - TX",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -14084,6 +14896,20 @@
     "FleetID": null
   },
   {
+    "ID": "3A7942D3-A570-4E1E-BEB4-91C232455B64",
+    "StatusID": "C5E5F514-11C4-4539-9B5A-B9A8ED62CF76",
+    "OperatorID": "2B41E971-35A0-43A0-B832-5D975F00A008",
+    "Date": "2026-01-21T02:50:29.333000",
+    "RecordAt": "2026-01-21T02:50:29.333000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "6 - FL",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "481773AC-F18F-4320-B4D4-91F8E79E64A8",
     "StatusID": "42763137-455A-436A-BB6A-0C0CAB7F7EE0",
     "OperatorID": "922224E5-3426-480B-8D09-70377A657508",
@@ -14126,6 +14952,20 @@
     "FleetID": null
   },
   {
+    "ID": "DF8B80A5-1997-46AB-960E-92442CBE8106",
+    "StatusID": "710EC10A-D41C-43BE-9CCF-B6A337EAFA7E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-22T18:00:50.190000",
+    "RecordAt": "2025-05-22T18:00:50.190000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "9D970AA8-0E3D-438E-BD6F-924457025390",
     "StatusID": "566DA8ED-E851-4308-9611-C8CB935ECC73",
     "OperatorID": "B1CA77F1-AC90-48A2-B515-C0796A20B172",
@@ -14149,6 +14989,34 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "12 - PA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "FFD9ADCB-C36C-419B-842F-928272B66EFD",
+    "StatusID": "990C4E17-6C75-4DDC-BF31-2C8F2E918B4F",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T11:00:43.977000",
+    "RecordAt": "2025-05-24T11:00:43.977000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "E7563180-1FC1-4F49-A1F0-9289A4F2B084",
+    "StatusID": "14D7990F-6FE2-44EC-9BF2-F837596221B7",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T19:30:25.543000",
+    "RecordAt": "2025-05-24T19:30:25.543000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -14182,11 +15050,11 @@
     "FleetID": null
   },
   {
-    "ID": "FFAA0B84-31FA-4065-B5D9-92CA689F44EB",
-    "StatusID": "40DA1D07-1190-4708-94A0-FEDE6C3EDF1E",
-    "OperatorID": "F2F61E35-C5E5-4E0F-B616-C6C99DB311EA",
-    "Date": "2025-12-13T14:45:57.433000",
-    "RecordAt": "2025-12-13T14:45:57.433000",
+    "ID": "825B8815-F1D9-4F1C-AFE0-92A4DEA58595",
+    "StatusID": "710EC10A-D41C-43BE-9CCF-B6A337EAFA7E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T22:00:30.767000",
+    "RecordAt": "2025-05-24T22:00:30.767000",
     "RecordBy": null,
     "UpdateAt": null,
     "UpdateBy": null,
@@ -14196,15 +15064,15 @@
     "FleetID": null
   },
   {
-    "ID": "2271D8A7-9C05-4B96-B23A-92CFF35804EE",
-    "StatusID": "9850D839-103E-4559-8A15-D390FCC68803",
-    "OperatorID": "B67AD39A-3675-4B16-910A-6D503B0BC322",
-    "Date": "2026-01-06T23:39:30.007000",
-    "RecordAt": "2026-01-06T23:39:30.007000",
+    "ID": "FFAA0B84-31FA-4065-B5D9-92CA689F44EB",
+    "StatusID": "40DA1D07-1190-4708-94A0-FEDE6C3EDF1E",
+    "OperatorID": "F2F61E35-C5E5-4E0F-B616-C6C99DB311EA",
+    "Date": "2025-12-13T14:45:57.433000",
+    "RecordAt": "2025-12-13T14:45:57.433000",
     "RecordBy": null,
     "UpdateAt": null,
     "UpdateBy": null,
-    "DivisionID": "12 - PA",
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -14275,6 +15143,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "5 - CA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "A5A34F13-3EB4-4ED0-9478-931B96BF0CB8",
+    "StatusID": "DCD19706-CEBB-4559-9FE6-884CC7258539",
+    "OperatorID": "08B55A08-29A1-4DE7-BC3D-9415E6A828F5",
+    "Date": "2026-01-21T02:20:25.947000",
+    "RecordAt": "2026-01-21T02:20:25.947000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "12 - PA",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -14462,6 +15344,34 @@
     "FleetID": null
   },
   {
+    "ID": "5EBAEE34-DD38-4386-A2B6-94DB7AFB532B",
+    "StatusID": "3F40B4B1-E98E-45FA-8F6A-08C41177C734",
+    "OperatorID": "4CBE49F3-E1CA-49ED-940F-FF1E396442D4",
+    "Date": "2026-01-21T03:08:06.157000",
+    "RecordAt": "2026-01-21T03:08:06.157000",
+    "RecordBy": "compliance@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "12 - PA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "63A5E6C7-FF52-400B-87F5-950BD472B660",
+    "StatusID": "1A544845-CA14-43DB-884F-E5F0DAC6D877",
+    "OperatorID": "F625FD16-039B-4CA7-9B5F-EC9D8F151997",
+    "Date": "2026-01-21T00:50:34.100000",
+    "RecordAt": "2026-01-21T00:50:34.100000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "192D0371-036B-4686-879A-9513746C3E54",
     "StatusID": "397D52F5-C0B6-47F5-BF9F-D643D955018E",
     "OperatorID": "5CB0C570-E3EA-4554-B7B3-EE97B30DB124",
@@ -14546,6 +15456,20 @@
     "FleetID": null
   },
   {
+    "ID": "58A1C864-453A-496D-AD50-95F6DA43DB00",
+    "StatusID": "14D7990F-6FE2-44EC-9BF2-F837596221B7",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T11:00:47.003000",
+    "RecordAt": "2025-05-24T11:00:47.003000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "6773C7CA-B742-41A9-9868-96015D958108",
     "StatusID": "C5E5F514-11C4-4539-9B5A-B9A8ED62CF76",
     "OperatorID": "16790AC3-3A18-4C36-A637-DFD0F88FA7D4",
@@ -14616,6 +15540,20 @@
     "FleetID": null
   },
   {
+    "ID": "70995F6F-A374-470B-B764-96F1EA7B0A25",
+    "StatusID": "710EC10A-D41C-43BE-9CCF-B6A337EAFA7E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T21:30:20.313000",
+    "RecordAt": "2025-05-24T21:30:20.313000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "39E202A9-3692-4E39-911E-9747AD9AE978",
     "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
     "OperatorID": "328A9D4D-7035-4E26-8D45-30A5F51A0339",
@@ -14625,6 +15563,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "3 - TX",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "6022AEFF-5399-4AB9-880A-976D083D601D",
+    "StatusID": "40DA1D07-1190-4708-94A0-FEDE6C3EDF1E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T20:30:26.960000",
+    "RecordAt": "2025-05-24T20:30:26.960000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -14728,15 +15680,15 @@
     "FleetID": null
   },
   {
-    "ID": "7C4302E2-9F7D-4248-97CE-97DB798FA6F5",
-    "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
-    "OperatorID": "B53D1212-E1BB-4650-81C8-7C7B2751AB79",
-    "Date": "2026-01-06T23:02:54.080000",
-    "RecordAt": "2026-01-06T23:02:54.080000",
+    "ID": "1D98D7E8-23CE-4794-8601-97CF9ADDB3AA",
+    "StatusID": "40DA1D07-1190-4708-94A0-FEDE6C3EDF1E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T20:00:40.730000",
+    "RecordAt": "2025-05-24T20:00:40.730000",
     "RecordBy": null,
     "UpdateAt": null,
     "UpdateBy": null,
-    "DivisionID": "3 - TX",
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -14821,20 +15773,6 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "3 - TX",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
-    "ID": "02440145-CE92-4DB8-A59E-985E0C86BE0D",
-    "StatusID": "82C99C5F-173B-4820-819A-CCFEAD15ADC5",
-    "OperatorID": "41F4D2E3-0BEF-4E9F-93EC-3CA74D8C9310",
-    "Date": "2023-07-12T21:41:30.783000",
-    "RecordAt": "2023-07-12T21:41:30.783000",
-    "RecordBy": "darren@bigstartransit.com",
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "7 - MI",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -15106,12 +16044,12 @@
     "FleetID": null
   },
   {
-    "ID": "25D38599-F521-4E13-9187-9BDBF1C11386",
-    "StatusID": "C4EF163C-1090-4E76-AA5E-0357DC53AE76",
-    "OperatorID": "B67AD39A-3675-4B16-910A-6D503B0BC322",
-    "Date": "2026-01-06T23:28:55.800000",
-    "RecordAt": "2026-01-06T23:28:55.800000",
-    "RecordBy": null,
+    "ID": "ACC5ED80-8EB5-41BF-9EF8-9B90232EA43F",
+    "StatusID": "E93910D9-B364-4E42-ADC0-FFA8FEC11CD2",
+    "OperatorID": "0419E168-84CB-4038-BD66-3D1E9335597F",
+    "Date": "2025-05-02T19:33:29.567000",
+    "RecordAt": "2025-05-02T19:33:29.567000",
+    "RecordBy": "saul@bigstartransit.com",
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "12 - PA",
@@ -15260,6 +16198,20 @@
     "FleetID": null
   },
   {
+    "ID": "814732D4-6340-44AE-9EBA-9DA923692BF1",
+    "StatusID": "017E3B84-DF5F-4815-9682-2D9343D6574F",
+    "OperatorID": "0419E168-84CB-4038-BD66-3D1E9335597F",
+    "Date": "2025-03-21T14:32:48.707000",
+    "RecordAt": "2025-03-21T14:32:48.707000",
+    "RecordBy": "armani@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "12 - PA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "68911E3E-9E81-43E5-B29C-9DD098B3BD63",
     "StatusID": "EA630AC9-1B42-4173-8D0E-4108178D24DE",
     "OperatorID": "16790AC3-3A18-4C36-A637-DFD0F88FA7D4",
@@ -15325,20 +16277,6 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "5 - CA",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
-    "ID": "26CDF71E-2444-4D71-B33F-9E0B0FCD322C",
-    "StatusID": "8A1CC050-5B51-4D70-8698-F93283A42F90",
-    "OperatorID": "41F4D2E3-0BEF-4E9F-93EC-3CA74D8C9310",
-    "Date": "2023-09-21T17:44:58.540000",
-    "RecordAt": "2023-09-21T17:44:58.540000",
-    "RecordBy": "darren@bigstartransit.com",
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "7 - MI",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -15624,6 +16562,20 @@
     "FleetID": null
   },
   {
+    "ID": "FFC65F7B-0840-4481-8605-A031C52A3E3D",
+    "StatusID": "710EC10A-D41C-43BE-9CCF-B6A337EAFA7E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T15:30:21.983000",
+    "RecordAt": "2025-05-24T15:30:21.983000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "8F1DDD8F-2EA3-4D1A-AF51-A035CE228C2C",
     "StatusID": "B8698A50-FEFF-43BC-90FF-6ED1CAE6C41B",
     "OperatorID": "7E642892-5D9F-4933-B402-01F63EC74D79",
@@ -15904,20 +16856,6 @@
     "FleetID": null
   },
   {
-    "ID": "1007F920-CB98-4AE1-9250-A29C130341E3",
-    "StatusID": "613F66D7-6CDD-43FE-B3F1-67D615188D02",
-    "OperatorID": "28BC986B-D995-470F-9C9A-5F5DDEDF337D",
-    "Date": "2024-03-25T22:07:55.443000",
-    "RecordAt": "2024-03-25T22:07:55.443000",
-    "RecordBy": "zatoria@bigstartransit.com",
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "6 - FL",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
     "ID": "32595EB4-8826-4A5F-AA1B-A2A79B7D0AEE",
     "StatusID": "9611AC36-3AEE-4EDE-89B6-8B05DDFE7124",
     "OperatorID": "13C33CDA-A72D-4AF6-B999-4E08A1525490",
@@ -15988,20 +16926,6 @@
     "FleetID": null
   },
   {
-    "ID": "E29AF6DC-109C-4560-9258-A3ABD9AF16D0",
-    "StatusID": "EB309DDC-A302-4428-9E9F-8FC34A30A859",
-    "OperatorID": "28BC986B-D995-470F-9C9A-5F5DDEDF337D",
-    "Date": "2024-03-04T15:32:34.323000",
-    "RecordAt": "2024-03-04T15:32:34.323000",
-    "RecordBy": "zatoria@bigstartransit.com",
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "6 - FL",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
     "ID": "030E2E75-D9EC-4D04-A256-A3BD08BFDCC7",
     "StatusID": "9F098511-E116-4DC7-902A-D2C7EA2EDA20",
     "OperatorID": "77D56C08-B5E2-4718-97AE-2CB23D5C2809",
@@ -16039,20 +16963,6 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "7 - MI",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
-    "ID": "4507A7BF-5560-4EA6-ABA6-A40D55EA57B7",
-    "StatusID": "85F8103E-F6A4-4EC1-9BD5-842FB4BED561",
-    "OperatorID": "28BC986B-D995-470F-9C9A-5F5DDEDF337D",
-    "Date": "2024-03-12T19:37:22.953000",
-    "RecordAt": "2024-03-12T19:37:22.953000",
-    "RecordBy": "zatoria@bigstartransit.com",
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "6 - FL",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -16212,20 +17122,6 @@
     "FleetID": null
   },
   {
-    "ID": "BF553D9B-E389-492B-8442-A5DB994D37C9",
-    "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
-    "OperatorID": "B7B196E4-42C0-4A1C-B42F-DBBE117668BB",
-    "Date": "2026-01-06T22:56:35.837000",
-    "RecordAt": "2026-01-06T22:56:35.837000",
-    "RecordBy": null,
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "3 - TX",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
     "ID": "85AFB37E-EC8E-4FC3-AB7C-A60E02ACF0F2",
     "StatusID": "E4ED5BC0-CEEB-432E-943A-0B5B89DD08AE",
     "OperatorID": "99B3EB62-BE03-422C-8CB0-591247CC9BC2",
@@ -16319,20 +17215,6 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "12 - PA",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
-    "ID": "F5BFFA4C-B2BB-4810-A90A-A70E24EA976D",
-    "StatusID": "2CF6D154-065E-4043-B6FC-71A7E7147B4B",
-    "OperatorID": "41F4D2E3-0BEF-4E9F-93EC-3CA74D8C9310",
-    "Date": "2023-07-07T02:36:19.430000",
-    "RecordAt": "2023-07-07T02:36:19.430000",
-    "RecordBy": "darren@bigstartransit.com",
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "7 - MI",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -16884,6 +17766,20 @@
     "FleetID": null
   },
   {
+    "ID": "F3FEE042-EEFC-4F23-A06D-AE9D9A395B69",
+    "StatusID": "14D7990F-6FE2-44EC-9BF2-F837596221B7",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T21:00:40.560000",
+    "RecordAt": "2025-05-24T21:00:40.560000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "F0F0296B-84EA-45E0-A3E3-AEECD9CDC855",
     "StatusID": "52B23CCA-0D3B-470E-8C6B-875B2127406F",
     "OperatorID": "243C975B-AB39-4B0F-A5A4-541CE20CD7E5",
@@ -17038,20 +17934,6 @@
     "FleetID": null
   },
   {
-    "ID": "D006D667-DCEF-48D7-8214-AFC61E79DD23",
-    "StatusID": "BC1F0792-3E9D-4D85-B890-9D5F3EFAF14B",
-    "OperatorID": "28BC986B-D995-470F-9C9A-5F5DDEDF337D",
-    "Date": "2024-02-16T19:39:56.637000",
-    "RecordAt": "2024-02-16T19:39:56.637000",
-    "RecordBy": "zatoria@bigstartransit.com",
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "6 - FL",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
     "ID": "F7AE7849-163F-4302-B8BA-AFF1DF0B46FA",
     "StatusID": "DD941DEA-02F9-48A3-B58C-BEEA5C9984C4",
     "OperatorID": "24EEFDA9-1DDA-4DEB-8631-3FF6202E8A3A",
@@ -17066,6 +17948,20 @@
     "FleetID": null
   },
   {
+    "ID": "8BF62665-3C3A-41FE-92B3-B03A2FF50FF4",
+    "StatusID": "40DA1D07-1190-4708-94A0-FEDE6C3EDF1E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T21:30:28.503000",
+    "RecordAt": "2025-05-24T21:30:28.503000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "255F1B50-6057-4E71-ABF9-B04994665E70",
     "StatusID": "85F8103E-F6A4-4EC1-9BD5-842FB4BED561",
     "OperatorID": "3C0FBEA9-5198-4060-B3E9-C2C84377A614",
@@ -17075,6 +17971,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "6 - FL",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "961A8473-51DA-4FBB-BE3D-B06326337108",
+    "StatusID": "14D7990F-6FE2-44EC-9BF2-F837596221B7",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T12:00:42.203000",
+    "RecordAt": "2025-05-24T12:00:42.203000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -17271,6 +18181,34 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "12 - PA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "BD8758AB-E38A-4DE7-B86C-B368DE02F36C",
+    "StatusID": "8B6C849B-AE1B-4BF0-BF46-1D1A71157D7E",
+    "OperatorID": "AD4E4FDD-6B1B-495E-9D6E-FA10E8059D46",
+    "Date": "2026-01-21T03:06:41.400000",
+    "RecordAt": "2026-01-21T03:06:41.400000",
+    "RecordBy": "compliance@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "12 - PA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "228ECBE2-384C-447B-95EE-B37C289B42AA",
+    "StatusID": "990C4E17-6C75-4DDC-BF31-2C8F2E918B4F",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T20:00:35.850000",
+    "RecordAt": "2025-05-24T20:00:35.850000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -17612,6 +18550,20 @@
     "FleetID": null
   },
   {
+    "ID": "0DF916BB-E836-4AFE-BD4A-B612EC4BB2B6",
+    "StatusID": "548AB58E-A17E-4898-A7C1-153E82156E33",
+    "OperatorID": "54816C97-5653-42FD-B730-4BF857464CB9",
+    "Date": "2025-02-28T15:40:53.450000",
+    "RecordAt": "2025-02-28T15:40:53.450000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "12 - PA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "153E997E-C11E-4686-987B-B680474923F1",
     "StatusID": "A2B3E951-D4F3-4F34-BB54-F15DBD5C7F8C",
     "OperatorID": "4E5082CE-53AD-4B6C-98D8-255BC0C15DE5",
@@ -17705,6 +18657,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "3 - TX",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "1FBA3E14-29A1-4E61-8127-B7705DD9733D",
+    "StatusID": "40DA1D07-1190-4708-94A0-FEDE6C3EDF1E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T17:00:42.857000",
+    "RecordAt": "2025-05-24T17:00:42.857000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -18256,6 +19222,20 @@
     "FleetID": null
   },
   {
+    "ID": "0D352768-8D0B-46EB-B14B-BC69731B84E4",
+    "StatusID": "7D975BBA-A0F6-4849-B592-9A6892BF142F",
+    "OperatorID": "B7A58196-2B6D-4740-BF57-054DC6DFED53",
+    "Date": "2026-01-06T23:32:58.700000",
+    "RecordAt": "2026-01-06T23:32:58.700000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "69AD56F2-D4A4-4B16-AAD3-BC744CCCC0C7",
     "StatusID": "4185B583-698B-42AB-9EA8-5F7D2161E658",
     "OperatorID": "7B582D4D-83AE-4722-939E-419D30A26913",
@@ -18452,15 +19432,15 @@
     "FleetID": null
   },
   {
-    "ID": "41362FE2-01B6-4A17-9782-BF10DC6ABA24",
-    "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
-    "OperatorID": "9A1B24A7-8E33-4940-881A-6B0A372391EA",
-    "Date": "2026-01-15T19:20:29.743000",
-    "RecordAt": "2026-01-15T19:20:29.743000",
+    "ID": "15703B42-6EED-454B-B625-BF22055CAB5B",
+    "StatusID": "990C4E17-6C75-4DDC-BF31-2C8F2E918B4F",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T15:00:43.630000",
+    "RecordAt": "2025-05-24T15:00:43.630000",
     "RecordBy": null,
     "UpdateAt": null,
     "UpdateBy": null,
-    "DivisionID": "3 - TX",
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -18629,6 +19609,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "3 - TX",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "A6A9E0FC-74AA-4FAE-9F5E-C080C3970A8D",
+    "StatusID": "31031C1B-C8B4-45FC-A0BE-A8E952A89388",
+    "OperatorID": "EA085C89-E733-45C7-8F5D-79F0877D4269",
+    "Date": "2026-01-20T21:13:27.583000",
+    "RecordAt": "2026-01-20T21:13:27.583000",
+    "RecordBy": "doug@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -18844,20 +19838,6 @@
     "FleetID": null
   },
   {
-    "ID": "5A19DCF0-C674-4767-A237-C220E5276C85",
-    "StatusID": "EA630AC9-1B42-4173-8D0E-4108178D24DE",
-    "OperatorID": "28BC986B-D995-470F-9C9A-5F5DDEDF337D",
-    "Date": "2024-10-29T16:54:17.987000",
-    "RecordAt": "2024-10-29T16:54:17.987000",
-    "RecordBy": "armani@bigstartransit.com",
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "6 - FL",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
     "ID": "A03DB2EC-C187-4CB4-9FFB-C2323F28AA1C",
     "StatusID": "CA2C1184-58DE-4D88-9F66-4E606665A6FE",
     "OperatorID": "2EC1C984-A860-4A11-97F6-BE208CFF8BAE",
@@ -19026,15 +20006,15 @@
     "FleetID": null
   },
   {
-    "ID": "3BCEE036-8ACC-496D-94AF-C3D646772AAF",
-    "StatusID": "C4EF163C-1090-4E76-AA5E-0357DC53AE76",
-    "OperatorID": "D769D763-C427-407D-91EA-01E644D6E7B5",
-    "Date": "2026-01-06T23:02:24.563000",
-    "RecordAt": "2026-01-06T23:02:24.563000",
+    "ID": "6B215232-2023-4126-A02A-C3CAB14ED7E2",
+    "StatusID": "710EC10A-D41C-43BE-9CCF-B6A337EAFA7E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T20:00:32.567000",
+    "RecordAt": "2025-05-24T20:00:32.567000",
     "RecordBy": null,
     "UpdateAt": null,
     "UpdateBy": null,
-    "DivisionID": "12 - PA",
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -19320,6 +20300,20 @@
     "FleetID": null
   },
   {
+    "ID": "9C56AB07-B35D-41D0-95C3-C6257A960E64",
+    "StatusID": "14D7990F-6FE2-44EC-9BF2-F837596221B7",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T13:30:26.800000",
+    "RecordAt": "2025-05-24T13:30:26.800000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "2C37DFD3-92B1-4846-9ACF-C6417ED69A26",
     "StatusID": "36207DD7-68AA-4DBD-8B38-0BE357B8BDF4",
     "OperatorID": "1036B59B-1DBA-4702-9FE4-FB48D02240A8",
@@ -19343,6 +20337,34 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "7 - MI",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "96E3D8A2-B727-46CA-83E1-C66CC913BD17",
+    "StatusID": "40DA1D07-1190-4708-94A0-FEDE6C3EDF1E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T14:30:30.503000",
+    "RecordAt": "2025-05-24T14:30:30.503000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "1C94B7D6-6A60-41C5-A6EA-C67423B0CBA8",
+    "StatusID": "439DBB11-6C9F-4FD7-B90C-239A9BF01EFE",
+    "OperatorID": "C2ABB938-D0E2-4312-99BE-6672A08C50BB",
+    "Date": "2026-01-21T01:50:28.997000",
+    "RecordAt": "2026-01-21T01:50:28.997000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -19418,6 +20440,20 @@
     "FleetID": null
   },
   {
+    "ID": "F46BE250-0317-4B59-8BE1-C77787FB3012",
+    "StatusID": "990C4E17-6C75-4DDC-BF31-2C8F2E918B4F",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T18:30:28.247000",
+    "RecordAt": "2025-05-24T18:30:28.247000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "1D01E09E-97BE-4DCE-A229-C7ECC17A6006",
     "StatusID": "C4EF163C-1090-4E76-AA5E-0357DC53AE76",
     "OperatorID": "1ADDD57C-10FC-4BA1-8B51-4D031EEF0EA5",
@@ -19474,20 +20510,6 @@
     "FleetID": null
   },
   {
-    "ID": "E8B989D2-1FCB-48AE-852D-C8B8609E7001",
-    "StatusID": "613F66D7-6CDD-43FE-B3F1-67D615188D02",
-    "OperatorID": "28BC986B-D995-470F-9C9A-5F5DDEDF337D",
-    "Date": "2024-03-26T16:30:37.927000",
-    "RecordAt": "2024-03-26T16:30:37.927000",
-    "RecordBy": null,
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "6 - FL",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
     "ID": "626B318D-289F-4767-89F0-C90C0B72E55B",
     "StatusID": "613F66D7-6CDD-43FE-B3F1-67D615188D02",
     "OperatorID": "533287F3-08A4-4B29-A506-A961E6D0404A",
@@ -19497,6 +20519,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "6 - FL",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "EBD23C46-D0D5-4ECF-A5A7-C969C8B1D3D9",
+    "StatusID": "11EF6817-E21A-4D36-BBF2-2E20F41D785E",
+    "OperatorID": "18F2607C-BB31-47F6-88F6-C1BBCE51C0FD",
+    "Date": "2026-01-21T02:50:33.340000",
+    "RecordAt": "2026-01-21T02:50:33.340000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "5 - CA",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -19628,6 +20664,20 @@
     "FleetID": null
   },
   {
+    "ID": "9480DC14-743F-4A4A-A89F-CAE04144127B",
+    "StatusID": "B4709CA2-5DBC-4B92-9A61-E5783C5634A1",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-12-03T19:02:17.133000",
+    "RecordAt": "2025-12-03T19:02:17.133000",
+    "RecordBy": "doug@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "AEECD7DE-04BE-442D-95C4-CAF1316E8173",
     "StatusID": "20E10408-FFAA-4B91-AFC4-8DCF9A0CBB84",
     "OperatorID": "6C5B5147-E238-4CDD-B4A6-A5B8F1DDC780",
@@ -19665,6 +20715,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "10 - OR",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "949B67F8-F71E-4616-B331-CB32456712EB",
+    "StatusID": "14D7990F-6FE2-44EC-9BF2-F837596221B7",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T15:00:45.897000",
+    "RecordAt": "2025-05-24T15:00:45.897000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -19735,6 +20799,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "3 - TX",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "0B169351-5881-48F3-930E-CBEEB019CD6A",
+    "StatusID": "40DA1D07-1190-4708-94A0-FEDE6C3EDF1E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T18:00:41.407000",
+    "RecordAt": "2025-05-24T18:00:41.407000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -19852,15 +20930,29 @@
     "FleetID": null
   },
   {
-    "ID": "8B5D9DCD-F7B9-4237-A6AD-CD3B40107AFE",
-    "StatusID": "B8698A50-FEFF-43BC-90FF-6ED1CAE6C41B",
-    "OperatorID": "B67AD39A-3675-4B16-910A-6D503B0BC322",
-    "Date": "2026-01-06T23:01:02.757000",
-    "RecordAt": "2026-01-06T23:01:02.757000",
+    "ID": "28D36808-C2EF-45B5-B64B-CD4E57DC87BC",
+    "StatusID": "14D7990F-6FE2-44EC-9BF2-F837596221B7",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T14:30:28.273000",
+    "RecordAt": "2025-05-24T14:30:28.273000",
     "RecordBy": null,
     "UpdateAt": null,
     "UpdateBy": null,
-    "DivisionID": "12 - PA",
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "6961BE89-C0F3-42E9-9668-CDA5D4049DEA",
+    "StatusID": "710EC10A-D41C-43BE-9CCF-B6A337EAFA7E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T16:30:20.300000",
+    "RecordAt": "2025-05-24T16:30:20.300000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -19917,6 +21009,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "10 - OR",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "28D7AFAA-43D0-4207-B6E1-CE277D7C2A8D",
+    "StatusID": "C56C748B-D740-4D55-B52B-0A27800F43CB",
+    "OperatorID": "5A051C04-1F20-4EAE-896D-787BEE0F95C8",
+    "Date": "2024-11-05T14:19:32.890000",
+    "RecordAt": "2024-11-05T14:19:32.890000",
+    "RecordBy": "akram@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -20216,6 +21322,34 @@
     "FleetID": null
   },
   {
+    "ID": "2EDBAC53-1EDE-4E1F-A021-D0640D73C4DE",
+    "StatusID": "990C4E17-6C75-4DDC-BF31-2C8F2E918B4F",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T17:30:25.017000",
+    "RecordAt": "2025-05-24T17:30:25.017000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "2F8ADA23-D890-4E0F-B01E-D0A8D986BEAA",
+    "StatusID": "C5E5F514-11C4-4539-9B5A-B9A8ED62CF76",
+    "OperatorID": "583F37CB-4FC0-46D2-BEC7-8995CE88FB1B",
+    "Date": "2026-01-06T22:57:29.553000",
+    "RecordAt": "2026-01-06T22:57:29.553000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "6 - FL",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "3C1A2EAB-6A75-4A74-9136-D0D1BCF6238A",
     "StatusID": "D3B6540A-D286-4D8D-8364-2401F7C616F8",
     "OperatorID": "005143AD-B7BC-463F-B904-E7789AA67822",
@@ -20314,6 +21448,20 @@
     "FleetID": null
   },
   {
+    "ID": "FCC791D2-D938-4984-ACCA-D1DC0DE03067",
+    "StatusID": "3F40B4B1-E98E-45FA-8F6A-08C41177C734",
+    "OperatorID": "54816C97-5653-42FD-B730-4BF857464CB9",
+    "Date": "2025-02-28T15:32:38.170000",
+    "RecordAt": "2025-02-28T15:32:38.170000",
+    "RecordBy": "akram@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "12 - PA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "E8C0ABA5-014D-46CC-84D7-D2059ADC65C2",
     "StatusID": "DCD19706-CEBB-4559-9FE6-884CC7258539",
     "OperatorID": "7E642892-5D9F-4933-B402-01F63EC74D79",
@@ -20337,6 +21485,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "10 - OR",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "0BFF3748-09D2-4CB3-838A-D21B299D50FA",
+    "StatusID": "397D52F5-C0B6-47F5-BF9F-D643D955018E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-06-04T12:32:29.877000",
+    "RecordAt": "2025-06-04T12:32:29.877000",
+    "RecordBy": "doug@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -20533,20 +21695,6 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "3 - TX",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
-    "ID": "0051F040-7C04-4052-B4EE-D3CB6C03DE5B",
-    "StatusID": "DCD19706-CEBB-4559-9FE6-884CC7258539",
-    "OperatorID": "B67AD39A-3675-4B16-910A-6D503B0BC322",
-    "Date": "2026-01-06T23:34:23.520000",
-    "RecordAt": "2026-01-06T23:34:23.520000",
-    "RecordBy": null,
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "12 - PA",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -20804,6 +21952,34 @@
     "FleetID": null
   },
   {
+    "ID": "CE174FD4-5C7C-42F7-A815-D60D6F296564",
+    "StatusID": "685D0FD7-469B-494C-BF74-1D5722903F23",
+    "OperatorID": "E98ECB6B-C801-4FD2-BB42-F2EB942C7FF3",
+    "Date": "2026-01-06T20:25:07.377000",
+    "RecordAt": "2026-01-06T20:25:07.377000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "7 - MI",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "1E66CC3D-1C34-473B-B1E6-D65EEEDF9D65",
+    "StatusID": "14D7990F-6FE2-44EC-9BF2-F837596221B7",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T15:30:27.277000",
+    "RecordAt": "2025-05-24T15:30:27.277000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "50B5164C-A47C-4CCC-9854-D68126165053",
     "StatusID": "1A544845-CA14-43DB-884F-E5F0DAC6D877",
     "OperatorID": "6C5B5147-E238-4CDD-B4A6-A5B8F1DDC780",
@@ -21000,6 +22176,20 @@
     "FleetID": null
   },
   {
+    "ID": "A08AC571-0A98-45C9-8D15-D9FFFB8AED1B",
+    "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
+    "OperatorID": "9CBD3E09-4E74-49A5-BF10-8EA6C8DAA691",
+    "Date": "2026-01-21T02:50:31.427000",
+    "RecordAt": "2026-01-21T02:50:31.427000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "8CD95003-63D4-4E98-9EB2-DA3F550A5F28",
     "StatusID": "B8698A50-FEFF-43BC-90FF-6ED1CAE6C41B",
     "OperatorID": "0DBA6A17-CC08-445B-A673-E92EE466C5A5",
@@ -21079,6 +22269,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "596BB27A-3FB7-4318-B81D-DBBFC129D32A",
+    "StatusID": "36889218-5043-4719-A1C7-E2D73BED2F26",
+    "OperatorID": "F625FD16-039B-4CA7-9B5F-EC9D8F151997",
+    "Date": "2026-01-13T23:50:30.450000",
+    "RecordAt": "2026-01-13T23:50:30.450000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -21196,6 +22400,20 @@
     "FleetID": null
   },
   {
+    "ID": "4B353D8A-2B22-441E-94D2-DD3B911221F7",
+    "StatusID": "14D7990F-6FE2-44EC-9BF2-F837596221B7",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T20:30:24.783000",
+    "RecordAt": "2025-05-24T20:30:24.783000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "77A80445-9142-4AAF-BEC8-DD4E7DD8483D",
     "StatusID": "DD941DEA-02F9-48A3-B58C-BEEA5C9984C4",
     "OperatorID": "ADD22A46-FB7A-4109-9BE0-1066963A75B4",
@@ -21219,6 +22437,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "5 - CA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "FEA9AD23-653C-4D4F-9B25-DD9397FE3184",
+    "StatusID": "14D7990F-6FE2-44EC-9BF2-F837596221B7",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T16:00:51.673000",
+    "RecordAt": "2025-05-24T16:00:51.673000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -21546,6 +22778,20 @@
     "FleetID": null
   },
   {
+    "ID": "6DF3D492-2AD4-44C8-BD7A-E0B3EA077FD6",
+    "StatusID": "990C4E17-6C75-4DDC-BF31-2C8F2E918B4F",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T16:00:48.360000",
+    "RecordAt": "2025-05-24T16:00:48.360000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "6A78A6B4-75FB-487F-9458-E0B9C13BD29D",
     "StatusID": "A2B3E951-D4F3-4F34-BB54-F15DBD5C7F8C",
     "OperatorID": "5009F756-6A7D-46F9-94AF-DDBE554B0A33",
@@ -21630,6 +22876,34 @@
     "FleetID": null
   },
   {
+    "ID": "AE3F2401-450C-4005-8D4E-E1501E7EBB1D",
+    "StatusID": "990C4E17-6C75-4DDC-BF31-2C8F2E918B4F",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T19:00:37.140000",
+    "RecordAt": "2025-05-24T19:00:37.140000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "350FE7C0-43B9-427B-AF5E-E15D70EA04F6",
+    "StatusID": "710EC10A-D41C-43BE-9CCF-B6A337EAFA7E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T13:00:42.437000",
+    "RecordAt": "2025-05-24T13:00:42.437000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "F309034E-45E6-4C0E-95F2-E17B5BFEC814",
     "StatusID": "1F0E7EFD-D5F0-4A7F-8FFE-5FEC757E1041",
     "OperatorID": "DDF85D26-C7B7-4CF2-BD18-646698AE70AC",
@@ -21667,20 +22941,6 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "2 - IL",
-    "SequenceID": null,
-    "ProviderID": null,
-    "FleetID": null
-  },
-  {
-    "ID": "69D0AD67-7535-4221-85DD-E1E07D072B85",
-    "StatusID": "5784C955-A664-4271-9A5C-9EC818D56E18",
-    "OperatorID": "28BC986B-D995-470F-9C9A-5F5DDEDF337D",
-    "Date": "2024-03-27T12:20:00.780000",
-    "RecordAt": "2024-03-27T12:20:00.780000",
-    "RecordBy": "david@bigstartransit.com",
-    "UpdateAt": null,
-    "UpdateBy": null,
-    "DivisionID": "6 - FL",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -21765,6 +23025,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "6 - FL",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "1402CB37-FD81-4CC9-964B-E2B1B9839CA6",
+    "StatusID": "40DA1D07-1190-4708-94A0-FEDE6C3EDF1E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T16:00:54.243000",
+    "RecordAt": "2025-05-24T16:00:54.243000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -21891,6 +23165,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "11 - GA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "DA795EC0-4A85-4A9D-82DF-E394B4BF18F2",
+    "StatusID": "017E3B84-DF5F-4815-9682-2D9343D6574F",
+    "OperatorID": "0419E168-84CB-4038-BD66-3D1E9335597F",
+    "Date": "2025-03-21T14:21:06.337000",
+    "RecordAt": "2025-03-21T14:21:06.337000",
+    "RecordBy": "armani@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "12 - PA",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -22316,6 +23604,48 @@
     "FleetID": null
   },
   {
+    "ID": "D8172001-2E10-4D50-AC10-E6E3EC590DBC",
+    "StatusID": "990C4E17-6C75-4DDC-BF31-2C8F2E918B4F",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T11:30:22.760000",
+    "RecordAt": "2025-05-24T11:30:22.760000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "77791245-F31E-45C1-AAB7-E6ED255D86E3",
+    "StatusID": "318AB4DE-1723-4404-B49C-F4A675CB4403",
+    "OperatorID": "E98ECB6B-C801-4FD2-BB42-F2EB942C7FF3",
+    "Date": "2026-01-06T20:26:15.097000",
+    "RecordAt": "2026-01-06T20:26:15.097000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "7 - MI",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "6E889AEA-4DC0-4DC5-8844-E7144B948BEF",
+    "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
+    "OperatorID": "EEDDFA2E-492D-4315-854F-4F5A56CC27CC",
+    "Date": "2026-01-21T02:20:31.200000",
+    "RecordAt": "2026-01-21T02:20:31.200000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "03514EF1-E158-4380-A776-E7792DBD1598",
     "StatusID": "7D7F4649-C0B8-4B98-BAD6-F38A01E80B7B",
     "OperatorID": "8F016D11-F7B8-4364-AC16-DD58D0A13A2A",
@@ -22451,6 +23781,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "2 - IL",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "C11303BE-ADFF-495E-8EAE-E8807487D1E2",
+    "StatusID": "710EC10A-D41C-43BE-9CCF-B6A337EAFA7E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T14:30:22.983000",
+    "RecordAt": "2025-05-24T14:30:22.983000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -22624,6 +23968,20 @@
     "FleetID": null
   },
   {
+    "ID": "B34E6B51-55E9-4318-8F12-EA95367715C4",
+    "StatusID": "40DA1D07-1190-4708-94A0-FEDE6C3EDF1E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T15:00:48.440000",
+    "RecordAt": "2025-05-24T15:00:48.440000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "2AE4C3A2-43D8-4DF6-A02F-EAA4D3C43ADF",
     "StatusID": "20E10408-FFAA-4B91-AFC4-8DCF9A0CBB84",
     "OperatorID": "9CBF2E98-681F-4278-9DBF-D11C5D811006",
@@ -22661,6 +24019,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "194426C2-3048-4DDA-BD48-EB39E58546E5",
+    "StatusID": "264D977F-ED26-4F9F-B5C4-961EEDAC7ECC",
+    "OperatorID": "06DAFF2B-66A0-4391-82A8-78FE6FF7D5C2",
+    "Date": "2026-01-21T02:50:32.333000",
+    "RecordAt": "2026-01-21T02:50:32.333000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -22904,6 +24276,20 @@
     "FleetID": null
   },
   {
+    "ID": "F08B3D11-8C42-4B11-9E45-EE2EBC97F7CC",
+    "StatusID": "990C4E17-6C75-4DDC-BF31-2C8F2E918B4F",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T22:00:33.790000",
+    "RecordAt": "2025-05-24T22:00:33.790000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "D10A9976-C73E-42A4-8843-EE36DEB69509",
     "StatusID": "3F40B4B1-E98E-45FA-8F6A-08C41177C734",
     "OperatorID": "9E71A405-11B1-4FD8-BA71-7DEE593CD576",
@@ -23114,6 +24500,20 @@
     "FleetID": null
   },
   {
+    "ID": "0A76B428-E85C-4EE3-B172-F0FE701C5C5D",
+    "StatusID": "990C4E17-6C75-4DDC-BF31-2C8F2E918B4F",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T13:30:24.363000",
+    "RecordAt": "2025-05-24T13:30:24.363000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "0C228E90-4EA8-439A-8C0E-F1089D4A4A74",
     "StatusID": "86B8CD33-E1FD-465B-98A8-BA4400C0CE23",
     "OperatorID": "1269A6B1-D3F9-4F39-B995-6757804CFC34",
@@ -23123,6 +24523,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "10 - OR",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "D1FF3D7A-6961-4F17-B27C-F11A56C57590",
+    "StatusID": "DA38607E-012F-45D7-B379-667729775A68",
+    "OperatorID": "583F37CB-4FC0-46D2-BEC7-8995CE88FB1B",
+    "Date": "2026-01-06T23:28:39.913000",
+    "RecordAt": "2026-01-06T23:28:39.913000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "6 - FL",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -23576,6 +24990,20 @@
     "FleetID": null
   },
   {
+    "ID": "8326ADE6-1BFD-4A93-A95B-F5FFF4572624",
+    "StatusID": "14D7990F-6FE2-44EC-9BF2-F837596221B7",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T18:00:38.840000",
+    "RecordAt": "2025-05-24T18:00:38.840000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "5F5219A3-3CE0-4A1C-9ABC-F600A2FC178A",
     "StatusID": "E93910D9-B364-4E42-ADC0-FFA8FEC11CD2",
     "OperatorID": "50CAECAD-35A7-454A-8F3B-556F07DD19AB",
@@ -23683,6 +25111,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "12 - PA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "338981E2-CCEF-44F1-B064-F71B84136283",
+    "StatusID": "397D52F5-C0B6-47F5-BF9F-D643D955018E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-12-10T21:04:37.140000",
+    "RecordAt": "2025-12-10T21:04:37.140000",
+    "RecordBy": "doug@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -23842,6 +25284,20 @@
     "FleetID": null
   },
   {
+    "ID": "B698F897-AA68-4EEF-9F6F-F87E911C7E6F",
+    "StatusID": "C5E5F514-11C4-4539-9B5A-B9A8ED62CF76",
+    "OperatorID": "034D9784-3F82-4F38-896A-6D58415FF46E",
+    "Date": "2026-01-21T01:20:27.223000",
+    "RecordAt": "2026-01-21T01:20:27.223000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "6 - FL",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "EB9BEB05-4FCC-42FA-B0EA-F8857801FBA6",
     "StatusID": "3F40B4B1-E98E-45FA-8F6A-08C41177C734",
     "OperatorID": "DB3EDFAA-AF4C-454A-8080-29CD5869DBBC",
@@ -23870,6 +25326,34 @@
     "FleetID": null
   },
   {
+    "ID": "C52FB854-CE9B-4517-8DEC-F8DBF134CB36",
+    "StatusID": "40DA1D07-1190-4708-94A0-FEDE6C3EDF1E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T14:00:42.370000",
+    "RecordAt": "2025-05-24T14:00:42.370000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "96AFB3AE-7AA1-48A2-8FA4-F8F63C9F8FA2",
+    "StatusID": "40DA1D07-1190-4708-94A0-FEDE6C3EDF1E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T17:30:29.540000",
+    "RecordAt": "2025-05-24T17:30:29.540000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "3C9CAB74-4D30-4CDA-9C3D-F9113BEB0BA9",
     "StatusID": "397D52F5-C0B6-47F5-BF9F-D643D955018E",
     "OperatorID": "0BE018F7-71B4-48A6-BB6B-8015BEB670EF",
@@ -23879,6 +25363,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "34045B29-4FEC-4108-8A82-F9382C3F76F5",
+    "StatusID": "1F0E7EFD-D5F0-4A7F-8FFE-5FEC757E1041",
+    "OperatorID": "5A051C04-1F20-4EAE-896D-787BEE0F95C8",
+    "Date": "2024-09-23T13:59:29.090000",
+    "RecordAt": "2024-09-23T13:59:29.090000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -24052,6 +25550,20 @@
     "FleetID": null
   },
   {
+    "ID": "74E07C62-0FC7-44EF-BFDB-FAC1749CF199",
+    "StatusID": "710EC10A-D41C-43BE-9CCF-B6A337EAFA7E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T12:30:20.253000",
+    "RecordAt": "2025-05-24T12:30:20.253000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "E56EE2C9-8353-43E2-9750-FAFD92CB11E2",
     "StatusID": "20E10408-FFAA-4B91-AFC4-8DCF9A0CBB84",
     "OperatorID": "D1EE0AC0-EE98-43C1-AE0F-ECF7C60E5729",
@@ -24103,6 +25615,34 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "10 - OR",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "012D456B-E001-4B7D-A798-FB5913B194EA",
+    "StatusID": "20E10408-FFAA-4B91-AFC4-8DCF9A0CBB84",
+    "OperatorID": "4F612BE0-F52C-4D16-B3CB-0364EEDF455C",
+    "Date": "2025-09-26T13:25:35.170000",
+    "RecordAt": "2025-09-26T13:25:35.170000",
+    "RecordBy": "david@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "3 - TX",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "71ED0611-A4BF-4903-A2C6-FB8072D0A2B1",
+    "StatusID": "439DBB11-6C9F-4FD7-B90C-239A9BF01EFE",
+    "OperatorID": "692A001B-12AB-4932-9ACC-0D2C003FC9CB",
+    "Date": "2026-01-21T01:50:26.700000",
+    "RecordAt": "2026-01-21T01:50:26.700000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null
@@ -24262,6 +25802,20 @@
     "FleetID": null
   },
   {
+    "ID": "95DAA221-0302-4546-9629-FD90BABCC059",
+    "StatusID": "439DBB11-6C9F-4FD7-B90C-239A9BF01EFE",
+    "OperatorID": "692A001B-12AB-4932-9ACC-0D2C003FC9CB",
+    "Date": "2026-01-21T02:20:28.980000",
+    "RecordAt": "2026-01-21T02:20:28.980000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "953E4DDB-8937-4F01-9678-FDC030561DA7",
     "StatusID": "85F8103E-F6A4-4EC1-9BD5-842FB4BED561",
     "OperatorID": "91373E8D-C0FD-4B01-80EB-707E79E1B4F8",
@@ -24346,6 +25900,20 @@
     "FleetID": null
   },
   {
+    "ID": "E943C73C-0986-4D21-87CA-FEBD500684FB",
+    "StatusID": "C6E5BB04-6212-4378-97A2-4CA3E3E9DCA7",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-06-02T20:59:30.380000",
+    "RecordAt": "2025-06-02T20:59:30.380000",
+    "RecordBy": "armani@bigstartransit.com",
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
     "ID": "390C4B47-197A-48E7-8942-FF2AD382B828",
     "StatusID": "D2F26379-DC7F-4A6E-81BE-9CEC3FBCD939",
     "OperatorID": "3F9CED33-BB56-4491-B091-3D792638A20C",
@@ -24355,6 +25923,20 @@
     "UpdateAt": null,
     "UpdateBy": null,
     "DivisionID": "5 - CA",
+    "SequenceID": null,
+    "ProviderID": null,
+    "FleetID": null
+  },
+  {
+    "ID": "27BD4251-44D6-4427-83E2-FF342B6126CA",
+    "StatusID": "710EC10A-D41C-43BE-9CCF-B6A337EAFA7E",
+    "OperatorID": "6514D188-2EE7-4EE3-BFC6-D356DACD505E",
+    "Date": "2025-05-24T13:30:21.630000",
+    "RecordAt": "2025-05-24T13:30:21.630000",
+    "RecordBy": null,
+    "UpdateAt": null,
+    "UpdateBy": null,
+    "DivisionID": "8 - OH",
     "SequenceID": null,
     "ProviderID": null,
     "FleetID": null

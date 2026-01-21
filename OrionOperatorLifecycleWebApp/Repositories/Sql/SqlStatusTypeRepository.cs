@@ -51,5 +51,20 @@ namespace OrionOperatorLifecycleWebApp.Repositories.Sql
                 _context.Entry(status).State = EntityState.Detached;
             }
         }
+
+        public void Add(StatusType statusType)
+        {
+            if (statusType == null) return;
+
+            // Generate ID if not provided
+            if (string.IsNullOrWhiteSpace(statusType.Id))
+            {
+                statusType.Id = System.Guid.NewGuid().ToString().ToUpper();
+            }
+
+            _context.StatusTypes.Add(statusType);
+            _context.SaveChanges();
+            _context.Entry(statusType).State = EntityState.Detached;
+        }
     }
 }

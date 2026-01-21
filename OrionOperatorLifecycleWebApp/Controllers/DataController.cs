@@ -51,6 +51,78 @@ namespace OrionOperatorLifecycleWebApp.Controllers
             _cache = cache;
         }
 
+        // POST: /api/data/statustypes/create - Create a single new status type
+        [HttpPost("statustypes/create")]
+        public IActionResult CreateStatusType([FromBody] JsonElement statusTypeJson)
+        {
+            try
+            {
+                var inputJson = statusTypeJson.GetRawText();
+                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                var newStatusType = JsonSerializer.Deserialize<StatusType>(inputJson, options);
+                
+                if (newStatusType == null)
+                {
+                    return BadRequest(new { success = false, message = "Invalid status type data" });
+                }
+
+                // Generate ID if not provided
+                if (string.IsNullOrEmpty(newStatusType.Id))
+                {
+                    newStatusType.Id = Guid.NewGuid().ToString().ToUpper();
+                }
+
+                // Add to existing status types
+                _statusTypeService.AddStatusType(newStatusType);
+                
+                // Invalidate cache
+                _cache.Remove(CACHE_KEY_STATUSTYPES);
+                
+                return Ok(new { success = true, message = "Status type created successfully", id = newStatusType.Id });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error creating status type: {ex.Message}");
+                return StatusCode(500, new { success = false, message = ex.Message });
+            }
+        }
+
+        // POST: /api/data/pizzastatuses/create - Create a single new pizza status
+        [HttpPost("pizzastatuses/create")]
+        public IActionResult CreatePizzaStatus([FromBody] JsonElement pizzaStatusJson)
+        {
+            try
+            {
+                var inputJson = pizzaStatusJson.GetRawText();
+                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                var newPizzaStatus = JsonSerializer.Deserialize<PizzaStatus>(inputJson, options);
+                
+                if (newPizzaStatus == null)
+                {
+                    return BadRequest(new { success = false, message = "Invalid pizza status data" });
+                }
+
+                // Generate ID if not provided
+                if (string.IsNullOrEmpty(newPizzaStatus.Id))
+                {
+                    newPizzaStatus.Id = Guid.NewGuid().ToString().ToUpper();
+                }
+
+                // Add to existing pizza statuses
+                _pizzaStatusService.AddPizzaStatus(newPizzaStatus);
+                
+                // Invalidate cache
+                _cache.Remove(CACHE_KEY_PIZZASTATUSES);
+                
+                return Ok(new { success = true, message = "Pizza status created successfully", id = newPizzaStatus.Id });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error creating pizza status: {ex.Message}");
+                return StatusCode(500, new { success = false, message = ex.Message });
+            }
+        }
+
         [HttpPost("statustypes")]
         public IActionResult SaveStatusTypes([FromBody] JsonElement statusTypesJson)
         {

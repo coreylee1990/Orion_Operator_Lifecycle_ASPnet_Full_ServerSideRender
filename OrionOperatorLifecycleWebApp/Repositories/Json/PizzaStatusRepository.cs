@@ -64,5 +64,19 @@ namespace OrionOperatorLifecycleWebApp.Repositories
             var json = JsonSerializer.Serialize(existing, options);
             File.WriteAllText(_filePath, json);
         }
+
+        public void Add(PizzaStatus pizzaStatus)
+        {
+            if (pizzaStatus == null) return;
+            if (string.IsNullOrWhiteSpace(pizzaStatus.Id))
+            {
+                pizzaStatus.Id = Guid.NewGuid().ToString().ToUpper();
+            }
+            var existing = GetAll();
+            existing.Add(pizzaStatus);
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            var json = JsonSerializer.Serialize(existing, options);
+            File.WriteAllText(_filePath, json);
+        }
     }
 }

@@ -503,6 +503,13 @@ document.addEventListener('DOMContentLoaded', function() {
         let statusTracker = [];  // Track how long operators have been in each status
         let editedRequirements = {};
 
+        // Status Type Filter state
+        let entityTypeFilter = 'operators';  // 'operators', 'fleet', 'providers', 'all'
+        let filterCertFlag = false;
+        let filterIsTracked = false;
+        let filterIsHireEvent = false;
+        let filterIsTermEvent = false;
+
         // Change tracking - only save items that were actually modified
         const modifiedCertTypeIds = new Set();
         const modifiedStatusTypeIds = new Set();
@@ -999,6 +1006,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     const stIsDeleted = st.isDeleted ?? st.IsDeleted ?? st.IsDelete ?? st.isDelete;
                     const stFleet = st.Fleet ?? st.fleet ?? 0;
                     const stProviders = st.Providers ?? st.providers ?? 0;
+                    const stCertFlag = st.CertFlag ?? st.certFlag ?? false;
+                    const stIsTracked = st.isTracked ?? st.IsTracked ?? false;
+                    const stIsHireEvent = st.isHireEvent ?? st.IsHireEvent ?? false;
+                    const stIsTermEvent = st.isTermEvent ?? st.IsTermEvent ?? false;
 
                     // Must have PizzaStatusID
                     if (!stPizzaStatusId) return false;
@@ -1010,15 +1021,30 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Deleted filter - must not be deleted
                     if (stIsDeleted === true || stIsDeleted === 1 || String(stIsDeleted).trim() === '1' || String(stIsDeleted).trim().toLowerCase() === 'true') return false;
 
-                    // Operator-only filter: Fleet must be 0/false (not Fleet status)
-                    if (stFleet === 1 || stFleet === true || String(stFleet).trim() === '1') return false;
-
-                    // Operator-only filter: Providers must be 0/false (not Provider status)
-                    if (stProviders === 1 || stProviders === true || String(stProviders).trim() === '1') return false;
-
-                    // CRITICAL: PizzaStatus MUST have IsOperator = 1/true to be an Operator status
+                    // Entity type filter based on radio button selection
+                    const isFleet = stFleet === 1 || stFleet === true || String(stFleet).trim() === '1';
+                    const isProvider = stProviders === 1 || stProviders === true || String(stProviders).trim() === '1';
                     const psIsOperator = ps.IsOperator ?? ps.isOperator;
-                    if (psIsOperator !== true && psIsOperator !== 1) return false;
+                    const isOperator = (psIsOperator === true || psIsOperator === 1) && !isFleet && !isProvider;
+
+                    if (entityTypeFilter === 'operators') {
+                        // Operator-only: Fleet=false, Providers=false, PizzaStatus.IsOperator=true
+                        if (isFleet || isProvider) return false;
+                        if (psIsOperator !== true && psIsOperator !== 1) return false;
+                    } else if (entityTypeFilter === 'fleet') {
+                        // Fleet-only
+                        if (!isFleet) return false;
+                    } else if (entityTypeFilter === 'providers') {
+                        // Providers-only
+                        if (!isProvider) return false;
+                    }
+                    // 'all' - no entity type filtering
+
+                    // Additional checkbox filters (only filter if checked)
+                    if (filterCertFlag && !(stCertFlag === true || stCertFlag === 1)) return false;
+                    if (filterIsTracked && !(stIsTracked === true || stIsTracked === 1)) return false;
+                    if (filterIsHireEvent && !(stIsHireEvent === true || stIsHireEvent === 1)) return false;
+                    if (filterIsTermEvent && !(stIsTermEvent === true || stIsTermEvent === 1)) return false;
 
                     // Division filter
                     if (mainDivisionFilter !== 'ALL' && stDivision !== mainDivisionFilter) return false;
@@ -1162,7 +1188,7 @@ document.addEventListener('DOMContentLoaded', function() {
             pizzaStatusesArr.forEach(p => { if (p.ID || p.Id) pizzaStatusMap[p.ID || p.Id] = p; });
 
             // Filter StatusTypes for the selected division and/or client
-            // OPERATOR ONLY: Fleet=0, Providers=0, isDeleted=false, PizzaStatusID not null
+            // Uses entity type filter (operators/fleet/providers/all) and additional checkbox filters
             let divStatuses = statusTypesArr.filter(st => {
                 // Get division ID with flexible property name (SQL vs JSON may differ)
                 const stDivision = st.DivisionID || st.DivisionId || st.divisionId || st.divisionID;
@@ -1170,6 +1196,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 const stIsDeleted = st.isDeleted ?? st.IsDeleted ?? st.IsDelete ?? st.isDelete;
                 const stFleet = st.Fleet ?? st.fleet ?? 0;
                 const stProviders = st.Providers ?? st.providers ?? 0;
+                const stCertFlag = st.CertFlag ?? st.certFlag ?? false;
+                const stIsTracked = st.isTracked ?? st.IsTracked ?? false;
+                const stIsHireEvent = st.isHireEvent ?? st.IsHireEvent ?? false;
+                const stIsTermEvent = st.isTermEvent ?? st.IsTermEvent ?? false;
                 
                 // Must have PizzaStatusID
                 if (!stPizzaStatusId) return false;
@@ -1180,18 +1210,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Deleted filter - must not be deleted
                 if (stIsDeleted === true || stIsDeleted === 1 || String(stIsDeleted).trim() === '1' || String(stIsDeleted).trim().toLowerCase() === 'true') return false;
                 
-                // Operator-only filter: Fleet must be 0/false (not Fleet status)
-                if (stFleet === 1 || stFleet === true || String(stFleet).trim() === '1') return false;
-                
-                // Operator-only filter: Providers must be 0/false (not Provider status)
-                if (stProviders === 1 || stProviders === true || String(stProviders).trim() === '1') return false;
-                
-                // CRITICAL: PizzaStatus MUST have IsOperator = 1/true to be an Operator status
-                // This excludes event/accident statuses (NULL/NULL) and Provider statuses
+                // Entity type filter based on radio button selection
                 const ps = pizzaStatusMap[stPizzaStatusId];
+                const isFleet = stFleet === 1 || stFleet === true || String(stFleet).trim() === '1';
+                const isProvider = stProviders === 1 || stProviders === true || String(stProviders).trim() === '1';
                 const psIsOperator = ps.IsOperator ?? ps.isOperator;
-                // Require IsOperator to be explicitly true/1
-                if (psIsOperator !== true && psIsOperator !== 1) return false;
+
+                if (entityTypeFilter === 'operators') {
+                    // Operator-only: Fleet=false, Providers=false, PizzaStatus.IsOperator=true
+                    if (isFleet || isProvider) return false;
+                    if (psIsOperator !== true && psIsOperator !== 1) return false;
+                } else if (entityTypeFilter === 'fleet') {
+                    // Fleet-only
+                    if (!isFleet) return false;
+                } else if (entityTypeFilter === 'providers') {
+                    // Providers-only
+                    if (!isProvider) return false;
+                }
+                // 'all' - no entity type filtering
+
+                // Additional checkbox filters (only filter if checked)
+                if (filterCertFlag && !(stCertFlag === true || stCertFlag === 1)) return false;
+                if (filterIsTracked && !(stIsTracked === true || stIsTracked === 1)) return false;
+                if (filterIsHireEvent && !(stIsHireEvent === true || stIsHireEvent === 1)) return false;
+                if (filterIsTermEvent && !(stIsTermEvent === true || stIsTermEvent === 1)) return false;
                 
                 // Division filter
                 if (mainDivisionFilter !== 'ALL' && stDivision !== mainDivisionFilter) return false;
@@ -1496,6 +1538,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Add drag and drop event listeners
             addDragAndDropListeners();
+
+            // Update the filter count display
+            updateStatusTypeFilterCount();
         }
 
         /**
@@ -1647,6 +1692,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Find StatusID and PizzaStatusID if specific division is selected
             let statusDebugInfo = '';
             let pizzaStatusName = '';
+            let pizzaStatusOrder = null;
             let autoToggleHtml = '';
             if (mainDivisionFilter !== 'ALL') {
                 const debugSt = statusTypes.find(st => st.Status === statusName && st.DivisionID === mainDivisionFilter);
@@ -1656,13 +1702,14 @@ document.addEventListener('DOMContentLoaded', function() {
                              <span style="font-family: monospace;">${debugSt.PizzaStatusID || 'N/A'}</span> (Pz)
                     </div>`;
                     
-                    // Get PizzaStatus name
+                    // Get PizzaStatus name and MobileAppOrder
                     if (debugSt.PizzaStatusID && pizzaStatuses && Array.isArray(pizzaStatuses)) {
                         const pizzaStat = pizzaStatuses.find(ps => ps.ID === debugSt.PizzaStatusID || ps.Id === debugSt.PizzaStatusID);
                         if (pizzaStat) {
                             if (pizzaStat.Status) {
                                 pizzaStatusName = pizzaStat.Status;
                             }
+                            pizzaStatusOrder = pizzaStat.MobileAppOrder;
                             const isAuto = pizzaStat.IsAuto === true || pizzaStat.isAuto === true;
                             autoToggleHtml = `
                                 <span>|</span>
@@ -1683,6 +1730,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="step-title">
                             ${statusName}
                             ${pizzaStatusName ? `<span class="pizza-status-tag">${pizzaStatusName}</span>` : ''}
+                            ${pizzaStatusOrder != null ? `<span class="pizza-order-tag" title="Mobile App Order">#${pizzaStatusOrder}</span>` : ''}
                             ${statusDebugInfo}
                         </div>
                         <div class="step-meta">
@@ -1833,7 +1881,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     progressBarHtml = `
                                         <div class="progress" style="height: 20px; width: 100%; margin-top: 6px; border-radius: 6px; background-color: #e9ecef;" title="${validCount} of ${totalAll} certs completed">
                                             <div class="progress-bar ${progressColorClass}" role="progressbar" style="width: ${completedPercent}%; font-size: 11px; font-weight: bold; line-height: 20px;" aria-valuenow="${completedPercent}" aria-valuemin="0" aria-valuemin="100">
-                                                ${validCount}/${totalAll}
+                                                ${completedPercent}%
                                             </div>
                                         </div>
                                     `;
@@ -3884,6 +3932,55 @@ function removeCertFromStatus(statusName, certName) {
             populateAddStatusFields();
         }
 
+        // Handle status type filter change (entity type radio buttons and additional checkboxes)
+        function handleStatusTypeFilterChange() {
+            // Get entity type from radio buttons
+            const entityRadio = document.querySelector('input[name="entityTypeFilter"]:checked');
+            entityTypeFilter = entityRadio ? entityRadio.value : 'operators';
+            
+            // Get additional filter checkbox values
+            filterCertFlag = document.getElementById('filterCertFlag')?.checked || false;
+            filterIsTracked = document.getElementById('filterIsTracked')?.checked || false;
+            filterIsHireEvent = document.getElementById('filterIsHireEvent')?.checked || false;
+            filterIsTermEvent = document.getElementById('filterIsTermEvent')?.checked || false;
+            
+            // Re-initialize workflow with new filters
+            initializeDynamicWorkflow();
+            renderWorkflow();
+            updateStats();
+            
+            // Update filter count display
+            updateStatusTypeFilterCount();
+        }
+
+        // Update the filter count display
+        function updateStatusTypeFilterCount() {
+            const countEl = document.getElementById('statusTypeFilterCount');
+            if (!countEl) return;
+            
+            const activeFilters = [];
+            
+            // Entity type
+            if (entityTypeFilter === 'operators') activeFilters.push('Operators');
+            else if (entityTypeFilter === 'fleet') activeFilters.push('Fleet');
+            else if (entityTypeFilter === 'providers') activeFilters.push('Providers');
+            else activeFilters.push('All Entity Types');
+            
+            // Additional filters
+            if (filterCertFlag) activeFilters.push('Has Certs');
+            if (filterIsTracked) activeFilters.push('Tracked');
+            if (filterIsHireEvent) activeFilters.push('Hire Events');
+            if (filterIsTermEvent) activeFilters.push('Term Events');
+            
+            // Count visible statuses
+            const visibleCount = currentWorkflow ? currentWorkflow.length : 0;
+            
+            countEl.textContent = `Showing ${visibleCount} statuses (${activeFilters.join(', ')})`;
+        }
+
+        // Expose globally
+        window.handleStatusTypeFilterChange = handleStatusTypeFilterChange;
+
         // Add event listener to populate Add Status fields when accordion is opened
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -4846,11 +4943,376 @@ function removeCertFromStatus(statusName, certName) {
             }
         }
 
-        // Placeholder functions for Create Pizza Status and Create Status modals
+        // Show the Create Pizza Status modal
         function showCreatePizzaStatusModal() {
-            alert('Create Pizza Status modal - TODO: Implement server-side modal\n\nRequired fields:\n- Status Name\n- Description\n- Client ID\n- Is Operator (checkbox)\n- Is Provider (checkbox)\n- Mobile App Order (number)');
+            // Get the current client - require a client to be selected
+            if (!mainClientFilter) {
+                alert('Please select a client before creating a new Pizza Status.');
+                return;
+            }
+
+            // Find client name for display
+            let clientName = mainClientFilter;
+            if (clients && clients.length > 0) {
+                const client = clients.find(c => 
+                    (c.ID || c.Id || c.id) === mainClientFilter ||
+                    (c.ClientID || c.ClientId) === mainClientFilter
+                );
+                if (client) {
+                    clientName = client.ClientName || client.Name || client.name || mainClientFilter;
+                }
+            }
+
+            // Set hidden client ID
+            const clientIdInput = document.getElementById('pizzaStatusClientId');
+            if (clientIdInput) {
+                clientIdInput.value = mainClientFilter;
+            }
+
+            // Show client name in the modal
+            const clientDisplay = document.getElementById('pizzaStatusClientDisplay');
+            if (clientDisplay) {
+                clientDisplay.textContent = clientName;
+            }
+
+            // Clear form fields
+            const nameInput = document.getElementById('pizzaStatusName');
+            const descInput = document.getElementById('pizzaStatusDescription');
+            const isOperatorInput = document.getElementById('pizzaStatusIsOperator');
+            const isProviderInput = document.getElementById('pizzaStatusIsProvider');
+            const isAutoInput = document.getElementById('pizzaStatusIsAuto');
+            const isActiveInput = document.getElementById('pizzaStatusIsActive');
+            const mobileAppOrderInput = document.getElementById('pizzaStatusMobileAppOrder');
+            const nounIdInput = document.getElementById('pizzaStatusNounId');
+            const subNounIdInput = document.getElementById('pizzaStatusSubNounId');
+
+            if (nameInput) nameInput.value = '';
+            if (descInput) descInput.value = '';
+            if (isOperatorInput) isOperatorInput.checked = (entityTypeFilter === 'fleet');
+            if (isProviderInput) isProviderInput.checked = (entityTypeFilter === 'providers');
+            if (isAutoInput) isAutoInput.checked = false;
+            if (isActiveInput) isActiveInput.checked = true; // Default to active
+            if (mobileAppOrderInput) mobileAppOrderInput.value = '';
+            if (nounIdInput) nounIdInput.value = '';
+            if (subNounIdInput) subNounIdInput.value = '';
+
+            // Show the modal
+            const modalEl = document.getElementById('createPizzaStatusModal');
+            if (modalEl && window.bootstrap) {
+                const modal = window.bootstrap.Modal.getOrCreateInstance(modalEl);
+                modal.show();
+            }
         }
 
-        function showCreateStatusModal() {
-            alert('Create Status modal - TODO: Implement server-side modal\n\nRequired fields:\n- Status Name\n- Division ID\n- Pizza Status ID (dropdown)\n- Order ID (number)');
+        // Submit the Create Pizza Status form
+        function submitCreatePizzaStatus() {
+            const name = document.getElementById('pizzaStatusName')?.value?.trim();
+            const description = document.getElementById('pizzaStatusDescription')?.value?.trim();
+            const clientId = document.getElementById('pizzaStatusClientId')?.value;
+            const isOperator = document.getElementById('pizzaStatusIsOperator')?.checked || false;
+            const isProvider = document.getElementById('pizzaStatusIsProvider')?.checked || false;
+            const isAuto = document.getElementById('pizzaStatusIsAuto')?.checked || false;
+            const isActive = document.getElementById('pizzaStatusIsActive')?.checked ?? true;
+            const mobileAppOrder = document.getElementById('pizzaStatusMobileAppOrder')?.value || null;
+            const nounId = document.getElementById('pizzaStatusNounId')?.value?.trim() || null;
+            const subNounId = document.getElementById('pizzaStatusSubNounId')?.value?.trim() || null;
+
+            if (!name) {
+                alert('Please enter a Status Name.');
+                return;
+            }
+
+            if (!clientId) {
+                alert('Client ID is required. Please select a client.');
+                return;
+            }
+
+            const newPizzaStatus = {
+                ID: generateUUID(),
+                Status: name,
+                Description: description || name,
+                ClientID: clientId,
+                IsOperator: isOperator ? true : null,
+                IsProvider: isProvider ? true : null,
+                isAuto: isAuto,
+                MobileAppOrder: mobileAppOrder ? parseInt(mobileAppOrder) : null,
+                isActive: isActive,
+                NounID: nounId,
+                SubNounID: subNounId
+            };
+
+            console.log('Creating new Pizza Status:', newPizzaStatus);
+
+            fetch('/api/data/pizzastatuses/create', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newPizzaStatus)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('Pizza status created:', data);
+                    
+                    // Close the modal
+                    const modalEl = document.getElementById('createPizzaStatusModal');
+                    if (modalEl && window.bootstrap) {
+                        const modal = window.bootstrap.Modal.getInstance(modalEl);
+                        if (modal) modal.hide();
+                    }
+
+                    // Add to local cache with the returned ID
+                    const savedId = data.id || newPizzaStatus.ID;
+                    if (!pizzaStatuses) pizzaStatuses = [];
+                    pizzaStatuses.push({
+                        ...newPizzaStatus,
+                        ID: savedId
+                    });
+
+                    // Track as modified (matches Status behavior)
+                    modifiedPizzaStatusIds.add(savedId);
+
+                    // Show Save Changes button
+                    markUnsaved();
+
+                    alert(`Pizza Status "${name}" created successfully!`);
+
+                    // Refresh the dropdown in Create Status modal if it's populated
+                    populateCreateStatusPizzaDropdown();
+                } else {
+                    alert('Failed to create Pizza Status: ' + (data.message || 'Unknown error'));
+                }
+            })
+            .catch(error => {
+                console.error('Error creating pizza status:', error);
+                alert('Error creating Pizza Status: ' + error.message);
+            });
         }
+
+        // Make functions globally accessible
+        window.showCreatePizzaStatusModal = showCreatePizzaStatusModal;
+        window.submitCreatePizzaStatus = submitCreatePizzaStatus;
+
+        function showCreateStatusModal() {
+            // Check if a specific division is selected
+            if (!mainDivisionFilter || mainDivisionFilter === 'ALL') {
+                alert('Please select a specific division before creating a new status.');
+                return;
+            }
+
+            // Populate Division field
+            const divisionInput = document.getElementById('createStatusDivision');
+            if (divisionInput) {
+                divisionInput.value = mainDivisionFilter;
+            }
+
+            // Pre-set entity type checkboxes based on current filter
+            const fleetCheckbox = document.getElementById('createStatusFleet');
+            const providersCheckbox = document.getElementById('createStatusProviders');
+            if (fleetCheckbox) fleetCheckbox.checked = (entityTypeFilter === 'fleet');
+            if (providersCheckbox) providersCheckbox.checked = (entityTypeFilter === 'providers');
+
+            // Pre-set additional flags based on current filter
+            const certFlagCheckbox = document.getElementById('createStatusCertFlag');
+            const isTrackedCheckbox = document.getElementById('createStatusIsTracked');
+            const isHireEventCheckbox = document.getElementById('createStatusIsHireEvent');
+            const isTermEventCheckbox = document.getElementById('createStatusIsTermEvent');
+            
+            if (certFlagCheckbox) certFlagCheckbox.checked = filterCertFlag;
+            if (isTrackedCheckbox) isTrackedCheckbox.checked = true; // Default to tracked
+            if (isHireEventCheckbox) isHireEventCheckbox.checked = filterIsHireEvent;
+            if (isTermEventCheckbox) isTermEventCheckbox.checked = filterIsTermEvent;
+
+            // Populate Pizza Status dropdown with client-filtered options
+            populateCreateStatusPizzaDropdown();
+
+            // Calculate next OrderId
+            const maxOrder = currentWorkflow.reduce((max, step) => {
+                const order = parseInt(step.originalObj?.OrderID) || 0;
+                return order > max ? order : max;
+            }, 0);
+            const orderIdInput = document.getElementById('createStatusOrderId');
+            if (orderIdInput) {
+                orderIdInput.value = maxOrder + 1;
+            }
+
+            // Clear form fields
+            const nameInput = document.getElementById('createStatusName');
+            const descInput = document.getElementById('createStatusDescription');
+            if (nameInput) nameInput.value = '';
+            if (descInput) descInput.value = '';
+
+            // Hide pizza status details
+            const detailsDiv = document.getElementById('pizzaStatusDetails');
+            if (detailsDiv) detailsDiv.style.display = 'none';
+
+            // Show the modal
+            const modalEl = document.getElementById('createStatusModal');
+            if (modalEl && window.bootstrap) {
+                const modal = window.bootstrap.Modal.getOrCreateInstance(modalEl);
+                modal.show();
+            }
+        }
+
+        // Populate the Pizza Status dropdown for Create Status modal
+        function populateCreateStatusPizzaDropdown() {
+            const select = document.getElementById('createStatusPizzaStatusId');
+            if (!select) return;
+
+            // Clear existing options
+            select.innerHTML = '<option value="">-- Select a Pizza Status --</option>';
+
+            // Get pizza statuses filtered by current client
+            let filteredPizzaStatuses = pizzaStatuses || [];
+            
+            if (mainClientFilter) {
+                filteredPizzaStatuses = filteredPizzaStatuses.filter(ps => {
+                    const psClientId = ps.ClientID || ps.ClientId || ps.clientId || ps.clientID;
+                    return psClientId === mainClientFilter;
+                });
+            }
+
+            // Sort by Status name
+            filteredPizzaStatuses.sort((a, b) => {
+                const statusA = (a.Status || '').toLowerCase();
+                const statusB = (b.Status || '').toLowerCase();
+                return statusA.localeCompare(statusB);
+            });
+
+            // Add options with detailed labels
+            filteredPizzaStatuses.forEach(ps => {
+                const id = ps.ID || ps.Id;
+                const status = ps.Status || 'Unknown';
+                const isOperator = ps.IsOperator === true ? '👤 Operator' : '';
+                const isProvider = ps.IsProvider === true ? '🏢 Provider' : '';
+                const isAuto = (ps.isAuto === true || ps.IsAuto === true) ? '⚡ Auto' : '';
+                
+                // Build label with indicators
+                const indicators = [isOperator, isProvider, isAuto].filter(Boolean).join(' | ');
+                const label = indicators ? `${status} [${indicators}]` : status;
+
+                const option = document.createElement('option');
+                option.value = id;
+                option.textContent = label;
+                option.dataset.status = status;
+                option.dataset.description = ps.Description || '';
+                option.dataset.clientId = ps.ClientID || ps.ClientId || '';
+                option.dataset.isOperator = ps.IsOperator === true ? 'true' : 'false';
+                option.dataset.isProvider = ps.IsProvider === true ? 'true' : 'false';
+                option.dataset.isAuto = (ps.isAuto === true || ps.IsAuto === true) ? 'true' : 'false';
+                
+                select.appendChild(option);
+            });
+        }
+
+        // Submit create status form
+        async function submitCreateStatus() {
+            const nameInput = document.getElementById('createStatusName');
+            const divisionInput = document.getElementById('createStatusDivision');
+            const descInput = document.getElementById('createStatusDescription');
+            const orderInput = document.getElementById('createStatusOrderId');
+            const ageDaysInput = document.getElementById('createStatusAgeDaysAlert');
+            const pizzaStatusSelect = document.getElementById('createStatusPizzaStatusId');
+
+            // Validate required fields
+            const statusName = nameInput?.value?.trim();
+            const divisionId = divisionInput?.value?.trim();
+            const pizzaStatusId = pizzaStatusSelect?.value;
+
+            if (!statusName) {
+                alert('Please enter a status name.');
+                nameInput?.focus();
+                return;
+            }
+
+            if (!divisionId) {
+                alert('Division ID is required.');
+                return;
+            }
+
+            if (!pizzaStatusId) {
+                alert('Please select a Pizza Status.');
+                pizzaStatusSelect?.focus();
+                return;
+            }
+
+            // Build the new status object
+            const newStatus = {
+                Id: generateUUID(),
+                Status: statusName,
+                Description: descInput?.value?.trim() || statusName,
+                DivisionID: divisionId,
+                OrderID: orderInput?.value || null,
+                PizzaStatusID: pizzaStatusId,
+                Fleet: document.getElementById('createStatusFleet')?.checked || false,
+                Providers: document.getElementById('createStatusProviders')?.checked || false,
+                CertFlag: document.getElementById('createStatusCertFlag')?.checked || false,
+                OutOfServiceFlag: document.getElementById('createStatusOutOfServiceFlag')?.checked || false,
+                isTracked: document.getElementById('createStatusIsTracked')?.checked || false,
+                isHireEvent: document.getElementById('createStatusIsHireEvent')?.checked || false,
+                isTermEvent: document.getElementById('createStatusIsTermEvent')?.checked || false,
+                isProjectedFill: document.getElementById('createStatusIsProjectedFill')?.checked || false,
+                AgeDaysAlert: ageDaysInput?.value || '0',
+                isDeleted: false,
+                RecordAt: new Date().toISOString(),
+                RecordBy: null,
+                UpdateAt: null,
+                UpdateBy: null,
+                VideoUrl: null,
+                NounID: null,
+                SubNounID: null
+            };
+
+            try {
+                // Send to API - use create endpoint for single item
+                const response = await fetch('/api/data/statustypes/create', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newStatus)
+                });
+
+                if (!response.ok) {
+                    const text = await response.text();
+                    throw new Error(`Server returned ${response.status}: ${text}`);
+                }
+
+                // Add to local statusTypes array
+                if (!window.statusTypes) window.statusTypes = [];
+                window.statusTypes.push(newStatus);
+                statusTypes = window.statusTypes;
+
+                // Track as modified
+                modifiedStatusTypeIds.add(newStatus.Id);
+
+                // Close modal
+                const modalEl = document.getElementById('createStatusModal');
+                if (modalEl && window.bootstrap) {
+                    const modal = window.bootstrap.Modal.getInstance(modalEl);
+                    if (modal) modal.hide();
+                }
+
+                // Refresh workflow
+                initializeDynamicWorkflow();
+                renderWorkflow();
+                updateStats();
+                markUnsaved();
+
+                alert(`Status "${statusName}" created successfully!`);
+
+            } catch (error) {
+                console.error('Error creating status:', error);
+                alert('Failed to create status: ' + (error.message || error));
+            }
+        }
+
+        // Generate UUID for new records
+        function generateUUID() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                const r = Math.random() * 16 | 0;
+                const v = c === 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16).toUpperCase();
+            });
+        }
+
+        // Expose functions globally
+        window.showCreateStatusModal = showCreateStatusModal;
+        window.submitCreateStatus = submitCreateStatus;

@@ -35,5 +35,11 @@ namespace OrionOperatorLifecycleWebApp.Services
             _pizzaStatusRepository.SaveAll(pizzaStatuses);
             _cache.Remove(CACHE_KEY_ALL);
         }
+
+        public void AddPizzaStatus(PizzaStatus pizzaStatus)
+        {
+            _pizzaStatusRepository.Add(pizzaStatus);
+            _cache.Remove(CACHE_KEY_ALL);
+        }
     }
 }

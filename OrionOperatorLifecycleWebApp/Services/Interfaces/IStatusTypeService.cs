@@ -9,5 +9,6 @@ namespace OrionOperatorLifecycleWebApp.Services
         StatusType GetStatusTypeById(string id);
         List<StatusType> GetStatusTypesByDivision(string divisionId);
         void SaveAllStatusTypes(List<StatusType> statusTypes);
+        void AddStatusType(StatusType statusType);
     }
 }

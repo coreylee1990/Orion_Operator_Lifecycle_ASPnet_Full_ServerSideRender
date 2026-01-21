@@ -7,7 +7,6 @@ C:\Users\PC\Desktop\Orion_Operator_Lifecycle_ASPnet-main\OrionOperatorLifecycleW
 C:\Users\PC\Desktop\Orion_Operator_Lifecycle_ASPnet-main\OrionOperatorLifecycleWebApp\bin\Debug\net9.0\App_Data\pay_PizzaStatuses.json
 C:\Users\PC\Desktop\Orion_Operator_Lifecycle_ASPnet-main\OrionOperatorLifecycleWebApp\bin\Debug\net9.0\App_Data\pay_StatusTracker.json
 C:\Users\PC\Desktop\Orion_Operator_Lifecycle_ASPnet-main\OrionOperatorLifecycleWebApp\bin\Debug\net9.0\App_Data\pay_StatusTypes.json
-C:\Users\PC\Desktop\Orion_Operator_Lifecycle_ASPnet-main\OrionOperatorLifecycleWebApp\bin\Debug\net9.0\App_Data\rawOperators.json
 C:\Users\PC\Desktop\Orion_Operator_Lifecycle_ASPnet-main\OrionOperatorLifecycleWebApp\bin\Debug\net9.0\OrionOperatorLifecycleAPI.postman_collection.json
 C:\Users\PC\Desktop\Orion_Operator_Lifecycle_ASPnet-main\OrionOperatorLifecycleWebApp\bin\Debug\net9.0\OrionOperatorLifecycleWebApp.staticwebassets.runtime.json
 C:\Users\PC\Desktop\Orion_Operator_Lifecycle_ASPnet-main\OrionOperatorLifecycleWebApp\bin\Debug\net9.0\OrionOperatorLifecycleWebApp.staticwebassets.endpoints.json
@@ -161,5 +160,5 @@ C:\Users\PC\Desktop\Orion_Operator_Lifecycle_ASPnet-main\OrionOperatorLifecycleW
 C:\Users\PC\Desktop\Orion_Operator_Lifecycle_ASPnet-main\OrionOperatorLifecycleWebApp\obj\Debug\net9.0\OrionOperatorLifecycleWebApp.pdb
 C:\Users\PC\Desktop\Orion_Operator_Lifecycle_ASPnet-main\OrionOperatorLifecycleWebApp\obj\Debug\net9.0\OrionOperatorLifecycleWebApp.genruntimeconfig.cache
 C:\Users\PC\Desktop\Orion_Operator_Lifecycle_ASPnet-main\OrionOperatorLifecycleWebApp\obj\Debug\net9.0\ref\OrionOperatorLifecycleWebApp.dll
-C:\Users\PC\Desktop\Orion_Operator_Lifecycle_ASPnet-main\OrionOperatorLifecycleWebApp\obj\Debug\net9.0\compressed\uls5qjfpth-eat9kjwj35.gz
-C:\Users\PC\Desktop\Orion_Operator_Lifecycle_ASPnet-main\OrionOperatorLifecycleWebApp\obj\Debug\net9.0\compressed\tfuthwk0kp-37ncq12j8f.gz
+C:\Users\PC\Desktop\Orion_Operator_Lifecycle_ASPnet-main\OrionOperatorLifecycleWebApp\obj\Debug\net9.0\compressed\tfuthwk0kp-xw8zzey0ff.gz
+C:\Users\PC\Desktop\Orion_Operator_Lifecycle_ASPnet-main\OrionOperatorLifecycleWebApp\obj\Debug\net9.0\compressed\uls5qjfpth-zl7ikpki3z.gz

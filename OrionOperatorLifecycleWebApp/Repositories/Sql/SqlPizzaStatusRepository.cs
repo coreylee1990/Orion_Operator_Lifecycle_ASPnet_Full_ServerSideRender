@@ -51,5 +51,16 @@ namespace OrionOperatorLifecycleWebApp.Repositories.Sql
                 _context.Entry(pizzaStatus).State = EntityState.Detached;
             }
         }
+
+        public void Add(PizzaStatus pizzaStatus)
+        {
+            if (pizzaStatus == null) return;
+            if (string.IsNullOrWhiteSpace(pizzaStatus.Id))
+            {
+                pizzaStatus.Id = Guid.NewGuid().ToString().ToUpper();
+            }
+            _context.PizzaStatuses.Add(pizzaStatus);
+            _context.SaveChanges();
+        }
     }
 }
